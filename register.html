@@ -4,14 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Create Account | CheryChat</title>
+    <title>Create Account - CheryChat</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <style>
         * {
@@ -21,193 +18,133 @@
         }
 
         body {
+            min-height: 100vh;
+            background: #02091f;
+            color: #ffffff;
             font-family: 'Poppins', sans-serif;
-            background: #07030f;
-            color: #fff;
-            min-height: 100vh;
-        }
-
-        .page {
-            min-height: 100vh;
             display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .glow {
-            position: fixed;
-            width: 260px;
-            height: 260px;
-            border-radius: 50%;
-            background: rgba(255, 193, 7, 0.12);
-            filter: blur(80px);
-            top: -80px;
-            right: -80px;
-        }
-
-        .glow2 {
-            position: fixed;
-            width: 230px;
-            height: 230px;
-            border-radius: 50%;
-            background: rgba(120, 50, 255, 0.12);
-            filter: blur(80px);
-            bottom: -70px;
-            left: -70px;
-        }
-
-        header {
-            padding: 22px 20px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .back {
-            color: #fff;
-            text-decoration: none;
-            font-size: 14px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            opacity: .9;
-        }
-
-        main {
-            flex: 1;
-            width: 100%;
-            max-width: 480px;
-            margin: 0 auto;
-            padding: 15px 20px 40px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .heading {
-            text-align: center;
-            margin: 10px 0 28px;
-        }
-
-        .logo-icon {
-            width: 66px;
-            height: 66px;
-            margin: 0 auto 17px;
-            border-radius: 21px;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            background: linear-gradient(145deg, #ffd84d, #ff9e00);
-            color: #160b00;
-            font-size: 27px;
-            box-shadow: 0 12px 35px rgba(255,181,0,.18);
+            align-items: center;
+            padding: 25px 15px;
         }
 
-        h1 {
-            font-size: 27px;
+        .container {
+            width: 100%;
+            max-width: 430px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .logo h1 {
+            font-size: 34px;
             font-weight: 800;
+            color: #ffd700;
+            letter-spacing: -1px;
+        }
+
+        .logo p {
+            color: #9ca8c7;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .card {
+            background: #0d193d;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            border-radius: 20px;
+            padding: 28px 22px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .card h2 {
+            font-size: 23px;
             margin-bottom: 7px;
         }
 
-        .heading p {
-            color: #918c9b;
+        .subtitle {
+            color: #9ca8c7;
             font-size: 13px;
+            margin-bottom: 24px;
         }
 
-        .form-card {
-            padding: 22px;
-            border-radius: 22px;
-            background: rgba(255,255,255,.045);
-            border: 1px solid rgba(255,255,255,.09);
-            backdrop-filter: blur(12px);
-        }
-
-        .field {
-            margin-bottom: 16px;
+        .form-group {
+            margin-bottom: 17px;
         }
 
         label {
             display: block;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 600;
-            color: #d7d3dc;
-            margin-bottom: 7px;
+            margin-bottom: 8px;
+            color: #dce4ff;
         }
 
         .input-box {
             position: relative;
         }
 
-        .input-box i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #817b8b;
-            font-size: 14px;
-        }
-
         input {
             width: 100%;
-            height: 50px;
-            border: 1px solid rgba(255,255,255,.10);
+            height: 52px;
+            padding: 0 48px 0 15px;
+            border: 1px solid #26365f;
+            border-radius: 12px;
+            background: #07112f;
+            color: white;
             outline: none;
-            border-radius: 13px;
-            background: rgba(0,0,0,.18);
-            color: #fff;
-            padding: 0 15px 0 43px;
             font-family: inherit;
-            font-size: 13px;
-            transition: .2s;
+            font-size: 14px;
+            transition: 0.2s;
         }
 
         input:focus {
-            border-color: #ffc928;
-            box-shadow: 0 0 0 3px rgba(255,201,40,.08);
+            border-color: #ffd700;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.08);
         }
 
         input::placeholder {
-            color: #625d69;
+            color: #647093;
         }
 
-        .password-box input {
-            padding-right: 45px;
-        }
-
-        .toggle-password {
+        .toggle {
             position: absolute;
             right: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: #817b8b;
             cursor: pointer;
-            font-size: 14px;
+            color: #8996ba;
+            font-size: 13px;
+            user-select: none;
+        }
+
+        .toggle:hover {
+            color: #ffd700;
         }
 
         .terms {
             display: flex;
             align-items: flex-start;
             gap: 9px;
-            margin: 7px 0 19px;
+            margin: 7px 0 20px;
+            font-size: 12px;
+            color: #9ca8c7;
+            line-height: 1.5;
         }
 
         .terms input {
             width: 16px;
             height: 16px;
             margin-top: 2px;
-            accent-color: #ffc928;
             padding: 0;
-        }
-
-        .terms label {
-            font-size: 10px;
-            line-height: 1.5;
-            margin: 0;
-            color: #85808d;
-            font-weight: 400;
+            accent-color: #ffd700;
+            flex-shrink: 0;
         }
 
         .terms a {
-            color: #ffd34d;
+            color: #ffd700;
             text-decoration: none;
         }
 
@@ -215,43 +152,86 @@
             width: 100%;
             height: 52px;
             border: none;
-            border-radius: 14px;
-            background: linear-gradient(135deg, #ffe16a, #ffad13);
-            color: #160b00;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #ffd700, #d4af37);
+            color: #02091f;
             font-family: inherit;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 800;
             cursor: pointer;
-            box-shadow: 0 12px 28px rgba(255,181,0,.15);
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.18);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .message {
+            display: none;
+            margin-top: 15px;
+            padding: 11px 13px;
+            border-radius: 10px;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .error {
+            display: block;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ff8b8b;
+        }
+
+        .success {
+            display: block;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #6ee7a0;
         }
 
         .login {
             text-align: center;
-            margin-top: 21px;
-            font-size: 12px;
-            color: #85808d;
+            margin-top: 22px;
+            color: #9ca8c7;
+            font-size: 13px;
         }
 
         .login a {
-            color: #ffd34d;
-            text-decoration: none;
+            color: #ffd700;
             font-weight: 700;
+            text-decoration: none;
         }
 
-        footer {
-            text-align: center;
-            padding: 15px 20px 22px;
-            color: #5f5a67;
-            font-size: 9px;
+        .password-status {
+            font-size: 11px;
+            margin-top: 6px;
+            display: none;
         }
 
-        @media (max-width: 360px) {
-            .form-card {
-                padding: 18px;
+        .match {
+            color: #6ee7a0;
+            display: block;
+        }
+
+        .no-match {
+            color: #ff8b8b;
+            display: block;
+        }
+
+        @media (max-width: 380px) {
+            .card {
+                padding: 24px 18px;
             }
 
-            h1 {
-                font-size: 24px;
+            .logo h1 {
+                font-size: 30px;
             }
         }
     </style>
@@ -259,159 +239,245 @@
 
 <body>
 
-<div class="page">
+<div class="container">
 
-    <div class="glow"></div>
-    <div class="glow2"></div>
+    <div class="logo">
+        <h1>CheryChat</h1>
+        <p>A new way to connect</p>
+    </div>
 
-    <header>
-        <a href="index.html" class="back">
-            <i class="fa-solid fa-arrow-left"></i>
-            Back
-        </a>
-    </header>
+    <div class="card">
 
-    <main>
+        <h2>Create account</h2>
+        <p class="subtitle">Join CheryChat and start connecting.</p>
 
-        <div class="heading">
+        <form id="registerForm">
 
-            <div class="logo-icon">
-                <i class="fa-solid fa-user-plus"></i>
+            <div class="form-group">
+                <label for="fullName">Full name</label>
+
+                <div class="input-box">
+                    <input
+                        type="text"
+                        id="fullName"
+                        placeholder="Enter your full name"
+                        required
+                    >
+                </div>
             </div>
 
-            <h1>Create your account</h1>
+            <div class="form-group">
+                <label for="email">Email address</label>
 
-            <p>Join CheryChat and start connecting.</p>
+                <div class="input-box">
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+                </div>
+            </div>
 
-        </div>
+            <div class="form-group">
+                <label for="phone">Phone number</label>
 
-        <div class="form-card">
+                <div class="input-box">
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="Enter your phone number"
+                        required
+                    >
+                </div>
+            </div>
 
-            <form id="registerForm">
+            <div class="form-group">
+                <label for="password">Password</label>
 
-                <div class="field">
-                    <label for="fullName">Full name</label>
+                <div class="input-box">
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Create a password"
+                        minlength="6"
+                        required
+                    >
 
-                    <div class="input-box">
-                        <i class="fa-solid fa-user"></i>
+                    <span class="toggle" onclick="togglePassword('password', this)">
+                        Show
+                    </span>
+                </div>
+            </div>
 
-                        <input
-                            type="text"
-                            id="fullName"
-                            placeholder="Enter your full name"
-                            autocomplete="name"
-                            required>
-                    </div>
+            <!-- CONFIRM PASSWORD -->
+            <div class="form-group">
+                <label for="confirmPassword">Confirm password</label>
+
+                <div class="input-box">
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Confirm your password"
+                        minlength="6"
+                        required
+                    >
+
+                    <span class="toggle" onclick="togglePassword('confirmPassword', this)">
+                        Show
+                    </span>
                 </div>
 
-                <div class="field">
-                    <label for="username">Username</label>
+                <div id="passwordStatus" class="password-status"></div>
+            </div>
 
-                    <div class="input-box">
-                        <i class="fa-solid fa-at"></i>
+            <div class="terms">
+                <input type="checkbox" id="terms" required>
 
-                        <input
-                            type="text"
-                            id="username"
-                            placeholder="Choose a username"
-                            autocomplete="username"
-                            required>
-                    </div>
-                </div>
+                <span>
+                    I agree to the
+                    <a href="#">Terms & Conditions</a>
+                    and
+                    <a href="#">Privacy Policy</a>.
+                </span>
+            </div>
 
-                <div class="field">
-                    <label for="email">Email address</label>
+            <button type="submit" id="registerBtn">
+                Create Account
+            </button>
 
-                    <div class="input-box">
-                        <i class="fa-solid fa-envelope"></i>
+            <div id="message" class="message"></div>
 
-                        <input
-                            type="email"
-                            id="email"
-                            placeholder="Enter your email"
-                            autocomplete="email"
-                            required>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label for="password">Password</label>
-
-                    <div class="input-box password-box">
-                        <i class="fa-solid fa-lock"></i>
-
-                        <input
-                            type="password"
-                            id="password"
-                            placeholder="Create a password"
-                            autocomplete="new-password"
-                            minlength="8"
-                            required>
-
-                        <span class="toggle-password" onclick="togglePassword()">
-                            <i class="fa-solid fa-eye" id="eyeIcon"></i>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="terms">
-
-                    <input type="checkbox" id="terms" required>
-
-                    <label for="terms">
-                        I agree to the
-                        <a href="#">Terms of Service</a>
-                        and
-                        <a href="#">Privacy Policy</a>.
-                    </label>
-
-                </div>
-
-                <button type="submit">
-                    <i class="fa-solid fa-user-plus"></i>
-                    Create Account
-                </button>
-
-            </form>
-
-        </div>
+        </form>
 
         <div class="login">
             Already have an account?
-            <a href="login.html">Log in</a>
+            <a href="login.html">Login</a>
         </div>
 
-    </main>
-
-    <footer>
-        © 2026 CheryChat. All rights reserved.
-    </footer>
+    </div>
 
 </div>
 
 <script>
-    function togglePassword() {
-        const password = document.getElementById("password");
-        const eyeIcon = document.getElementById("eyeIcon");
 
-        if (password.type === "password") {
-            password.type = "text";
-            eyeIcon.classList.remove("fa-eye");
-            eyeIcon.classList.add("fa-eye-slash");
+    function togglePassword(id, element) {
+
+        const input = document.getElementById(id);
+
+        if (input.type === "password") {
+            input.type = "text";
+            element.textContent = "Hide";
         } else {
-            password.type = "password";
-            eyeIcon.classList.remove("fa-eye-slash");
-            eyeIcon.classList.add("fa-eye");
+            input.type = "password";
+            element.textContent = "Show";
         }
     }
 
+
+    const password = document.getElementById("password");
+    const confirmPassword = document.getElementById("confirmPassword");
+    const passwordStatus = document.getElementById("passwordStatus");
+
+
+    function checkPasswords() {
+
+        if (confirmPassword.value === "") {
+            passwordStatus.style.display = "none";
+            passwordStatus.textContent = "";
+            return;
+        }
+
+        if (password.value === confirmPassword.value) {
+
+            passwordStatus.className = "password-status match";
+            passwordStatus.textContent = "Passwords match";
+
+        } else {
+
+            passwordStatus.className = "password-status no-match";
+            passwordStatus.textContent = "Passwords do not match";
+        }
+    }
+
+
+    password.addEventListener("input", checkPasswords);
+    confirmPassword.addEventListener("input", checkPasswords);
+
+
     document.getElementById("registerForm").addEventListener("submit", function(e) {
+
         e.preventDefault();
 
-        alert("Registration will be connected to the CheryChat backend next.");
+        const fullName = document.getElementById("fullName").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const passwordValue = password.value;
+        const confirmValue = confirmPassword.value;
+        const terms = document.getElementById("terms").checked;
+
+        const message = document.getElementById("message");
+        const button = document.getElementById("registerBtn");
+
+
+        message.className = "message";
+        message.textContent = "";
+
+
+        if (passwordValue !== confirmValue) {
+
+            message.className = "message error";
+            message.textContent = "Passwords do not match.";
+
+            return;
+        }
+
+
+        if (passwordValue.length < 6) {
+
+            message.className = "message error";
+            message.textContent = "Password must be at least 6 characters.";
+
+            return;
+        }
+
+
+        if (!terms) {
+
+            message.className = "message error";
+            message.textContent = "Please accept the Terms & Conditions.";
+
+            return;
+        }
+
+
+        button.disabled = true;
+        button.textContent = "Creating Account...";
+
+
+        /*
+         * FRONTEND ONLY FOR NOW
+         * We can connect this to the CheryChat backend
+         * after the registration page is confirmed working.
+         */
+
+        setTimeout(() => {
+
+            message.className = "message success";
+            message.textContent = "Account details are ready.";
+
+            button.disabled = false;
+            button.textContent = "Create Account";
+
+        }, 1000);
 
     });
+
 </script>
 
 </body>
 </html>
+
+This version specifically includes Confirm password, Show/Hide, live “Passwords match / do not match”, and blocks registration when the two passwords differ.
+
+If we're continuing the CheryChat build one step at a time, this can be the registration page before connecting it to the backend.
