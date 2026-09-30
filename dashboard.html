@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -8,7 +9,11 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 <style>
 
@@ -19,15 +24,15 @@
 }
 
 :root{
-    --bg:#02091f;
-    --header:#0d193d;
-    --card:#0d193d;
-    --card2:#07112f;
+    --bg:#07030f;
+    --header:#120a22;
+    --card:#120a22;
+    --card2:#0d071b;
     --text:#ffffff;
-    --muted:#9ca8c7;
-    --border:#26365f;
-    --gold:#ffd700;
-    --gold2:#d4af37;
+    --muted:#9993a5;
+    --border:rgba(255,255,255,.09);
+    --gold:#ffd54a;
+    --gold2:#ff9e00;
     --green:#22c55e;
     --red:#ef4444;
 }
@@ -54,16 +59,20 @@ body{
     padding-bottom:75px;
 }
 
+
 /* HEADER */
 
 .header{
     height:65px;
     padding:0 12px;
+
     display:grid;
-    grid-template-columns:45px 1fr 85px;
+    grid-template-columns:45px 1fr 45px;
     align-items:center;
+
     background:var(--header);
     border-bottom:1px solid var(--border);
+
     position:sticky;
     top:0;
     z-index:50;
@@ -72,11 +81,14 @@ body{
 .menu-button{
     width:40px;
     height:40px;
+
     border:0;
     border-radius:50%;
+
     background:transparent;
     color:var(--text);
-    font-size:23px;
+
+    font-size:20px;
     cursor:pointer;
 }
 
@@ -89,21 +101,23 @@ body{
 
 .header-right{
     display:flex;
-    align-items:center;
     justify-content:flex-end;
-    gap:4px;
 }
 
 .header-icon{
-    width:38px;
-    height:38px;
+    width:40px;
+    height:40px;
+
     border:0;
     border-radius:50%;
+
     background:transparent;
     color:var(--text);
-    font-size:20px;
+
+    font-size:17px;
     cursor:pointer;
 }
+
 
 /* SEARCH */
 
@@ -114,26 +128,35 @@ body{
 
 .search{
     height:44px;
+
     display:flex;
     align-items:center;
     gap:10px;
+
     padding:0 14px;
+
     background:var(--card);
+
     border:1px solid var(--border);
+
     border-radius:22px;
 }
 
 .search-icon{
     color:var(--muted);
-    font-size:18px;
+    font-size:15px;
 }
 
 .search input{
     flex:1;
+
     border:0;
     outline:0;
+
     background:transparent;
+
     color:var(--text);
+
     font-family:inherit;
     font-size:12px;
 }
@@ -142,14 +165,19 @@ body{
     color:var(--muted);
 }
 
+
 /* TABS */
 
 .tabs{
     display:flex;
     gap:8px;
+
     padding:5px 13px 12px;
+
     background:var(--bg);
+
     overflow-x:auto;
+
     scrollbar-width:none;
 }
 
@@ -159,22 +187,32 @@ body{
 
 .tab{
     border:1px solid var(--border);
+
     background:var(--card);
+
     color:var(--muted);
+
     padding:7px 14px;
+
     border-radius:18px;
+
     font-family:inherit;
     font-size:10px;
+
     white-space:nowrap;
+
     cursor:pointer;
 }
 
 .tab.active{
     background:var(--gold);
     border-color:var(--gold);
-    color:#02091f;
+
+    color:#160b00;
+
     font-weight:700;
 }
+
 
 /* CONTENT */
 
@@ -184,14 +222,18 @@ body{
     margin:auto;
 }
 
+
 /* EMPTY CHAT */
 
 .empty-chat{
     min-height:calc(100vh - 220px);
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     text-align:center;
+
     padding:30px;
 }
 
@@ -202,14 +244,22 @@ body{
 .empty-icon{
     width:78px;
     height:78px;
+
     margin:0 auto 18px;
+
     border-radius:50%;
+
     background:var(--card);
+
     border:1px solid var(--border);
+
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:34px;
+
+    color:var(--gold);
+
+    font-size:30px;
 }
 
 .empty-content h2{
@@ -219,17 +269,22 @@ body{
 
 .empty-content p{
     color:var(--muted);
+
     font-size:11px;
     line-height:1.7;
 }
+
 
 /* SIDE MENU */
 
 .overlay{
     position:fixed;
     inset:0;
+
     background:rgba(0,0,0,.65);
+
     z-index:100;
+
     display:none;
 }
 
@@ -239,15 +294,23 @@ body{
 
 .side-menu{
     position:fixed;
+
     left:-310px;
     top:0;
+
     width:290px;
     max-width:85%;
+
     height:100vh;
+
     background:var(--card);
+
     border-right:1px solid var(--border);
+
     z-index:150;
+
     transition:.25s;
+
     overflow-y:auto;
 }
 
@@ -257,49 +320,67 @@ body{
 
 .menu-header{
     padding:22px 18px;
+
     border-bottom:1px solid var(--border);
 }
 
 .menu-logo{
     color:var(--gold);
+
     font-size:22px;
     font-weight:800;
 }
+
+
+/* PROFILE */
 
 .menu-profile{
     display:flex;
     align-items:center;
     gap:11px;
+
     padding:16px 18px;
+
     border-bottom:1px solid var(--border);
 }
 
 .menu-avatar{
     width:46px;
     height:46px;
+
     border-radius:50%;
-    background:linear-gradient(
-        135deg,
-        var(--gold),
-        var(--gold2)
-    );
-    color:#02091f;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--gold),
+            var(--gold2)
+        );
+
+    color:#160b00;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     font-size:14px;
     font-weight:800;
 }
 
 .menu-profile strong{
     display:block;
+
     font-size:13px;
 }
 
 .menu-profile span{
     color:var(--muted);
+
     font-size:9px;
 }
+
+
+/* MENU */
 
 .menu-list{
     padding:10px;
@@ -308,17 +389,26 @@ body{
 .menu-item{
     width:100%;
     min-height:46px;
+
     padding:10px 11px;
+
     display:flex;
     align-items:center;
+
     gap:13px;
+
     border:0;
     border-radius:10px;
+
     background:transparent;
+
     color:var(--text);
+
     font-family:inherit;
     font-size:12px;
+
     text-align:left;
+
     cursor:pointer;
 }
 
@@ -328,45 +418,61 @@ body{
 
 .menu-icon{
     width:25px;
+
     text-align:center;
-    font-size:17px;
+
+    font-size:16px;
 }
 
 .menu-item.logout{
     color:var(--red);
 }
 
-/* THEME SWITCH */
+
+/* THEME */
 
 .theme-row{
     display:flex;
+
     align-items:center;
     justify-content:space-between;
+
     padding:12px 11px;
 }
 
 .theme-label{
     display:flex;
+
     align-items:center;
+
     gap:13px;
+
     font-size:12px;
 }
 
 .switch{
     width:45px;
     height:24px;
+
     border-radius:20px;
+
     background:#34415f;
+
     padding:3px;
+
     cursor:pointer;
 }
 
 .switch span{
     display:block;
+
     width:18px;
     height:18px;
+
     border-radius:50%;
+
     background:#fff;
+
     transition:.2s;
 }
 
@@ -378,96 +484,126 @@ body.light .switch span{
     transform:translateX(21px);
 }
 
+
 /* BOTTOM NAV */
 
 .bottom-nav{
     position:fixed;
+
     bottom:0;
     left:0;
+
     width:100%;
     height:68px;
+
     display:flex;
     align-items:center;
     justify-content:space-around;
+
     background:var(--header);
+
     border-top:1px solid var(--border);
+
     z-index:80;
 }
 
 .nav-item{
     min-width:58px;
+
     color:var(--muted);
+
     text-decoration:none;
+
     text-align:center;
+
     font-size:9px;
 }
 
 .nav-icon{
     display:block;
-    font-size:20px;
-    margin-bottom:2px;
+
+    font-size:18px;
+
+    margin-bottom:3px;
 }
 
 .nav-item.active{
     color:var(--gold);
 }
 
+
+/* DESKTOP */
+
 @media(min-width:700px){
 
     .container{
         border-left:1px solid var(--border);
         border-right:1px solid var(--border);
+
         min-height:calc(100vh - 65px);
     }
 
     .bottom-nav{
         max-width:650px;
+
         left:50%;
+
         transform:translateX(-50%);
+
         border-left:1px solid var(--border);
         border-right:1px solid var(--border);
+
         border-radius:18px 18px 0 0;
     }
 
 }
 
 </style>
+
 </head>
 
+
 <body>
+
 
 <!-- HEADER -->
 
 <header class="header">
 
-    <button
-        class="menu-button"
-        onclick="openMenu()"
-        aria-label="Open menu"
-    >
-        ☰
-    </button>
+<button
+    class="menu-button"
+    onclick="openMenu()"
+    aria-label="Open menu"
+>
 
-    <div class="logo">
-        CheryChat
-    </div>
+<i class="fa-solid fa-bars"></i>
 
-    <div class="header-right">
+</button>
 
-        <button
-            class="header-icon"
-            onclick="toggleSearch()"
-            aria-label="Search"
-        >
-            🔍
-        </button>
 
-    </div>
+<div class="logo">
+    CheryChat
+</div>
+
+
+<div class="header-right">
+
+<button
+    class="header-icon"
+    onclick="toggleSearch()"
+    aria-label="Search"
+>
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+</button>
+
+</div>
 
 </header>
 
 
-<!-- SIDE MENU -->
+<!-- OVERLAY -->
 
 <div
     class="overlay"
@@ -476,192 +612,163 @@ body.light .switch span{
 ></div>
 
 
+<!-- SIDE MENU -->
+
 <aside
     class="side-menu"
     id="sideMenu"
 >
 
-    <div class="menu-header">
 
-        <div class="menu-logo">
-            CHERYCHAT
-        </div>
+<div class="menu-header">
 
-    </div>
+<div class="menu-logo">
+    CHERYCHAT
+</div>
 
+</div>
 
-    <div class="menu-profile">
 
-        <div class="menu-avatar">
-            CY
-        </div>
+<!-- LOGGED IN USER -->
 
-        <div>
+<div class="menu-profile">
 
-            <strong>Cheryot Y</strong>
+<div
+    class="menu-avatar"
+    id="menuAvatar"
+>
+    U
+</div>
 
-            <span>
-                CheryChat account
-            </span>
 
-        </div>
+<div>
 
-    </div>
+<strong id="menuName">
+    User
+</strong>
 
+<span>
+    CheryChat account
+</span>
 
-    <div class="menu-list">
+</div>
 
-        <button class="menu-item">
+</div>
 
-            <span class="menu-icon">
-                💬
-            </span>
 
-            Chats
+<div class="menu-list">
 
-        </button>
 
+<button class="menu-item">
 
-        <button class="menu-item">
+<span class="menu-icon">
+    <i class="fa-solid fa-comment"></i>
+</span>
 
-            <span class="menu-icon">
-                👥
-            </span>
+Chats
 
-            Groups
+</button>
 
-        </button>
 
+<button class="menu-item">
 
-        <button class="menu-item">
+<span class="menu-icon">
+    <i class="fa-solid fa-users"></i>
+</span>
 
-            <span class="menu-icon">
-                ◉
-            </span>
+Groups
 
-            Stories
+</button>
 
-        </button>
 
+<button class="menu-item">
 
-        <button class="menu-item">
+<span class="menu-icon">
+    <i class="fa-solid fa-circle"></i>
+</span>
 
-            <span class="menu-icon">
-                👤
-            </span>
+Stories
 
-            Friends
+</button>
 
-        </button>
 
+<button class="menu-item">
 
-        <button class="menu-item">
+<span class="menu-icon">
+    <i class="fa-solid fa-user-group"></i>
+</span>
 
-            <span class="menu-icon">
-                🟢
-            </span>
+Friends
 
-            Online Users
+</button>
 
-        </button>
 
+<button class="menu-item">
 
-        <button class="menu-item">
+<span class="menu-icon">
+    <i class="fa-solid fa-circle-check"></i>
+</span>
 
-            <span class="menu-icon">
-                ✓
-            </span>
+Verification
 
-            Verification
+</button>
 
-        </button>
 
+<button class="menu-item">
 
-        <button class="menu-item">
+<span class="menu-icon">
+    <i class="fa-solid fa-gear"></i>
+</span>
 
-            <span class="menu-icon">
-                💰
-            </span>
+Settings
 
-            Earn Online
+</button>
 
-        </button>
 
+<!-- THEME -->
 
-        <button class="menu-item">
+<div class="theme-row">
 
-            <span class="menu-icon">
-                📱
-            </span>
+<div class="theme-label">
 
-            Install CheryChat App
+<span class="menu-icon">
+    <i class="fa-solid fa-moon"></i>
+</span>
 
-        </button>
+Dark / Light Mode
 
+</div>
 
-        <button class="menu-item">
 
-            <span class="menu-icon">
-                🔔
-            </span>
+<div
+    class="switch"
+    onclick="toggleTheme()"
+>
 
-            Enable Notifications
+<span></span>
 
-        </button>
+</div>
 
+</div>
 
-        <button class="menu-item">
 
-            <span class="menu-icon">
-                ⚙️
-            </span>
+<!-- LOGOUT -->
 
-            Settings
+<button
+    class="menu-item logout"
+    onclick="logout()"
+>
 
-        </button>
+<span class="menu-icon">
+    <i class="fa-solid fa-right-from-bracket"></i>
+</span>
 
+Logout
 
-        <!-- DARK / LIGHT MODE -->
+</button>
 
-        <div class="theme-row">
 
-            <div class="theme-label">
-
-                <span class="menu-icon">
-                    🌙
-                </span>
-
-                Dark / Light Mode
-
-            </div>
-
-
-            <div
-                class="switch"
-                onclick="toggleTheme()"
-            >
-
-                <span></span>
-
-            </div>
-
-        </div>
-
-
-        <button
-            class="menu-item logout"
-            onclick="logout()"
-        >
-
-            <span class="menu-icon">
-                ↪
-            </span>
-
-            Logout
-
-        </button>
-
-    </div>
+</div>
 
 </aside>
 
@@ -671,80 +778,83 @@ body.light .switch span{
 <main class="container">
 
 
-    <!-- SEARCH -->
+<!-- SEARCH -->
 
-    <div
-        class="search-box"
-        id="searchBox"
-        style="display:none;"
-    >
+<div
+    class="search-box"
+    id="searchBox"
+    style="display:none;"
+>
 
-        <div class="search">
+<div class="search">
 
-            <span class="search-icon">
-                🔍
-            </span>
+<span class="search-icon">
+    <i class="fa-solid fa-magnifying-glass"></i>
+</span>
 
-            <input
-                type="search"
-                id="searchInput"
-                placeholder="Search CheryChat..."
-                autocomplete="off"
-            >
+<input
+    type="search"
+    id="searchInput"
+    placeholder="Search CheryChat..."
+    autocomplete="off"
+>
 
-        </div>
+</div>
 
-    </div>
-
-
-    <!-- TABS -->
-
-    <div class="tabs">
-
-        <button
-            class="tab active"
-        >
-            All
-        </button>
-
-        <button class="tab">
-            Unread
-        </button>
-
-        <button class="tab">
-            Groups
-        </button>
-
-        <button class="tab">
-            Friends
-        </button>
-
-    </div>
+</div>
 
 
-    <!-- EMPTY STATE -->
+<!-- TABS -->
 
-    <section class="empty-chat">
+<div class="tabs">
 
-        <div class="empty-content">
+<button class="tab active">
+    All
+</button>
 
-            <div class="empty-icon">
-                💬
-            </div>
+<button class="tab">
+    Unread
+</button>
 
-            <h2>
-                No conversations yet
-            </h2>
+<button class="tab">
+    Groups
+</button>
 
-            <p>
-                Start a conversation with another
-                CheryChat user. Your chats will appear
-                here once you send or receive a message.
-            </p>
+<button class="tab">
+    Friends
+</button>
 
-        </div>
+</div>
 
-    </section>
+
+<!-- EMPTY CHAT -->
+
+<section class="empty-chat">
+
+<div class="empty-content">
+
+<div class="empty-icon">
+
+<i class="fa-solid fa-comments"></i>
+
+</div>
+
+
+<h2>
+    No conversations yet
+</h2>
+
+
+<p>
+    Start a conversation with another
+    CheryChat user. Your chats will appear
+    here once you send or receive a message.
+</p>
+
+</div>
+
+</section>
+
 
 </main>
 
@@ -753,81 +863,171 @@ body.light .switch span{
 
 <nav class="bottom-nav">
 
-    <a
-        href="dashboard.html"
-        class="nav-item active"
-    >
 
-        <span class="nav-icon">
-            💬
-        </span>
+<a
+    href="dashboard.html"
+    class="nav-item active"
+>
 
-        Chats
+<span class="nav-icon">
+    <i class="fa-solid fa-comment"></i>
+</span>
 
-    </a>
+Chats
 
-
-    <a
-        href="#"
-        class="nav-item"
-    >
-
-        <span class="nav-icon">
-            👥
-        </span>
-
-        Groups
-
-    </a>
+</a>
 
 
-    <a
-        href="#"
-        class="nav-item"
-    >
+<a
+    href="#"
+    class="nav-item"
+>
 
-        <span class="nav-icon">
-            ◉
-        </span>
+<span class="nav-icon">
+    <i class="fa-solid fa-users"></i>
+</span>
 
-        Stories
+Groups
 
-    </a>
-
-
-    <a
-        href="#"
-        class="nav-item"
-    >
-
-        <span class="nav-icon">
-            👤
-        </span>
-
-        Friends
-
-    </a>
+</a>
 
 
-    <a
-        href="#"
-        class="nav-item"
-    >
+<a
+    href="#"
+    class="nav-item"
+>
 
-        <span class="nav-icon">
-            ⚙️
-        </span>
+<span class="nav-icon">
+    <i class="fa-solid fa-circle"></i>
+</span>
 
-        Settings
+Stories
 
-    </a>
+</a>
+
+
+<a
+    href="#"
+    class="nav-item"
+>
+
+<span class="nav-icon">
+    <i class="fa-solid fa-user-group"></i>
+</span>
+
+Friends
+
+</a>
+
+
+<a
+    href="#"
+    class="nav-item"
+>
+
+<span class="nav-icon">
+    <i class="fa-solid fa-gear"></i>
+</span>
+
+Settings
+
+</a>
+
 
 </nav>
 
 
 <script>
 
-/* MENU */
+
+/* =========================
+   LOAD LOGGED-IN USER
+========================= */
+
+function loadUser(){
+
+    const savedUser =
+        localStorage.getItem(
+            "cheryChatCurrentUser"
+        );
+
+
+    if(!savedUser){
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    try{
+
+        const user =
+            JSON.parse(savedUser);
+
+
+        const name =
+            user.fullName || "User";
+
+
+        document.getElementById(
+            "menuName"
+        ).textContent = name;
+
+
+        /*
+         * Create initials
+         */
+
+        const words =
+            name.trim().split(/\s+/);
+
+
+        let initials = "";
+
+
+        if(words.length >= 2){
+
+            initials =
+                words[0][0] +
+                words[1][0];
+
+        }else if(words.length === 1){
+
+            initials =
+                words[0].substring(0,2);
+
+        }
+
+
+        document.getElementById(
+            "menuAvatar"
+        ).textContent =
+            initials.toUpperCase();
+
+    }catch(error){
+
+        localStorage.removeItem(
+            "cheryChatCurrentUser"
+        );
+
+        localStorage.removeItem(
+            "cheryChatLoggedIn"
+        );
+
+        window.location.href =
+            "login.html";
+
+    }
+
+}
+
+
+/* =========================
+   MENU
+========================= */
 
 function openMenu(){
 
@@ -855,12 +1055,17 @@ function closeMenu(){
 }
 
 
-/* SEARCH */
+/* =========================
+   SEARCH
+========================= */
 
 function toggleSearch(){
 
     const box =
-        document.getElementById("searchBox");
+        document.getElementById(
+            "searchBox"
+        );
+
 
     if(box.style.display === "none"){
 
@@ -879,20 +1084,29 @@ function toggleSearch(){
 }
 
 
-/* THEME */
+/* =========================
+   THEME
+========================= */
 
 function applyTheme(){
 
     const theme =
-        localStorage.getItem("cheryChatTheme") || "dark";
+        localStorage.getItem(
+            "cheryChatTheme"
+        ) || "dark";
+
 
     if(theme === "light"){
 
-        document.body.classList.add("light");
+        document.body.classList.add(
+            "light"
+        );
 
     }else{
 
-        document.body.classList.remove("light");
+        document.body.classList.remove(
+            "light"
+        );
 
     }
 
@@ -902,23 +1116,35 @@ function applyTheme(){
 function toggleTheme(){
 
     const isLight =
-        document.body.classList.contains("light");
+        document.body.classList.contains(
+            "light"
+        );
+
 
     localStorage.setItem(
         "cheryChatTheme",
         isLight ? "dark" : "light"
     );
 
+
     applyTheme();
 
 }
 
 
-/* LOGOUT */
+/* =========================
+   LOGOUT
+========================= */
 
 function logout(){
 
-    localStorage.removeItem("cheryChatUser");
+    localStorage.removeItem(
+        "cheryChatLoggedIn"
+    );
+
+    localStorage.removeItem(
+        "cheryChatCurrentUser"
+    );
 
     window.location.href =
         "login.html";
@@ -926,7 +1152,11 @@ function logout(){
 }
 
 
-/* START */
+/* =========================
+   START
+========================= */
+
+loadUser();
 
 applyTheme();
 
