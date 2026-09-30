@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CheryChat Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #02091f;
+            --card: #0d193d;
+            --card-2: #07112f;
+            --text: #ffffff;
+            --muted: #9ca8c7;
+            --border: #26365f;
+            --gold: #ffd700;
+            --gold-dark: #d4af37;
+            --green: #22c55e;
+            --red: #ef4444;
+            --nav: #07112f;
+        }
+
+        body.light {
+            --bg: #f4f6fb;
+            --card: #ffffff;
+            --card-2: #f0f2f7;
+            --text: #111827;
+            --muted: #667085;
+            --border: #e1e5ee;
+            --gold: #b8860b;
+            --gold-dark: #d4af37;
+            --green: #16a34a;
+            --red: #dc2626;
+            --nav: #ffffff;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Poppins', sans-serif;
+            padding-bottom: 78px;
+            transition: background 0.25s, color 0.25s;
+        }
+
+        /* TOP BAR */
+
+        .topbar {
+            height: 66px;
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            font-size: 21px;
+            font-weight: 800;
+            color: var(--gold);
+            letter-spacing: -0.5px;
+        }
+
+        .top-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: var(--card-2);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+            cursor: pointer;
+        }
+
+        .menu-btn {
+            font-size: 22px;
+        }
+
+        /* MAIN */
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px 15px;
+        }
+
+        .welcome {
+            margin-bottom: 20px;
+        }
+
+        .welcome h1 {
+            font-size: 23px;
+            line-height: 1.3;
+            margin-bottom: 5px;
+        }
+
+        .welcome p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* PROFILE CARD */
+
+        .profile-card {
+            background: linear-gradient(
+                135deg,
+                var(--card),
+                var(--card-2)
+            );
+
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 17px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .profile-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(
+                135deg,
+                var(--gold),
+                var(--gold-dark)
+            );
+
+            color: #02091f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 17px;
+        }
+
+        .profile-name {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .verified {
+            color: var(--gold);
+            font-size: 12px;
+        }
+
+        .profile-status {
+            color: var(--green);
+            font-size: 11px;
+            margin-top: 2px;
+        }
+
+        .balance {
+            text-align: right;
+        }
+
+        .balance small {
+            display: block;
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        .balance strong {
+            color: var(--gold);
+            font-size: 15px;
+        }
+
+        /* SECTION */
+
+        .section {
+            margin-bottom: 23px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 11px;
+        }
+
+        .section-header h2 {
+            font-size: 17px;
+        }
+
+        .section-header span {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        /* ONLINE USERS */
+
+        .users {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+            scrollbar-width: none;
+        }
+
+        .users::-webkit-scrollbar {
+            display: none;
+        }
+
+        .user {
+            min-width: 82px;
+            text-align: center;
+        }
+
+        .user-avatar {
+            width: 53px;
+            height: 53px;
+            margin: auto;
+            border-radius: 50%;
+            background: var(--card);
+            border: 2px solid var(--green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .user-name {
+            font-size: 10px;
+            margin-top: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .online {
+            color: var(--green);
+            font-size: 9px;
+        }
+
+        /* SEARCH */
+
+        .search {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 0 13px;
+            height: 45px;
+            margin-bottom: 12px;
+        }
+
+        .search span {
+            font-size: 18px;
+            color: var(--muted);
+        }
+
+        .search input {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 12px;
+        }
+
+        .search input::placeholder {
+            color: var(--muted);
+        }
+
+        /* CHATS */
+
+        .chat-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .chat {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            cursor: pointer;
+        }
+
+        .chat-avatar {
+            width: 46px;
+            height: 46px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: var(--card-2);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        .chat-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .chat-name {
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chat-message {
+            color: var(--muted);
+            font-size: 11px;
+            margin-top: 3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chat-time {
+            text-align: right;
+            color: var(--muted);
+            font-size: 9px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 19px;
+            height: 19px;
+            padding: 0 5px;
+            border-radius: 10px;
+            background: var(--gold);
+            color: #02091f;
+            font-size: 9px;
+            font-weight: 800;
+            margin-top: 5px;
+        }
+
+        /* SIDE MENU */
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 200;
+            display: none;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -310px;
+            width: 290px;
+            max-width: 85%;
+            height: 100vh;
+            background: var(--card);
+            z-index: 300;
+            transition: left 0.25s ease;
+            overflow-y: auto;
+            border-right: 1px solid var(--border);
+        }
+
+        .side-menu.open {
+            left: 0;
+        }
+
+        .menu-header {
+            padding: 22px 18px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .menu-brand {
+            color: var(--gold);
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .menu-balance {
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .menu-profile {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 16px 18px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .small-avatar {
+            width: 43px;
+            height: 43px;
+            border-radius: 50%;
+            background: var(--gold);
+            color: #02091f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        .menu-profile strong {
+            font-size: 13px;
+        }
+
+        .menu-profile p {
+            color: var(--muted);
+            font-size: 10px;
+            margin-top: 2px;
+        }
+
+        .menu-items {
+            padding: 10px;
+        }
+
+        .menu-item {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 13px 12px;
+            border-radius: 11px;
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 12px;
+            text-align: left;
+            cursor: pointer;
+            margin-bottom: 3px;
+        }
+
+        .menu-item:hover {
+            background: var(--card-2);
+        }
+
+        .menu-icon {
+            width: 25px;
+            text-align: center;
+            font-size: 17px;
+        }
+
+        .menu-item.logout {
+            color: var(--red);
+        }
+
+        .theme-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 13px 12px;
+            margin-bottom: 3px;
+            font-size: 12px;
+        }
+
+        .theme-label {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .switch {
+            width: 43px;
+            height: 23px;
+            border-radius: 20px;
+            background: #26365f;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .switch::after {
+            content: "";
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: white;
+            position: absolute;
+            top: 2.5px;
+            left: 3px;
+            transition: 0.2s;
+        }
+
+        body.light .switch {
+            background: var(--gold);
+        }
+
+        body.light .switch::after {
+            left: 22px;
+        }
+
+        /* BOTTOM NAV */
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 68px;
+            background: var(--nav);
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            z-index: 150;
+        }
+
+        .nav-item {
+            color: var(--muted);
+            text-decoration: none;
+            text-align: center;
+            font-size: 9px;
+            min-width: 55px;
+        }
+
+        .nav-icon {
+            display: block;
+            font-size: 19px;
+            margin-bottom: 2px;
+        }
+
+        .nav-item.active {
+            color: var(--gold);
+        }
+
+        /* DESKTOP */
+
+        @media (min-width: 700px) {
+
+            .container {
+                padding-top: 30px;
+            }
+
+            .side-menu {
+                width: 310px;
+            }
+
+            .bottom-nav {
+                max-width: 600px;
+                left: 50%;
+                transform: translateX(-50%);
+                border-left: 1px solid var(--border);
+                border-right: 1px solid var(--border);
+                border-radius: 18px 18px 0 0;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+        <div class="brand">
+            CheryChat
+        </div>
+
+        <div class="top-actions">
+
+            <button class="icon-btn" onclick="toggleTheme()" title="Toggle theme">
+                <span id="themeIcon">☀</span>
+            </button>
+
+            <button class="icon-btn menu-btn" onclick="openMenu()" title="Menu">
+                ☰
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- SIDE MENU -->
+
+    <div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+    <aside class="side-menu" id="sideMenu">
+
+        <div class="menu-header">
+
+            <div class="menu-brand">
+                CHERYCHAT
+            </div>
+
+            <div class="menu-balance">
+                KSh. 0
+            </div>
+
+        </div>
+
+
+        <div class="menu-profile">
+
+            <div class="small-avatar">
+                CY
+            </div>
+
+            <div>
+                <strong>Cheryot Y</strong>
+                <p>CheryChat account</p>
+            </div>
+
+        </div>
+
+
+        <div class="menu-items">
+
+            <button class="menu-item">
+                <span class="menu-icon">💬</span>
+                Chats
+            </button>
+
+            <button class="menu-item">
+                <span class="menu-icon">👥</span>
+                Groups
+            </button>
+
+            <button class="menu-item">
+                <span class="menu-icon">◉</span>
+                Stories
+            </button>
+
+            <button class="menu-item">
+                <span class="menu-icon">👤</span>
+                Friends
+            </button>
+
+            <button class="menu-item">
+                <span class="menu-icon">🟢</span>
+                Online Users
+            </button>
+
+            <button class="menu-item">
+                <span class="menu-icon">✓</span>
+                Verification
+            </button>
+
+            <button class="menu-item">
+                <span class="menu-icon">💰</span>
+                Earn Online
+            </button>
+
+            <button class="menu-item">
+                <span class="menu-icon">📱</span>
+                Install CheryChat App
+            </button>
+
+            <button class="menu-item">
+                <span class="menu-icon">🔔</span>
+                Enable Notifications
+            </button>
+
+            <button class="menu-item">
+                <span class="menu-icon">⚙️</span>
+                Settings
+            </button>
+
+
+            <!-- THEME -->
+
+            <div class="theme-row">
+
+                <div class="theme-label">
+                    <span class="menu-icon">🌙</span>
+                    Dark / Light Mode
+                </div>
+
+                <div class="switch" onclick="toggleTheme()"></div>
+
+            </div>
+
+
+            <button class="menu-item logout" onclick="logout()">
+                <span class="menu-icon">↪</span>
+                Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="container">
+
+        <section class="welcome">
+
+            <h1>
+                Welcome back, Cheryot Y 👋
+            </h1>
+
+            <p>
+                See who's online and continue your conversations.
+            </p>
+
+        </section>
+
+
+        <!-- PROFILE -->
+
+        <section class="profile-card">
+
+            <div class="profile-left">
+
+                <div class="avatar">
+                    CY
+                </div>
+
+                <div>
+
+                    <div class="profile-name">
+                        Cheryot Y
+                        <span class="verified">✓</span>
+                    </div>
+
+                    <div class="profile-status">
+                        ● Online
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="balance">
+
+                <small>Balance</small>
+
+                <strong>KSh. 0</strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- ONLINE USERS -->
+
+        <section class="section">
+
+            <div class="section-header">
+
+                <h2>Online Users</h2>
+
+                <span>People currently active</span>
+
+            </div>
+
+
+            <div class="users">
+
+                <div class="user">
+
+                    <div class="user-avatar">
+                        CY
+                    </div>
+
+                    <div class="user-name">
+                        Cheryot Y
+                    </div>
+
+                    <div class="online">
+                        Online
+                    </div>
+
+                </div>
+
+
+                <div class="user">
+
+                    <div class="user-avatar">
+                        BO
+                    </div>
+
+                    <div class="user-name">
+                        Blair Opeto
+                    </div>
+
+                    <div class="online">
+                        Online
+                    </div>
+
+                </div>
+
+
+                <div class="user">
+
+                    <div class="user-avatar">
+                        BK
+                    </div>
+
+                    <div class="user-name">
+                        Boaz Kibiwott
+                    </div>
+
+                    <div class="online">
+                        Online
+                    </div>
+
+                </div>
+
+
+                <div class="user">
+
+                    <div class="user-avatar">
+                        CS
+                    </div>
+
+                    <div class="user-name">
+                        CheryChat Support
+                    </div>
+
+                    <div class="online">
+                        Online
+                    </div>
+
+                </div>
+
+
+                <div class="user">
+
+                    <div class="user-avatar">
+                        EK
+                    </div>
+
+                    <div class="user-name">
+                        Emmanuel
+                    </div>
+
+                    <div class="online">
+                        Online
+                    </div>
+
+                </div>
+
+
+                <div class="user">
+
+                    <div class="user-avatar">
+                        JK
+                    </div>
+
+                    <div class="user-name">
+                        Jamal
+                    </div>
+
+                    <div class="online">
+                        Online
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RECENT CHATS -->
+
+        <section class="section">
+
+            <div class="section-header">
+
+                <h2>Recent Chats</h2>
+
+                <span>Your latest conversations</span>
+
+            </div>
+
+
+            <div class="search">
+
+                <span>⌕</span>
+
+                <input
+                    type="text"
+                    placeholder="Search conversations..."
+                >
+
+            </div>
+
+
+            <div class="chat-list">
+
+
+                <div class="chat">
+
+                    <div class="chat-avatar">
+                        DJ
+                    </div>
+
+                    <div class="chat-info">
+
+                        <div class="chat-name">
+                            Dr. John Knec ✓
+                        </div>
+
+                        <div class="chat-message">
+                            Hey
+                        </div>
+
+                    </div>
+
+                    <div class="chat-time">
+                        Yesterday
+                        <br>
+                        <span class="badge">3</span>
+                    </div>
+
+                </div>
+
+
+                <div class="chat">
+
+                    <div class="chat-avatar">
+                        KC
+                    </div>
+
+                    <div class="chat-info">
+
+                        <div class="chat-name">
+                            KCSE 2026 REVISION PAPERS
+                        </div>
+
+                        <div class="chat-message">
+                            Dr. John Knec ✓ : That's KCSE 2026...
+                        </div>
+
+                    </div>
+
+                    <div class="chat-time">
+                        28 Sept
+                        <br>
+                        <span class="badge">65</span>
+                    </div>
+
+                </div>
+
+
+                <div class="chat">
+
+                    <div class="chat-avatar">
+                        BN
+                    </div>
+
+                    <div class="chat-info">
+
+                        <div class="chat-name">
+                            Blessy Ntinyari
+                        </div>
+
+                        <div class="chat-message">
+                            Hello
+                        </div>
+
+                    </div>
+
+                    <div class="chat-time">
+                        26 Sept
+                        <br>
+                        <span class="badge">1</span>
+                    </div>
+
+                </div>
+
+
+                <div class="chat">
+
+                    <div class="chat-avatar">
+                        CS
+                    </div>
+
+                    <div class="chat-info">
+
+                        <div class="chat-name">
+                            CheryChat Support ✓
+                        </div>
+
+                        <div class="chat-message">
+                            Welcome to CheryChat
+                        </div>
+
+                    </div>
+
+                    <div class="chat-time">
+                        20 Sept
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- BOTTOM NAVIGATION -->
+
+    <nav class="bottom-nav">
+
+        <a href="dashboard.html" class="nav-item active">
+
+            <span class="nav-icon">💬</span>
+            Chats
+
+        </a>
+
+
+        <a href="#" class="nav-item">
+
+            <span class="nav-icon">👥</span>
+            Groups
+
+        </a>
+
+
+        <a href="#" class="nav-item">
+
+            <span class="nav-icon">◉</span>
+            Stories
+
+        </a>
+
+
+        <a href="#" class="nav-item">
+
+            <span class="nav-icon">👤</span>
+            Friends
+
+        </a>
+
+
+        <a href="#" class="nav-item">
+
+            <span class="nav-icon">💰</span>
+            Earn
+
+        </a>
+
+    </nav>
+
+
+    <script>
+
+        /* =========================
+           SIDE MENU
+        ========================= */
+
+        function openMenu() {
+
+            document.getElementById("sideMenu")
+                .classList.add("open");
+
+            document.getElementById("overlay")
+                .classList.add("show");
+        }
+
+
+        function closeMenu() {
+
+            document.getElementById("sideMenu")
+                .classList.remove("open");
+
+            document.getElementById("overlay")
+                .classList.remove("show");
+        }
+
+
+        /* =========================
+           DARK / LIGHT MODE
+        ========================= */
+
+        function applyTheme() {
+
+            const theme =
+                localStorage.getItem("cheryChatTheme") || "dark";
+
+            const icon =
+                document.getElementById("themeIcon");
+
+            if (theme === "light") {
+
+                document.body.classList.add("light");
+
+                if (icon) {
+                    icon.textContent = "🌙";
+                }
+
+            } else {
+
+                document.body.classList.remove("light");
+
+                if (icon) {
+                    icon.textContent = "☀";
+                }
+            }
+        }
+
+
+        function toggleTheme() {
+
+            const isLight =
+                document.body.classList.contains("light");
+
+            if (isLight) {
+
+                localStorage.setItem(
+                    "cheryChatTheme",
+                    "dark"
+                );
+
+            } else {
+
+                localStorage.setItem(
+                    "cheryChatTheme",
+                    "light"
+                );
+            }
+
+            applyTheme();
+        }
+
+
+        /* =========================
+           LOGOUT
+        ========================= */
+
+        function logout() {
+
+            localStorage.removeItem("cheryChatUser");
+
+            window.location.href = "login.html";
+        }
+
+
+        /* =========================
+           START
+        ========================= */
+
+        applyTheme();
+
+    </script>
+
+</body>
+</html>
