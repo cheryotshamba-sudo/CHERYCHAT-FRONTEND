@@ -1,346 +1,817 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Login - CheryChat</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<title>Login - CheryChat</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-        body {
-            min-height: 100vh;
-            background: #02091f;
-            color: #ffffff;
-            font-family: 'Poppins', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 25px 15px;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-        .container {
-            width: 100%;
-            max-width: 430px;
-        }
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-        .logo {
-            text-align: center;
-            margin-bottom: 25px;
-        }
+<style>
 
-        .logo h1 {
-            font-size: 34px;
-            font-weight: 800;
-            color: #ffd700;
-            letter-spacing: -1px;
-        }
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
-        .logo p {
-            color: #9ca8c7;
-            font-size: 14px;
-            margin-top: 4px;
-        }
+body{
+    min-height:100vh;
+    background:#07030f;
+    color:#fff;
+    font-family:'Poppins',sans-serif;
+}
 
-        .card {
-            background: #0d193d;
-            border: 1px solid rgba(255, 215, 0, 0.15);
-            border-radius: 20px;
-            padding: 30px 22px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
-        }
+.page{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    position:relative;
+    overflow:hidden;
+    padding:20px;
+}
 
-        .card h2 {
-            font-size: 24px;
-            margin-bottom: 7px;
-        }
+.glow{
+    position:absolute;
+    width:300px;
+    height:300px;
+    border-radius:50%;
+    background:rgba(255,193,7,.12);
+    filter:blur(85px);
+    top:-120px;
+    right:-100px;
+}
 
-        .subtitle {
-            color: #9ca8c7;
-            font-size: 13px;
-            margin-bottom: 25px;
-        }
+.glow2{
+    position:absolute;
+    width:260px;
+    height:260px;
+    border-radius:50%;
+    background:rgba(120,50,255,.10);
+    filter:blur(85px);
+    bottom:-120px;
+    left:-100px;
+}
 
-        .form-group {
-            margin-bottom: 18px;
-        }
+.container{
+    width:100%;
+    max-width:430px;
+    margin:auto;
+    position:relative;
+    z-index:2;
+}
 
-        label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #dce4ff;
-        }
 
-        .input-box {
-            position: relative;
-        }
+/* BRAND */
 
-        input {
-            width: 100%;
-            height: 52px;
-            padding: 0 48px 0 15px;
-            border: 1px solid #26365f;
-            border-radius: 12px;
-            background: #07112f;
-            color: #ffffff;
-            outline: none;
-            font-family: inherit;
-            font-size: 14px;
-            transition: 0.2s;
-        }
+.logo{
+    text-align:center;
+    margin-bottom:24px;
+}
 
-        input:focus {
-            border-color: #ffd700;
-            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.08);
-        }
+.logo-icon{
+    width:60px;
+    height:60px;
+    margin:0 auto 12px;
 
-        input::placeholder {
-            color: #647093;
-        }
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-        .toggle {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: #8996ba;
-            font-size: 13px;
-            user-select: none;
-        }
+    border-radius:19px;
 
-        .toggle:hover {
-            color: #ffd700;
-        }
+    background:linear-gradient(
+        135deg,
+        #ffd84d,
+        #ff9e00
+    );
 
-        .forgot {
-            text-align: right;
-            margin-top: -7px;
-            margin-bottom: 22px;
-        }
+    color:#160b00;
+    font-size:25px;
 
-        .forgot a {
-            color: #ffd700;
-            font-size: 12px;
-            text-decoration: none;
-            font-weight: 600;
-        }
+    box-shadow:
+        0 12px 30px rgba(255,180,0,.12);
+}
 
-        button {
-            width: 100%;
-            height: 52px;
-            border: none;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #ffd700, #d4af37);
-            color: #02091f;
-            font-family: inherit;
-            font-size: 15px;
-            font-weight: 800;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+.logo h1{
+    font-size:31px;
+    font-weight:800;
+    letter-spacing:-1px;
+}
 
-        button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.18);
-        }
+.logo h1 span{
+    color:#ffd54a;
+}
 
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
+.logo p{
+    color:#9993a5;
+    font-size:11px;
+    margin-top:4px;
+}
 
-        .message {
-            display: none;
-            margin-top: 15px;
-            padding: 11px 13px;
-            border-radius: 10px;
-            font-size: 13px;
-            text-align: center;
-        }
 
-        .error {
-            display: block;
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: #ff8b8b;
-        }
+/* CARD */
 
-        .success {
-            display: block;
-            background: rgba(34, 197, 94, 0.1);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            color: #6ee7a0;
-        }
+.card{
+    background:rgba(18,10,34,.95);
 
-        .register {
-            text-align: center;
-            margin-top: 23px;
-            color: #9ca8c7;
-            font-size: 13px;
-        }
+    border:1px solid rgba(255,255,255,.09);
 
-        .register a {
-            color: #ffd700;
-            font-weight: 700;
-            text-decoration: none;
-        }
+    border-radius:24px;
 
-        @media (max-width: 380px) {
-            .card {
-                padding: 25px 18px;
-            }
+    padding:27px 20px;
 
-            .logo h1 {
-                font-size: 30px;
-            }
-        }
-    </style>
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.40);
+}
+
+.card-header{
+    text-align:center;
+    margin-bottom:23px;
+}
+
+.card-header h2{
+    font-size:23px;
+    font-weight:800;
+    margin-bottom:5px;
+}
+
+.subtitle{
+    color:#9993a5;
+    font-size:11px;
+}
+
+
+/* FORM */
+
+.form-group{
+    margin-bottom:16px;
+}
+
+label{
+    display:block;
+
+    font-size:11px;
+    font-weight:600;
+
+    margin-bottom:7px;
+
+    color:#ddd8e5;
+}
+
+.input-box{
+    height:49px;
+
+    display:flex;
+    align-items:center;
+
+    gap:10px;
+
+    padding:0 13px;
+
+    background:#0d071b;
+
+    border:1px solid rgba(255,255,255,.10);
+
+    border-radius:13px;
+
+    transition:.2s;
+}
+
+.input-box:focus-within{
+    border-color:#ffd54a;
+
+    box-shadow:
+        0 0 0 3px rgba(255,213,74,.06);
+}
+
+.input-icon{
+    width:18px;
+
+    color:#9a94a6;
+
+    font-size:14px;
+
+    text-align:center;
+}
+
+.input-box input{
+    width:100%;
+    height:100%;
+
+    border:none;
+    outline:none;
+
+    background:transparent;
+
+    color:#fff;
+
+    font-family:inherit;
+
+    font-size:12px;
+}
+
+.input-box input::placeholder{
+    color:#676171;
+}
+
+
+/* PASSWORD EYE */
+
+.password-toggle{
+    width:32px;
+    height:32px;
+
+    flex-shrink:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:0;
+    background:transparent;
+
+    color:#8f899b;
+
+    cursor:pointer;
+
+    padding:0;
+
+    font-size:14px;
+}
+
+.password-toggle:hover{
+    color:#ffd54a;
+}
+
+
+/* FORGOT PASSWORD */
+
+.forgot{
+    text-align:right;
+
+    margin-top:-3px;
+
+    margin-bottom:21px;
+}
+
+.forgot a{
+    color:#ffd54a;
+
+    font-size:10px;
+
+    text-decoration:none;
+
+    font-weight:600;
+}
+
+
+/* LOGIN BUTTON */
+
+.login-btn{
+    width:100%;
+    height:52px;
+
+    border:0;
+
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffe16a,
+            #ffad13
+        );
+
+    color:#160b00;
+
+    font-family:inherit;
+
+    font-size:14px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 10px 28px rgba(255,181,0,.15);
+
+    transition:.2s;
+}
+
+.login-btn:active{
+    transform:scale(.98);
+}
+
+.login-btn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+
+/* MESSAGE */
+
+.message{
+    display:none;
+
+    padding:10px;
+
+    border-radius:10px;
+
+    margin-top:14px;
+
+    font-size:10px;
+
+    text-align:center;
+}
+
+.message.error{
+    display:block;
+
+    background:rgba(239,68,68,.10);
+
+    border:1px solid rgba(239,68,68,.20);
+
+    color:#ff7373;
+}
+
+.message.success{
+    display:block;
+
+    background:rgba(34,197,94,.10);
+
+    border:1px solid rgba(34,197,94,.20);
+
+    color:#4ade80;
+}
+
+
+/* REGISTER */
+
+.register{
+    text-align:center;
+
+    margin-top:19px;
+
+    color:#817b8b;
+
+    font-size:10px;
+}
+
+.register a{
+    color:#ffd54a;
+
+    font-weight:700;
+
+    text-decoration:none;
+}
+
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+
+    margin-top:18px;
+
+    color:#625d69;
+
+    font-size:9px;
+}
+
+
+/* MOBILE */
+
+@media(max-width:360px){
+
+    .page{
+        padding:15px;
+    }
+
+    .card{
+        padding:23px 16px;
+    }
+
+    .logo h1{
+        font-size:28px;
+    }
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
+<div class="page">
+
+<div class="glow"></div>
+<div class="glow2"></div>
+
+
 <div class="container">
 
-    <div class="logo">
-        <h1>CheryChat</h1>
-        <p>A new way to connect</p>
+
+<!-- BRAND -->
+
+<div class="logo">
+
+    <div class="logo-icon">
+        <i class="fa-solid fa-comments"></i>
     </div>
 
-    <div class="card">
+    <h1>
+        Chery<span>Chat</span>
+    </h1>
 
-        <h2>Welcome back</h2>
-        <p class="subtitle">Login to continue to CheryChat.</p>
-
-        <form id="loginForm">
-
-            <div class="form-group">
-                <label for="email">Email or phone number</label>
-
-                <div class="input-box">
-                    <input
-                        type="text"
-                        id="email"
-                        placeholder="Enter email or phone number"
-                        required
-                    >
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="password">Password</label>
-
-                <div class="input-box">
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder="Enter your password"
-                        required
-                    >
-
-                    <span class="toggle" onclick="togglePassword()">
-                        Show
-                    </span>
-                </div>
-            </div>
-
-            <div class="forgot">
-                <a href="forgot-password.html">Forgot password?</a>
-            </div>
-
-            <button type="submit" id="loginBtn">
-                Login
-            </button>
-
-            <div id="message" class="message"></div>
-
-        </form>
-
-        <div class="register">
-            Don't have an account?
-            <a href="register.html">Create account</a>
-        </div>
-
-    </div>
+    <p>
+        A new way to connect
+    </p>
 
 </div>
 
+
+<!-- LOGIN CARD -->
+
+<div class="card">
+
+<div class="card-header">
+
+    <h2>
+        Welcome back
+    </h2>
+
+    <p class="subtitle">
+        Log in to continue to CheryChat.
+    </p>
+
+</div>
+
+
+<div
+    id="message"
+    class="message">
+</div>
+
+
+<form id="loginForm">
+
+
+<!-- EMAIL / PHONE -->
+
+<div class="form-group">
+
+<label for="loginIdentifier">
+    Email or phone number
+</label>
+
+<div class="input-box">
+
+<span class="input-icon">
+    <i class="fa-solid fa-user"></i>
+</span>
+
+<input
+    type="text"
+    id="loginIdentifier"
+    placeholder="Enter email or phone number"
+    autocomplete="username"
+    required
+>
+
+</div>
+
+</div>
+
+
+<!-- PASSWORD -->
+
+<div class="form-group">
+
+<label for="loginPassword">
+    Password
+</label>
+
+<div class="input-box">
+
+<span class="input-icon">
+    <i class="fa-solid fa-lock"></i>
+</span>
+
+<input
+    type="password"
+    id="loginPassword"
+    placeholder="Enter your password"
+    autocomplete="current-password"
+    required
+>
+
+<button
+    type="button"
+    class="password-toggle"
+    id="passwordToggle"
+    aria-label="Show password"
+>
+
+<i
+    id="passwordEye"
+    class="fa-solid fa-eye">
+</i>
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- FORGOT -->
+
+<div class="forgot">
+
+<a href="forgot-password.html">
+    Forgot password?
+</a>
+
+</div>
+
+
+<!-- LOGIN -->
+
+<button
+    type="submit"
+    class="login-btn"
+    id="loginBtn"
+>
+
+    <i class="fa-solid fa-right-to-bracket"></i>
+
+    Login
+
+</button>
+
+
+</form>
+
+
+<!-- CREATE ACCOUNT -->
+
+<div class="register">
+
+Don't have an account?
+
+<a href="register.html">
+    Create account
+</a>
+
+</div>
+
+</div>
+
+
+<footer>
+    © 2026 CheryChat. All rights reserved.
+</footer>
+
+
+</div>
+
+</div>
+
+
 <script>
 
-    function togglePassword() {
 
-        const password = document.getElementById("password");
-        const toggle = document.querySelector(".toggle");
+/* =========================
+   PASSWORD SHOW / HIDE
+========================= */
 
-        if (password.type === "password") {
+const password =
+    document.getElementById("loginPassword");
+
+const passwordToggle =
+    document.getElementById("passwordToggle");
+
+const passwordEye =
+    document.getElementById("passwordEye");
+
+
+passwordToggle.addEventListener(
+    "click",
+    function(){
+
+        if(password.type === "password"){
+
             password.type = "text";
-            toggle.textContent = "Hide";
-        } else {
+
+            passwordEye.classList.remove(
+                "fa-eye"
+            );
+
+            passwordEye.classList.add(
+                "fa-eye-slash"
+            );
+
+            passwordToggle.setAttribute(
+                "aria-label",
+                "Hide password"
+            );
+
+        }else{
+
             password.type = "password";
-            toggle.textContent = "Show";
+
+            passwordEye.classList.remove(
+                "fa-eye-slash"
+            );
+
+            passwordEye.classList.add(
+                "fa-eye"
+            );
+
+            passwordToggle.setAttribute(
+                "aria-label",
+                "Show password"
+            );
+
         }
+
     }
+);
 
 
-    document.getElementById("loginForm").addEventListener("submit", function(e) {
+/* =========================
+   LOGIN
+========================= */
 
-        e.preventDefault();
+document
+.getElementById("loginForm")
+.addEventListener(
+    "submit",
+    function(event){
 
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value;
+        event.preventDefault();
 
-        const message = document.getElementById("message");
-        const button = document.getElementById("loginBtn");
 
-        message.className = "message";
-        message.textContent = "";
+        const identifier =
+            document
+            .getElementById("loginIdentifier")
+            .value
+            .trim();
 
-        if (!email || !password) {
 
-            message.className = "message error";
-            message.textContent = "Please enter your login details.";
+        const enteredPassword =
+            password.value;
+
+
+        const message =
+            document.getElementById(
+                "message"
+            );
+
+
+        const loginBtn =
+            document.getElementById(
+                "loginBtn"
+            );
+
+
+        message.className =
+            "message";
+
+        message.textContent =
+            "";
+
+
+        if(!identifier || !enteredPassword){
+
+            message.className =
+                "message error";
+
+            message.textContent =
+                "Please enter your login details.";
 
             return;
+
         }
 
-        button.disabled = true;
-        button.textContent = "Logging in...";
 
         /*
-         * FRONTEND ONLY FOR NOW.
-         * We will connect this to the CheryChat backend
-         * after the frontend pages are ready.
+         * TEMPORARY FRONTEND LOGIN
+         *
+         * This checks the account created
+         * on register.html.
+         *
+         * Later we will replace this with
+         * the real CheryChat backend.
          */
 
-        setTimeout(() => {
+        const savedUser =
+            localStorage.getItem(
+                "cheryChatRegisteredUser"
+            );
 
-            message.className = "message success";
-            message.textContent = "Login details received.";
 
-            button.disabled = false;
-            button.textContent = "Login";
+        if(!savedUser){
 
-        }, 1000);
+            message.className =
+                "message error";
 
-    });
+            message.textContent =
+                "No account found. Please create an account first.";
+
+            return;
+
+        }
+
+
+        const user =
+            JSON.parse(savedUser);
+
+
+        const emailMatches =
+            identifier.toLowerCase() ===
+            user.email.toLowerCase();
+
+
+        const phoneMatches =
+            identifier === user.phone;
+
+
+        const passwordMatches =
+            enteredPassword === user.password;
+
+
+        if(
+            (emailMatches || phoneMatches) &&
+            passwordMatches
+        ){
+
+            loginBtn.disabled = true;
+
+            loginBtn.innerHTML =
+                '<i class="fa-solid fa-spinner fa-spin"></i> Logging in...';
+
+
+            /*
+             * Save login session
+             */
+
+            localStorage.setItem(
+                "cheryChatLoggedIn",
+                "true"
+            );
+
+
+            localStorage.setItem(
+                "cheryChatCurrentUser",
+                JSON.stringify(user)
+            );
+
+
+            message.className =
+                "message success";
+
+            message.textContent =
+                "Login successful. Opening CheryChat...";
+
+
+            setTimeout(
+                function(){
+
+                    window.location.href =
+                        "dashboard.html";
+
+                },
+                700
+            );
+
+
+        }else{
+
+            message.className =
+                "message error";
+
+            message.textContent =
+                "Incorrect email, phone number or password.";
+
+        }
+
+    }
+);
 
 </script>
 
 </body>
 </html>
-
-Done — "login.html" is ready. It includes email/phone login, password show/hide, forgot-password link, and a link back to "register.html".
-
-Next we can build "forgot-password.html".
