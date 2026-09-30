@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - CheryChat</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #02091f;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px 15px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 430px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .logo h1 {
+            font-size: 34px;
+            font-weight: 800;
+            color: #ffd700;
+            letter-spacing: -1px;
+        }
+
+        .logo p {
+            color: #9ca8c7;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .card {
+            background: #0d193d;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            border-radius: 20px;
+            padding: 30px 22px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .card h2 {
+            font-size: 24px;
+            margin-bottom: 7px;
+        }
+
+        .subtitle {
+            color: #9ca8c7;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #dce4ff;
+        }
+
+        .input-box {
+            position: relative;
+        }
+
+        input {
+            width: 100%;
+            height: 52px;
+            padding: 0 48px 0 15px;
+            border: 1px solid #26365f;
+            border-radius: 12px;
+            background: #07112f;
+            color: #ffffff;
+            outline: none;
+            font-family: inherit;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        input:focus {
+            border-color: #ffd700;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.08);
+        }
+
+        input::placeholder {
+            color: #647093;
+        }
+
+        .toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #8996ba;
+            font-size: 13px;
+            user-select: none;
+        }
+
+        .toggle:hover {
+            color: #ffd700;
+        }
+
+        .forgot {
+            text-align: right;
+            margin-top: -7px;
+            margin-bottom: 22px;
+        }
+
+        .forgot a {
+            color: #ffd700;
+            font-size: 12px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        button {
+            width: 100%;
+            height: 52px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #ffd700, #d4af37);
+            color: #02091f;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.18);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .message {
+            display: none;
+            margin-top: 15px;
+            padding: 11px 13px;
+            border-radius: 10px;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .error {
+            display: block;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ff8b8b;
+        }
+
+        .success {
+            display: block;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #6ee7a0;
+        }
+
+        .register {
+            text-align: center;
+            margin-top: 23px;
+            color: #9ca8c7;
+            font-size: 13px;
+        }
+
+        .register a {
+            color: #ffd700;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        @media (max-width: 380px) {
+            .card {
+                padding: 25px 18px;
+            }
+
+            .logo h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">
+        <h1>CheryChat</h1>
+        <p>A new way to connect</p>
+    </div>
+
+    <div class="card">
+
+        <h2>Welcome back</h2>
+        <p class="subtitle">Login to continue to CheryChat.</p>
+
+        <form id="loginForm">
+
+            <div class="form-group">
+                <label for="email">Email or phone number</label>
+
+                <div class="input-box">
+                    <input
+                        type="text"
+                        id="email"
+                        placeholder="Enter email or phone number"
+                        required
+                    >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+
+                <div class="input-box">
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                    <span class="toggle" onclick="togglePassword()">
+                        Show
+                    </span>
+                </div>
+            </div>
+
+            <div class="forgot">
+                <a href="forgot-password.html">Forgot password?</a>
+            </div>
+
+            <button type="submit" id="loginBtn">
+                Login
+            </button>
+
+            <div id="message" class="message"></div>
+
+        </form>
+
+        <div class="register">
+            Don't have an account?
+            <a href="register.html">Create account</a>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    function togglePassword() {
+
+        const password = document.getElementById("password");
+        const toggle = document.querySelector(".toggle");
+
+        if (password.type === "password") {
+            password.type = "text";
+            toggle.textContent = "Hide";
+        } else {
+            password.type = "password";
+            toggle.textContent = "Show";
+        }
+    }
+
+
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+
+        e.preventDefault();
+
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+
+        const message = document.getElementById("message");
+        const button = document.getElementById("loginBtn");
+
+        message.className = "message";
+        message.textContent = "";
+
+        if (!email || !password) {
+
+            message.className = "message error";
+            message.textContent = "Please enter your login details.";
+
+            return;
+        }
+
+        button.disabled = true;
+        button.textContent = "Logging in...";
+
+        /*
+         * FRONTEND ONLY FOR NOW.
+         * We will connect this to the CheryChat backend
+         * after the frontend pages are ready.
+         */
+
+        setTimeout(() => {
+
+            message.className = "message success";
+            message.textContent = "Login details received.";
+
+            button.disabled = false;
+            button.textContent = "Login";
+
+        }, 1000);
+
+    });
+
+</script>
+
+</body>
+</html>
+
+Done — "login.html" is ready. It includes email/phone login, password show/hide, forgot-password link, and a link back to "register.html".
+
+Next we can build "forgot-password.html".
