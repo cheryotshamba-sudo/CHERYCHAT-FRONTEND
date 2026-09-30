@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CheryChat</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #07030f;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        .page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background glow */
+        .glow {
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: rgba(255, 193, 7, 0.12);
+            filter: blur(80px);
+            top: -80px;
+            right: -80px;
+        }
+
+        .glow2 {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: rgba(120, 50, 255, 0.12);
+            filter: blur(80px);
+            bottom: -80px;
+            left: -80px;
+        }
+
+        /* Header */
+        header {
+            width: 100%;
+            padding: 22px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 2;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #ffd54a, #ff9d00);
+            color: #160b00;
+            font-size: 20px;
+            box-shadow: 0 8px 25px rgba(255, 190, 0, 0.22);
+        }
+
+        .brand-name {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-name span {
+            color: #ffd54a;
+        }
+
+        .login-top {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 9px 14px;
+            border: 1px solid rgba(255,255,255,0.16);
+            border-radius: 20px;
+            background: rgba(255,255,255,0.04);
+        }
+
+        /* Main */
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 35px 20px 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero {
+            width: 100%;
+            max-width: 480px;
+            text-align: center;
+        }
+
+        .chat-icon {
+            width: 92px;
+            height: 92px;
+            margin: 0 auto 25px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(145deg, #ffd84d, #ff9e00);
+            color: #160b00;
+            font-size: 39px;
+            box-shadow:
+                0 15px 45px rgba(255, 181, 0, 0.20),
+                inset 0 1px 2px rgba(255,255,255,0.5);
+        }
+
+        .hero h1 {
+            font-size: 39px;
+            line-height: 1.12;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            margin-bottom: 17px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, #ffe16a, #ffae18);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: #aaa5b5;
+            font-size: 15px;
+            line-height: 1.75;
+            max-width: 390px;
+            margin: 0 auto 30px;
+        }
+
+        /* Buttons */
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .btn {
+            width: 100%;
+            min-height: 54px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 700;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .primary {
+            color: #160b00;
+            background: linear-gradient(135deg, #ffe16a, #ffad13);
+            box-shadow: 0 12px 30px rgba(255, 181, 0, 0.17);
+        }
+
+        .secondary {
+            color: #ffffff;
+            background: rgba(255,255,255,0.055);
+            border: 1px solid rgba(255,255,255,0.13);
+        }
+
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 9px;
+            margin-top: 34px;
+        }
+
+        .feature {
+            padding: 15px 7px;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.035);
+            border: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .feature i {
+            color: #ffd34d;
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+
+        .feature h3 {
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .feature p {
+            font-size: 9px;
+            line-height: 1.4;
+            color: #85808f;
+            margin: 0;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 18px 20px 24px;
+            color: #66616e;
+            font-size: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (max-width: 360px) {
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .chat-icon {
+                width: 78px;
+                height: 78px;
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <div class="glow"></div>
+    <div class="glow2"></div>
+
+    <header>
+        <div class="brand">
+            <div class="brand-icon">
+                <i class="fa-solid fa-comments"></i>
+            </div>
+
+            <div class="brand-name">
+                Chery<span>Chat</span>
+            </div>
+        </div>
+
+        <a href="login.html" class="login-top">
+            Log in
+        </a>
+    </header>
+
+    <main>
+        <section class="hero">
+
+            <div class="chat-icon">
+                <i class="fa-solid fa-comment-dots"></i>
+            </div>
+
+            <h1>
+                Connect.<br>
+                Chat. <span>Share.</span>
+            </h1>
+
+            <p>
+                A new way to connect with people, chat with friends,
+                discover communities and share your world.
+            </p>
+
+            <div class="buttons">
+
+                <a href="register.html" class="btn primary">
+                    <i class="fa-solid fa-user-plus"></i>
+                    Create Account
+                </a>
+
+                <a href="login.html" class="btn secondary">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    I already have an account
+                </a>
+
+            </div>
+
+            <div class="features">
+
+                <div class="feature">
+                    <i class="fa-solid fa-comments"></i>
+                    <h3>Chat</h3>
+                    <p>Private & group</p>
+                </div>
+
+                <div class="feature">
+                    <i class="fa-solid fa-users"></i>
+                    <h3>Connect</h3>
+                    <p>Meet people</p>
+                </div>
+
+                <div class="feature">
+                    <i class="fa-solid fa-share-nodes"></i>
+                    <h3>Share</h3>
+                    <p>Share your world</p>
+                </div>
+
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        © 2026 CheryChat. All rights reserved.
+    </footer>
+
+</div>
+
+</body>
+</html>
