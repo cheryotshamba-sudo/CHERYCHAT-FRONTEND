@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create Account - CheryChat</title>
+<title>Create Account | CheryChat</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
@@ -23,235 +24,152 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 body{
     min-height:100vh;
-    background:#07030f;
+    background:
+        radial-gradient(circle at top,#24103d 0%,#0d0618 45%,#07030f 100%);
     color:#fff;
     font-family:'Poppins',sans-serif;
-}
-
-.page{
-    min-height:100vh;
     display:flex;
-    flex-direction:column;
-    position:relative;
-    overflow:hidden;
-}
-
-.glow{
-    position:absolute;
-    width:280px;
-    height:280px;
-    border-radius:50%;
-    background:rgba(255,193,7,.12);
-    filter:blur(80px);
-    top:-100px;
-    right:-80px;
-}
-
-.glow2{
-    position:absolute;
-    width:250px;
-    height:250px;
-    border-radius:50%;
-    background:rgba(120,50,255,.10);
-    filter:blur(80px);
-    bottom:-100px;
-    left:-80px;
-}
-
-header{
-    padding:20px;
-    display:flex;
+    justify-content:center;
     align-items:center;
-    justify-content:space-between;
-    position:relative;
-    z-index:2;
+    padding:25px 15px;
 }
 
-.brand{
-    display:flex;
-    align-items:center;
-    gap:9px;
+.container{
+    width:100%;
+    max-width:450px;
 }
 
-.brand-icon{
-    width:40px;
-    height:40px;
-    border-radius:12px;
+.logo{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.logo-icon{
+    width:65px;
+    height:65px;
+    margin:auto;
+    border-radius:20px;
     display:flex;
     align-items:center;
     justify-content:center;
     background:linear-gradient(135deg,#ffd54a,#ff9d00);
-    color:#160b00;
-    font-size:18px;
+    color:#17091f;
+    font-size:30px;
+    box-shadow:0 10px 35px rgba(255,180,0,.25);
 }
 
-.brand-name{
-    font-size:21px;
-    font-weight:800;
-}
-
-.brand-name span{
+.logo h1{
+    margin-top:12px;
+    font-size:28px;
     color:#ffd54a;
 }
 
-.login-link{
-    color:#ffd54a;
-    text-decoration:none;
-    font-size:12px;
-    font-weight:600;
-}
-
-main{
-    flex:1;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:15px 20px 35px;
-    position:relative;
-    z-index:1;
+.logo p{
+    margin-top:4px;
+    color:#aaa;
+    font-size:13px;
 }
 
 .card{
-    width:100%;
-    max-width:440px;
-    background:rgba(18,10,34,.95);
-    border:1px solid rgba(255,255,255,.09);
+    background:rgba(18,10,34,.96);
+    border:1px solid rgba(255,213,74,.15);
     border-radius:24px;
-    padding:25px 20px;
-    box-shadow:0 20px 60px rgba(0,0,0,.35);
+    padding:28px 22px;
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
 }
 
-.card-header{
+.card h2{
     text-align:center;
-    margin-bottom:22px;
+    font-size:22px;
+    margin-bottom:6px;
 }
 
-.card-icon{
-    width:60px;
-    height:60px;
-    margin:0 auto 13px;
-    border-radius:19px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:linear-gradient(135deg,#ffd84d,#ff9e00);
-    color:#160b00;
-    font-size:24px;
-}
-
-.card-header h1{
-    font-size:23px;
-    font-weight:800;
-    margin-bottom:5px;
-}
-
-.card-header p{
-    color:#9993a5;
-    font-size:11px;
+.subtitle{
+    text-align:center;
+    color:#999;
+    font-size:13px;
+    margin-bottom:25px;
 }
 
 .form-group{
-    margin-bottom:14px;
+    margin-bottom:17px;
 }
 
 .form-group label{
     display:block;
-    font-size:11px;
-    font-weight:600;
-    margin-bottom:6px;
-    color:#ddd8e5;
+    font-size:13px;
+    color:#ddd;
+    margin-bottom:7px;
 }
 
 .input-box{
-    height:48px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:0 13px;
-    background:#0d071b;
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:13px;
+    position:relative;
 }
 
-.input-box:focus-within{
-    border-color:#ffd54a;
-}
-
-.input-icon{
-    color:#a49daf;
+.input-box i.left-icon{
+    position:absolute;
+    left:14px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#a98935;
     font-size:14px;
-    width:18px;
-    text-align:center;
 }
 
 .input-box input{
     width:100%;
-    height:100%;
-    border:0;
-    outline:0;
-    background:transparent;
+    height:50px;
+    border-radius:13px;
+    border:1px solid #30223d;
+    background:#0e0818;
     color:#fff;
-    font-family:inherit;
-    font-size:12px;
+    outline:none;
+    padding:0 45px 0 42px;
+    font-family:'Poppins',sans-serif;
+    font-size:14px;
+    transition:.2s;
 }
 
-.input-box input::placeholder{
-    color:#676171;
+.input-box input:focus{
+    border-color:#ffd54a;
+    box-shadow:0 0 0 3px rgba(255,213,74,.08);
 }
 
-/* EYE BUTTON */
-
-.password-toggle{
-    width:32px;
-    height:32px;
-    flex-shrink:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border:0;
-    background:transparent;
-    color:#aaa4b3;
+.toggle-password{
+    position:absolute;
+    right:13px;
+    top:50%;
+    transform:translateY(-50%);
+    background:none;
+    border:none;
+    color:#999;
     cursor:pointer;
-    padding:0;
     font-size:15px;
+    padding:5px;
 }
 
-.password-toggle:hover{
+.toggle-password:hover{
     color:#ffd54a;
 }
 
 .password-status{
-    font-size:9px;
-    margin-top:5px;
-    min-height:14px;
-}
-
-.password-status.match{
-    color:#22c55e;
-}
-
-.password-status.no-match{
-    color:#ef4444;
+    font-size:11px;
+    margin-top:6px;
+    min-height:16px;
 }
 
 .terms{
     display:flex;
     align-items:flex-start;
-    gap:8px;
+    gap:9px;
     margin:17px 0;
+    font-size:12px;
+    color:#999;
+    line-height:1.5;
 }
 
 .terms input{
-    width:15px;
-    height:15px;
-    margin-top:2px;
+    margin-top:3px;
     accent-color:#ffd54a;
-}
-
-.terms label{
-    color:#8f899b;
-    font-size:9px;
-    line-height:1.5;
 }
 
 .terms a{
@@ -259,84 +177,72 @@ main{
     text-decoration:none;
 }
 
-.submit-btn{
+button.submit-btn{
     width:100%;
     height:52px;
-    border:0;
-    border-radius:15px;
-    background:linear-gradient(135deg,#ffe16a,#ffad13);
-    color:#160b00;
-    font-family:inherit;
-    font-size:14px;
-    font-weight:800;
-    cursor:pointer;
-    box-shadow:0 10px 28px rgba(255,181,0,.15);
-}
-
-.submit-btn:active{
-    transform:scale(.98);
-}
-
-.submit-btn:disabled{
-    opacity:.6;
-    cursor:not-allowed;
-}
-
-.login-text{
-    text-align:center;
-    margin-top:18px;
-    color:#817b8b;
-    font-size:10px;
-}
-
-.login-text a{
-    color:#ffd54a;
-    text-decoration:none;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(135deg,#ffd54a,#ff9d00);
+    color:#16091d;
+    font-family:'Poppins',sans-serif;
     font-weight:700;
+    font-size:14px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+button.submit-btn:hover{
+    transform:translateY(-1px);
+    box-shadow:0 10px 25px rgba(255,174,0,.2);
+}
+
+button.submit-btn:disabled{
+    opacity:.65;
+    cursor:not-allowed;
+    transform:none;
 }
 
 .message{
     display:none;
-    padding:10px;
-    border-radius:10px;
-    margin-bottom:14px;
-    font-size:10px;
     text-align:center;
+    margin-top:15px;
+    padding:11px;
+    border-radius:10px;
+    font-size:12px;
 }
 
 .message.error{
     display:block;
-    background:rgba(239,68,68,.10);
-    color:#ff7373;
-    border:1px solid rgba(239,68,68,.20);
+    background:rgba(255,70,70,.1);
+    color:#ff7777;
+    border:1px solid rgba(255,70,70,.2);
 }
 
 .message.success{
     display:block;
-    background:rgba(34,197,94,.10);
-    color:#4ade80;
-    border:1px solid rgba(34,197,94,.20);
+    background:rgba(70,220,130,.1);
+    color:#65e89a;
+    border:1px solid rgba(70,220,130,.2);
 }
 
-footer{
+.login-link{
     text-align:center;
-    padding:15px 20px 20px;
-    color:#625d69;
-    font-size:9px;
-    position:relative;
-    z-index:2;
+    margin-top:22px;
+    font-size:13px;
+    color:#999;
 }
 
-@media(max-width:360px){
+.login-link a{
+    color:#ffd54a;
+    text-decoration:none;
+    font-weight:600;
+}
 
-    .card{
-        padding:22px 16px;
-    }
-
-    .card-header h1{
-        font-size:21px;
-    }
-
+.footer{
+    text-align:center;
+    margin-top:20px;
+    color:#666;
+    font-size:11px;
 }
 
 </style>
@@ -344,541 +250,568 @@ footer{
 
 <body>
 
-<div class="page">
+<div class="container">
 
-<div class="glow"></div>
-<div class="glow2"></div>
+    <div class="logo">
 
-<header>
-
-    <div class="brand">
-
-        <div class="brand-icon">
+        <div class="logo-icon">
             <i class="fa-solid fa-comments"></i>
         </div>
 
-        <div class="brand-name">
-            Chery<span>Chat</span>
+        <h1>CheryChat</h1>
+
+        <p>Connect. Chat. Share.</p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>Create Account</h2>
+
+        <p class="subtitle">
+            Join CheryChat and start connecting
+        </p>
+
+
+        <form id="registerForm">
+
+            <!-- FULL NAME -->
+
+            <div class="form-group">
+
+                <label for="fullName">
+                    Full Name
+                </label>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-user left-icon"></i>
+
+                    <input
+                        type="text"
+                        id="fullName"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-envelope left-icon"></i>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- PHONE -->
+
+            <div class="form-group">
+
+                <label for="phone">
+                    Phone Number
+                </label>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-phone left-icon"></i>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="Enter your phone number"
+                        autocomplete="tel"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-lock left-icon"></i>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Create a password"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="toggle-password"
+                        id="passwordToggle"
+                        aria-label="Show password"
+                    >
+                        <i class="fa-solid fa-eye" id="passwordEye"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONFIRM PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="confirmPassword">
+                    Confirm Password
+                </label>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-lock left-icon"></i>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Confirm your password"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="toggle-password"
+                        id="confirmPasswordToggle"
+                        aria-label="Show confirm password"
+                    >
+                        <i
+                            class="fa-solid fa-eye"
+                            id="confirmPasswordEye"
+                        ></i>
+                    </button>
+
+                </div>
+
+                <div
+                    class="password-status"
+                    id="passwordStatus"
+                ></div>
+
+            </div>
+
+
+            <!-- TERMS -->
+
+            <label class="terms">
+
+                <input
+                    type="checkbox"
+                    id="terms"
+                    required
+                >
+
+                <span>
+                    I agree to the
+                    <a href="#" onclick="return false;">
+                        Terms & Conditions
+                    </a>
+                    and Privacy Policy.
+                </span>
+
+            </label>
+
+
+            <!-- SUBMIT -->
+
+            <button
+                type="submit"
+                class="submit-btn"
+                id="submitBtn"
+            >
+                Create Account
+            </button>
+
+
+            <div
+                class="message"
+                id="message"
+            ></div>
+
+        </form>
+
+
+        <div class="login-link">
+
+            Already have an account?
+
+            <a href="login.html">
+                Log in
+            </a>
+
         </div>
 
     </div>
 
-    <a href="login.html" class="login-link">
-        Log in
-    </a>
 
-</header>
-
-
-<main>
-
-<div class="card">
-
-<div class="card-header">
-
-    <div class="card-icon">
-        <i class="fa-solid fa-user-plus"></i>
+    <div class="footer">
+        © 2026 CheryChat. All rights reserved.
     </div>
-
-    <h1>Create Account</h1>
-
-    <p>
-        Join CheryChat and start connecting.
-    </p>
-
-</div>
-
-
-<div id="message" class="message"></div>
-
-
-<form id="registerForm">
-
-
-<!-- FULL NAME -->
-
-<div class="form-group">
-
-<label for="fullName">
-    Full Name
-</label>
-
-<div class="input-box">
-
-<span class="input-icon">
-    <i class="fa-solid fa-user"></i>
-</span>
-
-<input
-    type="text"
-    id="fullName"
-    placeholder="Enter your full name"
-    autocomplete="name"
-    required
->
-
-</div>
-
-</div>
-
-
-<!-- EMAIL -->
-
-<div class="form-group">
-
-<label for="email">
-    Email Address
-</label>
-
-<div class="input-box">
-
-<span class="input-icon">
-    <i class="fa-solid fa-envelope"></i>
-</span>
-
-<input
-    type="email"
-    id="email"
-    placeholder="Enter your email"
-    autocomplete="email"
-    required
->
-
-</div>
-
-</div>
-
-
-<!-- PHONE -->
-
-<div class="form-group">
-
-<label for="phone">
-    Phone Number
-</label>
-
-<div class="input-box">
-
-<span class="input-icon">
-    <i class="fa-solid fa-phone"></i>
-</span>
-
-<input
-    type="tel"
-    id="phone"
-    placeholder="07XXXXXXXX"
-    autocomplete="tel"
-    required
->
-
-</div>
-
-</div>
-
-
-<!-- PASSWORD -->
-
-<div class="form-group">
-
-<label for="password">
-    Password
-</label>
-
-<div class="input-box">
-
-<span class="input-icon">
-    <i class="fa-solid fa-lock"></i>
-</span>
-
-<input
-    type="password"
-    id="password"
-    placeholder="Create a password"
-    autocomplete="new-password"
-    required
->
-
-<button
-    type="button"
-    class="password-toggle"
-    id="passwordToggle"
-    aria-label="Show password"
->
-
-<i id="passwordEye" class="fa-solid fa-eye"></i>
-
-</button>
-
-</div>
-
-</div>
-
-
-<!-- CONFIRM PASSWORD -->
-
-<div class="form-group">
-
-<label for="confirmPassword">
-    Confirm Password
-</label>
-
-<div class="input-box">
-
-<span class="input-icon">
-    <i class="fa-solid fa-lock"></i>
-</span>
-
-<input
-    type="password"
-    id="confirmPassword"
-    placeholder="Confirm your password"
-    autocomplete="new-password"
-    required
->
-
-<button
-    type="button"
-    class="password-toggle"
-    id="confirmPasswordToggle"
-    aria-label="Show password"
->
-
-<i id="confirmEye" class="fa-solid fa-eye"></i>
-
-</button>
-
-</div>
-
-<div
-    id="passwordStatus"
-    class="password-status"
-></div>
-
-</div>
-
-
-<!-- TERMS -->
-
-<div class="terms">
-
-<input
-    type="checkbox"
-    id="terms"
-    required
->
-
-<label for="terms">
-
-I agree to the
-<a href="#">
-Terms & Conditions
-</a>
-and
-<a href="#">
-Privacy Policy
-</a>.
-
-</label>
-
-</div>
-
-
-<!-- CREATE ACCOUNT -->
-
-<button
-    type="submit"
-    class="submit-btn"
-    id="submitBtn"
->
-
-<i class="fa-solid fa-user-plus"></i>
-Create Account
-
-</button>
-
-</form>
-
-
-<div class="login-text">
-
-Already have an account?
-
-<a href="login.html">
-Log in
-</a>
-
-</div>
-
-</div>
-
-</main>
-
-
-<footer>
-© 2026 CheryChat. All rights reserved.
-</footer>
 
 </div>
 
 
 <script>
 
-/* =========================
-   SHOW / HIDE PASSWORD
-========================= */
+/* YOUR REAL CHERYCHAT BACKEND */
+
+const API_URL =
+    "https://cherychat-backend.onrender.com";
+
+
+/* ELEMENTS */
+
+const registerForm =
+    document.getElementById("registerForm");
+
+const fullName =
+    document.getElementById("fullName");
+
+const email =
+    document.getElementById("email");
+
+const phone =
+    document.getElementById("phone");
 
 const password =
     document.getElementById("password");
 
-const passwordEye =
-    document.getElementById("passwordEye");
-
-const passwordToggle =
-    document.getElementById("passwordToggle");
-
-
-passwordToggle.addEventListener("click", function(){
-
-    if(password.type === "password"){
-
-        password.type = "text";
-
-        passwordEye.classList.remove("fa-eye");
-        passwordEye.classList.add("fa-eye-slash");
-
-        passwordToggle.setAttribute(
-            "aria-label",
-            "Hide password"
-        );
-
-    }else{
-
-        password.type = "password";
-
-        passwordEye.classList.remove("fa-eye-slash");
-        passwordEye.classList.add("fa-eye");
-
-        passwordToggle.setAttribute(
-            "aria-label",
-            "Show password"
-        );
-
-    }
-
-});
-
-
-/* =========================
-   SHOW / HIDE CONFIRM PASSWORD
-========================= */
-
 const confirmPassword =
     document.getElementById("confirmPassword");
-
-const confirmEye =
-    document.getElementById("confirmEye");
-
-const confirmPasswordToggle =
-    document.getElementById("confirmPasswordToggle");
-
-
-confirmPasswordToggle.addEventListener("click", function(){
-
-    if(confirmPassword.type === "password"){
-
-        confirmPassword.type = "text";
-
-        confirmEye.classList.remove("fa-eye");
-        confirmEye.classList.add("fa-eye-slash");
-
-        confirmPasswordToggle.setAttribute(
-            "aria-label",
-            "Hide password"
-        );
-
-    }else{
-
-        confirmPassword.type = "password";
-
-        confirmEye.classList.remove("fa-eye-slash");
-        confirmEye.classList.add("fa-eye");
-
-        confirmPasswordToggle.setAttribute(
-            "aria-label",
-            "Show password"
-        );
-
-    }
-
-});
-
-
-/* =========================
-   PASSWORD MATCH
-========================= */
 
 const passwordStatus =
     document.getElementById("passwordStatus");
 
+const message =
+    document.getElementById("message");
 
-function checkPasswordMatch(){
+const submitBtn =
+    document.getElementById("submitBtn");
+
+
+/* PASSWORD TOGGLE */
+
+document
+    .getElementById("passwordToggle")
+    .addEventListener("click", function(){
+
+        if(password.type === "password"){
+
+            password.type = "text";
+
+            document
+                .getElementById("passwordEye")
+                .classList
+                .remove("fa-eye");
+
+            document
+                .getElementById("passwordEye")
+                .classList
+                .add("fa-eye-slash");
+
+            this.setAttribute(
+                "aria-label",
+                "Hide password"
+            );
+
+        }else{
+
+            password.type = "password";
+
+            document
+                .getElementById("passwordEye")
+                .classList
+                .remove("fa-eye-slash");
+
+            document
+                .getElementById("passwordEye")
+                .classList
+                .add("fa-eye");
+
+            this.setAttribute(
+                "aria-label",
+                "Show password"
+            );
+        }
+
+    });
+
+
+/* CONFIRM PASSWORD TOGGLE */
+
+document
+    .getElementById("confirmPasswordToggle")
+    .addEventListener("click", function(){
+
+        if(confirmPassword.type === "password"){
+
+            confirmPassword.type = "text";
+
+            document
+                .getElementById("confirmPasswordEye")
+                .classList
+                .remove("fa-eye");
+
+            document
+                .getElementById("confirmPasswordEye")
+                .classList
+                .add("fa-eye-slash");
+
+            this.setAttribute(
+                "aria-label",
+                "Hide confirm password"
+            );
+
+        }else{
+
+            confirmPassword.type = "password";
+
+            document
+                .getElementById("confirmPasswordEye")
+                .classList
+                .remove("fa-eye-slash");
+
+            document
+                .getElementById("confirmPasswordEye")
+                .classList
+                .add("fa-eye");
+
+            this.setAttribute(
+                "aria-label",
+                "Show confirm password"
+            );
+        }
+
+    });
+
+
+/* PASSWORD MATCH */
+
+function checkPasswords(){
 
     if(confirmPassword.value === ""){
 
         passwordStatus.textContent = "";
 
-        passwordStatus.className =
-            "password-status";
-
         return;
-
     }
 
     if(password.value === confirmPassword.value){
 
         passwordStatus.textContent =
-            "✓ Passwords match";
+            "Passwords match";
 
-        passwordStatus.className =
-            "password-status match";
+        passwordStatus.style.color =
+            "#65e89a";
 
     }else{
 
         passwordStatus.textContent =
-            "✕ Passwords do not match";
+            "Passwords do not match";
 
-        passwordStatus.className =
-            "password-status no-match";
-
+        passwordStatus.style.color =
+            "#ff7777";
     }
 
 }
 
-
 password.addEventListener(
     "input",
-    checkPasswordMatch
+    checkPasswords
 );
 
 confirmPassword.addEventListener(
     "input",
-    checkPasswordMatch
+    checkPasswords
 );
 
 
-/* =========================
-   REGISTRATION
-========================= */
+/* REGISTRATION */
 
-document
-.getElementById("registerForm")
-.addEventListener("submit", function(event){
+registerForm.addEventListener(
+    "submit",
+    async function(event){
 
-    event.preventDefault();
+        event.preventDefault();
 
-    const fullName =
-        document.getElementById("fullName")
-        .value.trim();
+        message.className = "message";
+        message.textContent = "";
 
-    const email =
-        document.getElementById("email")
-        .value.trim();
+        const name =
+            fullName.value.trim();
 
-    const phone =
-        document.getElementById("phone")
-        .value.trim();
+        const userEmail =
+            email.value.trim().toLowerCase();
 
-    const pass =
-        password.value;
+        const userPhone =
+            phone.value.trim();
 
-    const confirm =
-        confirmPassword.value;
+        const pass =
+            password.value;
 
-    const terms =
-        document.getElementById("terms")
-        .checked;
-
-    const message =
-        document.getElementById("message");
-
-    const submitBtn =
-        document.getElementById("submitBtn");
+        const confirmPass =
+            confirmPassword.value;
 
 
-    if(pass !== confirm){
+        /* CHECK PASSWORD */
 
-        message.textContent =
-            "Passwords do not match.";
+        if(pass.length < 6){
 
-        message.className =
-            "message error";
+            message.className =
+                "message error";
 
-        return;
+            message.textContent =
+                "Password must be at least 6 characters.";
+
+            return;
+        }
+
+
+        /* CHECK CONFIRM PASSWORD */
+
+        if(pass !== confirmPass){
+
+            message.className =
+                "message error";
+
+            message.textContent =
+                "Passwords do not match.";
+
+            return;
+        }
+
+
+        /* DISABLE BUTTON */
+
+        submitBtn.disabled = true;
+
+        submitBtn.textContent =
+            "Creating Account...";
+
+
+        try{
+
+            const response =
+                await fetch(
+                    `${API_URL}/api/register`,
+                    {
+                        method:"POST",
+
+                        headers:{
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:JSON.stringify({
+
+                            fullName:name,
+
+                            email:userEmail,
+
+                            phone:userPhone,
+
+                            password:pass
+
+                        })
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if(!response.ok){
+
+                throw new Error(
+                    data.message ||
+                    "Unable to create account."
+                );
+
+            }
+
+
+            /* SUCCESS */
+
+            message.className =
+                "message success";
+
+            message.textContent =
+                "Account created successfully. Redirecting to login...";
+
+
+            registerForm.reset();
+
+            passwordStatus.textContent = "";
+
+
+            setTimeout(function(){
+
+                window.location.href =
+                    "login.html";
+
+            },1500);
+
+
+        }catch(error){
+
+            console.error(
+                "Registration error:",
+                error
+            );
+
+            message.className =
+                "message error";
+
+            message.textContent =
+                error.message ||
+                "Unable to connect to CheryChat server.";
+
+            submitBtn.disabled = false;
+
+            submitBtn.textContent =
+                "Create Account";
+
+        }
 
     }
-
-
-    if(pass.length < 6){
-
-        message.textContent =
-            "Password must be at least 6 characters.";
-
-        message.className =
-            "message error";
-
-        return;
-
-    }
-
-
-    if(!terms){
-
-        message.textContent =
-            "Please accept the Terms & Conditions.";
-
-        message.className =
-            "message error";
-
-        return;
-
-    }
-
-
-    /* Temporary account for testing */
-
-    const user = {
-
-        fullName:fullName,
-        email:email,
-        phone:phone,
-        password:pass
-
-    };
-
-
-    localStorage.setItem(
-        "cheryChatRegisteredUser",
-        JSON.stringify(user)
-    );
-
-
-    message.textContent =
-        "Account created successfully. Please log in.";
-
-    message.className =
-        "message success";
-
-    submitBtn.disabled = true;
-
-
-    setTimeout(function(){
-
-        window.location.href =
-            "login.html";
-
-    },1200);
-
-});
+);
 
 </script>
 
