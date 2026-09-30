@@ -8,7 +8,6 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <link rel="stylesheet"
@@ -25,7 +24,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 body{
     min-height:100vh;
     background:#07030f;
-    color:#ffffff;
+    color:#fff;
     font-family:'Poppins',sans-serif;
 }
 
@@ -36,8 +35,6 @@ body{
     position:relative;
     overflow:hidden;
 }
-
-/* BACKGROUND */
 
 .glow{
     position:absolute;
@@ -60,8 +57,6 @@ body{
     bottom:-100px;
     left:-80px;
 }
-
-/* HEADER */
 
 header{
     padding:20px;
@@ -106,8 +101,6 @@ header{
     font-weight:600;
 }
 
-/* MAIN */
-
 main{
     flex:1;
     display:flex;
@@ -121,7 +114,7 @@ main{
 .card{
     width:100%;
     max-width:440px;
-    background:rgba(18,10,34,.94);
+    background:rgba(18,10,34,.95);
     border:1px solid rgba(255,255,255,.09);
     border-radius:24px;
     padding:25px 20px;
@@ -156,8 +149,6 @@ main{
     color:#9993a5;
     font-size:11px;
 }
-
-/* FORM */
 
 .form-group{
     margin-bottom:14px;
@@ -199,7 +190,7 @@ main{
     border:0;
     outline:0;
     background:transparent;
-    color:#ffffff;
+    color:#fff;
     font-family:inherit;
     font-size:12px;
 }
@@ -208,15 +199,26 @@ main{
     color:#676171;
 }
 
+/* EYE BUTTON */
+
 .password-toggle{
+    width:32px;
+    height:32px;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     border:0;
-    background:none;
-    color:#8f899b;
+    background:transparent;
+    color:#aaa4b3;
     cursor:pointer;
-    font-size:14px;
+    padding:0;
+    font-size:15px;
 }
 
-/* PASSWORD STATUS */
+.password-toggle:hover{
+    color:#ffd54a;
+}
 
 .password-status{
     font-size:9px;
@@ -231,8 +233,6 @@ main{
 .password-status.no-match{
     color:#ef4444;
 }
-
-/* TERMS */
 
 .terms{
     display:flex;
@@ -259,8 +259,6 @@ main{
     text-decoration:none;
 }
 
-/* BUTTON */
-
 .submit-btn{
     width:100%;
     height:52px;
@@ -273,7 +271,6 @@ main{
     font-weight:800;
     cursor:pointer;
     box-shadow:0 10px 28px rgba(255,181,0,.15);
-    transition:.2s;
 }
 
 .submit-btn:active{
@@ -284,8 +281,6 @@ main{
     opacity:.6;
     cursor:not-allowed;
 }
-
-/* LOGIN */
 
 .login-text{
     text-align:center;
@@ -299,8 +294,6 @@ main{
     text-decoration:none;
     font-weight:700;
 }
-
-/* MESSAGE */
 
 .message{
     display:none;
@@ -324,8 +317,6 @@ main{
     color:#4ade80;
     border:1px solid rgba(34,197,94,.20);
 }
-
-/* FOOTER */
 
 footer{
     text-align:center;
@@ -355,311 +346,541 @@ footer{
 
 <div class="page">
 
-    <div class="glow"></div>
-    <div class="glow2"></div>
+<div class="glow"></div>
+<div class="glow2"></div>
 
+<header>
 
-    <!-- HEADER -->
+    <div class="brand">
 
-    <header>
-
-        <div class="brand">
-
-            <div class="brand-icon">
-                <i class="fa-solid fa-comments"></i>
-            </div>
-
-            <div class="brand-name">
-                Chery<span>Chat</span>
-            </div>
-
+        <div class="brand-icon">
+            <i class="fa-solid fa-comments"></i>
         </div>
 
-        <a href="login.html" class="login-link">
-            Log in
-        </a>
-
-    </header>
-
-
-    <!-- MAIN -->
-
-    <main>
-
-        <div class="card">
-
-            <div class="card-header">
-
-                <div class="card-icon">
-                    <i class="fa-solid fa-user-plus"></i>
-                </div>
-
-                <h1>
-                    Create Account
-                </h1>
-
-                <p>
-                    Join CheryChat and start connecting.
-                </p>
-
-            </div>
-
-
-            <div
-                id="message"
-                class="message"
-            ></div>
-
-
-            <form id="registerForm">
-
-
-                <!-- FULL NAME -->
-
-                <div class="form-group">
-
-                    <label for="fullName">
-                        Full Name
-                    </label>
-
-                    <div class="input-box">
-
-                        <span class="input-icon">
-                            <i class="fa-solid fa-user"></i>
-                        </span>
-
-                        <input
-                            type="text"
-                            id="fullName"
-                            placeholder="Enter your full name"
-                            autocomplete="name"
-                            required
-                        >
-
-                    </div>
-
-                </div>
-
-
-                <!-- EMAIL -->
-
-                <div class="form-group">
-
-                    <label for="email">
-                        Email Address
-                    </label>
-
-                    <div class="input-box">
-
-                        <span class="input-icon">
-                            <i class="fa-solid fa-envelope"></i>
-                        </span>
-
-                        <input
-                            type="email"
-                            id="email"
-                            placeholder="Enter your email"
-                            autocomplete="email"
-                            required
-                        >
-
-                    </div>
-
-                </div>
-
-
-                <!-- PHONE -->
-
-                <div class="form-group">
-
-                    <label for="phone">
-                        Phone Number
-                    </label>
-
-                    <div class="input-box">
-
-                        <span class="input-icon">
-                            <i class="fa-solid fa-phone"></i>
-                        </span>
-
-                        <input
-                            type="tel"
-                            id="phone"
-                            placeholder="07XXXXXXXX"
-                            autocomplete="tel"
-                            required
-                        >
-
-                    </div>
-
-                </div>
-
-
-                <!-- PASSWORD -->
-
-                <div class="form-group">
-
-                    <label for="password">
-                        Password
-                    </label>
-
-                    <div class="input-box">
-
-                        <span class="input-icon">
-                            <i class="fa-solid fa-lock"></i>
-                        </span>
-
-                        <input
-                            type="password"
-                            id="password"
-                            placeholder="Create a password"
-                            autocomplete="new-password"
-                            required
-                        >
-
-                        <button
-                            type="button"
-                            class="password-toggle"
-                            onclick="togglePassword('password','passwordEye')"
-                        >
-
-                            <i
-                                id="passwordEye"
-                                class="fa-solid fa-eye"
-                            ></i>
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <!-- CONFIRM PASSWORD -->
-
-                <div class="form-group">
-
-                    <label for="confirmPassword">
-                        Confirm Password
-                    </label>
-
-                    <div class="input-box">
-
-                        <span class="input-icon">
-                            <i class="fa-solid fa-lock"></i>
-                        </span>
-
-                        <input
-                            type="password"
-                            id="confirmPassword"
-                            placeholder="Confirm your password"
-                            autocomplete="new-password"
-                            required
-                        >
-
-                        <button
-                            type="button"
-                            class="password-toggle"
-                            onclick="togglePassword('confirmPassword','confirmEye')"
-                        >
-
-                            <i
-                                id="confirmEye"
-                                class="fa-solid fa-eye"
-                            ></i>
-
-                        </button>
-
-                    </div>
-
-                    <div
-                        id="passwordStatus"
-                        class="password-status"
-                    ></div>
-
-                </div>
-
-
-                <!-- TERMS -->
-
-                <div class="terms">
-
-                    <input
-                        type="checkbox"
-                        id="terms"
-                        required
-                    >
-
-                    <label for="terms">
-
-                        I agree to the
-                        <a href="#">
-                            Terms & Conditions
-                        </a>
-                        and
-                        <a href="#">
-                            Privacy Policy
-                        </a>.
-
-                    </label>
-
-                </div>
-
-
-                <!-- SUBMIT -->
-
-                <button
-                    type="submit"
-                    class="submit-btn"
-                    id="submitBtn"
-                >
-
-                    <i class="fa-solid fa-user-plus"></i>
-                    Create Account
-
-                </button>
-
-            </form>
-
-
-            <div class="login-text">
-
-                Already have an account?
-
-                <a href="login.html">
-                    Log in
-                </a>
-
-            </div>
-
+        <div class="brand-name">
+            Chery<span>Chat</span>
         </div>
 
-    </main>
+    </div>
+
+    <a href="login.html" class="login-link">
+        Log in
+    </a>
+
+</header>
 
 
-    <footer>
-        © 2026 CheryChat. All rights reserved.
-    </footer>
+<main>
+
+<div class="card">
+
+<div class="card-header">
+
+    <div class="card-icon">
+        <i class="fa-solid fa-user-plus"></i>
+    </div>
+
+    <h1>Create Account</h1>
+
+    <p>
+        Join CheryChat and start connecting.
+    </p>
+
+</div>
+
+
+<div id="message" class="message"></div>
+
+
+<form id="registerForm">
+
+
+<!-- FULL NAME -->
+
+<div class="form-group">
+
+<label for="fullName">
+    Full Name
+</label>
+
+<div class="input-box">
+
+<span class="input-icon">
+    <i class="fa-solid fa-user"></i>
+</span>
+
+<input
+    type="text"
+    id="fullName"
+    placeholder="Enter your full name"
+    autocomplete="name"
+    required
+>
+
+</div>
+
+</div>
+
+
+<!-- EMAIL -->
+
+<div class="form-group">
+
+<label for="email">
+    Email Address
+</label>
+
+<div class="input-box">
+
+<span class="input-icon">
+    <i class="fa-solid fa-envelope"></i>
+</span>
+
+<input
+    type="email"
+    id="email"
+    placeholder="Enter your email"
+    autocomplete="email"
+    required
+>
+
+</div>
+
+</div>
+
+
+<!-- PHONE -->
+
+<div class="form-group">
+
+<label for="phone">
+    Phone Number
+</label>
+
+<div class="input-box">
+
+<span class="input-icon">
+    <i class="fa-solid fa-phone"></i>
+</span>
+
+<input
+    type="tel"
+    id="phone"
+    placeholder="07XXXXXXXX"
+    autocomplete="tel"
+    required
+>
+
+</div>
+
+</div>
+
+
+<!-- PASSWORD -->
+
+<div class="form-group">
+
+<label for="password">
+    Password
+</label>
+
+<div class="input-box">
+
+<span class="input-icon">
+    <i class="fa-solid fa-lock"></i>
+</span>
+
+<input
+    type="password"
+    id="password"
+    placeholder="Create a password"
+    autocomplete="new-password"
+    required
+>
+
+<button
+    type="button"
+    class="password-toggle"
+    id="passwordToggle"
+    aria-label="Show password"
+>
+
+<i id="passwordEye" class="fa-solid fa-eye"></i>
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- CONFIRM PASSWORD -->
+
+<div class="form-group">
+
+<label for="confirmPassword">
+    Confirm Password
+</label>
+
+<div class="input-box">
+
+<span class="input-icon">
+    <i class="fa-solid fa-lock"></i>
+</span>
+
+<input
+    type="password"
+    id="confirmPassword"
+    placeholder="Confirm your password"
+    autocomplete="new-password"
+    required
+>
+
+<button
+    type="button"
+    class="password-toggle"
+    id="confirmPasswordToggle"
+    aria-label="Show password"
+>
+
+<i id="confirmEye" class="fa-solid fa-eye"></i>
+
+</button>
+
+</div>
+
+<div
+    id="passwordStatus"
+    class="password-status"
+></div>
+
+</div>
+
+
+<!-- TERMS -->
+
+<div class="terms">
+
+<input
+    type="checkbox"
+    id="terms"
+    required
+>
+
+<label for="terms">
+
+I agree to the
+<a href="#">
+Terms & Conditions
+</a>
+and
+<a href="#">
+Privacy Policy
+</a>.
+
+</label>
+
+</div>
+
+
+<!-- CREATE ACCOUNT -->
+
+<button
+    type="submit"
+    class="submit-btn"
+    id="submitBtn"
+>
+
+<i class="fa-solid fa-user-plus"></i>
+Create Account
+
+</button>
+
+</form>
+
+
+<div class="login-text">
+
+Already have an account?
+
+<a href="login.html">
+Log in
+</a>
+
+</div>
+
+</div>
+
+</main>
+
+
+<footer>
+© 2026 CheryChat. All rights reserved.
+</footer>
 
 </div>
 
 
 <script>
 
-/* PASSWORD SHOW / HIDE */
+/* =========================
+   SHOW / HIDE PASSWORD
+========================= */
 
-function togglePassword(inputId, iconId){
+const password =
+    document.getElementById("password");
 
-    const input =
-        document.getElementById(inputId);
+const passwordEye =
+    document.getElementById("passwordEye");
 
-    const icon =
-        document.getElementById(iconId);
+const passwordToggle =
+    document.getElementById("passwordToggle");
 
-    if(input.type === "password"){
 
-        input.type = "text";
+passwordToggle.addEventListener("click", function(){
 
-        icon.classList.remove("fa-eye");
+    if(password.type === "password"){
 
-        icon
+        password.type = "text";
+
+        passwordEye.classList.remove("fa-eye");
+        passwordEye.classList.add("fa-eye-slash");
+
+        passwordToggle.setAttribute(
+            "aria-label",
+            "Hide password"
+        );
+
+    }else{
+
+        password.type = "password";
+
+        passwordEye.classList.remove("fa-eye-slash");
+        passwordEye.classList.add("fa-eye");
+
+        passwordToggle.setAttribute(
+            "aria-label",
+            "Show password"
+        );
+
+    }
+
+});
+
+
+/* =========================
+   SHOW / HIDE CONFIRM PASSWORD
+========================= */
+
+const confirmPassword =
+    document.getElementById("confirmPassword");
+
+const confirmEye =
+    document.getElementById("confirmEye");
+
+const confirmPasswordToggle =
+    document.getElementById("confirmPasswordToggle");
+
+
+confirmPasswordToggle.addEventListener("click", function(){
+
+    if(confirmPassword.type === "password"){
+
+        confirmPassword.type = "text";
+
+        confirmEye.classList.remove("fa-eye");
+        confirmEye.classList.add("fa-eye-slash");
+
+        confirmPasswordToggle.setAttribute(
+            "aria-label",
+            "Hide password"
+        );
+
+    }else{
+
+        confirmPassword.type = "password";
+
+        confirmEye.classList.remove("fa-eye-slash");
+        confirmEye.classList.add("fa-eye");
+
+        confirmPasswordToggle.setAttribute(
+            "aria-label",
+            "Show password"
+        );
+
+    }
+
+});
+
+
+/* =========================
+   PASSWORD MATCH
+========================= */
+
+const passwordStatus =
+    document.getElementById("passwordStatus");
+
+
+function checkPasswordMatch(){
+
+    if(confirmPassword.value === ""){
+
+        passwordStatus.textContent = "";
+
+        passwordStatus.className =
+            "password-status";
+
+        return;
+
+    }
+
+    if(password.value === confirmPassword.value){
+
+        passwordStatus.textContent =
+            "✓ Passwords match";
+
+        passwordStatus.className =
+            "password-status match";
+
+    }else{
+
+        passwordStatus.textContent =
+            "✕ Passwords do not match";
+
+        passwordStatus.className =
+            "password-status no-match";
+
+    }
+
+}
+
+
+password.addEventListener(
+    "input",
+    checkPasswordMatch
+);
+
+confirmPassword.addEventListener(
+    "input",
+    checkPasswordMatch
+);
+
+
+/* =========================
+   REGISTRATION
+========================= */
+
+document
+.getElementById("registerForm")
+.addEventListener("submit", function(event){
+
+    event.preventDefault();
+
+    const fullName =
+        document.getElementById("fullName")
+        .value.trim();
+
+    const email =
+        document.getElementById("email")
+        .value.trim();
+
+    const phone =
+        document.getElementById("phone")
+        .value.trim();
+
+    const pass =
+        password.value;
+
+    const confirm =
+        confirmPassword.value;
+
+    const terms =
+        document.getElementById("terms")
+        .checked;
+
+    const message =
+        document.getElementById("message");
+
+    const submitBtn =
+        document.getElementById("submitBtn");
+
+
+    if(pass !== confirm){
+
+        message.textContent =
+            "Passwords do not match.";
+
+        message.className =
+            "message error";
+
+        return;
+
+    }
+
+
+    if(pass.length < 6){
+
+        message.textContent =
+            "Password must be at least 6 characters.";
+
+        message.className =
+            "message error";
+
+        return;
+
+    }
+
+
+    if(!terms){
+
+        message.textContent =
+            "Please accept the Terms & Conditions.";
+
+        message.className =
+            "message error";
+
+        return;
+
+    }
+
+
+    /* Temporary account for testing */
+
+    const user = {
+
+        fullName:fullName,
+        email:email,
+        phone:phone,
+        password:pass
+
+    };
+
+
+    localStorage.setItem(
+        "cheryChatRegisteredUser",
+        JSON.stringify(user)
+    );
+
+
+    message.textContent =
+        "Account created successfully. Please log in.";
+
+    message.className =
+        "message success";
+
+    submitBtn.disabled = true;
+
+
+    setTimeout(function(){
+
+        window.location.href =
+            "login.html";
+
+    },1200);
+
+});
+
+</script>
+
+</body>
+</html>
