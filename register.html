@@ -4,11 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CheryChat Dashboard</title>
+<title>Create Account - CheryChat</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 <style>
 
@@ -18,524 +22,328 @@
     padding:0;
 }
 
-:root{
-    --bg:#02091f;
-    --card:#0d193d;
-    --card2:#07112f;
-    --text:#ffffff;
-    --muted:#9ca8c7;
-    --border:#26365f;
-    --gold:#ffd700;
-    --gold2:#d4af37;
-    --green:#22c55e;
-    --red:#ef4444;
-}
-
-body.light{
-    --bg:#f4f7fc;
-    --card:#ffffff;
-    --card2:#eef2f8;
-    --text:#111827;
-    --muted:#667085;
-    --border:#dce3ef;
-    --gold:#b8860b;
-    --gold2:#d4af37;
-}
-
 body{
     min-height:100vh;
-    background:var(--bg);
-    color:var(--text);
+    background:#07030f;
+    color:#ffffff;
     font-family:'Poppins',sans-serif;
-    padding-bottom:75px;
-    transition:.25s;
+}
+
+.page{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    overflow:hidden;
+}
+
+/* BACKGROUND */
+
+.glow{
+    position:absolute;
+    width:280px;
+    height:280px;
+    border-radius:50%;
+    background:rgba(255,193,7,.12);
+    filter:blur(80px);
+    top:-100px;
+    right:-80px;
+}
+
+.glow2{
+    position:absolute;
+    width:250px;
+    height:250px;
+    border-radius:50%;
+    background:rgba(120,50,255,.10);
+    filter:blur(80px);
+    bottom:-100px;
+    left:-80px;
 }
 
 /* HEADER */
 
-.header{
-    height:68px;
-    padding:0 16px;
+header{
+    padding:20px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    background:var(--card);
-    border-bottom:1px solid var(--border);
-    position:sticky;
-    top:0;
-    z-index:50;
+    position:relative;
+    z-index:2;
 }
 
-.logo{
-    color:var(--gold);
-    font-size:22px;
-    font-weight:800;
-}
-
-.header-right{
+.brand{
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:9px;
 }
 
-.balance{
-    font-size:12px;
-    font-weight:700;
-}
-
-.menu-button{
-    width:42px;
-    height:42px;
+.brand-icon{
+    width:40px;
+    height:40px;
     border-radius:12px;
-    border:1px solid var(--border);
-    background:var(--card2);
-    color:var(--text);
-    font-size:22px;
-    cursor:pointer;
-}
-
-/* CONTENT */
-
-.container{
-    width:100%;
-    max-width:600px;
-    margin:auto;
-    padding:20px 15px;
-}
-
-.welcome h1{
-    font-size:23px;
-    margin-bottom:5px;
-}
-
-.welcome p{
-    color:var(--muted);
-    font-size:13px;
-}
-
-/* PROFILE */
-
-.profile-card{
-    margin-top:20px;
-    padding:16px;
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:17px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.profile-left{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.avatar{
-    width:52px;
-    height:52px;
-    border-radius:50%;
-    background:linear-gradient(135deg,var(--gold),var(--gold2));
-    color:#02091f;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:16px;
-    font-weight:800;
-}
-
-.profile-name{
-    font-size:14px;
-    font-weight:700;
-}
-
-.verified{
-    color:var(--gold);
-}
-
-.online-status{
-    color:var(--green);
-    font-size:10px;
-    margin-top:2px;
-}
-
-.balance-box{
-    text-align:right;
-}
-
-.balance-box small{
-    display:block;
-    color:var(--muted);
-    font-size:9px;
-}
-
-.balance-box strong{
-    color:var(--gold);
-    font-size:14px;
-}
-
-/* SECTIONS */
-
-.section{
-    margin-top:25px;
-}
-
-.section-title{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:12px;
-}
-
-.section-title h2{
-    font-size:17px;
-}
-
-.section-title span{
-    color:var(--muted);
-    font-size:10px;
-}
-
-/* SEARCH */
-
-.search{
-    height:44px;
-    display:flex;
-    align-items:center;
-    gap:8px;
-    padding:0 13px;
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:12px;
-    margin-bottom:12px;
-}
-
-.search-icon{
-    color:var(--muted);
+    background:linear-gradient(135deg,#ffd54a,#ff9d00);
+    color:#160b00;
     font-size:18px;
 }
 
-.search input{
+.brand-name{
+    font-size:21px;
+    font-weight:800;
+}
+
+.brand-name span{
+    color:#ffd54a;
+}
+
+.login-link{
+    color:#ffd54a;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:600;
+}
+
+/* MAIN */
+
+main{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:15px 20px 35px;
+    position:relative;
+    z-index:1;
+}
+
+.card{
     width:100%;
+    max-width:440px;
+    background:rgba(18,10,34,.94);
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:24px;
+    padding:25px 20px;
+    box-shadow:0 20px 60px rgba(0,0,0,.35);
+}
+
+.card-header{
+    text-align:center;
+    margin-bottom:22px;
+}
+
+.card-icon{
+    width:60px;
+    height:60px;
+    margin:0 auto 13px;
+    border-radius:19px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#ffd84d,#ff9e00);
+    color:#160b00;
+    font-size:24px;
+}
+
+.card-header h1{
+    font-size:23px;
+    font-weight:800;
+    margin-bottom:5px;
+}
+
+.card-header p{
+    color:#9993a5;
+    font-size:11px;
+}
+
+/* FORM */
+
+.form-group{
+    margin-bottom:14px;
+}
+
+.form-group label{
+    display:block;
+    font-size:11px;
+    font-weight:600;
+    margin-bottom:6px;
+    color:#ddd8e5;
+}
+
+.input-box{
+    height:48px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:0 13px;
+    background:#0d071b;
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:13px;
+}
+
+.input-box:focus-within{
+    border-color:#ffd54a;
+}
+
+.input-icon{
+    color:#a49daf;
+    font-size:14px;
+    width:18px;
+    text-align:center;
+}
+
+.input-box input{
+    width:100%;
+    height:100%;
     border:0;
     outline:0;
     background:transparent;
-    color:var(--text);
+    color:#ffffff;
     font-family:inherit;
     font-size:12px;
 }
 
-/* USERS */
-
-.users{
-    display:flex;
-    gap:12px;
-    overflow-x:auto;
-    scrollbar-width:none;
+.input-box input::placeholder{
+    color:#676171;
 }
 
-.users::-webkit-scrollbar{
-    display:none;
-}
-
-.user{
-    min-width:80px;
-    text-align:center;
-}
-
-.user-avatar{
-    width:52px;
-    height:52px;
-    margin:auto;
-    border-radius:50%;
-    background:var(--card);
-    border:2px solid var(--green);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:12px;
-    font-weight:700;
-}
-
-.user-name{
-    font-size:10px;
-    margin-top:5px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-.user-online{
-    color:var(--green);
-    font-size:9px;
-}
-
-/* CHATS */
-
-.chat{
-    display:flex;
-    align-items:center;
-    gap:11px;
-    padding:12px;
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:13px;
-    margin-bottom:8px;
-}
-
-.chat-avatar{
-    width:45px;
-    height:45px;
-    flex-shrink:0;
-    border-radius:50%;
-    background:var(--card2);
-    border:1px solid var(--border);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:11px;
-    font-weight:700;
-}
-
-.chat-info{
-    flex:1;
-    min-width:0;
-}
-
-.chat-name{
-    font-size:12px;
-    font-weight:700;
-}
-
-.chat-message{
-    color:var(--muted);
-    font-size:10px;
-    margin-top:3px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-.chat-right{
-    text-align:right;
-    color:var(--muted);
-    font-size:9px;
-}
-
-.badge{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    min-width:18px;
-    height:18px;
-    padding:0 5px;
-    margin-top:4px;
-    border-radius:10px;
-    background:var(--gold);
-    color:#02091f;
-    font-weight:800;
-    font-size:8px;
-}
-
-/* SIDE MENU */
-
-.overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.6);
-    z-index:100;
-    display:none;
-}
-
-.overlay.show{
-    display:block;
-}
-
-.side-menu{
-    position:fixed;
-    left:-310px;
-    top:0;
-    width:290px;
-    max-width:85%;
-    height:100vh;
-    background:var(--card);
-    border-right:1px solid var(--border);
-    z-index:150;
-    transition:.25s;
-    overflow-y:auto;
-}
-
-.side-menu.open{
-    left:0;
-}
-
-.menu-header{
-    padding:22px 18px;
-    border-bottom:1px solid var(--border);
-}
-
-.menu-logo{
-    color:var(--gold);
-    font-size:22px;
-    font-weight:800;
-}
-
-.menu-balance{
-    color:var(--muted);
-    font-size:11px;
-    margin-top:3px;
-}
-
-.menu-profile{
-    padding:16px 18px;
-    display:flex;
-    align-items:center;
-    gap:11px;
-    border-bottom:1px solid var(--border);
-}
-
-.menu-avatar{
-    width:45px;
-    height:45px;
-    border-radius:50%;
-    background:linear-gradient(135deg,var(--gold),var(--gold2));
-    color:#02091f;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:800;
-}
-
-.menu-profile strong{
-    display:block;
-    font-size:13px;
-}
-
-.menu-profile span{
-    color:var(--muted);
-    font-size:9px;
-}
-
-.menu-list{
-    padding:10px;
-}
-
-.menu-item{
-    width:100%;
-    padding:13px 11px;
-    display:flex;
-    align-items:center;
-    gap:13px;
+.password-toggle{
     border:0;
-    border-radius:10px;
-    background:transparent;
-    color:var(--text);
-    font-family:inherit;
-    font-size:12px;
-    text-align:left;
+    background:none;
+    color:#8f899b;
     cursor:pointer;
+    font-size:14px;
 }
 
-.menu-item:hover{
-    background:var(--card2);
+/* PASSWORD STATUS */
+
+.password-status{
+    font-size:9px;
+    margin-top:5px;
+    min-height:14px;
 }
 
-.menu-icon{
-    width:24px;
-    text-align:center;
-    font-size:17px;
+.password-status.match{
+    color:#22c55e;
 }
 
-.menu-item.logout{
-    color:var(--red);
+.password-status.no-match{
+    color:#ef4444;
 }
 
-/* THEME */
+/* TERMS */
 
-.theme-row{
+.terms{
     display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:13px 11px;
+    align-items:flex-start;
+    gap:8px;
+    margin:17px 0;
+}
+
+.terms input{
+    width:15px;
+    height:15px;
     margin-top:2px;
+    accent-color:#ffd54a;
 }
 
-.theme-label{
-    display:flex;
-    align-items:center;
-    gap:13px;
-    font-size:12px;
+.terms label{
+    color:#8f899b;
+    font-size:9px;
+    line-height:1.5;
 }
 
-.switch{
-    width:45px;
-    height:24px;
-    border-radius:20px;
-    background:#34415f;
-    padding:3px;
+.terms a{
+    color:#ffd54a;
+    text-decoration:none;
+}
+
+/* BUTTON */
+
+.submit-btn{
+    width:100%;
+    height:52px;
+    border:0;
+    border-radius:15px;
+    background:linear-gradient(135deg,#ffe16a,#ffad13);
+    color:#160b00;
+    font-family:inherit;
+    font-size:14px;
+    font-weight:800;
     cursor:pointer;
-}
-
-.switch span{
-    display:block;
-    width:18px;
-    height:18px;
-    background:#fff;
-    border-radius:50%;
+    box-shadow:0 10px 28px rgba(255,181,0,.15);
     transition:.2s;
 }
 
-body.light .switch{
-    background:var(--gold);
+.submit-btn:active{
+    transform:scale(.98);
 }
 
-body.light .switch span{
-    transform:translateX(21px);
+.submit-btn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
 }
 
-/* BOTTOM NAV */
+/* LOGIN */
 
-.bottom-nav{
-    position:fixed;
-    bottom:0;
-    left:0;
-    width:100%;
-    height:68px;
-    background:var(--card);
-    border-top:1px solid var(--border);
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
-    z-index:80;
-}
-
-.nav-item{
-    text-decoration:none;
-    color:var(--muted);
+.login-text{
     text-align:center;
-    font-size:9px;
+    margin-top:18px;
+    color:#817b8b;
+    font-size:10px;
 }
 
-.nav-icon{
+.login-text a{
+    color:#ffd54a;
+    text-decoration:none;
+    font-weight:700;
+}
+
+/* MESSAGE */
+
+.message{
+    display:none;
+    padding:10px;
+    border-radius:10px;
+    margin-bottom:14px;
+    font-size:10px;
+    text-align:center;
+}
+
+.message.error{
     display:block;
-    font-size:19px;
-    margin-bottom:2px;
+    background:rgba(239,68,68,.10);
+    color:#ff7373;
+    border:1px solid rgba(239,68,68,.20);
 }
 
-.nav-item.active{
-    color:var(--gold);
+.message.success{
+    display:block;
+    background:rgba(34,197,94,.10);
+    color:#4ade80;
+    border:1px solid rgba(34,197,94,.20);
 }
 
-@media(min-width:700px){
+/* FOOTER */
 
-    .bottom-nav{
-        max-width:600px;
-        left:50%;
-        transform:translateX(-50%);
-        border-left:1px solid var(--border);
-        border-right:1px solid var(--border);
-        border-radius:17px 17px 0 0;
+footer{
+    text-align:center;
+    padding:15px 20px 20px;
+    color:#625d69;
+    font-size:9px;
+    position:relative;
+    z-index:2;
+}
+
+@media(max-width:360px){
+
+    .card{
+        padding:22px 16px;
+    }
+
+    .card-header h1{
+        font-size:21px;
     }
 
 }
@@ -545,583 +353,313 @@ body.light .switch span{
 
 <body>
 
-<!-- HEADER -->
+<div class="page">
 
-<header class="header">
-
-    <div class="logo">
-        CheryChat
-    </div>
-
-    <div class="header-right">
-
-        <div class="balance">
-            KSh. 0
-        </div>
-
-        <button class="menu-button" onclick="openMenu()">
-            ☰
-        </button>
-
-    </div>
-
-</header>
+    <div class="glow"></div>
+    <div class="glow2"></div>
 
 
-<!-- SIDE MENU OVERLAY -->
+    <!-- HEADER -->
 
-<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+    <header>
 
+        <div class="brand">
 
-<!-- SIDE MENU -->
-
-<aside class="side-menu" id="sideMenu">
-
-    <div class="menu-header">
-
-        <div class="menu-logo">
-            CHERYCHAT
-        </div>
-
-        <div class="menu-balance">
-            KSh. 0
-        </div>
-
-    </div>
-
-
-    <div class="menu-profile">
-
-        <div class="menu-avatar">
-            CY
-        </div>
-
-        <div>
-            <strong>Cheryot Y</strong>
-            <span>CheryChat account</span>
-        </div>
-
-    </div>
-
-
-    <div class="menu-list">
-
-        <button class="menu-item">
-            <span class="menu-icon">💬</span>
-            Chats
-        </button>
-
-        <button class="menu-item">
-            <span class="menu-icon">👥</span>
-            Groups
-        </button>
-
-        <button class="menu-item">
-            <span class="menu-icon">◉</span>
-            Stories
-        </button>
-
-        <button class="menu-item">
-            <span class="menu-icon">👤</span>
-            Friends
-        </button>
-
-        <button class="menu-item">
-            <span class="menu-icon">🟢</span>
-            Online Users
-        </button>
-
-        <button class="menu-item">
-            <span class="menu-icon">✓</span>
-            Verification
-        </button>
-
-        <button class="menu-item">
-            <span class="menu-icon">💰</span>
-            Earn Online
-        </button>
-
-        <button class="menu-item">
-            <span class="menu-icon">📱</span>
-            Install CheryChat App
-        </button>
-
-        <button class="menu-item">
-            <span class="menu-icon">🔔</span>
-            Enable Notifications
-        </button>
-
-        <button class="menu-item">
-            <span class="menu-icon">⚙️</span>
-            Settings
-        </button>
-
-
-        <!-- DARK / LIGHT -->
-
-        <div class="theme-row">
-
-            <div class="theme-label">
-                <span class="menu-icon">🌙</span>
-                Dark / Light Mode
+            <div class="brand-icon">
+                <i class="fa-solid fa-comments"></i>
             </div>
 
-            <div class="switch" onclick="toggleTheme()">
-                <span></span>
+            <div class="brand-name">
+                Chery<span>Chat</span>
             </div>
 
         </div>
 
+        <a href="login.html" class="login-link">
+            Log in
+        </a>
 
-        <button class="menu-item logout" onclick="logout()">
-
-            <span class="menu-icon">↪</span>
-            Logout
-
-        </button>
-
-    </div>
-
-</aside>
+    </header>
 
 
-<!-- MAIN -->
+    <!-- MAIN -->
 
-<main class="container">
+    <main>
 
-    <section class="welcome">
+        <div class="card">
 
-        <h1>
-            Welcome back, Cheryot Y 👋
-        </h1>
+            <div class="card-header">
 
-        <p>
-            See who's online and continue your conversations.
-        </p>
-
-    </section>
-
-
-    <!-- PROFILE -->
-
-    <div class="profile-card">
-
-        <div class="profile-left">
-
-            <div class="avatar">
-                CY
-            </div>
-
-            <div>
-
-                <div class="profile-name">
-                    Cheryot Y
-                    <span class="verified">✓</span>
+                <div class="card-icon">
+                    <i class="fa-solid fa-user-plus"></i>
                 </div>
 
-                <div class="online-status">
-                    ● Online
-                </div>
+                <h1>
+                    Create Account
+                </h1>
 
-            </div>
-
-        </div>
-
-
-        <div class="balance-box">
-
-            <small>Balance</small>
-            <strong>KSh. 0</strong>
-
-        </div>
-
-    </div>
-
-
-    <!-- ONLINE USERS -->
-
-    <section class="section">
-
-        <div class="section-title">
-
-            <h2>
-                Online Users (18)
-            </h2>
-
-            <span>
-                People currently active
-            </span>
-
-        </div>
-
-
-        <div class="users">
-
-            <div class="user">
-
-                <div class="user-avatar">
-                    CY
-                </div>
-
-                <div class="user-name">
-                    Cheryot Y
-                </div>
-
-                <div class="user-online">
-                    Online
-                </div>
+                <p>
+                    Join CheryChat and start connecting.
+                </p>
 
             </div>
 
 
-            <div class="user">
+            <div
+                id="message"
+                class="message"
+            ></div>
 
-                <div class="user-avatar">
-                    BO
+
+            <form id="registerForm">
+
+
+                <!-- FULL NAME -->
+
+                <div class="form-group">
+
+                    <label for="fullName">
+                        Full Name
+                    </label>
+
+                    <div class="input-box">
+
+                        <span class="input-icon">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+
+                        <input
+                            type="text"
+                            id="fullName"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            required
+                        >
+
+                    </div>
+
                 </div>
 
-                <div class="user-name">
-                    Blair Opeto
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <div class="input-box">
+
+                        <span class="input-icon">
+                            <i class="fa-solid fa-envelope"></i>
+                        </span>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
                 </div>
 
-                <div class="user-online">
-                    Online
+
+                <!-- PHONE -->
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        Phone Number
+                    </label>
+
+                    <div class="input-box">
+
+                        <span class="input-icon">
+                            <i class="fa-solid fa-phone"></i>
+                        </span>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            placeholder="07XXXXXXXX"
+                            autocomplete="tel"
+                            required
+                        >
+
+                    </div>
+
                 </div>
 
-            </div>
 
+                <!-- PASSWORD -->
 
-            <div class="user">
+                <div class="form-group">
 
-                <div class="user-avatar">
-                    BK
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="input-box">
+
+                        <span class="input-icon">
+                            <i class="fa-solid fa-lock"></i>
+                        </span>
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Create a password"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            onclick="togglePassword('password','passwordEye')"
+                        >
+
+                            <i
+                                id="passwordEye"
+                                class="fa-solid fa-eye"
+                            ></i>
+
+                        </button>
+
+                    </div>
+
                 </div>
 
-                <div class="user-name">
-                    Boaz Kibiwott
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="confirmPassword">
+                        Confirm Password
+                    </label>
+
+                    <div class="input-box">
+
+                        <span class="input-icon">
+                            <i class="fa-solid fa-lock"></i>
+                        </span>
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Confirm your password"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            onclick="togglePassword('confirmPassword','confirmEye')"
+                        >
+
+                            <i
+                                id="confirmEye"
+                                class="fa-solid fa-eye"
+                            ></i>
+
+                        </button>
+
+                    </div>
+
+                    <div
+                        id="passwordStatus"
+                        class="password-status"
+                    ></div>
+
                 </div>
 
-                <div class="user-online">
-                    Online
+
+                <!-- TERMS -->
+
+                <div class="terms">
+
+                    <input
+                        type="checkbox"
+                        id="terms"
+                        required
+                    >
+
+                    <label for="terms">
+
+                        I agree to the
+                        <a href="#">
+                            Terms & Conditions
+                        </a>
+                        and
+                        <a href="#">
+                            Privacy Policy
+                        </a>.
+
+                    </label>
+
                 </div>
 
-            </div>
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    class="submit-btn"
+                    id="submitBtn"
+                >
+
+                    <i class="fa-solid fa-user-plus"></i>
+                    Create Account
+
+                </button>
+
+            </form>
 
 
-            <div class="user">
+            <div class="login-text">
 
-                <div class="user-avatar">
-                    CS
-                </div>
+                Already have an account?
 
-                <div class="user-name">
-                    CheryChat Support
-                </div>
-
-                <div class="user-online">
-                    Online
-                </div>
-
-            </div>
-
-
-            <div class="user">
-
-                <div class="user-avatar">
-                    EK
-                </div>
-
-                <div class="user-name">
-                    Emmanuel
-                </div>
-
-                <div class="user-online">
-                    Online
-                </div>
-
-            </div>
-
-
-            <div class="user">
-
-                <div class="user-avatar">
-                    JK
-                </div>
-
-                <div class="user-name">
-                    Jamal
-                </div>
-
-                <div class="user-online">
-                    Online
-                </div>
+                <a href="login.html">
+                    Log in
+                </a>
 
             </div>
 
         </div>
 
-    </section>
+    </main>
 
 
-    <!-- RECENT CHATS -->
+    <footer>
+        © 2026 CheryChat. All rights reserved.
+    </footer>
 
-    <section class="section">
-
-        <div class="section-title">
-
-            <h2>
-                Recent Chats
-            </h2>
-
-            <span>
-                Your latest conversations
-            </span>
-
-        </div>
-
-
-        <div class="search">
-
-            <span class="search-icon">⌕</span>
-
-            <input
-                type="text"
-                placeholder="Search conversations..."
-            >
-
-        </div>
-
-
-        <div class="chat">
-
-            <div class="chat-avatar">
-                DJ
-            </div>
-
-            <div class="chat-info">
-
-                <div class="chat-name">
-                    Dr. John Knec ✓
-                </div>
-
-                <div class="chat-message">
-                    Hey
-                </div>
-
-            </div>
-
-            <div class="chat-right">
-                Yesterday
-                <br>
-                <span class="badge">3</span>
-            </div>
-
-        </div>
-
-
-        <div class="chat">
-
-            <div class="chat-avatar">
-                KC
-            </div>
-
-            <div class="chat-info">
-
-                <div class="chat-name">
-                    KCSE 2026 Revision Papers
-                </div>
-
-                <div class="chat-message">
-                    That's KCSE 2026...
-                </div>
-
-            </div>
-
-            <div class="chat-right">
-                28 Sept
-                <br>
-                <span class="badge">65</span>
-            </div>
-
-        </div>
-
-
-        <div class="chat">
-
-            <div class="chat-avatar">
-                BN
-            </div>
-
-            <div class="chat-info">
-
-                <div class="chat-name">
-                    Blessy Ntinyari
-                </div>
-
-                <div class="chat-message">
-                    Hello
-                </div>
-
-            </div>
-
-            <div class="chat-right">
-                26 Sept
-                <br>
-                <span class="badge">1</span>
-            </div>
-
-        </div>
-
-
-        <div class="chat">
-
-            <div class="chat-avatar">
-                CS
-            </div>
-
-            <div class="chat-info">
-
-                <div class="chat-name">
-                    CheryChat Support ✓
-                </div>
-
-                <div class="chat-message">
-                    Welcome to CheryChat
-                </div>
-
-            </div>
-
-            <div class="chat-right">
-                20 Sept
-            </div>
-
-        </div>
-
-    </section>
-
-</main>
-
-
-<!-- BOTTOM NAV -->
-
-<nav class="bottom-nav">
-
-    <a href="dashboard.html" class="nav-item active">
-        <span class="nav-icon">💬</span>
-        Chats
-    </a>
-
-    <a href="#" class="nav-item">
-        <span class="nav-icon">👥</span>
-        Groups
-    </a>
-
-    <a href="#" class="nav-item">
-        <span class="nav-icon">◉</span>
-        Stories
-    </a>
-
-    <a href="#" class="nav-item">
-        <span class="nav-icon">👤</span>
-        Friends
-    </a>
-
-    <a href="#" class="nav-item">
-        <span class="nav-icon">💰</span>
-        Earn
-    </a>
-
-</nav>
+</div>
 
 
 <script>
 
-/* SIDE MENU */
+/* PASSWORD SHOW / HIDE */
 
-function openMenu(){
+function togglePassword(inputId, iconId){
 
-    document.getElementById("sideMenu")
-        .classList.add("open");
+    const input =
+        document.getElementById(inputId);
 
-    document.getElementById("overlay")
-        .classList.add("show");
+    const icon =
+        document.getElementById(iconId);
 
-}
+    if(input.type === "password"){
 
+        input.type = "text";
 
-function closeMenu(){
+        icon.classList.remove("fa-eye");
 
-    document.getElementById("sideMenu")
-        .classList.remove("open");
-
-    document.getElementById("overlay")
-        .classList.remove("show");
-
-}
-
-
-/* THEME */
-
-function applyTheme(){
-
-    const theme =
-        localStorage.getItem("cheryChatTheme") || "dark";
-
-    if(theme === "light"){
-
-        document.body.classList.add("light");
-
-    }else{
-
-        document.body.classList.remove("light");
-
-    }
-
-}
-
-
-function toggleTheme(){
-
-    const light =
-        document.body.classList.contains("light");
-
-    if(light){
-
-        localStorage.setItem(
-            "cheryChatTheme",
-            "dark"
-        );
-
-    }else{
-
-        localStorage.setItem(
-            "cheryChatTheme",
-            "light"
-        );
-
-    }
-
-    applyTheme();
-
-}
-
-
-/* LOGOUT */
-
-function logout(){
-
-    localStorage.removeItem("cheryChatUser");
-
-    window.location.href="login.html";
-
-}
-
-
-/* START */
-
-applyTheme();
-
-</script>
-
-</body>
-</html>
+        icon
