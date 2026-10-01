@@ -6,9 +6,13 @@
 
     <title>VibeChat</title>
 
-    <link rel="manifest" href="manifest.json">
-
+    <!-- PWA -->
+    <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#120a22">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="VibeChat">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -142,6 +146,7 @@
             box-shadow:
                 0 15px 45px rgba(255, 181, 0, 0.20),
                 inset 0 1px 2px rgba(255,255,255,0.5);
+            overflow: hidden;
         }
 
         .chat-icon img {
@@ -211,10 +216,11 @@
         }
 
         .install-btn {
-            color: #ffe16a;
-            background: rgba(255,193,7,0.08);
-            border: 1px solid rgba(255,213,77,0.35);
+            color: #160b00;
+            background: linear-gradient(135deg, #ffd84d, #ff9e00);
+            border: none;
             cursor: pointer;
+            box-shadow: 0 12px 30px rgba(255, 181, 0, 0.14);
         }
 
         .features {
@@ -228,214 +234,4 @@
             padding: 15px 7px;
             border-radius: 16px;
             background: rgba(255,255,255,0.035);
-            border: 1px solid rgba(255,255,255,0.07);
-        }
-
-        .feature i {
-            color: #ffd34d;
-            font-size: 17px;
-            margin-bottom: 8px;
-        }
-
-        .feature h3 {
-            font-size: 11px;
-            font-weight: 700;
-            margin-bottom: 3px;
-        }
-
-        .feature p {
-            font-size: 9px;
-            line-height: 1.4;
-            color: #85808f;
-            margin: 0;
-        }
-
-        footer {
-            text-align: center;
-            padding: 18px 20px 24px;
-            color: #66616e;
-            font-size: 10px;
-            position: relative;
-            z-index: 2;
-        }
-
-        @media (max-width: 360px) {
-            .hero h1 {
-                font-size: 34px;
-            }
-
-            .chat-icon {
-                width: 78px;
-                height: 78px;
-                font-size: 32px;
-            }
-
-            .hero p {
-                font-size: 14px;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-<div class="page">
-
-    <div class="glow"></div>
-    <div class="glow2"></div>
-
-    <header>
-
-        <div class="brand">
-
-            <div class="brand-icon">
-                <i class="fa-solid fa-comments"></i>
-            </div>
-
-            <div class="brand-name">
-                Vibe<span>Chat</span>
-            </div>
-
-        </div>
-
-        <a href="login.html" class="login-top">
-            Log in
-        </a>
-
-    </header>
-
-    <main>
-
-        <section class="hero">
-
-            <div class="chat-icon">
-                <img src="IMG-20261001-WA0004.jpg" alt="VibeChat Logo">
-            </div>
-
-            <h1>
-                Connect.<br>
-                Chat. <span>Share.</span>
-            </h1>
-
-            <p>
-                A new way to connect with people, chat with friends,
-                discover communities and share your world.
-            </p>
-
-            <div class="buttons">
-
-                <a href="register.html" class="btn primary">
-                    <i class="fa-solid fa-user-plus"></i>
-                    Create Account
-                </a>
-
-                <a href="login.html" class="btn secondary">
-                    <i class="fa-solid fa-right-to-bracket"></i>
-                    I already have an account
-                </a>
-
-                <button id="installBtn" class="btn install-btn" type="button">
-                    <i class="fa-solid fa-download"></i>
-                    Install App
-                </button>
-
-            </div>
-
-            <div class="features">
-
-                <div class="feature">
-                    <i class="fa-solid fa-comments"></i>
-                    <h3>Chat</h3>
-                    <p>Private & group</p>
-                </div>
-
-                <div class="feature">
-                    <i class="fa-solid fa-users"></i>
-                    <h3>Connect</h3>
-                    <p>Meet people</p>
-                </div>
-
-                <div class="feature">
-                    <i class="fa-solid fa-share-nodes"></i>
-                    <h3>Share</h3>
-                    <p>Share your world</p>
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-    <footer>
-        © 2026 VibeChat. All rights reserved.
-    </footer>
-
-</div>
-
-<script>
-
-    let deferredPrompt = null;
-
-    const installBtn = document.getElementById("installBtn");
-
-    window.addEventListener("beforeinstallprompt", function(event) {
-
-        event.preventDefault();
-
-        deferredPrompt = event;
-
-    });
-
-    installBtn.addEventListener("click", async function() {
-
-        if (deferredPrompt) {
-
-            deferredPrompt.prompt();
-
-            const result = await deferredPrompt.userChoice;
-
-            deferredPrompt = null;
-
-            if (result.outcome === "accepted") {
-                installBtn.innerHTML =
-                    '<i class="fa-solid fa-check"></i> App Installed';
-            }
-
-        } else {
-
-            alert(
-                "If the install window does not appear, open your browser menu and choose 'Install app' or 'Add to Home screen'."
-            );
-
-        }
-
-    });
-
-    window.addEventListener("appinstalled", function() {
-
-        installBtn.innerHTML =
-            '<i class="fa-solid fa-check"></i> App Installed';
-
-    });
-
-    if ("serviceWorker" in navigator) {
-
-        window.addEventListener("load", function() {
-
-            navigator.serviceWorker.register("./sw.js")
-                .then(function() {
-                    console.log("VibeChat service worker registered.");
-                })
-                .catch(function(error) {
-                    console.log("Service worker registration failed:", error);
-                });
-
-        });
-
-    }
-
-</script>
-
-</body>
-</html>
+            border: 1px solid rgba(255
