@@ -10,9 +10,15 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "IMG-20261001-WA0004.jpg",
-      "sizes": "1254x1254",
-      "type": "image/jpeg",
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
       "purpose": "any"
     }
   ]
