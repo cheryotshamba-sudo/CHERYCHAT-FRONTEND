@@ -1,20 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Login | VibeChat</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-<style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Login | VibeChat</title><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"><style>
 
 *{
     box-sizing:border-box;
@@ -230,153 +219,143 @@ body{
     font-size:11px;
 }
 
-</style>
-</head>
+</style></head><body><div class="container"><div class="logo">
 
-<body>
-
-<div class="container">
-
-    <div class="logo">
-
-        <div class="logo-icon">
-            <i class="fa-solid fa-comments"></i>
-        </div>
-
-        <h1>VibeChat</h1>
-
-        <p>Connect. Chat. Share.</p>
-
+    <div class="logo-icon">
+        <i class="fa-solid fa-comments"></i>
     </div>
 
+    <h1>VibeChat</h1>
 
-    <div class="card">
+    <p>Connect. Chat. Share.</p>
 
-        <h2>Welcome Back</h2>
-
-        <p class="subtitle">
-            Log in to continue to VibeChat
-        </p>
+</div>
 
 
-        <form id="loginForm">
+<div class="card">
 
-            <div class="form-group">
+    <h2>Welcome Back</h2>
 
-                <label for="identifier">
-                    Email Address or Phone Number
-                </label>
+    <p class="subtitle">
+        Log in to continue to VibeChat
+    </p>
 
-                <div class="input-box">
+
+    <form id="loginForm">
+
+        <div class="form-group">
+
+            <label for="identifier">
+                Email Address or Phone Number
+            </label>
+
+            <div class="input-box">
+
+                <i class="fa-solid fa-user left-icon"></i>
+
+                <input
+                    type="text"
+                    id="identifier"
+                    placeholder="Email or phone number"
+                    autocomplete="username"
+                    required
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="password">
+                Password
+            </label>
+
+            <div class="input-box">
+
+                <i class="fa-solid fa-lock left-icon"></i>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+
+                <button
+                    type="button"
+                    class="toggle-password"
+                    id="passwordToggle"
+                    aria-label="Show password"
+                >
 
                     <i
-                        class="fa-solid fa-user left-icon">
+                        class="fa-solid fa-eye"
+                        id="passwordEye">
                     </i>
 
-                    <input
-                        type="text"
-                        id="identifier"
-                        placeholder="Email or phone number"
-                        autocomplete="username"
-                        required
-                    >
-
-                </div>
+                </button>
 
             </div>
 
-
-            <div class="form-group">
-
-                <label for="password">
-                    Password
-                </label>
-
-                <div class="input-box">
-
-                    <i
-                        class="fa-solid fa-lock left-icon">
-                    </i>
-
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder="Enter your password"
-                        autocomplete="current-password"
-                        required
-                    >
-
-                    <button
-                        type="button"
-                        class="toggle-password"
-                        id="passwordToggle"
-                        aria-label="Show password"
-                    >
-
-                        <i
-                            class="fa-solid fa-eye"
-                            id="passwordEye">
-                        </i>
-
-                    </button>
-
-                </div>
-
-            </div>
+        </div>
 
 
-            <div class="forgot">
+        <div class="forgot">
 
-                <a href="#" onclick="return false;">
-                    Forgot Password?
-                </a>
-
-            </div>
-
-
-            <button
-                type="submit"
-                class="login-btn"
-                id="loginBtn"
-            >
-                Log In
-            </button>
-
-
-            <div
-                class="message"
-                id="message">
-            </div>
-
-        </form>
-
-
-        <div class="register-link">
-
-            Don't have an account?
-
-            <a href="register.html">
-                Create Account
+            <a href="#" onclick="return false;">
+                Forgot Password?
             </a>
 
         </div>
 
-    </div>
+
+        <button
+            type="submit"
+            class="login-btn"
+            id="loginBtn"
+        >
+            Log In
+        </button>
 
 
-    <div class="footer">
-        © 2026 VibeChat. All rights reserved.
+        <div
+            class="message"
+            id="message">
+        </div>
+
+    </form>
+
+
+    <div class="register-link">
+
+        Don't have an account?
+
+        <a href="register.html">
+            Create Account
+        </a>
+
     </div>
 
 </div>
 
 
-<script>
+<div class="footer">
+    © 2026 VibeChat. All rights reserved.
+</div>
 
-/* REAL VIBECHAT BACKEND */
+</div><script>
 
 const API_URL =
     "https://cherychat-backend.onrender.com";
+
+const CURRENT_USER_KEY =
+    "cheryChatCurrentUser";
+
+const LOGIN_KEY =
+    "cheryChatLoggedIn";
 
 
 /* ELEMENTS */
@@ -397,7 +376,35 @@ const message =
     document.getElementById("message");
 
 
-/* PASSWORD SHOW / HIDE */
+/* =========================================
+   IF ALREADY LOGGED IN
+========================================= */
+
+(function(){
+
+    const loggedIn =
+        localStorage.getItem(LOGIN_KEY);
+
+    const savedUser =
+        localStorage.getItem(CURRENT_USER_KEY);
+
+    if(
+        loggedIn === "true" &&
+        savedUser
+    ){
+
+        window.location.replace(
+            "dashboard.html"
+        );
+
+    }
+
+})();
+
+
+/* =========================================
+   PASSWORD SHOW / HIDE
+========================================= */
 
 document
     .getElementById("passwordToggle")
@@ -410,13 +417,9 @@ document
 
             password.type = "text";
 
-            eye.classList.remove(
-                "fa-eye"
-            );
+            eye.classList.remove("fa-eye");
 
-            eye.classList.add(
-                "fa-eye-slash"
-            );
+            eye.classList.add("fa-eye-slash");
 
             this.setAttribute(
                 "aria-label",
@@ -427,13 +430,9 @@ document
 
             password.type = "password";
 
-            eye.classList.remove(
-                "fa-eye-slash"
-            );
+            eye.classList.remove("fa-eye-slash");
 
-            eye.classList.add(
-                "fa-eye"
-            );
+            eye.classList.add("fa-eye");
 
             this.setAttribute(
                 "aria-label",
@@ -445,7 +444,9 @@ document
     });
 
 
-/* LOGIN */
+/* =========================================
+   LOGIN
+========================================= */
 
 loginForm.addEventListener(
     "submit",
@@ -480,6 +481,7 @@ loginForm.addEventListener(
                 "Please enter your email/phone and password.";
 
             return;
+
         }
 
 
@@ -529,20 +531,24 @@ loginForm.addEventListener(
             }
 
 
-            /* SAVE CURRENT USER */
+            /* =================================
+               SAVE SESSION
+            ================================= */
 
             localStorage.setItem(
-                "cheryChatLoggedIn",
+                LOGIN_KEY,
                 "true"
             );
 
             localStorage.setItem(
-                "cheryChatCurrentUser",
+                CURRENT_USER_KEY,
                 JSON.stringify(data.user)
             );
 
 
-            /* SUCCESS */
+            /* =================================
+               SUCCESS
+            ================================= */
 
             message.className =
                 "message success";
@@ -553,8 +559,9 @@ loginForm.addEventListener(
 
             setTimeout(function(){
 
-                window.location.href =
-                    "dashboard.html";
+                window.location.replace(
+                    "dashboard.html"
+                );
 
             },800);
 
@@ -585,7 +592,5 @@ loginForm.addEventListener(
     }
 );
 
-</script>
-
-</body>
+</script></body>
 </html>
