@@ -1,9 +1,28 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>VibeChat</title><link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"><style>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>VibeChat</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
 
 *{
     box-sizing:border-box;
@@ -47,6 +66,7 @@ body{
     padding-bottom:75px;
 }
 
+
 /* HEADER */
 
 .header{
@@ -89,6 +109,7 @@ body{
     justify-content:flex-end;
 }
 
+
 /* MAIN */
 
 .container{
@@ -96,6 +117,7 @@ body{
     max-width:650px;
     margin:auto;
 }
+
 
 /* SEARCH */
 
@@ -138,6 +160,7 @@ body{
 .search input::placeholder{
     color:var(--muted);
 }
+
 
 /* SEARCH RESULTS */
 
@@ -198,6 +221,7 @@ body{
     width:42px;
     height:42px;
     font-size:12px;
+    overflow:hidden;
 }
 
 .result-info{
@@ -241,6 +265,7 @@ body{
     font-size:10px;
 }
 
+
 /* TABS */
 
 .tabs{
@@ -282,6 +307,7 @@ body{
     color:#160b00;
     font-weight:700;
 }
+
 
 /* CONVERSATIONS */
 
@@ -335,6 +361,8 @@ body{
 
     font-size:13px;
     font-weight:800;
+
+    overflow:hidden;
 }
 
 .conversation-info{
@@ -375,14 +403,33 @@ body{
     text-overflow:ellipsis;
 }
 
-.unread-dot{
-    width:8px;
-    height:8px;
+.conversation-bottom{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+}
 
-    border-radius:50%;
+.unread-dot{
+    min-width:18px;
+    height:18px;
+
+    padding:0 5px;
+
+    border-radius:10px;
 
     background:var(--gold);
+
+    color:#160b00;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:8px;
+    font-weight:800;
 }
+
 
 /* EMPTY CHAT */
 
@@ -498,6 +545,8 @@ body{
     background:#54656f;
 
     color:#ffffff;
+
+    overflow:hidden;
 }
 
 .chat-user-info{
@@ -553,10 +602,6 @@ body{
 
     background-color:#0b141a;
 
-    /*
-      Subtle WhatsApp-style chat texture.
-      Kept very soft so it doesn't interfere with messages.
-    */
     background-image:
         radial-gradient(
             rgba(255,255,255,.025) 1px,
@@ -582,14 +627,6 @@ body{
     justify-content:flex-start;
 }
 
-
-/*
-   COMPACT MESSAGE BUBBLES
-
-   Short messages such as "Hello" now stay
-   very small instead of becoming large cards.
-*/
-
 .message-bubble{
     display:inline-block;
 
@@ -611,9 +648,6 @@ body{
         0 1px 1px rgba(0,0,0,.18);
 }
 
-
-/* SENT MESSAGE */
-
 .mine .message-bubble{
     background:#005c4b;
 
@@ -624,9 +658,6 @@ body{
     border:none;
 }
 
-
-/* RECEIVED MESSAGE */
-
 .theirs .message-bubble{
     background:#202c33;
 
@@ -636,9 +667,6 @@ body{
 
     border:none;
 }
-
-
-/* MESSAGE TIME */
 
 .message-time{
     display:inline-block;
@@ -663,9 +691,6 @@ body{
 
     color:#53bdeb;
 }
-
-
-/* EMPTY / LOADING */
 
 .chat-loading,
 .chat-empty{
@@ -1000,166 +1025,458 @@ body.light .switch span{
 
 }
 
-</style></head><body><!-- HEADER --><header class="header"><button class="menu-button" onclick="openMenu()">
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header class="header">
+
+<button class="menu-button" onclick="openMenu()">
 <i class="fa-solid fa-bars"></i>
-</button><div class="logo">
+</button>
+
+<div class="logo">
 VibeChat
-</div><div class="header-right"><button class="header-icon" onclick="toggleSearch()">
+</div>
+
+<div class="header-right">
+
+<button class="header-icon" onclick="toggleSearch()">
 <i class="fa-solid fa-magnifying-glass"></i>
-</button></div></header><!-- OVERLAY --><div
+</button>
+
+</div>
+
+</header>
+
+
+<!-- OVERLAY -->
+
+<div
 class="overlay"
 id="overlay"
 onclick="closeMenu()">
-</div><!-- SIDE MENU --><aside class="side-menu" id="sideMenu"><div class="menu-header"><div class="menu-logo">
+</div>
+
+
+<!-- SIDE MENU -->
+
+<aside class="side-menu" id="sideMenu">
+
+<div class="menu-header">
+
+<div class="menu-logo">
 VIBECHAT
-</div></div><div class="menu-profile"><div class="menu-avatar" id="menuAvatar">
+</div>
+
+</div>
+
+
+<div class="menu-profile">
+
+<div class="menu-avatar" id="menuAvatar">
 U
-</div><div><strong id="menuName">User</strong>
+</div>
 
-<span>VibeChat account</span>
+<div>
 
-</div></div><div class="menu-list"><button class="menu-item"><span class="menu-icon">
+<strong id="menuName">
+User
+</strong>
+
+<span>
+VibeChat account
+</span>
+
+</div>
+
+</div>
+
+
+<div class="menu-list">
+
+<button class="menu-item">
+
+<span class="menu-icon">
 <i class="fa-solid fa-comment"></i>
-</span>Chats
+</span>
 
-</button><button class="menu-item"><span class="menu-icon">
+Chats
+
+</button>
+
+
+<button class="menu-item">
+
+<span class="menu-icon">
 <i class="fa-solid fa-users"></i>
-</span>Groups
+</span>
 
-</button><button class="menu-item"><span class="menu-icon">
+Groups
+
+</button>
+
+
+<button class="menu-item">
+
+<span class="menu-icon">
 <i class="fa-solid fa-circle"></i>
-</span>Stories
+</span>
 
-</button><button class="menu-item"><span class="menu-icon">
+Stories
+
+</button>
+
+
+<button class="menu-item">
+
+<span class="menu-icon">
 <i class="fa-solid fa-user-group"></i>
-</span>Friends
+</span>
 
-</button><button class="menu-item"><span class="menu-icon">
+Friends
+
+</button>
+
+
+<button class="menu-item">
+
+<span class="menu-icon">
 <i class="fa-solid fa-circle-check"></i>
-</span>Verification
+</span>
 
-</button><button class="menu-item"><span class="menu-icon">
+Verification
+
+</button>
+
+
+<button class="menu-item">
+
+<span class="menu-icon">
 <i class="fa-solid fa-gear"></i>
-</span>Settings
+</span>
 
-</button><div class="theme-row"><div class="theme-label"><span class="menu-icon">
+Settings
+
+</button>
+
+
+<div class="theme-row">
+
+<div class="theme-label">
+
+<span class="menu-icon">
 <i class="fa-solid fa-moon"></i>
-</span>Dark / Light Mode
+</span>
 
-</div><div class="switch" onclick="toggleTheme()"><span></span>
+Dark / Light Mode
 
-</div></div><button class="menu-item logout" onclick="logout()"><span class="menu-icon">
+</div>
+
+
+<div class="switch" onclick="toggleTheme()">
+
+<span></span>
+
+</div>
+
+</div>
+
+
+<button
+class="menu-item logout"
+onclick="logout()">
+
+<span class="menu-icon">
 <i class="fa-solid fa-right-from-bracket"></i>
-</span>Logout
+</span>
 
-</button></div></aside><!-- MAIN --><main class="container"><!-- SEARCH --><div
+Logout
+
+</button>
+
+</div>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="container">
+
+
+<!-- SEARCH -->
+
+<div
 class="search-box"
 id="searchBox"
-style="display:none;"><div class="search"><span class="search-icon">
+style="display:none;">
+
+<div class="search">
+
+<span class="search-icon">
 <i class="fa-solid fa-magnifying-glass"></i>
-</span><input
+</span>
+
+<input
 type="search"
 id="searchInput"
 placeholder="Search VibeChat..."
 autocomplete="off">
 
-</div></div><!-- SEARCH RESULTS --><div
+</div>
+
+</div>
+
+
+<!-- SEARCH RESULTS -->
+
+<div
 class="search-results"
 id="searchResults"
 style="display:none;">
-</div><!-- TABS --><div class="tabs"><button class="tab active">
+</div>
+
+
+<!-- TABS -->
+
+<div class="tabs">
+
+<button class="tab active">
 All
-</button><button class="tab">
+</button>
+
+<button class="tab">
 Unread
-</button><button class="tab">
+</button>
+
+<button class="tab">
 Groups
-</button><button class="tab">
+</button>
+
+<button class="tab">
 Friends
-</button></div><!-- CONVERSATIONS --><div
+</button>
+
+</div>
+
+
+<!-- CONVERSATIONS -->
+
+<div
 class="conversations"
 id="conversations">
-</div><!-- EMPTY STATE --><section
+
+<div class="search-message">
+Loading chats...
+</div>
+
+</div>
+
+
+<!-- EMPTY STATE -->
+
+<section
 class="empty-chat"
-id="emptyChat"><div class="empty-content"><div class="empty-icon">
+id="emptyChat">
+
+<div class="empty-content">
+
+<div class="empty-icon">
 <i class="fa-solid fa-comments"></i>
-</div><h2>
+</div>
+
+<h2>
 No conversations yet
-</h2><p>
+</h2>
+
+<p>
 Search for another VibeChat user above
 and start a private conversation.
-</p></div></section></main><!-- PRIVATE CHAT SCREEN --><section
+</p>
+
+</div>
+
+</section>
+
+
+</main>
+
+
+<!-- PRIVATE CHAT SCREEN -->
+
+<section
 class="chat-screen"
-id="chatScreen"><header class="chat-header"><button
+id="chatScreen">
+
+<header class="chat-header">
+
+<button
 class="chat-back"
 onclick="closeChat()">
 
 <i class="fa-solid fa-arrow-left"></i>
 
-</button><div
+</button>
+
+
+<div
 class="chat-avatar"
 id="chatAvatar">
+
 U
-</div><div class="chat-user-info"><div
+
+</div>
+
+
+<div class="chat-user-info">
+
+<div
 class="chat-user-name"
 id="chatUserName">
+
 User
-</div><div
+
+</div>
+
+
+<div
 class="chat-user-status"
 id="chatUserStatus">
-Offline
-</div></div><button class="chat-more"><i class="fa-solid fa-ellipsis-vertical"></i>
 
-</button></header><div
+Offline
+
+</div>
+
+</div>
+
+
+<button class="chat-more">
+
+<i class="fa-solid fa-ellipsis-vertical"></i>
+
+</button>
+
+</header>
+
+
+<div
 class="messages"
-id="messages"><div class="chat-loading">
+id="messages">
+
+<div class="chat-loading">
 Loading conversation...
-</div></div><form
+</div>
+
+</div>
+
+
+<form
 class="message-form"
-id="messageForm"><textarea
+id="messageForm">
+
+<textarea
 class="message-input"
 id="messageInput"
 placeholder="Write a message..."
 rows="1"
-maxlength="5000"></textarea><button
+maxlength="5000"></textarea>
+
+
+<button
 type="submit"
 class="send-button"
 id="sendButton">
 
 <i class="fa-solid fa-paper-plane"></i>
 
-</button></form></section><!-- BOTTOM NAV --><nav class="bottom-nav"><a
+</button>
+
+</form>
+
+</section>
+
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottom-nav">
+
+<a
 href="dashboard.html"
 class="nav-item active">
 
 <span class="nav-icon">
 <i class="fa-solid fa-comment"></i>
-</span>Chats
+</span>
 
-</a><a href="#" class="nav-item"><span class="nav-icon">
+Chats
+
+</a>
+
+
+<a href="#" class="nav-item">
+
+<span class="nav-icon">
 <i class="fa-solid fa-users"></i>
-</span>Groups
+</span>
 
-</a><a href="#" class="nav-item"><span class="nav-icon">
+Groups
+
+</a>
+
+
+<a href="#" class="nav-item">
+
+<span class="nav-icon">
 <i class="fa-solid fa-circle"></i>
-</span>Stories
+</span>
 
-</a><a href="#" class="nav-item"><span class="nav-icon">
+Stories
+
+</a>
+
+
+<a href="#" class="nav-item">
+
+<span class="nav-icon">
 <i class="fa-solid fa-user-group"></i>
-</span>Friends
+</span>
 
-</a><a href="#" class="nav-item"><span class="nav-icon">
+Friends
+
+</a>
+
+
+<a href="#" class="nav-item">
+
+<span class="nav-icon">
 <i class="fa-solid fa-gear"></i>
-</span>Settings
+</span>
 
-</a></nav><script>
+Settings
+
+</a>
+
+</nav>
+
+
+<script>
 
 const API_URL =
 "https://cherychat-backend.onrender.com";
 
 let currentUser = null;
+
 let activeConversation = null;
+
 let activeChatUser = null;
+
 let messageRefreshTimer = null;
+
+let conversationRefreshTimer = null;
 
 let searchTimer = null;
 
@@ -1221,6 +1538,298 @@ function loadUser(){
 
 
 /* =========================
+   LOAD CONVERSATIONS
+========================= */
+
+async function loadConversations(){
+
+    if(!currentUser){
+        return;
+    }
+
+    const container =
+        document.getElementById(
+            "conversations"
+        );
+
+    const empty =
+        document.getElementById(
+            "emptyChat"
+        );
+
+    try{
+
+        const response =
+            await fetch(
+                `${API_URL}/api/conversations?userId=${encodeURIComponent(currentUser.id)}`
+            );
+
+        const data =
+            await response.json();
+
+        if(
+            !response.ok ||
+            !data.success
+        ){
+
+            throw new Error(
+                data.message ||
+                "Unable to load conversations"
+            );
+
+        }
+
+        const conversations =
+            data.conversations || [];
+
+
+        if(conversations.length === 0){
+
+            container.innerHTML = "";
+
+            empty.style.display =
+                "flex";
+
+            return;
+
+        }
+
+
+        empty.style.display =
+            "none";
+
+
+        container.innerHTML =
+            conversations.map(
+                chat => {
+
+                    const user =
+                        chat.otherUser || {};
+
+                    const name =
+                        user.fullName ||
+                        "VibeChat User";
+
+                    const initials =
+                        getInitials(name);
+
+                    let preview =
+                        chat.lastMessage ||
+                        "Start a conversation";
+
+                    if(
+                        chat.lastMessageSenderId &&
+                        Number(chat.lastMessageSenderId) ===
+                        Number(currentUser.id)
+                    ){
+
+                        preview =
+                            "You: " +
+                            preview;
+
+                    }
+
+
+                    const time =
+                        chat.lastMessageTime
+                        ? formatChatListTime(
+                            chat.lastMessageTime
+                        )
+                        : "";
+
+
+                    const unread =
+                        Number(
+                            chat.unreadCount || 0
+                        );
+
+
+                    return `
+
+                    <div
+                        class="conversation-item"
+                        onclick='openConversationFromList(${JSON.stringify(chat)})'
+                    >
+
+                        <div class="conversation-avatar">
+
+                            ${
+                                user.profilePicture
+                                ?
+                                `<img
+                                    src="${escapeHtml(user.profilePicture)}"
+                                    style="width:100%;height:100%;object-fit:cover;border-radius:50%;"
+                                >`
+                                :
+                                initials
+                            }
+
+                        </div>
+
+
+                        <div class="conversation-info">
+
+                            <div class="conversation-top">
+
+                                <div class="conversation-name">
+                                    ${escapeHtml(name)}
+                                </div>
+
+                                <div class="conversation-time">
+                                    ${time}
+                                </div>
+
+                            </div>
+
+
+                            <div class="conversation-bottom">
+
+                                <div class="conversation-preview">
+                                    ${escapeHtml(preview)}
+                                </div>
+
+
+                                ${
+                                    unread > 0
+                                    ?
+                                    `
+                                    <div class="unread-dot">
+                                        ${
+                                            unread > 99
+                                            ? "99+"
+                                            : unread
+                                        }
+                                    </div>
+                                    `
+                                    :
+                                    ""
+                                }
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    `;
+
+                }
+            ).join("");
+
+
+    }catch(error){
+
+        console.error(
+            "LOAD CONVERSATIONS ERROR:",
+            error
+        );
+
+        container.innerHTML = `
+            <div class="search-message">
+                Unable to load chats.
+            </div>
+        `;
+
+        empty.style.display =
+            "none";
+
+    }
+
+}
+
+
+/* =========================
+   OPEN CONVERSATION FROM LIST
+========================= */
+
+async function openConversationFromList(chat){
+
+    if(!currentUser){
+        return;
+    }
+
+    const user =
+        chat.otherUser || {};
+
+    activeChatUser = user;
+
+    activeConversation = {
+        id:
+            chat.conversationId,
+
+        userOneId:
+            null,
+
+        userTwoId:
+            null
+    };
+
+
+    document.getElementById(
+        "chatUserName"
+    ).textContent =
+        user.fullName ||
+        "User";
+
+
+    document.getElementById(
+        "chatUserStatus"
+    ).textContent =
+        user.isOnline
+        ? "Online"
+        : "Offline";
+
+
+    document.getElementById(
+        "chatUserStatus"
+    ).className =
+        user.isOnline
+        ? "chat-user-status online"
+        : "chat-user-status";
+
+
+    const avatar =
+        document.getElementById(
+            "chatAvatar"
+        );
+
+
+    if(user.profilePicture){
+
+        avatar.innerHTML = `
+            <img
+                src="${escapeHtml(user.profilePicture)}"
+                style="width:100%;height:100%;object-fit:cover;border-radius:50%;"
+            >
+        `;
+
+    }else{
+
+        avatar.textContent =
+            getInitials(
+                user.fullName || "User"
+            );
+
+    }
+
+
+    document.getElementById(
+        "chatScreen"
+    ).classList.add("show");
+
+
+    await loadMessages();
+
+    await markMessagesRead();
+
+    await loadConversations();
+
+    startMessageRefresh();
+
+}
+
+
+/* =========================
    MENU
 ========================= */
 
@@ -1235,6 +1844,7 @@ function openMenu(){
         .classList.add("show");
 
 }
+
 
 function closeMenu(){
 
@@ -1264,19 +1874,23 @@ function toggleSearch(){
     const results =
         document.getElementById("searchResults");
 
+
     if(box.style.display === "none"){
 
-        box.style.display = "block";
+        box.style.display =
+            "block";
 
         input.focus();
 
     }else{
 
-        box.style.display = "none";
+        box.style.display =
+            "none";
 
         input.value = "";
 
-        results.style.display = "none";
+        results.style.display =
+            "none";
 
         results.innerHTML = "";
 
@@ -1296,6 +1910,7 @@ document
 
         clearTimeout(searchTimer);
 
+
         if(query.length < 2){
 
             const results =
@@ -1311,6 +1926,7 @@ document
             return;
 
         }
+
 
         searchTimer =
             setTimeout(
@@ -1336,11 +1952,13 @@ async function searchUsers(query){
     results.style.display =
         "block";
 
+
     results.innerHTML = `
         <div class="search-message">
             Searching...
         </div>
     `;
+
 
     try{
 
@@ -1349,8 +1967,10 @@ async function searchUsers(query){
                 `${API_URL}/api/users/search?q=${encodeURIComponent(query)}`
             );
 
+
         const data =
             await response.json();
+
 
         if(
             !response.ok ||
@@ -1364,12 +1984,14 @@ async function searchUsers(query){
 
         }
 
+
         const users =
             data.users.filter(
                 user =>
                     String(user.id) !==
                     String(currentUser.id)
             );
+
 
         if(users.length === 0){
 
@@ -1382,6 +2004,7 @@ async function searchUsers(query){
             return;
 
         }
+
 
         results.innerHTML =
             users.map(
@@ -1397,6 +2020,7 @@ async function searchUsers(query){
                     const about =
                         user.about ||
                         "Hey there! I am using VibeChat.";
+
 
                     return `
 
@@ -1420,17 +2044,20 @@ async function searchUsers(query){
 
                         </div>
 
+
                         <div class="result-info">
 
                             <div class="result-name">
                                 ${escapeHtml(name)}
                             </div>
 
+
                             <div class="result-about">
                                 ${escapeHtml(about)}
                             </div>
 
                         </div>
+
 
                         <div
                             class="result-status ${
@@ -1439,11 +2066,13 @@ async function searchUsers(query){
                                 : ""
                             }"
                         >
+
                             ${
                                 user.isOnline
                                 ? "Online"
                                 : "Offline"
                             }
+
                         </div>
 
                     </div>
@@ -1453,12 +2082,14 @@ async function searchUsers(query){
                 }
             ).join("");
 
+
     }catch(error){
 
         console.error(
             "SEARCH ERROR:",
             error
         );
+
 
         results.innerHTML = `
             <div class="search-message">
@@ -1481,12 +2112,17 @@ async function openChatWithUser(user){
         return;
     }
 
-    activeChatUser = user;
+
+    activeChatUser =
+        user;
+
 
     document.getElementById(
         "chatUserName"
     ).textContent =
-        user.fullName || "User";
+        user.fullName ||
+        "User";
+
 
     document.getElementById(
         "chatUserStatus"
@@ -1495,6 +2131,7 @@ async function openChatWithUser(user){
         ? "Online"
         : "Offline";
 
+
     document.getElementById(
         "chatUserStatus"
     ).className =
@@ -1502,24 +2139,47 @@ async function openChatWithUser(user){
         ? "chat-user-status online"
         : "chat-user-status";
 
-    document.getElementById(
-        "chatAvatar"
-    ).textContent =
-        getInitials(
-            user.fullName || "User"
+
+    const avatar =
+        document.getElementById(
+            "chatAvatar"
         );
+
+
+    if(user.profilePicture){
+
+        avatar.innerHTML = `
+            <img
+                src="${escapeHtml(user.profilePicture)}"
+                style="width:100%;height:100%;object-fit:cover;border-radius:50%;"
+            >
+        `;
+
+    }else{
+
+        avatar.textContent =
+            getInitials(
+                user.fullName || "User"
+            );
+
+    }
+
 
     document.getElementById(
         "chatScreen"
     ).classList.add("show");
 
+
     document.getElementById(
         "searchResults"
-    ).style.display = "none";
+    ).style.display =
+        "none";
+
 
     document.getElementById(
         "searchInput"
     ).value = "";
+
 
     try{
 
@@ -1547,8 +2207,10 @@ async function openChatWithUser(user){
                 }
             );
 
+
         const data =
             await response.json();
+
 
         if(
             !response.ok ||
@@ -1562,14 +2224,19 @@ async function openChatWithUser(user){
 
         }
 
+
         activeConversation =
             data.conversation;
+
 
         await loadMessages();
 
         await markMessagesRead();
 
+        await loadConversations();
+
         startMessageRefresh();
+
 
     }catch(error){
 
@@ -1577,6 +2244,7 @@ async function openChatWithUser(user){
             "OPEN CHAT ERROR:",
             error
         );
+
 
         document.getElementById(
             "messages"
@@ -1601,6 +2269,7 @@ async function loadMessages(){
         return;
     }
 
+
     try{
 
         const response =
@@ -1608,8 +2277,10 @@ async function loadMessages(){
                 `${API_URL}/api/messages/${activeConversation.id}?userId=${encodeURIComponent(currentUser.id)}`
             );
 
+
         const data =
             await response.json();
+
 
         if(
             !response.ok ||
@@ -1623,9 +2294,11 @@ async function loadMessages(){
 
         }
 
+
         renderMessages(
             data.messages || []
         );
+
 
     }catch(error){
 
@@ -1633,6 +2306,7 @@ async function loadMessages(){
             "LOAD MESSAGES ERROR:",
             error
         );
+
 
         document.getElementById(
             "messages"
@@ -1658,6 +2332,7 @@ function renderMessages(messages){
             "messages"
         );
 
+
     if(messages.length === 0){
 
         box.innerHTML = `
@@ -1670,6 +2345,7 @@ function renderMessages(messages){
 
     }
 
+
     box.innerHTML =
         messages.map(
             message => {
@@ -1678,10 +2354,12 @@ function renderMessages(messages){
                     Number(message.senderId) ===
                     Number(currentUser.id);
 
+
                 const time =
                     formatTime(
                         message.createdAt
                     );
+
 
                 return `
 
@@ -1728,6 +2406,7 @@ function renderMessages(messages){
             }
         ).join("");
 
+
     box.scrollTop =
         box.scrollHeight;
 
@@ -1746,18 +2425,22 @@ document
 
         event.preventDefault();
 
+
         const input =
             document.getElementById(
                 "messageInput"
             );
+
 
         const button =
             document.getElementById(
                 "sendButton"
             );
 
+
         const message =
             input.value.trim();
+
 
         if(
             !message ||
@@ -1769,7 +2452,10 @@ document
 
         }
 
-        button.disabled = true;
+
+        button.disabled =
+            true;
+
 
         try{
 
@@ -1800,8 +2486,10 @@ document
                     }
                 );
 
+
             const data =
                 await response.json();
+
 
             if(
                 !response.ok ||
@@ -1815,9 +2503,14 @@ document
 
             }
 
+
             input.value = "";
 
+
             await loadMessages();
+
+            await loadConversations();
+
 
         }catch(error){
 
@@ -1826,14 +2519,17 @@ document
                 error
             );
 
+
             alert(
                 error.message ||
                 "Unable to send message"
             );
 
+
         }finally{
 
-            button.disabled = false;
+            button.disabled =
+                false;
 
             input.focus();
 
@@ -1852,6 +2548,7 @@ async function markMessagesRead(){
     if(!activeConversation){
         return;
     }
+
 
     try{
 
@@ -1878,6 +2575,7 @@ async function markMessagesRead(){
             }
         );
 
+
     }catch(error){
 
         console.error(
@@ -1898,6 +2596,7 @@ function startMessageRefresh(){
 
     stopMessageRefresh();
 
+
     messageRefreshTimer =
         setInterval(
             async () => {
@@ -1916,6 +2615,8 @@ function startMessageRefresh(){
                     await loadMessages();
 
                     await markMessagesRead();
+
+                    await loadConversations();
 
                 }
 
@@ -1956,9 +2657,82 @@ function closeChat(){
     activeChatUser =
         null;
 
+
     document
         .getElementById("chatScreen")
         .classList.remove("show");
+
+
+    loadConversations();
+
+}
+
+
+/* =========================
+   FORMAT CHAT LIST TIME
+========================= */
+
+function formatChatListTime(value){
+
+    try{
+
+        const date =
+            new Date(value);
+
+        const now =
+            new Date();
+
+
+        const sameDay =
+            date.toDateString() ===
+            now.toDateString();
+
+
+        if(sameDay){
+
+            return date.toLocaleTimeString(
+                [],
+                {
+                    hour:"numeric",
+                    minute:"2-digit"
+                }
+            );
+
+        }
+
+
+        const yesterday =
+            new Date(now);
+
+        yesterday.setDate(
+            now.getDate() - 1
+        );
+
+
+        if(
+            date.toDateString() ===
+            yesterday.toDateString()
+        ){
+
+            return "Yesterday";
+
+        }
+
+
+        return date.toLocaleDateString(
+            [],
+            {
+                day:"numeric",
+                month:"short"
+            }
+        );
+
+
+    }catch(error){
+
+        return "";
+
+    }
 
 }
 
@@ -1974,6 +2748,7 @@ function getInitials(name){
         .trim()
         .split(/\s+/);
 
+
     if(words.length >= 2){
 
         return (
@@ -1982,6 +2757,7 @@ function getInitials(name){
         ).toUpperCase();
 
     }
+
 
     return String(name)
         .substring(0,2)
@@ -2009,6 +2785,7 @@ function formatTime(value){
         const date =
             new Date(value);
 
+
         return date.toLocaleTimeString(
             [],
             {
@@ -2016,6 +2793,7 @@ function formatTime(value){
                 minute:"2-digit"
             }
         );
+
 
     }catch(error){
 
@@ -2037,6 +2815,7 @@ function applyTheme(){
             "cheryChatTheme"
         ) || "dark";
 
+
     document.body.classList.toggle(
         "light",
         theme === "light"
@@ -2052,12 +2831,14 @@ function toggleTheme(){
             "light"
         );
 
+
     localStorage.setItem(
         "cheryChatTheme",
         isLight
         ? "dark"
         : "light"
     );
+
 
     applyTheme();
 
@@ -2072,13 +2853,24 @@ function logout(){
 
     stopMessageRefresh();
 
+    if(conversationRefreshTimer){
+
+        clearInterval(
+            conversationRefreshTimer
+        );
+
+    }
+
+
     localStorage.removeItem(
         "cheryChatLoggedIn"
     );
 
+
     localStorage.removeItem(
         "cheryChatCurrentUser"
     );
+
 
     window.location.href =
         "login.html";
@@ -2094,7 +2886,11 @@ if(loadUser()){
 
     applyTheme();
 
+    loadConversations();
+
 }
 
-</script></body>
+</script>
+
+</body>
 </html>
