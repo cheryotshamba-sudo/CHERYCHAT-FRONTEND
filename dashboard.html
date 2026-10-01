@@ -1,20 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>VibeChat</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-<style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>VibeChat</title><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"><style>
 
 :root{
     --body-bg:#07030f;
@@ -168,12 +157,6 @@ input{
     font-weight:600;
 }
 
-
-/* ==============================
-   CONVERSATION CARD
-   ONLY SIZE CHANGED
-============================== */
-
 .conversations{
     padding:0 10px;
 }
@@ -245,6 +228,7 @@ input{
     gap:8px;
     margin-top:2px;
 }
+
 .conversation-preview{
     color:var(--muted);
     font-size:9px;
@@ -265,11 +249,6 @@ input{
     font-size:9px;
     font-weight:700;
 }
-
-
-/* ==============================
-   EMPTY CHAT
-============================== */
 
 .empty-chat{
     text-align:center;
@@ -300,11 +279,6 @@ input{
     font-size:12px;
     line-height:1.6;
 }
-
-
-/* ==============================
-   CHAT SCREEN
-============================== */
 
 .chat-screen{
     position:fixed;
@@ -458,11 +432,6 @@ input{
     font-size:16px;
 }
 
-
-/* ==============================
-   SIDE MENU
-============================== */
-
 .side-menu-overlay{
     position:fixed;
     inset:0;
@@ -560,11 +529,6 @@ input{
     color:var(--danger);
 }
 
-
-/* ==============================
-   BOTTOM NAV
-============================== */
-
 .bottom-nav{
     position:fixed;
     left:0;
@@ -596,385 +560,334 @@ input{
     color:var(--gold);
 }
 
-</style>
-</head>
+</style></head><body><header class="header"><div class="header-left">
 
-<body>
+    <button
+        class="menu-button"
+        onclick="openMenu()"
+        aria-label="Open menu">
 
+        <i class="fa-solid fa-ellipsis-vertical"></i>
 
-<!-- HEADER -->
+    </button>
 
-<header class="header">
+    <div class="logo">
+        Vibe<span>Chat</span>
+    </div>
 
-    <div class="header-left">
+</div>
 
-        <!-- THREE DOTS STAY ON LEFT -->
+<div class="header-right">
 
-        <button
-            class="menu-button"
-            onclick="openMenu()"
-            aria-label="Open menu">
+    <div
+        class="profile-small"
+        id="headerAvatar">
 
-            <i class="fa-solid fa-ellipsis-vertical"></i>
-
-        </button>
-
-        <div class="logo">
-
-            Vibe<span>Chat</span>
-
-        </div>
+        U
 
     </div>
 
+</div>
 
-    <div class="header-right">
-
-        <div
-            class="profile-small"
-            id="headerAvatar">
-
-            U
-
-        </div>
-
-    </div>
-
-</header>
-
-
-<!-- SIDE MENU -->
-
-<div
+</header><div
     class="side-menu-overlay"
     id="sideMenuOverlay"
     onclick="closeMenu()">
+</div><div
+    class="side-menu"
+    id="sideMenu"><div class="menu-profile">
+
+    <div
+        class="menu-profile-avatar"
+        id="menuAvatar">
+
+        U
+
+    </div>
+
+    <div>
+
+        <div
+            class="menu-name"
+            id="menuName">
+
+            User
+
+        </div>
+
+        <div
+            class="menu-email"
+            id="menuEmail">
+
+            VibeChat
+
+        </div>
+
+    </div>
+
 </div>
 
 
 <div
-    class="side-menu"
-    id="sideMenu">
+    class="menu-item"
+    onclick="closeMenu()">
+
+    <i class="fa-solid fa-comment"></i>
+
+    Chats
+
+</div>
 
 
-    <div class="menu-profile">
+<div class="menu-item">
+
+    <i class="fa-solid fa-users"></i>
+
+    Groups
+
+</div>
+
+
+<div class="menu-item">
+
+    <i class="fa-solid fa-circle-play"></i>
+
+    Stories
+
+</div>
+
+
+<div class="menu-item">
+
+    <i class="fa-solid fa-user-group"></i>
+
+    Friends
+
+</div>
+
+
+<div class="menu-item">
+
+    <i class="fa-solid fa-circle-check"></i>
+
+    Verification
+
+</div>
+
+
+<div class="menu-item">
+
+    <i class="fa-solid fa-gear"></i>
+
+    Settings
+
+</div>
+
+
+<div
+    class="menu-item"
+    onclick="toggleTheme()">
+
+    <i class="fa-solid fa-moon"></i>
+
+    Theme
+
+</div>
+
+
+<div
+    class="menu-item logout"
+    onclick="logout()">
+
+    <i class="fa-solid fa-right-from-bracket"></i>
+
+    Logout
+
+</div>
+
+</div><main class="container"><div class="search-box">
+
+    <i class="fa-solid fa-magnifying-glass"></i>
+
+    <input
+        id="searchInput"
+        type="text"
+        placeholder="Search VibeChat users..."
+        autocomplete="off">
+
+</div>
+
+
+<div
+    class="search-results"
+    id="searchResults">
+</div>
+
+
+<div class="tabs">
+
+    <button class="tab active">
+        All
+    </button>
+
+    <button class="tab">
+        Unread
+    </button>
+
+    <button class="tab">
+        Groups
+    </button>
+
+    <button class="tab">
+        Friends
+    </button>
+
+</div>
+
+
+<div
+    class="conversations"
+    id="conversations">
+</div>
+
+
+<section
+    class="empty-chat"
+    id="emptyChat">
+
+    <div class="empty-icon">
+
+        <i class="fa-regular fa-comments"></i>
+
+    </div>
+
+    <h2>
+        No conversations yet
+    </h2>
+
+    <p>
+        Search for another VibeChat user above
+        and start a private conversation.
+    </p>
+
+</section>
+
+</main><section
+    class="chat-screen"
+    id="chatScreen"><div class="chat-header">
+
+    <button
+        class="back-button"
+        onclick="closeChat()">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+    </button>
+
+
+    <div
+        class="chat-header-avatar"
+        id="chatAvatar">
+
+        U
+
+    </div>
+
+
+    <div class="chat-user-info">
 
         <div
-            class="menu-profile-avatar"
-            id="menuAvatar">
+            class="chat-user-name"
+            id="chatUserName">
 
-            U
-
-        </div>
-
-        <div>
-
-            <div
-                class="menu-name"
-                id="menuName">
-
-                User
-
-            </div>
-
-            <div
-                class="menu-email"
-                id="menuEmail">
-
-                VibeChat
-
-            </div>
+            User
 
         </div>
 
-    </div>
+        <div
+            class="chat-user-status"
+            id="chatUserStatus">
 
+            Offline
 
-    <div
-        class="menu-item"
-        onclick="closeMenu()">
-
-        <i class="fa-solid fa-comment"></i>
-
-        Chats
-
-    </div>
-
-
-    <div class="menu-item">
-
-        <i class="fa-solid fa-users"></i>
-
-        Groups
-
-    </div>
-
-
-    <div class="menu-item">
-
-        <i class="fa-solid fa-circle-play"></i>
-
-        Stories
-
-    </div>
-
-
-    <div class="menu-item">
-
-        <i class="fa-solid fa-user-group"></i>
-
-        Friends
-
-    </div>
-
-
-    <div class="menu-item">
-
-        <i class="fa-solid fa-circle-check"></i>
-
-        Verification
-
-    </div>
-
-
-    <div class="menu-item">
-
-        <i class="fa-solid fa-gear"></i>
-
-        Settings
-
-    </div>
-
-
-    <div
-        class="menu-item"
-        onclick="toggleTheme()">
-
-        <i class="fa-solid fa-moon"></i>
-
-        Theme
-
-    </div>
-
-
-    <div
-        class="menu-item logout"
-        onclick="logout()">
-
-        <i class="fa-solid fa-right-from-bracket"></i>
-
-        Logout
+        </div>
 
     </div>
 
 </div>
 
 
-<!-- MAIN -->
+<div
+    class="messages"
+    id="messages">
+</div>
 
-<main class="container">
 
+<form
+    class="message-form"
+    id="messageForm">
 
-    <div class="search-box">
+    <input
+        id="messageInput"
+        type="text"
+        placeholder="Type a message..."
+        autocomplete="off">
 
-        <i class="fa-solid fa-magnifying-glass"></i>
+    <button
+        class="send-button"
+        type="submit">
 
-        <input
-            id="searchInput"
-            type="text"
-            placeholder="Search VibeChat users..."
-            autocomplete="off">
+        <i class="fa-solid fa-paper-plane"></i>
 
-    </div>
+    </button>
 
+</form>
 
-    <div
-        class="search-results"
-        id="searchResults">
+</section><nav class="bottom-nav"><div class="bottom-nav-item active">
 
-    </div>
+    <i class="fa-solid fa-comment"></i>
 
+    <span>Chats</span>
 
-    <div class="tabs">
+</div>
 
-        <button class="tab active">
-            All
-        </button>
 
-        <button class="tab">
-            Unread
-        </button>
+<div class="bottom-nav-item">
 
-        <button class="tab">
-            Groups
-        </button>
+    <i class="fa-solid fa-users"></i>
 
-        <button class="tab">
-            Friends
-        </button>
+    <span>Groups</span>
 
-    </div>
+</div>
 
 
-    <div
-        class="conversations"
-        id="conversations">
+<div class="bottom-nav-item">
 
-    </div>
+    <i class="fa-solid fa-circle-play"></i>
 
+    <span>Stories</span>
 
-    <section
-        class="empty-chat"
-        id="emptyChat">
+</div>
 
-        <div class="empty-icon">
 
-            <i class="fa-regular fa-comments"></i>
+<div class="bottom-nav-item">
 
-        </div>
+    <i class="fa-solid fa-user"></i>
 
-        <h2>
-            No conversations yet
-        </h2>
+    <span>Profile</span>
 
-        <p>
-            Search for another VibeChat user above
-            and start a private conversation.
-        </p>
+</div>
 
-    </section>
-
-</main>
-
-
-<!-- CHAT SCREEN -->
-
-<section
-    class="chat-screen"
-    id="chatScreen">
-
-
-    <div class="chat-header">
-
-        <button
-            class="back-button"
-            onclick="closeChat()">
-
-            <i class="fa-solid fa-arrow-left"></i>
-
-        </button>
-
-
-        <div
-            class="chat-header-avatar"
-            id="chatAvatar">
-
-            U
-
-        </div>
-
-
-        <div class="chat-user-info">
-
-            <div
-                class="chat-user-name"
-                id="chatUserName">
-
-                User
-
-            </div>
-
-            <div
-                class="chat-user-status"
-                id="chatUserStatus">
-
-                Offline
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div
-        class="messages"
-        id="messages">
-    </div>
-
-
-    <form
-        class="message-form"
-        id="messageForm">
-
-        <input
-            id="messageInput"
-            type="text"
-            placeholder="Type a message..."
-            autocomplete="off">
-
-        <button
-            class="send-button"
-            type="submit">
-
-            <i class="fa-solid fa-paper-plane"></i>
-
-        </button>
-
-    </form>
-
-</section>
-
-
-<!-- BOTTOM NAV -->
-
-<nav class="bottom-nav">
-
-    <div class="bottom-nav-item active">
-
-        <i class="fa-solid fa-comment"></i>
-
-        <span>Chats</span>
-
-    </div>
-
-
-    <div class="bottom-nav-item">
-
-        <i class="fa-solid fa-users"></i>
-
-        <span>Groups</span>
-
-    </div>
-
-
-    <div class="bottom-nav-item">
-
-        <i class="fa-solid fa-circle-play"></i>
-
-        <span>Stories</span>
-
-    </div>
-
-
-    <div class="bottom-nav-item">
-
-        <i class="fa-solid fa-user"></i>
-
-        <span>Profile</span>
-
-    </div>
-
-</nav>
-
-
-<script>
+</nav><script>
 
 const API_URL =
     "https://cherychat-backend.onrender.com";
 
 const CURRENT_USER_KEY =
     "cheryChatCurrentUser";
+
+const LOGIN_KEY =
+    "cheryChatLoggedIn";
 
 const THEME_KEY =
     "vibeChatTheme";
@@ -991,7 +904,7 @@ let messageRefreshTimer = null;
 
 
 /* =========================
-   LOAD USER
+   LOAD USER / SESSION
 ========================= */
 
 async function loadUser(){
@@ -1001,30 +914,77 @@ async function loadUser(){
             CURRENT_USER_KEY
         );
 
-    if(!saved){
+    const loggedIn =
+        localStorage.getItem(
+            LOGIN_KEY
+        );
 
-        window.location.href =
-            "index.html";
 
-        return;
+    if(
+        !saved ||
+        loggedIn !== "true"
+    ){
+
+        localStorage.removeItem(
+            CURRENT_USER_KEY
+        );
+
+        localStorage.removeItem(
+            LOGIN_KEY
+        );
+
+        window.location.replace(
+            "login.html"
+        );
+
+        return false;
 
     }
+
 
     try{
 
         currentUser =
             JSON.parse(saved);
 
+
+        if(
+            !currentUser ||
+            !currentUser.id
+        ){
+
+            throw new Error(
+                "Invalid saved session"
+            );
+
+        }
+
+
         updateUserUI();
 
+        return true;
+
     }catch(error){
+
+        console.error(
+            "Session error:",
+            error
+        );
+
 
         localStorage.removeItem(
             CURRENT_USER_KEY
         );
 
-        window.location.href =
-            "index.html";
+        localStorage.removeItem(
+            LOGIN_KEY
+        );
+
+        window.location.replace(
+            "login.html"
+        );
+
+        return false;
 
     }
 
@@ -1075,12 +1035,12 @@ function updateUserUI(){
         document.getElementById(
             "headerAvatar"
         ).innerHTML =
-            `<img src="${picture}" alt="">`;
+            `<img src="${escapeHtml(picture)}" alt="">`;
 
         document.getElementById(
             "menuAvatar"
         ).innerHTML =
-            `<img src="${picture}" alt="">`;
+            `<img src="${escapeHtml(picture)}" alt="">`;
 
     }else{
 
@@ -1236,7 +1196,7 @@ function renderConversations(){
 
                         ${
                             picture
-                                ? `<img src="${picture}" alt="">`
+                                ? `<img src="${escapeHtml(picture)}" alt="">`
                                 : initial
                         }
 
@@ -1425,7 +1385,7 @@ async function searchUsers(query){
 
                             ${
                                 picture
-                                    ? `<img src="${picture}" alt="">`
+                                    ? `<img src="${escapeHtml(picture)}" alt="">`
                                     : initial
                             }
 
@@ -1443,8 +1403,10 @@ async function searchUsers(query){
                             <div class="conversation-preview">
 
                                 ${
-                                    user.about ||
-                                    "VibeChat user"
+                                    escapeHtml(
+                                        user.about ||
+                                        "VibeChat user"
+                                    )
                                 }
 
                             </div>
@@ -1592,7 +1554,7 @@ function setupChatHeader(){
     if(picture){
 
         avatar.innerHTML =
-            `<img src="${picture}" alt="">`;
+            `<img src="${escapeHtml(picture)}" alt="">`;
 
     }else{
 
@@ -1774,6 +1736,13 @@ document
             event.preventDefault();
 
 
+            if(
+                !activeConversation ||
+                !currentUser
+            )
+                return;
+
+
             const input =
                 document.getElementById(
                     "messageInput"
@@ -1833,7 +1802,6 @@ document
 
 
                 input.value = "";
-
 
                 await loadMessages();
 
@@ -2035,8 +2003,13 @@ function logout(){
         CURRENT_USER_KEY
     );
 
-    window.location.href =
-        "index.html";
+    localStorage.removeItem(
+        LOGIN_KEY
+    );
+
+    window.location.replace(
+        "login.html"
+    );
 
 }
 
@@ -2107,14 +2080,18 @@ document.addEventListener(
     "DOMContentLoaded",
     async () => {
 
-        await loadUser();
+        const authenticated =
+            await loadUser();
+
+
+        if(!authenticated)
+            return;
+
 
         await loadConversations();
 
     }
 );
 
-</script>
-
-</body>
+</script></body>
 </html>
