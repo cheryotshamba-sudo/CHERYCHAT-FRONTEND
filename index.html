@@ -390,36 +390,68 @@
 </div>
 
 <script>
-    let deferredPrompt = null;
 
-    const installBtn = document.getElementById("installBtn");
+/* =========================================
+   CHECK LOGIN STATUS
+========================================= */
 
-    window.addEventListener("beforeinstallprompt", function(event) {
+(function(){
+
+    const isLoggedIn =
+        localStorage.getItem("cheryChatLoggedIn");
+
+    if(isLoggedIn === "true"){
+
+        window.location.replace("dashboard.html");
+
+    }
+
+})();
+
+
+/* =========================================
+   APP INSTALLATION
+========================================= */
+
+let deferredPrompt = null;
+
+const installBtn =
+    document.getElementById("installBtn");
+
+
+window.addEventListener(
+    "beforeinstallprompt",
+    function(event){
 
         event.preventDefault();
 
         deferredPrompt = event;
 
-    });
+    }
+);
 
-    installBtn.addEventListener("click", async function() {
 
-        if (deferredPrompt) {
+installBtn.addEventListener(
+    "click",
+    async function(){
+
+        if(deferredPrompt){
 
             deferredPrompt.prompt();
 
-            const result = await deferredPrompt.userChoice;
+            const result =
+                await deferredPrompt.userChoice;
 
             deferredPrompt = null;
 
-            if (result.outcome === "accepted") {
+            if(result.outcome === "accepted"){
 
                 installBtn.innerHTML =
                     '<i class="fa-solid fa-check"></i> App Installed';
 
             }
 
-        } else {
+        }else{
 
             alert(
                 "VibeChat is already installed, or your browser does not currently offer installation."
@@ -427,26 +459,41 @@
 
         }
 
-    });
+    }
+);
 
-    window.addEventListener("appinstalled", function() {
+
+window.addEventListener(
+    "appinstalled",
+    function(){
 
         installBtn.innerHTML =
             '<i class="fa-solid fa-check"></i> App Installed';
 
-    });
+    }
+);
 
-    if ("serviceWorker" in navigator) {
 
-        window.addEventListener("load", function() {
+/* =========================================
+   SERVICE WORKER
+========================================= */
 
-            navigator.serviceWorker.register("./sw.js")
-                .then(function() {
+if("serviceWorker" in navigator){
 
-                    console.log("VibeChat service worker registered.");
+    window.addEventListener(
+        "load",
+        function(){
+
+            navigator.serviceWorker
+                .register("./sw.js")
+                .then(function(){
+
+                    console.log(
+                        "VibeChat service worker registered."
+                    );
 
                 })
-                .catch(function(error) {
+                .catch(function(error){
 
                     console.log(
                         "Service worker registration failed:",
@@ -455,9 +502,11 @@
 
                 });
 
-        });
+        }
+    );
 
-    }
+}
+
 </script>
 
 </body>
