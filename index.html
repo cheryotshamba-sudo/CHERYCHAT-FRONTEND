@@ -5,9 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>VibeChat</title>
-<link rel="manifest" href="manifest.json">
+
+    <link rel="manifest" href="manifest.json">
+
+    <meta name="theme-color" content="#120a22">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet"
@@ -138,12 +143,14 @@
                 0 15px 45px rgba(255, 181, 0, 0.20),
                 inset 0 1px 2px rgba(255,255,255,0.5);
         }
-.chat-icon img {
-    width: 150%;
-    height: 150%;
-    object-fit: contain;
-    border-radius: 30px;
-}
+
+        .chat-icon img {
+            width: 120%;
+            height: 120%;
+            object-fit: contain;
+            border-radius: 30px;
+        }
+
         .hero h1 {
             font-size: 39px;
             line-height: 1.12;
@@ -201,6 +208,13 @@
             color: #ffffff;
             background: rgba(255,255,255,0.055);
             border: 1px solid rgba(255,255,255,0.13);
+        }
+
+        .install-btn {
+            color: #ffe16a;
+            background: rgba(255,193,7,0.08);
+            border: 1px solid rgba(255,213,77,0.35);
+            cursor: pointer;
         }
 
         .features {
@@ -271,7 +285,9 @@
     <div class="glow2"></div>
 
     <header>
+
         <div class="brand">
+
             <div class="brand-icon">
                 <i class="fa-solid fa-comments"></i>
             </div>
@@ -279,19 +295,22 @@
             <div class="brand-name">
                 Vibe<span>Chat</span>
             </div>
+
         </div>
 
         <a href="login.html" class="login-top">
             Log in
         </a>
+
     </header>
 
     <main>
+
         <section class="hero">
 
             <div class="chat-icon">
-    <img src="IMG-20261001-WA0004.jpg" alt="VibeChat Logo">
-</div>
+                <img src="IMG-20261001-WA0004.jpg" alt="VibeChat Logo">
+            </div>
 
             <h1>
                 Connect.<br>
@@ -314,6 +333,11 @@
                     <i class="fa-solid fa-right-to-bracket"></i>
                     I already have an account
                 </a>
+
+                <button id="installBtn" class="btn install-btn" type="button">
+                    <i class="fa-solid fa-download"></i>
+                    Install App
+                </button>
 
             </div>
 
@@ -340,6 +364,7 @@
             </div>
 
         </section>
+
     </main>
 
     <footer>
@@ -347,6 +372,70 @@
     </footer>
 
 </div>
+
+<script>
+
+    let deferredPrompt = null;
+
+    const installBtn = document.getElementById("installBtn");
+
+    window.addEventListener("beforeinstallprompt", function(event) {
+
+        event.preventDefault();
+
+        deferredPrompt = event;
+
+    });
+
+    installBtn.addEventListener("click", async function() {
+
+        if (deferredPrompt) {
+
+            deferredPrompt.prompt();
+
+            const result = await deferredPrompt.userChoice;
+
+            deferredPrompt = null;
+
+            if (result.outcome === "accepted") {
+                installBtn.innerHTML =
+                    '<i class="fa-solid fa-check"></i> App Installed';
+            }
+
+        } else {
+
+            alert(
+                "If the install window does not appear, open your browser menu and choose 'Install app' or 'Add to Home screen'."
+            );
+
+        }
+
+    });
+
+    window.addEventListener("appinstalled", function() {
+
+        installBtn.innerHTML =
+            '<i class="fa-solid fa-check"></i> App Installed';
+
+    });
+
+    if ("serviceWorker" in navigator) {
+
+        window.addEventListener("load", function() {
+
+            navigator.serviceWorker.register("./sw.js")
+                .then(function() {
+                    console.log("VibeChat service worker registered.");
+                })
+                .catch(function(error) {
+                    console.log("Service worker registration failed:", error);
+                });
+
+        });
+
+    }
+
+</script>
 
 </body>
 </html>
