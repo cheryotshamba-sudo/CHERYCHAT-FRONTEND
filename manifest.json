@@ -2,7 +2,7 @@
   "name": "VibeChat",
   "short_name": "VibeChat",
   "description": "Chat, connect and vibe with people on VibeChat.",
-  "start_url": "./index.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#07030f",
