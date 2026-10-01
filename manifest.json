@@ -1,0 +1,17 @@
+{
+  "name": "VibeChat",
+  "short_name": "VibeChat",
+  "description": "Chat, connect and vibe with people on VibeChat.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#07030f",
+  "theme_color": "#120a22",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
