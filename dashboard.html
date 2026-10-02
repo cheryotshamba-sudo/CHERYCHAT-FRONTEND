@@ -39,7 +39,8 @@ body{
 }
 
 button,
-input{
+input,
+textarea{
     font-family:inherit;
 }
 
@@ -300,6 +301,111 @@ button{
 }
 
 /* =========================
+   GROUPS
+========================= */
+
+.groups-box{
+    display:none;
+    padding:10px 14px 100px;
+}
+
+.groups-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:15px;
+}
+
+.groups-title{
+    font-size:19px;
+    font-weight:600;
+}
+
+.create-group-button{
+    border:0;
+    background:#ffd54a;
+    color:#120a22;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    font-size:18px;
+}
+
+.groups-empty{
+    background:#120a22;
+    border-radius:18px;
+    padding:55px 20px;
+    text-align:center;
+    border:1px solid rgba(255,255,255,.06);
+}
+
+.groups-empty i{
+    font-size:48px;
+    color:#ffd54a;
+    margin-bottom:18px;
+}
+
+.groups-empty h3{
+    font-size:17px;
+    margin-bottom:7px;
+}
+
+.groups-empty p{
+    color:#9d96aa;
+    font-size:13px;
+    line-height:1.6;
+}
+
+/* =========================
+   PROFILE
+========================= */
+
+.profile-box{
+    display:none;
+    padding:20px;
+}
+
+.profile-card{
+    background:#120a22;
+    border-radius:18px;
+    padding:25px 20px;
+    text-align:center;
+}
+
+.profile-large{
+    width:85px;
+    height:85px;
+    margin:auto;
+    border-radius:50%;
+    background:linear-gradient(135deg,#ffd54a,#ff9e00);
+    color:#120a22;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    font-weight:700;
+    overflow:hidden;
+}
+
+.profile-large img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.profile-name{
+    margin-top:12px;
+    font-size:19px;
+    font-weight:600;
+}
+
+.profile-email{
+    color:#9d96aa;
+    font-size:12px;
+    margin-top:3px;
+}
+
+/* =========================
    CHAT SCREEN
 ========================= */
 
@@ -553,55 +659,6 @@ button{
 }
 
 /* =========================
-   PROFILE
-========================= */
-
-.profile-box{
-    display:none;
-    padding:20px;
-}
-
-.profile-card{
-    background:#120a22;
-    border-radius:18px;
-    padding:25px 20px;
-    text-align:center;
-}
-
-.profile-large{
-    width:85px;
-    height:85px;
-    margin:auto;
-    border-radius:50%;
-    background:linear-gradient(135deg,#ffd54a,#ff9e00);
-    color:#120a22;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:28px;
-    font-weight:700;
-    overflow:hidden;
-}
-
-.profile-large img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.profile-name{
-    margin-top:12px;
-    font-size:19px;
-    font-weight:600;
-}
-
-.profile-email{
-    color:#9d96aa;
-    font-size:12px;
-    margin-top:3px;
-}
-
-/* =========================
    BOTTOM NAV
 ========================= */
 
@@ -684,10 +741,6 @@ button{
 
 <div class="app">
 
-<!-- =========================
-     HEADER
-========================= -->
-
 <header class="top-header">
 
     <button class="menu-button" onclick="openMenu()">
@@ -717,10 +770,6 @@ button{
 </header>
 
 
-<!-- =========================
-     SEARCH
-========================= -->
-
 <div class="search-area">
 
     <div class="search-box">
@@ -738,32 +787,81 @@ button{
 
 </div>
 
+
 <div
     id="searchResults"
     class="search-results"
 ></div>
 
 
-<!-- =========================
-     MAIN CONTENT
-========================= -->
-
 <main class="page-content">
 
-    <div class="section-title">
-        Chats
-    </div>
+    <!-- CHATS -->
 
-    <div
-        id="conversationList"
-        class="conversation-list"
-    >
+    <section id="chatsSection">
 
-        <div class="loading">
-            Loading conversations...
+        <div class="section-title">
+            Chats
         </div>
 
-    </div>
+        <div
+            id="conversationList"
+            class="conversation-list"
+        >
+
+            <div class="loading">
+                Loading conversations...
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- GROUPS -->
+
+    <section
+        id="groupsBox"
+        class="groups-box"
+    >
+
+        <div class="groups-header">
+
+            <div class="groups-title">
+                Groups
+            </div>
+
+            <button
+                class="create-group-button"
+                onclick="createGroup()"
+                aria-label="Create group"
+            >
+                <i class="fa-solid fa-plus"></i>
+            </button>
+
+        </div>
+
+
+        <div class="groups-empty">
+
+            <i class="fa-solid fa-users"></i>
+
+            <h3>
+                VibeChat Groups
+            </h3>
+
+            <p>
+                Create and join groups to chat,
+                connect and vibe with other people.
+            </p>
+
+            <p style="margin-top:10px;">
+                Group payments will be added later.
+            </p>
+
+        </div>
+
+    </section>
 
 
     <!-- PROFILE -->
@@ -803,9 +901,7 @@ button{
 </main>
 
 
-<!-- =========================
-     PRIVATE CHAT
-========================= -->
+<!-- CHAT -->
 
 <section
     class="chat-screen"
@@ -822,14 +918,12 @@ button{
             <i class="fa-solid fa-arrow-left"></i>
         </button>
 
-
         <div
             class="chat-header-avatar"
             id="chatAvatar"
         >
             U
         </div>
-
 
         <div class="chat-user-info">
 
@@ -884,9 +978,7 @@ button{
 </section>
 
 
-<!-- =========================
-     SIDE MENU
-========================= -->
+<!-- SIDE MENU -->
 
 <div
     id="menuOverlay"
@@ -931,7 +1023,7 @@ button{
 
         <button
             class="menu-item"
-            onclick="showComingSoon('Groups')"
+            onclick="showGroups()"
         >
             <i class="fa-solid fa-users"></i>
             Groups
@@ -996,13 +1088,12 @@ button{
 </aside>
 
 
-<!-- =========================
-     BOTTOM NAV
-========================= -->
+<!-- BOTTOM NAV -->
 
 <nav class="bottom-nav">
 
     <button
+        id="bottomChats"
         class="bottom-item active"
         onclick="showChats()"
     >
@@ -1012,8 +1103,9 @@ button{
 
 
     <button
+        id="bottomGroups"
         class="bottom-item"
-        onclick="showComingSoon('Groups')"
+        onclick="showGroups()"
     >
         <i class="fa-solid fa-users"></i>
         Groups
@@ -1047,33 +1139,29 @@ button{
 
 </div>
 
-
+<!--
+=========================================================
 <script>
 
 /* =========================================================
-   CONFIGURATION
+   VIBECHAT CONFIGURATION
 ========================================================= */
 
-const API_URL =
-    "https://cherychat-backend.onrender.com";
+const API_URL = "https://cherychat-backend.onrender.com";
 
-const CURRENT_USER_KEY =
-    "cheryChatCurrentUser";
+const CURRENT_USER_KEY = "cheryChatCurrentUser";
+const LOGIN_KEY = "cheryChatLoggedIn";
+const THEME_KEY = "vibeChatTheme";
 
-const LOGIN_KEY =
-    "cheryChatLoggedIn";
 
-const THEME_KEY =
-    "vibeChatTheme";
-
+/* =========================================================
+   GLOBAL VARIABLES
+========================================================= */
 
 let currentUser = null;
 
-let conversations = [];
-
-let activeConversation = null;
-
-let activeChatUser = null;
+let currentConversation = null;
+let currentChatUser = null;
 
 let messageRefreshTimer = null;
 
@@ -1081,49 +1169,84 @@ let searchTimer = null;
 
 
 /* =========================================================
-   START
+   PAGE ELEMENTS
 ========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
+const searchInput =
+    document.getElementById("searchInput");
 
-        loadUser();
+const searchResults =
+    document.getElementById("searchResults");
 
-        const searchInput =
-            document.getElementById(
-                "searchInput"
-            );
+const conversationList =
+    document.getElementById("conversationList");
 
-        if(searchInput){
+const chatsSection =
+    document.getElementById("chatsSection");
 
-            searchInput.addEventListener(
-                "input",
-                handleSearch
-            );
+const groupsBox =
+    document.getElementById("groupsBox");
 
-        }
+const profileBox =
+    document.getElementById("profileBox");
+
+const chatScreen =
+    document.getElementById("chatScreen");
+
+const messagesBox =
+    document.getElementById("messages");
+
+const messageInput =
+    document.getElementById("messageInput");
+
+const messageForm =
+    document.getElementById("messageForm");
+
+const chatUserName =
+    document.getElementById("chatUserName");
+
+const chatUserStatus =
+    document.getElementById("chatUserStatus");
+
+const chatAvatar =
+    document.getElementById("chatAvatar");
+
+const sideMenu =
+    document.getElementById("sideMenu");
+
+const menuOverlay =
+    document.getElementById("menuOverlay");
+
+const toast =
+    document.getElementById("toast");
+
+const profileLarge =
+    document.getElementById("profileLarge");
+
+const profileName =
+    document.getElementById("profileName");
+
+const profileEmail =
+    document.getElementById("profileEmail");
 
 
-        const messageForm =
-            document.getElementById(
-                "messageForm"
-            );
+/* =========================================================
+   INITIALIZE
+========================================================= */
 
-        if(messageForm){
+document.addEventListener("DOMContentLoaded", () => {
 
-            messageForm.addEventListener(
-                "submit",
-                sendMessage
-            );
+    loadTheme();
 
-        }
+    loadUser();
 
+    setupSearch();
 
-        loadTheme();
+    setupMessageForm();
 
-    }
-);
+    registerServiceWorker();
+
+});
 
 
 /* =========================================================
@@ -1132,126 +1255,153 @@ document.addEventListener(
 
 function loadUser(){
 
+    const savedUser =
+        localStorage.getItem(CURRENT_USER_KEY);
+
+    const loggedIn =
+        localStorage.getItem(LOGIN_KEY);
+
+    if(!savedUser || loggedIn !== "true"){
+
+        window.location.href = "login.html";
+
+        return;
+    }
+
     try{
-
-        const savedUser =
-            localStorage.getItem(
-                CURRENT_USER_KEY
-            );
-
-        const loggedIn =
-            localStorage.getItem(
-                LOGIN_KEY
-            );
-
-
-        if(
-            !savedUser ||
-            loggedIn !== "true"
-        ){
-
-            window.location.href =
-                "login.html";
-
-            return;
-
-        }
-
 
         currentUser =
             JSON.parse(savedUser);
 
-
-        if(
-            !currentUser ||
-            !currentUser.id
-        ){
-
-            localStorage.removeItem(
-                CURRENT_USER_KEY
-            );
-
-            localStorage.removeItem(
-                LOGIN_KEY
-            );
-
-            window.location.href =
-                "login.html";
-
-            return;
-
-        }
-
-
-        updateUserUI();
-
-        loadConversations();
-
-
     }catch(error){
 
         console.error(
-            "Load user error:",
+            "Invalid saved user:",
             error
         );
 
+        localStorage.removeItem(CURRENT_USER_KEY);
+        localStorage.removeItem(LOGIN_KEY);
 
-        localStorage.removeItem(
-            CURRENT_USER_KEY
-        );
+        window.location.href = "login.html";
 
-        localStorage.removeItem(
-            LOGIN_KEY
-        );
-
-
-        window.location.href =
-            "login.html";
-
+        return;
     }
+
+    updateUserUI();
+
+    loadConversations();
 
 }
 
 
 /* =========================================================
-   USER UI
+   USER HELPERS
+========================================================= */
+
+function getUserId(){
+
+    if(!currentUser){
+        return null;
+    }
+
+    return (
+        currentUser.id ||
+        currentUser.user_id ||
+        currentUser.userId
+    );
+}
+
+
+function getUserName(user = currentUser){
+
+    if(!user){
+        return "User";
+    }
+
+    return (
+        user.full_name ||
+        user.fullName ||
+        user.name ||
+        user.username ||
+        "User"
+    );
+}
+
+
+function getUserEmail(user = currentUser){
+
+    if(!user){
+        return "";
+    }
+
+    return (
+        user.email ||
+        user.phone ||
+        ""
+    );
+}
+
+
+function getUserPicture(user = currentUser){
+
+    if(!user){
+        return "";
+    }
+
+    return (
+        user.profile_picture ||
+        user.profilePicture ||
+        user.avatar ||
+        user.photo ||
+        ""
+    );
+}
+
+
+function getOnlineStatus(user){
+
+    if(!user){
+        return false;
+    }
+
+    return (
+        user.is_online === true ||
+        user.is_online === 1 ||
+        user.isOnline === true ||
+        user.online === true
+    );
+}
+
+
+/* =========================================================
+   UPDATE USER UI
 ========================================================= */
 
 function updateUserUI(){
 
+    if(!currentUser){
+        return;
+    }
+
     const name =
         getUserName(currentUser);
 
-
     const email =
-        currentUser.email ||
-        currentUser.phone ||
-        "";
-
-
-    document.getElementById(
-        "profileName"
-    ).textContent = name;
-
-
-    document.getElementById(
-        "profileEmail"
-    ).textContent = email;
-
+        getUserEmail(currentUser);
 
     const picture =
         getUserPicture(currentUser);
 
+    profileName.textContent =
+        name;
 
-    const avatar =
-        document.getElementById(
-            "profileLarge"
-        );
-
+    profileEmail.textContent =
+        email || "VibeChat user";
 
     if(picture){
 
-        avatar.innerHTML = `
+        profileLarge.innerHTML = `
             <img
                 src="${escapeHtml(picture)}"
                 alt="${escapeHtml(name)}"
@@ -1260,7 +1410,7 @@ function updateUserUI(){
 
     }else{
 
-        avatar.textContent =
+        profileLarge.textContent =
             getInitial(name);
 
     }
@@ -1269,130 +1419,39 @@ function updateUserUI(){
 
 
 /* =========================================================
-   GET USER NAME
-========================================================= */
-
-function getUserName(user){
-
-    if(!user){
-        return "User";
-    }
-
-
-    return (
-        user.fullName ||
-        user.full_name ||
-        user.name ||
-        user.username ||
-        user.displayName ||
-        user.display_name ||
-        "User"
-    );
-
-}
-
-
-/* =========================================================
-   GET USER ID
-========================================================= */
-
-function getUserId(user){
-
-    if(!user){
-        return null;
-    }
-
-
-    return (
-        user.id ??
-        user.userId ??
-        user.user_id ??
-        null
-    );
-
-}
-
-
-/* =========================================================
-   GET USER PICTURE
-========================================================= */
-
-function getUserPicture(user){
-
-    if(!user){
-        return "";
-    }
-
-
-    return (
-        user.profilePicture ||
-        user.profile_picture ||
-        user.avatar ||
-        user.avatarUrl ||
-        user.avatar_url ||
-        ""
-    );
-
-}
-
-
-/* =========================================================
-   GET ONLINE STATUS
-========================================================= */
-
-function getOnlineStatus(user){
-
-    if(!user){
-        return false;
-    }
-
-
-    const value =
-        user.isOnline ??
-        user.is_online ??
-        user.online ??
-        user.onlineStatus ??
-        user.online_status ??
-        false;
-
-
-    return (
-        value === true ||
-        value === 1 ||
-        value === "1" ||
-        value === "true" ||
-        value === "online" ||
-        value === "Online"
-    );
-
-}
-
-
-/* =========================================================
-   CONVERSATIONS
+   LOAD CONVERSATIONS
 ========================================================= */
 
 async function loadConversations(){
 
-    const list =
-        document.getElementById(
-            "conversationList"
-        );
+    const userId =
+        getUserId();
 
+    if(!userId){
 
-    list.innerHTML =
-        `<div class="loading">
+        conversationList.innerHTML = `
+            <div class="empty-state">
+                <i class="fa-solid fa-comments"></i>
+                <h3>No conversations yet</h3>
+                <p>Search for another VibeChat user to start chatting.</p>
+            </div>
+        `;
+
+        return;
+    }
+
+    conversationList.innerHTML = `
+        <div class="loading">
             Loading conversations...
-        </div>`;
-
+        </div>
+    `;
 
     try{
 
         const response =
             await fetch(
-                `${API_URL}/api/conversations?userId=${encodeURIComponent(currentUser.id)}`
+                `${API_URL}/api/conversations?userId=${encodeURIComponent(userId)}`
             );
-
 
         if(!response.ok){
 
@@ -1402,39 +1461,30 @@ async function loadConversations(){
 
         }
 
-
         const data =
             await response.json();
 
-
-        console.log(
-            "VibeChat conversations response:",
-            data
-        );
-
+        let conversations = [];
 
         if(Array.isArray(data)){
 
-            conversations =
-                data;
+            conversations = data;
 
-        }else if(
-            data &&
-            Array.isArray(data.conversations)
-        ){
+        }else if(Array.isArray(data.conversations)){
 
             conversations =
                 data.conversations;
 
-        }else{
+        }else if(Array.isArray(data.data)){
 
-            conversations = [];
+            conversations =
+                data.data;
 
         }
 
-
-        renderConversations();
-
+        renderConversations(
+            conversations
+        );
 
     }catch(error){
 
@@ -1443,20 +1493,14 @@ async function loadConversations(){
             error
         );
 
-
-        list.innerHTML = `
+        conversationList.innerHTML = `
             <div class="empty-state">
-
-                <i class="fa-solid fa-triangle-exclamation"></i>
-
-                <h3>
-                    Unable to load chats
-                </h3>
-
+                <i class="fa-solid fa-comments"></i>
+                <h3>No conversations yet</h3>
                 <p>
-                    Please check your connection and try again.
+                    Search for another VibeChat user
+                    to start chatting.
                 </p>
-
             </div>
         `;
 
@@ -1469,137 +1513,70 @@ async function loadConversations(){
    GET OTHER USER FROM CONVERSATION
 ========================================================= */
 
-function getOtherUser(chat){
+function getOtherUser(conversation){
 
-    if(!chat){
-        return {};
+    if(!conversation){
+        return null;
     }
 
+    const userId =
+        Number(getUserId());
 
-    /*
-     * Most common backend formats.
-     */
+    const possibleUsers = [
 
-    const nestedUser =
-        chat.otherUser ||
-        chat.other_user ||
-        chat.otherUserData ||
-        chat.other_user_data ||
-        chat.otherUserInfo ||
-        chat.other_user_info ||
-        chat.user ||
-        chat.userData ||
-        chat.user_data ||
-        chat.recipient ||
-        chat.recipientUser ||
-        chat.recipient_user ||
-        chat.contact ||
-        chat.contactUser ||
-        chat.contact_user;
+        conversation.otherUser,
 
+        conversation.other_user,
 
-    if(
-        nestedUser &&
-        typeof nestedUser === "object"
-    ){
+        conversation.other_user_data,
 
-        return nestedUser;
+        conversation.partner,
 
-    }
+        conversation.recipient,
 
+        conversation.user,
 
-    /*
-     * Some APIs put the other user's
-     * information directly on the
-     * conversation object.
-     */
+        conversation.userData
 
-    const directUser = {
+    ];
 
-        id:
-            chat.otherUserId ??
-            chat.other_user_id ??
-            chat.otherUserID ??
-            chat.other_userID ??
-            chat.recipientId ??
-            chat.recipient_id ??
-            chat.contactId ??
-            chat.contact_id,
+    for(const user of possibleUsers){
 
-        fullName:
-            chat.otherUserName ||
-            chat.other_user_name ||
-            chat.recipientName ||
-            chat.recipient_name ||
-            chat.contactName ||
-            chat.contact_name,
+        if(user && typeof user === "object"){
 
-        email:
-            chat.otherUserEmail ||
-            chat.other_user_email ||
-            chat.recipientEmail ||
-            chat.recipient_email,
-
-        profilePicture:
-            chat.otherUserProfilePicture ||
-            chat.other_user_profile_picture ||
-            chat.recipientProfilePicture ||
-            chat.recipient_profile_picture ||
-            chat.contactProfilePicture ||
-            chat.contact_profile_picture,
-
-        isOnline:
-            chat.otherUserIsOnline ??
-            chat.other_user_is_online ??
-            chat.recipientIsOnline ??
-            chat.recipient_is_online ??
-            chat.contactIsOnline ??
-            chat.contact_is_online
-
-    };
-
-
-    if(
-        directUser.id ||
-        directUser.fullName ||
-        directUser.email
-    ){
-
-        return directUser;
-
-    }
-
-
-    /*
-     * Some backends return participants/users.
-     */
-
-    const participants =
-        chat.participants ||
-        chat.users ||
-        chat.members;
-
-
-    if(Array.isArray(participants)){
-
-        const other =
-            participants.find(
-                person =>
-                    Number(getUserId(person)) !==
-                    Number(currentUser.id)
-            );
-
-
-        if(other){
-
-            return other;
+            return user;
 
         }
 
     }
 
+    const userOne =
+        conversation.user_one ||
+        conversation.userOne ||
+        conversation.user1;
 
-    return {};
+    const userTwo =
+        conversation.user_two ||
+        conversation.userTwo ||
+        conversation.user2;
+
+    if(userOne && Number(userOne) !== userId){
+
+        return {
+            id:userOne
+        };
+
+    }
+
+    if(userTwo && Number(userTwo) !== userId){
+
+        return {
+            id:userTwo
+        };
+
+    }
+
+    return null;
 
 }
 
@@ -1608,82 +1585,83 @@ function getOtherUser(chat){
    RENDER CONVERSATIONS
 ========================================================= */
 
-function renderConversations(){
+function renderConversations(
+    conversations
+){
 
-    const list =
-        document.getElementById(
-            "conversationList"
-        );
+    if(!Array.isArray(conversations) ||
+       conversations.length === 0){
 
-
-    if(!conversations.length){
-
-        list.innerHTML = `
+        conversationList.innerHTML = `
             <div class="empty-state">
-
                 <i class="fa-solid fa-comments"></i>
-
-                <h3>
-                    No conversations yet
-                </h3>
-
+                <h3>No conversations yet</h3>
                 <p>
-                    Search for another VibeChat user to start chatting.
+                    Search for another VibeChat user
+                    to start chatting.
                 </p>
-
             </div>
         `;
 
         return;
-
     }
 
 
-    list.innerHTML = "";
+    conversationList.innerHTML = "";
 
 
     conversations.forEach(
-        chat => {
+        conversation => {
 
-            const user =
-                getOtherUser(chat);
+            const otherUser =
+                getOtherUser(
+                    conversation
+                );
+
+            if(!otherUser){
+
+                return;
+            }
+
+            const conversationId =
+                conversation.id ||
+                conversation.conversation_id ||
+                conversation.conversationId;
 
 
             const name =
-                getUserName(user);
-
-
-            const picture =
-                getUserPicture(user);
-
-
-            const lastMessage =
-                chat.lastMessage ||
-                chat.last_message ||
-                chat.message ||
-                chat.messageText ||
-                chat.message_text ||
-                "";
-
-
-            const conversationId =
-                chat.conversationId ??
-                chat.conversation_id ??
-                chat.id;
-
-
-            const item =
-                document.createElement(
-                    "div"
+                getUserName(
+                    otherUser
                 );
 
 
+            const picture =
+                getUserPicture(
+                    otherUser
+                );
+
+
+            const lastMessage =
+                conversation.last_message ||
+                conversation.lastMessage ||
+                conversation.message_text ||
+                conversation.message ||
+                "Start chatting";
+
+
+            const time =
+                conversation.updated_at ||
+                conversation.updatedAt ||
+                conversation.created_at ||
+                conversation.createdAt ||
+                "";
+
+
+            const item =
+                document.createElement("div");
+
             item.className =
                 "conversation";
-
-
-            const initial =
-                getInitial(name);
 
 
             item.innerHTML = `
@@ -1692,20 +1670,15 @@ function renderConversations(){
 
                     ${
                         picture
-
                         ?
-
-                        `
-                        <img
+                        `<img
                             src="${escapeHtml(picture)}"
                             alt="${escapeHtml(name)}"
-                            onerror="this.style.display='none';this.parentElement.textContent='${escapeHtml(initial)}'"
-                        >
-                        `
-
+                        >`
                         :
-
-                        escapeHtml(initial)
+                        escapeHtml(
+                            getInitial(name)
+                        )
                     }
 
                 </div>
@@ -1718,29 +1691,14 @@ function renderConversations(){
                     </div>
 
                     <div class="conversation-last">
-
-                        ${
-                            lastMessage
-                            ? escapeHtml(lastMessage)
-                            : "No messages yet"
-                        }
-
+                        ${escapeHtml(lastMessage)}
                     </div>
 
                 </div>
 
 
                 <div class="conversation-time">
-
-                    ${formatTime(
-                        chat.lastMessageAt ||
-                        chat.last_message_at ||
-                        chat.updatedAt ||
-                        chat.updated_at ||
-                        chat.createdAt ||
-                        chat.created_at
-                    )}
-
+                    ${formatTime(time)}
                 </div>
 
             `;
@@ -1748,17 +1706,39 @@ function renderConversations(){
 
             item.addEventListener(
                 "click",
-                () =>
+                () => {
+
                     openExistingConversation(
-                        chat
-                    )
+                        conversation,
+                        otherUser
+                    );
+
+                }
             );
 
 
-            list.appendChild(item);
+            conversationList.appendChild(
+                item
+            );
 
         }
     );
+
+
+    if(!conversationList.children.length){
+
+        conversationList.innerHTML = `
+            <div class="empty-state">
+                <i class="fa-solid fa-comments"></i>
+                <h3>No conversations yet</h3>
+                <p>
+                    Search for another VibeChat user
+                    to start chatting.
+                </p>
+            </div>
+        `;
+
+    }
 
 }
 
@@ -1767,119 +1747,55 @@ function renderConversations(){
    OPEN EXISTING CONVERSATION
 ========================================================= */
 
-async function openExistingConversation(
-    chat
+function openExistingConversation(
+    conversation,
+    otherUser
 ){
 
-    try{
+    const conversationId =
+        conversation.id ||
+        conversation.conversation_id ||
+        conversation.conversationId;
 
-        console.log(
-            "Opening conversation:",
-            chat
-        );
-
-
-        const conversationId =
-            chat.conversationId ??
-            chat.conversation_id ??
-            chat.id;
-
-
-        if(!conversationId){
-
-            showToast(
-                "Conversation ID is missing."
-            );
-
-            return;
-
-        }
-
-
-        activeConversation = {
-
-            id:
-                Number(conversationId)
-
-        };
-
-
-        activeChatUser =
-            getOtherUser(chat);
-
-
-        /*
-         * If no user was returned,
-         * keep an object instead of crashing.
-         */
-
-        if(!activeChatUser){
-
-            activeChatUser = {};
-
-        }
-
-
-        console.log(
-            "Selected chat user:",
-            activeChatUser
-        );
-
-
-        setupChatHeader();
-
-
-        document
-            .getElementById(
-                "chatScreen"
-            )
-            .classList.add(
-                "show"
-            );
-
-
-        await loadMessages();
-
-
-        await markMessagesRead();
-
-
-        startMessageRefresh();
-
-
-        setTimeout(
-            () => {
-
-                const input =
-                    document.getElementById(
-                        "messageInput"
-                    );
-
-
-                if(input){
-
-                    input.focus();
-
-                }
-
-            },
-            150
-        );
-
-
-    }catch(error){
-
-        console.error(
-            "Open chat error:",
-            error
-        );
-
+    if(!conversationId){
 
         showToast(
-            "Unable to open this chat."
+            "This conversation could not be opened."
         );
 
+        return;
     }
+
+
+    currentConversation = {
+        ...conversation,
+        id:conversationId
+    };
+
+
+    currentChatUser =
+        otherUser;
+
+
+    setupChatHeader();
+
+    chatScreen.classList.add(
+        "show"
+    );
+
+
+    loadMessages();
+
+    startMessageRefresh();
+
+    setTimeout(
+        () => {
+
+            messageInput.focus();
+
+        },
+        250
+    );
 
 }
 
@@ -1890,59 +1806,42 @@ async function openExistingConversation(
 
 function setupChatHeader(){
 
-    const user =
-        activeChatUser || {};
+    if(!currentChatUser){
+        return;
+    }
 
 
     const name =
-        getUserName(user);
+        getUserName(
+            currentChatUser
+        );
 
 
     const picture =
-        getUserPicture(user);
-
-
-    const isOnline =
-        getOnlineStatus(user);
-
-
-    const nameElement =
-        document.getElementById(
-            "chatUserName"
+        getUserPicture(
+            currentChatUser
         );
 
 
-    const statusElement =
-        document.getElementById(
-            "chatUserStatus"
-        );
-
-
-    const avatarElement =
-        document.getElementById(
-            "chatAvatar"
-        );
-
-
-    nameElement.textContent =
+    chatUserName.textContent =
         name;
 
 
-    if(isOnline){
+    if(getOnlineStatus(currentChatUser)){
 
-        statusElement.textContent =
+        chatUserStatus.textContent =
             "Online";
 
-        statusElement.classList.add(
+        chatUserStatus.classList.add(
             "online"
         );
 
     }else{
 
-        statusElement.textContent =
+        chatUserStatus.textContent =
             "Offline";
 
-        statusElement.classList.remove(
+        chatUserStatus.classList.remove(
             "online"
         );
 
@@ -1951,19 +1850,16 @@ function setupChatHeader(){
 
     if(picture){
 
-        avatarElement.innerHTML = `
-
+        chatAvatar.innerHTML = `
             <img
                 src="${escapeHtml(picture)}"
                 alt="${escapeHtml(name)}"
-                onerror="this.style.display='none';this.parentElement.textContent='${escapeHtml(getInitial(name))}'"
             >
-
         `;
 
     }else{
 
-        avatarElement.textContent =
+        chatAvatar.textContent =
             getInitial(name);
 
     }
@@ -1972,39 +1868,31 @@ function setupChatHeader(){
 
 
 /* =========================================================
-   SEARCH
+   SEARCH SETUP
 ========================================================= */
 
-function handleSearch(event){
+function setupSearch(){
 
-    const query =
-        event.target.value.trim();
-
-
-    clearTimeout(
-        searchTimer
+    searchInput.addEventListener(
+        "input",
+        handleSearch
     );
 
 
-    if(!query){
+    searchInput.addEventListener(
+        "keydown",
+        event => {
 
-        document
-            .getElementById(
-                "searchResults"
-            )
-            .innerHTML = "";
+            if(event.key === "Escape"){
 
+                searchInput.value = "";
 
-        return;
+                searchResults.innerHTML = "";
 
-    }
+            }
 
-
-    searchTimer =
-        setTimeout(
-            () => searchUsers(query),
-            350
-        );
+        }
+    );
 
 }
 
@@ -2013,20 +1901,57 @@ function handleSearch(event){
    SEARCH USERS
 ========================================================= */
 
-async function searchUsers(
-    query
-){
+function handleSearch(){
 
-    const container =
-        document.getElementById(
-            "searchResults"
+    clearTimeout(
+        searchTimer
+    );
+
+
+    const query =
+        searchInput.value.trim();
+
+
+    if(!query){
+
+        searchResults.innerHTML = "";
+
+        return;
+    }
+
+
+    if(query.length < 2){
+
+        searchResults.innerHTML = "";
+
+        return;
+    }
+
+
+    searchTimer =
+        setTimeout(
+            () => {
+
+                searchUsers(query);
+
+            },
+            350
         );
 
+}
 
-    container.innerHTML =
-        `<div class="loading">
+
+/* =========================================================
+   SEARCH USERS API
+========================================================= */
+
+async function searchUsers(query){
+
+    searchResults.innerHTML = `
+        <div class="loading">
             Searching...
-        </div>`;
+        </div>
+    `;
 
 
     try{
@@ -2050,12 +1975,6 @@ async function searchUsers(
             await response.json();
 
 
-        console.log(
-            "VibeChat search response:",
-            data
-        );
-
-
         let users = [];
 
 
@@ -2063,141 +1982,48 @@ async function searchUsers(
 
             users = data;
 
-        }else if(
-            data &&
-            Array.isArray(data.users)
-        ){
+        }else if(Array.isArray(data.users)){
 
-            users =
-                data.users;
+            users = data.users;
+
+        }else if(Array.isArray(data.data)){
+
+            users = data.data;
 
         }
 
 
-        const filtered =
+        const myId =
+            Number(getUserId());
+
+
+        users =
             users.filter(
                 user =>
                     Number(
-                        getUserId(user)
-                    ) !==
-                    Number(
-                        currentUser.id
-                    )
+                        user.id ||
+                        user.user_id ||
+                        user.userId
+                    ) !== myId
             );
 
 
-        if(!filtered.length){
-
-            container.innerHTML = `
-                <div class="loading">
-                    No users found.
-                </div>
-            `;
-
-            return;
-
-        }
-
-
-        container.innerHTML = "";
-
-
-        filtered.forEach(
-            user => {
-
-                const name =
-                    getUserName(user);
-
-
-                const about =
-                    user.about ||
-                    user.bio ||
-                    "VibeChat user";
-
-
-                const picture =
-                    getUserPicture(user);
-
-
-                const result =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                result.className =
-                    "search-result";
-
-
-                result.innerHTML = `
-
-                    <div class="avatar">
-
-                        ${
-                            picture
-
-                            ?
-
-                            `
-                            <img
-                                src="${escapeHtml(picture)}"
-                                alt="${escapeHtml(name)}"
-                            >
-                            `
-
-                            :
-
-                            escapeHtml(
-                                getInitial(name)
-                            )
-                        }
-
-                    </div>
-
-
-                    <div class="user-details">
-
-                        <div class="user-name">
-                            ${escapeHtml(name)}
-                        </div>
-
-                        <div class="user-about">
-                            ${escapeHtml(about)}
-                        </div>
-
-                    </div>
-
-                `;
-
-
-                result.addEventListener(
-                    "click",
-                    () =>
-                        openChatWithUser(
-                            user
-                        )
-                );
-
-
-                container.appendChild(
-                    result
-                );
-
-            }
+        renderSearchResults(
+            users
         );
 
 
     }catch(error){
 
         console.error(
-            "Search error:",
+            "User search error:",
             error
         );
 
 
-        container.innerHTML = `
+        searchResults.innerHTML = `
             <div class="loading">
-                Search failed.
+                Unable to search users right now.
             </div>
         `;
 
@@ -2207,35 +2033,167 @@ async function searchUsers(
 
 
 /* =========================================================
-   OPEN CHAT WITH SEARCH USER
+   RENDER SEARCH RESULTS
+========================================================= */
+
+function renderSearchResults(
+    users
+){
+
+    if(!users.length){
+
+        searchResults.innerHTML = `
+            <div class="empty-state"
+                 style="padding:35px 20px;">
+                <i class="fa-solid fa-user-slash"></i>
+                <h3>No users found</h3>
+                <p>
+                    Try another name, email or phone number.
+                </p>
+            </div>
+        `;
+
+        return;
+    }
+
+
+    searchResults.innerHTML = "";
+
+
+    users.forEach(
+        user => {
+
+            const item =
+                document.createElement("div");
+
+            item.className =
+                "search-result";
+
+
+            const name =
+                getUserName(
+                    user
+                );
+
+
+            const about =
+                user.about ||
+                user.bio ||
+                "VibeChat user";
+
+
+            const picture =
+                getUserPicture(
+                    user
+                );
+
+
+            item.innerHTML = `
+
+                <div class="avatar">
+
+                    ${
+                        picture
+                        ?
+                        `<img
+                            src="${escapeHtml(picture)}"
+                            alt="${escapeHtml(name)}"
+                        >`
+                        :
+                        escapeHtml(
+                            getInitial(name)
+                        )
+                    }
+
+                </div>
+
+
+                <div class="user-details">
+
+                    <div class="user-name">
+                        ${escapeHtml(name)}
+                    </div>
+
+                    <div class="user-about">
+                        ${escapeHtml(about)}
+                    </div>
+
+                </div>
+
+            `;
+
+
+            item.addEventListener(
+                "click",
+                () => {
+
+                    openChatWithUser(
+                        user
+                    );
+
+                }
+            );
+
+
+            searchResults.appendChild(
+                item
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   OPEN CHAT WITH USER
 ========================================================= */
 
 async function openChatWithUser(
     user
 ){
 
+    if(!user){
+        return;
+    }
+
+
+    const userId =
+        getUserId();
+
+
+    const otherUserId =
+        user.id ||
+        user.user_id ||
+        user.userId;
+
+
+    if(!userId || !otherUserId){
+
+        showToast(
+            "User information is incomplete."
+        );
+
+        return;
+    }
+
+
+    searchResults.innerHTML = "";
+
+    searchInput.value = "";
+
+
     try{
 
-        const otherUserId =
-            getUserId(user);
-
-
-        if(!otherUserId){
-
-            showToast(
-                "User ID is missing."
-            );
-
-            return;
-
-        }
+        showToast(
+            "Opening chat..."
+        );
 
 
         const response =
             await fetch(
                 `${API_URL}/api/conversations`,
                 {
-
                     method:"POST",
 
                     headers:{
@@ -2245,11 +2203,11 @@ async function openChatWithUser(
 
                     body:JSON.stringify({
 
-                        userId:
-                            currentUser.id,
+                        userOne:
+                            Number(userId),
 
-                        otherUserId:
-                            otherUserId
+                        userTwo:
+                            Number(otherUserId)
 
                     })
 
@@ -2270,106 +2228,76 @@ async function openChatWithUser(
             await response.json();
 
 
-        console.log(
-            "Create conversation response:",
-            data
-        );
-
-
         const conversation =
             data.conversation ||
+            data.data ||
             data;
 
 
         const conversationId =
-            conversation.id ??
-            conversation.conversationId ??
-            conversation.conversation_id;
+            conversation.id ||
+            conversation.conversation_id ||
+            conversation.conversationId;
 
 
         if(!conversationId){
 
             throw new Error(
-                "Conversation ID was not returned."
+                "No conversation ID returned."
             );
 
         }
 
 
-        activeConversation = {
+        currentConversation = {
 
-            id:
-                Number(conversationId)
+            ...conversation,
+
+            id:conversationId
 
         };
 
 
-        activeChatUser =
+        currentChatUser =
             user;
 
 
         setupChatHeader();
 
 
-        document
-            .getElementById(
-                "searchInput"
-            )
-            .value = "";
+        chatScreen.classList.add(
+            "show"
+        );
 
 
-        document
-            .getElementById(
-                "searchResults"
-            )
-            .innerHTML = "";
-
-
-        document
-            .getElementById(
-                "chatScreen"
-            )
-            .classList.add(
-                "show"
-            );
-
-
-        await loadMessages();
-
+        loadMessages();
 
         startMessageRefresh();
+
+
+        loadConversations();
 
 
         setTimeout(
             () => {
 
-                const input =
-                    document.getElementById(
-                        "messageInput"
-                    );
-
-
-                if(input){
-
-                    input.focus();
-
-                }
+                messageInput.focus();
 
             },
-            150
+            250
         );
 
 
     }catch(error){
 
         console.error(
-            "Create conversation error:",
+            "Open chat error:",
             error
         );
 
 
         showToast(
-            "Unable to start chat."
+            "Unable to open this chat."
         );
 
     }
@@ -2383,13 +2311,21 @@ async function openChatWithUser(
 
 async function loadMessages(){
 
-    if(
-        !activeConversation ||
-        !activeConversation.id
-    ){
-
+    if(!currentConversation){
         return;
+    }
 
+
+    const conversationId =
+        currentConversation.id;
+
+
+    const userId =
+        getUserId();
+
+
+    if(!conversationId || !userId){
+        return;
     }
 
 
@@ -2397,7 +2333,7 @@ async function loadMessages(){
 
         const response =
             await fetch(
-                `${API_URL}/api/messages?conversationId=${encodeURIComponent(activeConversation.id)}&userId=${encodeURIComponent(currentUser.id)}`
+                `${API_URL}/api/messages?conversationId=${encodeURIComponent(conversationId)}&userId=${encodeURIComponent(userId)}`
             );
 
 
@@ -2414,27 +2350,22 @@ async function loadMessages(){
             await response.json();
 
 
-        console.log(
-            "VibeChat messages response:",
-            data
-        );
-
-
         let messages = [];
 
 
         if(Array.isArray(data)){
 
-            messages =
-                data;
+            messages = data;
 
-        }else if(
-            data &&
-            Array.isArray(data.messages)
-        ){
+        }else if(Array.isArray(data.messages)){
 
             messages =
                 data.messages;
+
+        }else if(Array.isArray(data.data)){
+
+            messages =
+                data.data;
 
         }
 
@@ -2444,12 +2375,31 @@ async function loadMessages(){
         );
 
 
+        markMessagesRead();
+
+
     }catch(error){
 
         console.error(
-            "Message loading error:",
+            "Load messages error:",
             error
         );
+
+
+        if(!messagesBox.children.length){
+
+            messagesBox.innerHTML = `
+                <div class="empty-state"
+                     style="padding:60px 20px;">
+                    <i class="fa-solid fa-message"></i>
+                    <h3>Unable to load messages</h3>
+                    <p>
+                        Please check your connection and try again.
+                    </p>
+                </div>
+            `;
+
+        }
 
     }
 
@@ -2464,70 +2414,73 @@ function renderMessages(
     messages
 ){
 
-    const container =
-        document.getElementById(
-            "messages"
-        );
+    if(!Array.isArray(messages)){
+
+        messages = [];
+
+    }
 
 
-    container.innerHTML = "";
+    if(messages.length === 0){
 
-
-    if(!messages.length){
-
-        container.innerHTML = `
-
-            <div
-                class="empty-state"
-                style="padding:40px 15px;"
-            >
-
-                <i class="fa-solid fa-message"></i>
-
-                <h3>
-                    No messages yet
-                </h3>
-
+        messagesBox.innerHTML = `
+            <div class="empty-state"
+                 style="padding:60px 20px;">
+                <i class="fa-solid fa-comments"></i>
+                <h3>Start the conversation</h3>
                 <p>
-                    Start the conversation.
+                    Send your first message to ${escapeHtml(
+                        getUserName(currentChatUser)
+                    )}.
                 </p>
-
             </div>
-
         `;
 
         return;
-
     }
+
+
+    const myId =
+        Number(getUserId());
+
+
+    messagesBox.innerHTML = "";
 
 
     messages.forEach(
         message => {
 
+            const senderId =
+                Number(
+                    message.sender_id ||
+                    message.senderId ||
+                    message.sender ||
+                    0
+                );
+
+
             const text =
-                message.message ||
-                message.messageText ||
                 message.message_text ||
+                message.messageText ||
                 message.text ||
+                message.message ||
                 "";
 
 
-            const senderId =
-                message.senderId ??
-                message.sender_id ??
-                message.userId ??
-                message.user_id;
+            const createdAt =
+                message.created_at ||
+                message.createdAt ||
+                message.sent_at ||
+                message.sentAt ||
+                "";
 
 
             const mine =
-                Number(senderId) ===
-                Number(currentUser.id);
+                senderId === myId;
 
 
             const row =
-                document.createElement(
-                    "div"
-                );
+                document.createElement("div");
 
 
             row.className =
@@ -2540,9 +2493,7 @@ function renderMessages(
 
 
             const bubble =
-                document.createElement(
-                    "div"
-                );
+                document.createElement("div");
 
 
             bubble.className =
@@ -2554,12 +2505,7 @@ function renderMessages(
                 ${escapeHtml(text)}
 
                 <span class="message-meta">
-
-                    ${formatTime(
-                        message.createdAt ||
-                        message.created_at
-                    )}
-
+                    ${formatTime(createdAt)}
                 </span>
 
             `;
@@ -2570,7 +2516,7 @@ function renderMessages(
             );
 
 
-            container.appendChild(
+            messagesBox.appendChild(
                 row
             );
 
@@ -2578,8 +2524,28 @@ function renderMessages(
     );
 
 
-    container.scrollTop =
-        container.scrollHeight;
+    messagesBox.scrollTop =
+        messagesBox.scrollHeight;
+
+}
+
+
+/* =========================================================
+   MESSAGE FORM
+========================================================= */
+
+function setupMessageForm(){
+
+    messageForm.addEventListener(
+        "submit",
+        event => {
+
+            event.preventDefault();
+
+            sendMessage();
+
+        }
+    );
 
 }
 
@@ -2588,46 +2554,46 @@ function renderMessages(
    SEND MESSAGE
 ========================================================= */
 
-async function sendMessage(
-    event
-){
-
-    event.preventDefault();
-
-
-    const input =
-        document.getElementById(
-            "messageInput"
-        );
-
+async function sendMessage(){
 
     const text =
-        input.value.trim();
+        messageInput.value.trim();
 
 
     if(!text){
-
         return;
-
     }
 
 
-    if(
-        !activeConversation ||
-        !activeConversation.id
-    ){
+    if(!currentConversation){
 
         showToast(
             "Open a chat first."
         );
 
         return;
-
     }
 
 
-    input.disabled =
-        true;
+    const senderId =
+        getUserId();
+
+
+    const conversationId =
+        currentConversation.id;
+
+
+    if(!senderId || !conversationId){
+
+        showToast(
+            "Chat information is missing."
+        );
+
+        return;
+    }
+
+
+    messageInput.disabled = true;
 
 
     try{
@@ -2636,7 +2602,6 @@ async function sendMessage(
             await fetch(
                 `${API_URL}/api/messages`,
                 {
-
                     method:"POST",
 
                     headers:{
@@ -2647,10 +2612,10 @@ async function sendMessage(
                     body:JSON.stringify({
 
                         conversationId:
-                            activeConversation.id,
+                            Number(conversationId),
 
                         senderId:
-                            currentUser.id,
+                            Number(senderId),
 
                         messageText:
                             text
@@ -2670,16 +2635,11 @@ async function sendMessage(
         }
 
 
-        input.value = "";
+        messageInput.value = "";
 
 
         await loadMessages();
 
-
-        /*
-         * Refresh the conversation list so
-         * the latest message appears there.
-         */
 
         loadConversations();
 
@@ -2696,14 +2656,11 @@ async function sendMessage(
             "Message could not be sent."
         );
 
-
     }finally{
 
-        input.disabled =
-            false;
+        messageInput.disabled = false;
 
-
-        input.focus();
+        messageInput.focus();
 
     }
 
@@ -2716,13 +2673,21 @@ async function sendMessage(
 
 async function markMessagesRead(){
 
-    if(
-        !activeConversation ||
-        !activeConversation.id
-    ){
-
+    if(!currentConversation){
         return;
+    }
 
+
+    const conversationId =
+        currentConversation.id;
+
+
+    const userId =
+        getUserId();
+
+
+    if(!conversationId || !userId){
+        return;
     }
 
 
@@ -2731,7 +2696,6 @@ async function markMessagesRead(){
         await fetch(
             `${API_URL}/api/messages/read`,
             {
-
                 method:"POST",
 
                 headers:{
@@ -2742,20 +2706,19 @@ async function markMessagesRead(){
                 body:JSON.stringify({
 
                     conversationId:
-                        activeConversation.id,
+                        Number(conversationId),
 
                     userId:
-                        currentUser.id
+                        Number(userId)
 
                 })
 
             }
         );
 
-
     }catch(error){
 
-        console.error(
+        console.warn(
             "Mark read error:",
             error
         );
@@ -2766,7 +2729,7 @@ async function markMessagesRead(){
 
 
 /* =========================================================
-   MESSAGE REFRESH
+   MESSAGE POLLING
 ========================================================= */
 
 function startMessageRefresh(){
@@ -2776,14 +2739,14 @@ function startMessageRefresh(){
 
     messageRefreshTimer =
         setInterval(
-            async () => {
+            () => {
 
                 if(
-                    activeConversation &&
-                    activeConversation.id
+                    currentConversation &&
+                    chatScreen.classList.contains("show")
                 ){
 
-                    await loadMessages();
+                    loadMessages();
 
                 }
 
@@ -2794,20 +2757,13 @@ function startMessageRefresh(){
 }
 
 
-/* =========================================================
-   STOP MESSAGE REFRESH
-========================================================= */
-
 function stopMessageRefresh(){
 
-    if(
-        messageRefreshTimer
-    ){
+    if(messageRefreshTimer){
 
         clearInterval(
             messageRefreshTimer
         );
-
 
         messageRefreshTimer =
             null;
@@ -2823,24 +2779,25 @@ function stopMessageRefresh(){
 
 function closeChat(){
 
+    chatScreen.classList.remove(
+        "show"
+    );
+
+
     stopMessageRefresh();
 
 
-    document
-        .getElementById(
-            "chatScreen"
-        )
-        .classList.remove(
-            "show"
-        );
+    currentConversation =
+        null;
 
-
-    activeConversation =
+    currentChatUser =
         null;
 
 
-    activeChatUser =
-        null;
+    messagesBox.innerHTML = "";
+
+
+    messageInput.value = "";
 
 
     loadConversations();
@@ -2854,44 +2811,71 @@ function closeChat(){
 
 function openMenu(){
 
-    document
-        .getElementById(
-            "sideMenu"
-        )
-        .classList.add(
-            "open"
-        );
+    sideMenu.classList.add(
+        "open"
+    );
 
-
-    document
-        .getElementById(
-            "menuOverlay"
-        )
-        .classList.add(
-            "show"
-        );
+    menuOverlay.classList.add(
+        "show"
+    );
 
 }
 
 
 function closeMenu(){
 
+    sideMenu.classList.remove(
+        "open"
+    );
+
+    menuOverlay.classList.remove(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   BOTTOM NAV ACTIVE STATE
+========================================================= */
+
+function setBottomActive(
+    active
+){
+
     document
-        .getElementById(
-            "sideMenu"
-        )
-        .classList.remove(
-            "open"
+        .querySelectorAll(".bottom-item")
+        .forEach(
+            item => {
+
+                item.classList.remove(
+                    "active"
+                );
+
+            }
         );
 
 
-    document
-        .getElementById(
-            "menuOverlay"
-        )
-        .classList.remove(
-            "show"
-        );
+    if(active === "chats"){
+
+        document
+            .getElementById("bottomChats")
+            .classList.add(
+                "active"
+            );
+
+    }
+
+
+    if(active === "groups"){
+
+        document
+            .getElementById("bottomGroups")
+            .classList.add(
+                "active"
+            );
+
+    }
 
 }
 
@@ -2905,28 +2889,70 @@ function showChats(){
     closeMenu();
 
 
-    document
-        .getElementById(
-            "profileBox"
-        )
-        .style.display =
-            "none";
+    chatsSection.style.display =
+        "block";
 
 
-    document
-        .getElementById(
-            "conversationList"
-        )
-        .style.display =
-            "block";
+    groupsBox.style.display =
+        "none";
 
 
-    document
-        .querySelector(
-            ".section-title"
-        )
-        .style.display =
-            "block";
+    profileBox.style.display =
+        "none";
+
+
+    setBottomActive(
+        "chats"
+    );
+
+
+    searchResults.innerHTML = "";
+
+}
+
+
+/* =========================================================
+   SHOW GROUPS
+========================================================= */
+
+function showGroups(){
+
+    closeMenu();
+
+
+    chatsSection.style.display =
+        "none";
+
+
+    profileBox.style.display =
+        "none";
+
+
+    groupsBox.style.display =
+        "block";
+
+
+    setBottomActive(
+        "groups"
+    );
+
+
+    searchResults.innerHTML = "";
+
+    searchInput.value = "";
+
+}
+
+
+/* =========================================================
+   CREATE GROUP
+========================================================= */
+
+function createGroup(){
+
+    showToast(
+        "Group creation will be connected to the VibeChat backend next."
+    );
 
 }
 
@@ -2937,45 +2963,52 @@ function showChats(){
 
 function showProfile(){
 
-    document
-        .getElementById(
-            "conversationList"
-        )
-        .style.display =
-            "none";
+    closeMenu();
+
+
+    chatsSection.style.display =
+        "none";
+
+
+    groupsBox.style.display =
+        "none";
+
+
+    profileBox.style.display =
+        "block";
 
 
     document
-        .querySelector(
-            ".section-title"
-        )
-        .style.display =
-            "none";
+        .querySelectorAll(".bottom-item")
+        .forEach(
+            item => {
+
+                item.classList.remove(
+                    "active"
+                );
+
+            }
+        );
 
 
-    document
-        .getElementById(
-            "profileBox"
-        )
-        .style.display =
-            "block";
+    searchResults.innerHTML = "";
 
 }
 
 
 /* =========================================================
-   COMING SOON
+   OTHER SECTIONS
 ========================================================= */
 
 function showComingSoon(
-    name
+    section
 ){
 
     closeMenu();
 
 
     showToast(
-        `${name} is coming soon.`
+        `${section} is not connected yet.`
     );
 
 }
@@ -2987,17 +3020,7 @@ function showComingSoon(
 
 function focusSearch(){
 
-    const input =
-        document.getElementById(
-            "searchInput"
-        );
-
-
-    if(input){
-
-        input.focus();
-
-    }
+    searchInput.focus();
 
 }
 
@@ -3016,13 +3039,11 @@ function loadTheme(){
 
     if(theme === "light"){
 
-        document.body.style.background =
-            "#f5f5f5";
+        applyLightTheme();
 
     }else{
 
-        document.body.style.background =
-            "#07030f";
+        applyDarkTheme();
 
     }
 
@@ -3044,10 +3065,11 @@ function toggleTheme(){
             "dark"
         );
 
+        applyDarkTheme();
 
-        document.body.style.background =
-            "#07030f";
-
+        showToast(
+            "Dark theme enabled."
+        );
 
     }else{
 
@@ -3056,11 +3078,29 @@ function toggleTheme(){
             "light"
         );
 
+        applyLightTheme();
 
-        document.body.style.background =
-            "#f5f5f5";
+        showToast(
+            "Light theme enabled."
+        );
 
     }
+
+}
+
+
+function applyDarkTheme(){
+
+    document.body.style.background =
+        "#07030f";
+
+}
+
+
+function applyLightTheme(){
+
+    document.body.style.background =
+        "#f5f5f7";
 
 }
 
@@ -3071,17 +3111,17 @@ function toggleTheme(){
 
 async function logout(){
 
+    const userId =
+        getUserId();
+
+
     try{
 
-        if(
-            currentUser &&
-            currentUser.id
-        ){
+        if(userId){
 
             await fetch(
                 `${API_URL}/api/users/logout-status`,
                 {
-
                     method:"POST",
 
                     headers:{
@@ -3092,7 +3132,7 @@ async function logout(){
                     body:JSON.stringify({
 
                         userId:
-                            currentUser.id
+                            Number(userId)
 
                     })
 
@@ -3103,8 +3143,8 @@ async function logout(){
 
     }catch(error){
 
-        console.error(
-            "Logout status error:",
+        console.warn(
+            "Logout status update failed:",
             error
         );
 
@@ -3115,10 +3155,22 @@ async function logout(){
         CURRENT_USER_KEY
     );
 
-
     localStorage.removeItem(
         LOGIN_KEY
     );
+
+
+    currentUser =
+        null;
+
+    currentConversation =
+        null;
+
+    currentChatUser =
+        null;
+
+
+    stopMessageRefresh();
 
 
     window.location.href =
@@ -3131,15 +3183,12 @@ async function logout(){
    TOAST
 ========================================================= */
 
+let toastTimer = null;
+
+
 function showToast(
     message
 ){
-
-    const toast =
-        document.getElementById(
-            "toast"
-        );
-
 
     toast.textContent =
         message;
@@ -3150,16 +3199,22 @@ function showToast(
     );
 
 
-    setTimeout(
-        () => {
-
-            toast.classList.remove(
-                "show"
-            );
-
-        },
-        2500
+    clearTimeout(
+        toastTimer
     );
+
+
+    toastTimer =
+        setTimeout(
+            () => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2500
+        );
 
 }
 
@@ -3173,28 +3228,35 @@ function formatTime(
 ){
 
     if(!value){
+        return "";
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
 
         return "";
 
     }
 
 
-    try{
-
-        const date =
-            new Date(value);
+    const now =
+        new Date();
 
 
-        if(
-            isNaN(
-                date.getTime()
-            )
-        ){
+    const sameDay =
+        date.toDateString() ===
+        now.toDateString();
 
-            return "";
 
-        }
-
+    if(sameDay){
 
         return date.toLocaleTimeString(
             [],
@@ -3204,12 +3266,16 @@ function formatTime(
             }
         );
 
-
-    }catch(error){
-
-        return "";
-
     }
+
+
+    return date.toLocaleDateString(
+        [],
+        {
+            day:"2-digit",
+            month:"short"
+        }
+    );
 
 }
 
@@ -3222,20 +3288,13 @@ function getInitial(
     name
 ){
 
-    const text =
-        String(
-            name || "U"
-        ).trim();
-
-
-    if(!text){
-
+    if(!name){
         return "U";
-
     }
 
 
-    return text
+    return name
+        .trim()
         .charAt(0)
         .toUpperCase();
 
@@ -3250,29 +3309,20 @@ function escapeHtml(
     value
 ){
 
-    return String(
-        value ?? ""
-    )
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-    .replace(
-        /</g,
-        "&lt;"
-    )
-    .replace(
-        />/g,
-        "&gt;"
-    )
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-    .replace(
-        /'/g,
-        "&#039;"
-    );
+    if(value === null ||
+       value === undefined){
+
+        return "";
+
+    }
+
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 
 }
 
@@ -3281,28 +3331,36 @@ function escapeHtml(
    SERVICE WORKER
 ========================================================= */
 
-if(
-    "serviceWorker" in navigator
-){
+function registerServiceWorker(){
 
-    window.addEventListener(
-        "load",
-        () => {
+    if(
+        "serviceWorker" in navigator
+    ){
 
-            navigator.serviceWorker
-                .register(
-                    "./sw.js"
-                )
-                .catch(
-                    error =>
-                        console.error(
-                            "Service worker error:",
-                            error
-                        )
-                );
+        navigator.serviceWorker
+            .register("./sw.js")
+            .then(
+                registration => {
 
-        }
-    );
+                    console.log(
+                        "VibeChat service worker registered:",
+                        registration.scope
+                    );
+
+                }
+            )
+            .catch(
+                error => {
+
+                    console.warn(
+                        "Service worker registration failed:",
+                        error
+                    );
+
+                }
+            );
+
+    }
 
 }
 
