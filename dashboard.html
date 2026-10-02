@@ -1,9 +1,20 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>VibeChat</title><link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"><style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VibeChat</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
 
 :root{
     --body-bg:#07030f;
@@ -32,8 +43,14 @@ body{
 }
 
 button,
-input{
+input,
+textarea,
+select{
     font-family:inherit;
+}
+
+button{
+    cursor:pointer;
 }
 
 .header{
@@ -44,6 +61,8 @@ input{
     align-items:center;
     justify-content:space-between;
     padding:0 18px;
+    position:relative;
+    z-index:300;
 }
 
 .header-left{
@@ -60,7 +79,6 @@ input{
     background:rgba(255,213,74,.08);
     color:var(--gold);
     font-size:20px;
-    cursor:pointer;
 }
 
 .logo{
@@ -99,7 +117,7 @@ input{
 .container{
     max-width:720px;
     margin:auto;
-    padding-bottom:80px;
+    padding-bottom:90px;
 }
 
 .search-box{
@@ -139,6 +157,7 @@ input{
     display:flex;
     gap:8px;
     padding:0 15px 14px;
+    overflow-x:auto;
 }
 
 .tab{
@@ -148,6 +167,7 @@ input{
     padding:7px 14px;
     border-radius:20px;
     font-size:11px;
+    white-space:nowrap;
 }
 
 .tab.active{
@@ -165,7 +185,7 @@ input{
     display:flex;
     align-items:center;
     gap:10px;
-    padding:7px 8px;
+    padding:9px 8px;
     border-radius:12px;
     cursor:pointer;
 }
@@ -280,20 +300,217 @@ input{
     line-height:1.6;
 }
 
-.chat-screen{
+/* =========================
+   GROUPS
+========================= */
+
+#groupsSection{
+    display:none;
+    padding-bottom:30px;
+}
+
+.groups-header{
+    padding:15px;
+}
+
+.groups-title-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.groups-title{
+    font-size:20px;
+    font-weight:700;
+}
+
+.groups-subtitle{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:4px;
+}
+
+.create-group-button{
+    border:none;
+    background:linear-gradient(135deg,var(--gold),var(--gold2));
+    color:#170b00;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    font-size:17px;
+    flex-shrink:0;
+}
+
+.group-search{
+    margin:0 15px 15px;
+}
+
+.group-tabs{
+    display:flex;
+    gap:8px;
+    padding:0 15px 15px;
+}
+
+.group-tab{
+    background:var(--card);
+    border:1px solid var(--border);
+    color:var(--muted);
+    padding:7px 13px;
+    border-radius:20px;
+    font-size:11px;
+}
+
+.group-tab.active{
+    background:var(--gold);
+    color:#170b00;
+    border-color:var(--gold);
+}
+
+.groups-list{
+    padding:0 10px;
+}
+
+.group-card{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:11px 8px;
+    border-radius:14px;
+    border-bottom:1px solid rgba(255,255,255,.035);
+}
+
+.group-card:hover{
+    background:rgba(255,255,255,.035);
+}
+
+.group-avatar{
+    width:50px;
+    height:50px;
+    border-radius:15px;
+    background:linear-gradient(135deg,#34205a,#1c1232);
+    color:var(--gold);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    font-weight:700;
+    overflow:hidden;
+    flex-shrink:0;
+}
+
+.group-avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.group-info{
+    flex:1;
+    min-width:0;
+}
+
+.group-name{
+    font-size:13px;
+    font-weight:600;
+}
+
+.group-description{
+    color:var(--muted);
+    font-size:10px;
+    margin-top:3px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.group-meta{
+    display:flex;
+    gap:7px;
+    margin-top:5px;
+    flex-wrap:wrap;
+}
+
+.group-badge{
+    font-size:8px;
+    padding:3px 7px;
+    border-radius:10px;
+    background:rgba(255,213,74,.09);
+    color:var(--gold);
+}
+
+.group-badge.private{
+    color:#ffb0bb;
+    background:rgba(255,77,103,.08);
+}
+
+.group-badge.free{
+    color:var(--green);
+    background:rgba(34,197,94,.08);
+}
+
+.group-action{
+    border:none;
+    border-radius:18px;
+    padding:7px 11px;
+    background:var(--gold);
+    color:#170b00;
+    font-size:9px;
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.group-action.secondary{
+    background:rgba(255,255,255,.08);
+    color:var(--text);
+}
+
+.group-action.pending{
+    background:rgba(255,213,74,.12);
+    color:var(--gold);
+}
+
+.groups-empty{
+    text-align:center;
+    color:var(--muted);
+    padding:60px 25px;
+}
+
+.groups-empty i{
+    color:var(--gold);
+    font-size:35px;
+    margin-bottom:14px;
+}
+
+.groups-empty h3{
+    color:var(--text);
+    font-size:16px;
+    margin-bottom:7px;
+}
+
+.groups-empty p{
+    font-size:11px;
+    line-height:1.6;
+}
+
+/* =========================
+   GROUP CHAT
+========================= */
+
+.group-screen{
     position:fixed;
     inset:0;
     background:var(--body-bg);
-    z-index:500;
+    z-index:600;
     display:none;
     flex-direction:column;
 }
 
-.chat-screen.show{
+.group-screen.show{
     display:flex;
 }
 
-.chat-header{
+.group-chat-header{
     height:68px;
     background:var(--header-bg);
     border-bottom:1px solid var(--border);
@@ -303,19 +520,10 @@ input{
     padding:0 12px;
 }
 
-.back-button{
-    width:40px;
-    height:40px;
-    border:none;
-    background:transparent;
-    color:var(--text);
-    font-size:18px;
-}
-
-.chat-header-avatar{
+.group-chat-avatar{
     width:42px;
     height:42px;
-    border-radius:50%;
+    border-radius:13px;
     background:linear-gradient(135deg,#34205a,#1c1232);
     color:var(--gold);
     display:flex;
@@ -325,83 +533,110 @@ input{
     overflow:hidden;
 }
 
-.chat-header-avatar img{
+.group-chat-avatar img{
     width:100%;
     height:100%;
     object-fit:cover;
 }
 
-.chat-user-info{
+.group-chat-info{
     flex:1;
     min-width:0;
 }
 
-.chat-user-name{
+.group-chat-name{
     font-size:14px;
     font-weight:600;
 }
 
-.chat-user-status{
+.group-chat-members{
     color:var(--muted);
-    font-size:10px;
+    font-size:9px;
     margin-top:2px;
 }
 
-.chat-user-status.online{
-    color:var(--green);
+.group-header-button{
+    width:38px;
+    height:38px;
+    border:none;
+    background:transparent;
+    color:var(--text);
+    font-size:17px;
 }
 
-.messages{
+.group-messages{
     flex:1;
     overflow-y:auto;
     padding:15px;
     display:flex;
     flex-direction:column;
-    gap:8px;
+    gap:9px;
 }
 
-.message-row{
+.group-message-row{
     display:flex;
+    gap:7px;
+    align-items:flex-end;
 }
 
-.message-row.sent{
+.group-message-row.mine{
     justify-content:flex-end;
 }
 
-.message-row.received{
-    justify-content:flex-start;
+.group-message-avatar{
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#34205a,#1c1232);
+    color:var(--gold);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:10px;
+    font-weight:700;
+    overflow:hidden;
+    flex-shrink:0;
 }
 
-.message{
+.group-message-avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.group-message-content{
     max-width:78%;
+}
+
+.group-message-sender{
+    color:var(--gold);
+    font-size:9px;
+    margin:0 0 3px 4px;
+}
+
+.group-message{
     padding:9px 12px;
     border-radius:14px;
+    background:var(--card);
+    border:1px solid var(--border);
     font-size:12px;
     line-height:1.5;
 }
 
-.message-row.sent .message{
+.group-message-row.mine .group-message{
     background:linear-gradient(135deg,var(--gold),var(--gold2));
     color:#170b00;
     border-bottom-right-radius:4px;
 }
 
-.message-row.received .message{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-bottom-left-radius:4px;
-}
-
-.message-meta{
-    display:flex;
-    justify-content:flex-end;
-    gap:4px;
-    font-size:8px;
-    opacity:.65;
+.group-message-time{
+    font-size:7px;
+    opacity:.6;
+    text-align:right;
     margin-top:3px;
 }
 
-.message-form{
+.group-message-form{
     display:flex;
     gap:8px;
     padding:10px;
@@ -409,7 +644,7 @@ input{
     border-top:1px solid var(--border);
 }
 
-.message-form input{
+.group-message-form input{
     flex:1;
     height:44px;
     border:none;
@@ -422,15 +657,279 @@ input{
     font-size:12px;
 }
 
-.send-button{
+.group-send-button{
     width:44px;
     height:44px;
     border:none;
     border-radius:50%;
     background:linear-gradient(135deg,var(--gold),var(--gold2));
     color:#170b00;
-    font-size:16px;
 }
+
+/* =========================
+   GROUP DETAILS
+========================= */
+
+.modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.72);
+    z-index:1200;
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+}
+
+.modal-overlay.show{
+    display:flex;
+}
+
+.modal{
+    width:100%;
+    max-width:720px;
+    max-height:90vh;
+    overflow-y:auto;
+    background:#10071d;
+    border-radius:22px 22px 0 0;
+    padding:20px;
+    border-top:1px solid var(--border);
+}
+
+.modal-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:18px;
+}
+
+.modal-title{
+    font-size:18px;
+    font-weight:700;
+}
+
+.modal-close{
+    width:36px;
+    height:36px;
+    border:none;
+    border-radius:50%;
+    background:rgba(255,255,255,.07);
+    color:var(--text);
+}
+
+.form-group{
+    margin-bottom:13px;
+}
+
+.form-label{
+    display:block;
+    color:#ddd5e5;
+    font-size:11px;
+    margin-bottom:6px;
+}
+
+.form-input,
+.form-textarea,
+.form-select{
+    width:100%;
+    border:1px solid var(--border);
+    outline:none;
+    background:var(--card);
+    color:var(--text);
+    border-radius:12px;
+    padding:11px 12px;
+    font-size:11px;
+}
+
+.form-textarea{
+    min-height:80px;
+    resize:vertical;
+}
+
+.form-select option{
+    background:#10071d;
+}
+
+.privacy-options{
+    display:flex;
+    gap:8px;
+}
+
+.privacy-option{
+    flex:1;
+    padding:12px;
+    border:1px solid var(--border);
+    background:var(--card);
+    border-radius:12px;
+    color:var(--muted);
+    text-align:center;
+    font-size:10px;
+}
+
+.privacy-option.selected{
+    border-color:var(--gold);
+    color:var(--gold);
+    background:rgba(255,213,74,.08);
+}
+
+.modal-button{
+    width:100%;
+    height:45px;
+    border:none;
+    border-radius:13px;
+    background:linear-gradient(135deg,var(--gold),var(--gold2));
+    color:#170b00;
+    font-weight:700;
+    font-size:12px;
+}
+
+.modal-button.danger{
+    background:var(--danger);
+    color:white;
+}
+
+.group-detail-top{
+    text-align:center;
+}
+
+.detail-group-avatar{
+    width:76px;
+    height:76px;
+    border-radius:20px;
+    background:linear-gradient(135deg,#34205a,#1c1232);
+    color:var(--gold);
+    margin:0 auto 12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    font-weight:700;
+    overflow:hidden;
+}
+
+.detail-group-avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.detail-group-name{
+    font-size:20px;
+    font-weight:700;
+}
+
+.detail-group-description{
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.6;
+    margin-top:5px;
+}
+
+.detail-stats{
+    display:flex;
+    gap:8px;
+    margin:18px 0;
+}
+
+.detail-stat{
+    flex:1;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:11px;
+    text-align:center;
+}
+
+.detail-stat strong{
+    display:block;
+    color:var(--gold);
+    font-size:15px;
+}
+
+.detail-stat span{
+    color:var(--muted);
+    font-size:8px;
+}
+
+.detail-section{
+    margin-top:16px;
+}
+
+.detail-section-title{
+    font-size:12px;
+    font-weight:600;
+    margin-bottom:9px;
+}
+
+.member-row{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    padding:8px 0;
+    border-bottom:1px solid rgba(255,255,255,.04);
+}
+
+.member-avatar{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#34205a,#1c1232);
+    color:var(--gold);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:11px;
+    font-weight:700;
+    overflow:hidden;
+}
+
+.member-avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.member-info{
+    flex:1;
+}
+
+.member-name{
+    font-size:11px;
+}
+
+.member-role{
+    color:var(--gold);
+    font-size:8px;
+}
+
+.member-online{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--green);
+}
+
+.detail-actions{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin-top:20px;
+}
+
+.info-box{
+    background:rgba(255,213,74,.06);
+    border:1px solid rgba(255,213,74,.15);
+    color:#ded6c1;
+    border-radius:12px;
+    padding:11px;
+    font-size:10px;
+    line-height:1.6;
+    margin-bottom:14px;
+}
+
+/* =========================
+   SIDE MENU
+========================= */
 
 .side-menu-overlay{
     position:fixed;
@@ -454,6 +953,7 @@ input{
     z-index:1000;
     transition:.3s;
     padding:20px 15px;
+    overflow-y:auto;
 }
 
 .side-menu.show{
@@ -508,7 +1008,6 @@ input{
     border-radius:11px;
     color:#ddd5e5;
     font-size:13px;
-    cursor:pointer;
 }
 
 .menu-item i{
@@ -528,6 +1027,10 @@ input{
 .menu-item.logout i{
     color:var(--danger);
 }
+
+/* =========================
+   BOTTOM NAV
+========================= */
 
 .bottom-nav{
     position:fixed;
@@ -550,6 +1053,7 @@ input{
     gap:4px;
     color:var(--muted);
     font-size:10px;
+    cursor:pointer;
 }
 
 .bottom-nav-item i{
@@ -560,325 +1064,801 @@ input{
     color:var(--gold);
 }
 
-</style></head><body><header class="header"><div class="header-left">
+/* =========================
+   TOAST
+========================= */
 
-    <button
-        class="menu-button"
-        onclick="openMenu()"
-        aria-label="Open menu">
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:82px;
+    transform:translateX(-50%) translateY(20px);
+    background:#211333;
+    border:1px solid var(--border);
+    color:white;
+    padding:11px 15px;
+    border-radius:12px;
+    font-size:10px;
+    z-index:2000;
+    opacity:0;
+    pointer-events:none;
+    transition:.25s;
+    max-width:90%;
+    text-align:center;
+}
 
-        <i class="fa-solid fa-ellipsis-vertical"></i>
+.toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+}
 
-    </button>
+.toast.success{
+    border-color:rgba(34,197,94,.3);
+}
 
-    <div class="logo">
-        Vibe<span>Chat</span>
+.toast.error{
+    border-color:rgba(255,77,103,.3);
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="header-left">
+
+        <button
+            class="menu-button"
+            onclick="openMenu()"
+            aria-label="Open menu">
+
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+
+        </button>
+
+        <div class="logo">
+            Vibe<span>Chat</span>
+        </div>
+
     </div>
 
-</div>
+    <div class="header-right">
 
-<div class="header-right">
+        <div
+            class="profile-small"
+            id="headerAvatar">
 
-    <div
-        class="profile-small"
-        id="headerAvatar">
+            U
 
-        U
+        </div>
 
     </div>
 
-</div>
+</header>
 
-</header><div
+
+<!-- =========================
+     SIDE MENU
+========================= -->
+
+<div
     class="side-menu-overlay"
     id="sideMenuOverlay"
     onclick="closeMenu()">
-</div><div
+</div>
+
+<div
     class="side-menu"
-    id="sideMenu"><div class="menu-profile">
+    id="sideMenu">
+
+    <div class="menu-profile">
+
+        <div
+            class="menu-profile-avatar"
+            id="menuAvatar">
+
+            U
+
+        </div>
+
+        <div>
+
+            <div
+                class="menu-name"
+                id="menuName">
+
+                User
+
+            </div>
+
+            <div
+                class="menu-email"
+                id="menuEmail">
+
+                VibeChat
+
+            </div>
+
+        </div>
+
+    </div>
+
 
     <div
-        class="menu-profile-avatar"
-        id="menuAvatar">
+        class="menu-item"
+        onclick="showChats()">
 
-        U
+        <i class="fa-solid fa-comment"></i>
 
-    </div>
-
-    <div>
-
-        <div
-            class="menu-name"
-            id="menuName">
-
-            User
-
-        </div>
-
-        <div
-            class="menu-email"
-            id="menuEmail">
-
-            VibeChat
-
-        </div>
+        Chats
 
     </div>
 
-</div>
 
+    <div
+        class="menu-item"
+        onclick="showGroups()">
 
-<div
-    class="menu-item"
-    onclick="closeMenu()">
+        <i class="fa-solid fa-users"></i>
 
-    <i class="fa-solid fa-comment"></i>
-
-    Chats
-
-</div>
-
-
-<div class="menu-item">
-
-    <i class="fa-solid fa-users"></i>
-
-    Groups
-
-</div>
-
-
-<div class="menu-item">
-
-    <i class="fa-solid fa-circle-play"></i>
-
-    Stories
-
-</div>
-
-
-<div class="menu-item">
-
-    <i class="fa-solid fa-user-group"></i>
-
-    Friends
-
-</div>
-
-
-<div class="menu-item">
-
-    <i class="fa-solid fa-circle-check"></i>
-
-    Verification
-
-</div>
-
-
-<div class="menu-item">
-
-    <i class="fa-solid fa-gear"></i>
-
-    Settings
-
-</div>
-
-
-<div
-    class="menu-item"
-    onclick="toggleTheme()">
-
-    <i class="fa-solid fa-moon"></i>
-
-    Theme
-
-</div>
-
-
-<div
-    class="menu-item logout"
-    onclick="logout()">
-
-    <i class="fa-solid fa-right-from-bracket"></i>
-
-    Logout
-
-</div>
-
-</div><main class="container"><div class="search-box">
-
-    <i class="fa-solid fa-magnifying-glass"></i>
-
-    <input
-        id="searchInput"
-        type="text"
-        placeholder="Search VibeChat users..."
-        autocomplete="off">
-
-</div>
-
-
-<div
-    class="search-results"
-    id="searchResults">
-</div>
-
-
-<div class="tabs">
-
-    <button class="tab active">
-        All
-    </button>
-
-    <button class="tab">
-        Unread
-    </button>
-
-    <button class="tab">
         Groups
-    </button>
 
-    <button class="tab">
+    </div>
+
+
+    <div class="menu-item">
+
+        <i class="fa-solid fa-circle-play"></i>
+
+        Stories
+
+    </div>
+
+
+    <div class="menu-item">
+
+        <i class="fa-solid fa-user-group"></i>
+
         Friends
-    </button>
+
+    </div>
+
+
+    <div class="menu-item">
+
+        <i class="fa-solid fa-circle-check"></i>
+
+        Verification
+
+    </div>
+
+
+    <div class="menu-item">
+
+        <i class="fa-solid fa-gear"></i>
+
+        Settings
+
+    </div>
+
+
+    <div
+        class="menu-item"
+        onclick="toggleTheme()">
+
+        <i class="fa-solid fa-moon"></i>
+
+        Theme
+
+    </div>
+
+
+    <div
+        class="menu-item logout"
+        onclick="logout()">
+
+        <i class="fa-solid fa-right-from-bracket"></i>
+
+        Logout
+
+    </div>
 
 </div>
 
 
-<div
-    class="conversations"
-    id="conversations">
-</div>
+<!-- =========================
+     MAIN
+========================= -->
 
+<main class="container">
+
+    <!-- =====================
+         CHATS
+    ====================== -->
+
+    <section id="chatsSection">
+
+        <div class="search-box">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                id="searchInput"
+                type="text"
+                placeholder="Search VibeChat users..."
+                autocomplete="off">
+
+        </div>
+
+
+        <div
+            class="search-results"
+            id="searchResults">
+        </div>
+
+
+        <div class="tabs">
+
+            <button class="tab active">
+                All
+            </button>
+
+            <button class="tab">
+                Unread
+            </button>
+
+            <button
+                class="tab"
+                onclick="showGroups()">
+
+                Groups
+
+            </button>
+
+            <button class="tab">
+                Friends
+            </button>
+
+        </div>
+
+
+        <div
+            class="conversations"
+            id="conversations">
+        </div>
+
+
+        <section
+            class="empty-chat"
+            id="emptyChat">
+
+            <div class="empty-icon">
+
+                <i class="fa-regular fa-comments"></i>
+
+            </div>
+
+            <h2>
+                No conversations yet
+            </h2>
+
+            <p>
+                Search for another VibeChat user above
+                and start a private conversation.
+            </p>
+
+        </section>
+
+    </section>
+
+
+    <!-- =====================
+         GROUPS
+    ====================== -->
+
+    <section id="groupsSection">
+
+        <div class="groups-header">
+
+            <div class="groups-title-row">
+
+                <div>
+
+                    <div class="groups-title">
+                        Groups
+                    </div>
+
+                    <div class="groups-subtitle">
+                        Discover communities and connect.
+                    </div>
+
+                </div>
+
+                <button
+                    class="create-group-button"
+                    onclick="openCreateGroupModal()">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="search-box group-search">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                id="groupSearchInput"
+                type="text"
+                placeholder="Search groups..."
+                autocomplete="off">
+
+        </div>
+
+
+        <div class="group-tabs">
+
+            <button
+                class="group-tab active"
+                id="discoverGroupTab"
+                onclick="switchGroupTab('discover')">
+
+                Discover
+
+            </button>
+
+            <button
+                class="group-tab"
+                id="myGroupTab"
+                onclick="switchGroupTab('mine')">
+
+                My Groups
+
+            </button>
+
+        </div>
+
+
+        <div
+            class="groups-list"
+            id="groupsList">
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =========================
+     PRIVATE CHAT
+========================= -->
 
 <section
-    class="empty-chat"
-    id="emptyChat">
+    class="chat-screen"
+    id="chatScreen">
 
-    <div class="empty-icon">
+    <div class="chat-header">
 
-        <i class="fa-regular fa-comments"></i>
+        <button
+            class="back-button"
+            onclick="closeChat()"
+            style="width:40px;height:40px;border:none;background:transparent;color:white;font-size:18px;">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </button>
+
+
+        <div
+            class="chat-header-avatar"
+            id="chatAvatar">
+
+            U
+
+        </div>
+
+
+        <div class="chat-user-info">
+
+            <div
+                class="chat-user-name"
+                id="chatUserName">
+
+                User
+
+            </div>
+
+            <div
+                class="chat-user-status"
+                id="chatUserStatus">
+
+                Offline
+
+            </div>
+
+        </div>
 
     </div>
 
-    <h2>
-        No conversations yet
-    </h2>
 
-    <p>
-        Search for another VibeChat user above
-        and start a private conversation.
-    </p>
+    <div
+        class="messages"
+        id="messages">
+    </div>
+
+
+    <form
+        class="message-form"
+        id="messageForm">
+
+        <input
+            id="messageInput"
+            type="text"
+            placeholder="Type a message..."
+            autocomplete="off">
+
+        <button
+            class="send-button"
+            type="submit">
+
+            <i class="fa-solid fa-paper-plane"></i>
+
+        </button>
+
+    </form>
 
 </section>
 
-</main><section
-    class="chat-screen"
-    id="chatScreen"><div class="chat-header">
 
-    <button
-        class="back-button"
-        onclick="closeChat()">
+<!-- =========================
+     GROUP CHAT
+========================= -->
 
-        <i class="fa-solid fa-arrow-left"></i>
+<section
+    class="group-screen"
+    id="groupScreen">
 
-    </button>
+    <div class="group-chat-header">
+
+        <button
+            class="group-header-button"
+            onclick="closeGroupChat()">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </button>
+
+
+        <div
+            class="group-chat-avatar"
+            id="groupChatAvatar">
+
+            G
+
+        </div>
+
+
+        <div class="group-chat-info">
+
+            <div
+                class="group-chat-name"
+                id="groupChatName">
+
+                Group
+
+            </div>
+
+            <div
+                class="group-chat-members"
+                id="groupChatMembers">
+
+                0 members
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="group-header-button"
+            onclick="openActiveGroupDetails()">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+        </button>
+
+    </div>
 
 
     <div
-        class="chat-header-avatar"
-        id="chatAvatar">
-
-        U
-
+        class="group-messages"
+        id="groupMessages">
     </div>
 
 
-    <div class="chat-user-info">
+    <form
+        class="group-message-form"
+        id="groupMessageForm">
 
-        <div
-            class="chat-user-name"
-            id="chatUserName">
+        <input
+            id="groupMessageInput"
+            type="text"
+            placeholder="Type a group message..."
+            autocomplete="off">
 
-            User
+        <button
+            class="group-send-button"
+            type="submit">
+
+            <i class="fa-solid fa-paper-plane"></i>
+
+        </button>
+
+    </form>
+
+</section>
+
+
+<!-- =========================
+     CREATE GROUP MODAL
+========================= -->
+
+<div
+    class="modal-overlay"
+    id="createGroupModal">
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <div class="modal-title">
+                Create Group
+            </div>
+
+            <button
+                class="modal-close"
+                onclick="closeCreateGroupModal()">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
 
         </div>
 
+
+        <div class="form-group">
+
+            <label class="form-label">
+                Group name
+            </label>
+
+            <input
+                class="form-input"
+                id="createGroupName"
+                maxlength="100"
+                placeholder="Enter group name">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label class="form-label">
+                Description
+            </label>
+
+            <textarea
+                class="form-textarea"
+                id="createGroupDescription"
+                maxlength="1000"
+                placeholder="What is this group about?"></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label class="form-label">
+                Group privacy
+            </label>
+
+            <div class="privacy-options">
+
+                <button
+                    type="button"
+                    class="privacy-option selected"
+                    id="publicPrivacyButton"
+                    onclick="selectPrivacy('public')">
+
+                    <i class="fa-solid fa-earth-africa"></i>
+
+                    <br>
+
+                    Public
+
+                    <div style="font-size:8px;margin-top:4px;">
+                        Anyone can discover and join
+                    </div>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="privacy-option"
+                    id="privatePrivacyButton"
+                    onclick="selectPrivacy('private')">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <br>
+
+                    Private
+
+                    <div style="font-size:8px;margin-top:4px;">
+                        Payment can be required
+                    </div>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
         <div
-            class="chat-user-status"
-            id="chatUserStatus">
+            class="form-group"
+            id="joiningFeeGroup"
+            style="display:none;">
 
-            Offline
+            <label class="form-label">
+                Joining fee (KES)
+            </label>
 
+            <input
+                class="form-input"
+                id="createGroupFee"
+                type="number"
+                min="0"
+                step="1"
+                placeholder="Example: 100">
+
+            <div style="color:var(--muted);font-size:8px;margin-top:5px;">
+                The real payment provider will be connected separately.
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label class="form-label">
+                Group picture URL (optional)
+            </label>
+
+            <input
+                class="form-input"
+                id="createGroupPicture"
+                placeholder="https://...">
+
+        </div>
+
+
+        <button
+            class="modal-button"
+            onclick="createGroup()">
+
+            Create Group
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     GROUP DETAILS MODAL
+========================= -->
+
+<div
+    class="modal-overlay"
+    id="groupDetailsModal">
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <div class="modal-title">
+                Group
+            </div>
+
+            <button
+                class="modal-close"
+                onclick="closeGroupDetails()">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <div id="groupDetailsContent">
         </div>
 
     </div>
 
 </div>
+
+
+<!-- =========================
+     BOTTOM NAV
+========================= -->
+
+<nav class="bottom-nav">
+
+    <div
+        class="bottom-nav-item active"
+        id="bottomChats"
+        onclick="showChats()">
+
+        <i class="fa-solid fa-comment"></i>
+
+        <span>Chats</span>
+
+    </div>
+
+
+    <div
+        class="bottom-nav-item"
+        id="bottomGroups"
+        onclick="showGroups()">
+
+        <i class="fa-solid fa-users"></i>
+
+        <span>Groups</span>
+
+    </div>
+
+
+    <div class="bottom-nav-item">
+
+        <i class="fa-solid fa-circle-play"></i>
+
+        <span>Stories</span>
+
+    </div>
+
+
+    <div class="bottom-nav-item">
+
+        <i class="fa-solid fa-user"></i>
+
+        <span>Profile</span>
+
+    </div>
+
+</nav>
 
 
 <div
-    class="messages"
-    id="messages">
+    class="toast"
+    id="toast">
 </div>
 
 
-<form
-    class="message-form"
-    id="messageForm">
+<script>
 
-    <input
-        id="messageInput"
-        type="text"
-        placeholder="Type a message..."
-        autocomplete="off">
-
-    <button
-        class="send-button"
-        type="submit">
-
-        <i class="fa-solid fa-paper-plane"></i>
-
-    </button>
-
-</form>
-
-</section><nav class="bottom-nav"><div class="bottom-nav-item active">
-
-    <i class="fa-solid fa-comment"></i>
-
-    <span>Chats</span>
-
-</div>
-
-
-<div class="bottom-nav-item">
-
-    <i class="fa-solid fa-users"></i>
-
-    <span>Groups</span>
-
-</div>
-
-
-<div class="bottom-nav-item">
-
-    <i class="fa-solid fa-circle-play"></i>
-
-    <span>Stories</span>
-
-</div>
-
-
-<div class="bottom-nav-item">
-
-    <i class="fa-solid fa-user"></i>
-
-    <span>Profile</span>
-
-</div>
-
-</nav><script>
+/* =========================================================
+   CONFIG
+========================================================= */
 
 const API_URL =
     "https://cherychat-backend.onrender.com";
@@ -892,6 +1872,11 @@ const LOGIN_KEY =
 const THEME_KEY =
     "vibeChatTheme";
 
+
+/* =========================================================
+   STATE
+========================================================= */
+
 let currentUser = null;
 
 let conversations = [];
@@ -902,10 +1887,51 @@ let activeChatUser = null;
 
 let messageRefreshTimer = null;
 
+let activeGroup = null;
 
-/* =========================
-   LOAD USER / SESSION
-========================= */
+let activeGroupMessagesTimer = null;
+
+let groups = [];
+
+let currentGroupTab = "discover";
+
+let selectedPrivacy = "public";
+
+let groupSearchTimer = null;
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(message, type = ""){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.className =
+        "toast show " + type;
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+    window.toastTimer =
+        setTimeout(() => {
+
+            toast.className =
+                "toast";
+
+        }, 3000);
+
+}
+
+
+/* =========================================================
+   LOAD USER
+========================================================= */
 
 async function loadUser(){
 
@@ -962,6 +1988,8 @@ async function loadUser(){
 
         updateUserUI();
 
+        loadSavedTheme();
+
         return true;
 
     }catch(error){
@@ -970,7 +1998,6 @@ async function loadUser(){
             "Session error:",
             error
         );
-
 
         localStorage.removeItem(
             CURRENT_USER_KEY
@@ -991,14 +2018,15 @@ async function loadUser(){
 }
 
 
-/* =========================
-   UPDATE USER UI
-========================= */
+/* =========================================================
+   USER UI
+========================================================= */
 
 function updateUserUI(){
 
     if(!currentUser)
         return;
+
 
     const name =
         currentUser.fullName ||
@@ -1006,9 +2034,11 @@ function updateUserUI(){
         currentUser.name ||
         "User";
 
+
     const email =
         currentUser.email ||
         "VibeChat";
+
 
     const picture =
         currentUser.profilePicture ||
@@ -1037,6 +2067,7 @@ function updateUserUI(){
         ).innerHTML =
             `<img src="${escapeHtml(picture)}" alt="">`;
 
+
         document.getElementById(
             "menuAvatar"
         ).innerHTML =
@@ -1048,6 +2079,7 @@ function updateUserUI(){
             "headerAvatar"
         ).textContent = initial;
 
+
         document.getElementById(
             "menuAvatar"
         ).textContent = initial;
@@ -1057,9 +2089,9 @@ function updateUserUI(){
 }
 
 
-/* =========================
-   LOAD CONVERSATIONS
-========================= */
+/* =========================================================
+   CHATS
+========================================================= */
 
 async function loadConversations(){
 
@@ -1109,16 +2141,13 @@ async function loadConversations(){
 }
 
 
-/* =========================
-   RENDER CONVERSATIONS
-========================= */
-
 function renderConversations(){
 
     const container =
         document.getElementById(
             "conversations"
         );
+
 
     const emptyChat =
         document.getElementById(
@@ -1189,8 +2218,7 @@ function renderConversations(){
 
                 <div
                     class="conversation"
-                    onclick='openExistingConversation(${JSON.stringify(chat).replace(/'/g,"&#39;")})'>
-
+                    onclick='openExistingConversation(${safeJson(chat)})'>
 
                     <div class="avatar">
 
@@ -1201,7 +2229,6 @@ function renderConversations(){
                         }
 
                     </div>
-
 
                     <div class="conversation-info">
 
@@ -1216,7 +2243,6 @@ function renderConversations(){
                             </div>
 
                         </div>
-
 
                         <div class="conversation-bottom">
 
@@ -1243,44 +2269,9 @@ function renderConversations(){
 }
 
 
-/* =========================
-   OPEN EXISTING CHAT
-========================= */
-
-async function openExistingConversation(chat){
-
-    activeConversation = {
-        id:Number(
-            chat.conversationId ||
-            chat.id
-        )
-    };
-
-
-    activeChatUser =
-        chat.otherUser || {};
-
-
-    setupChatHeader();
-
-
-    document
-        .getElementById("chatScreen")
-        .classList.add("show");
-
-
-    await loadMessages();
-
-    await markMessagesRead();
-
-    startMessageRefresh();
-
-}
-
-
-/* =========================
-   SEARCH
-========================= */
+/* =========================================================
+   SEARCH USERS
+========================================================= */
 
 let searchTimer = null;
 
@@ -1379,7 +2370,7 @@ async function searchUsers(query){
 
                     <div
                         class="conversation"
-                        onclick='openChatWithUser(${JSON.stringify(user).replace(/'/g,"&#39;")})'>
+                        onclick='openChatWithUser(${safeJson(user)})'>
 
                         <div class="avatar">
 
@@ -1391,13 +2382,10 @@ async function searchUsers(query){
 
                         </div>
 
-
                         <div class="conversation-info">
 
                             <div class="conversation-name">
-
                                 ${escapeHtml(name)}
-
                             </div>
 
                             <div class="conversation-preview">
@@ -1431,9 +2419,40 @@ async function searchUsers(query){
 }
 
 
-/* =========================
-   OPEN CHAT WITH USER
-========================= */
+/* =========================================================
+   PRIVATE CHAT
+========================================================= */
+
+async function openExistingConversation(chat){
+
+    activeConversation = {
+        id:Number(
+            chat.conversationId ||
+            chat.id
+        )
+    };
+
+
+    activeChatUser =
+        chat.otherUser || {};
+
+
+    setupChatHeader();
+
+
+    document
+        .getElementById("chatScreen")
+        .classList.add("show");
+
+
+    await loadMessages();
+
+    await markMessagesRead();
+
+    startMessageRefresh();
+
+}
+
 
 async function openChatWithUser(user){
 
@@ -1516,14 +2535,16 @@ async function openChatWithUser(user){
             error
         );
 
+        showToast(
+            error.message ||
+            "Unable to open chat",
+            "error"
+        );
+
     }
 
 }
 
-
-/* =========================
-   CHAT HEADER
-========================= */
 
 function setupChatHeader(){
 
@@ -1593,10 +2614,6 @@ function setupChatHeader(){
 }
 
 
-/* =========================
-   LOAD MESSAGES
-========================= */
-
 async function loadMessages(){
 
     if(
@@ -1610,12 +2627,22 @@ async function loadMessages(){
 
         const response =
             await fetch(
-                `${API_URL}/api/messages/${activeConversation.id}?userId=${encodeURIComponent(currentUser.id)}`
+                `${API_URL}/api/messages?conversationId=${encodeURIComponent(activeConversation.id)}&userId=${encodeURIComponent(currentUser.id)}`
             );
 
 
         const data =
             await response.json();
+
+
+        if(!response.ok){
+
+            throw new Error(
+                data.message ||
+                "Unable to load messages"
+            );
+
+        }
 
 
         const messages =
@@ -1637,10 +2664,6 @@ async function loadMessages(){
 
 }
 
-
-/* =========================
-   RENDER MESSAGES
-========================= */
 
 function renderMessages(messages){
 
@@ -1722,10 +2745,6 @@ function renderMessages(messages){
 
 }
 
-
-/* =========================
-   SEND MESSAGE
-========================= */
 
 document
     .getElementById("messageForm")
@@ -1815,15 +2834,17 @@ document
                     error
                 );
 
+                showToast(
+                    error.message ||
+                    "Unable to send message",
+                    "error"
+                );
+
             }
 
         }
     );
 
-
-/* =========================
-   MARK READ
-========================= */
 
 async function markMessagesRead(){
 
@@ -1871,10 +2892,6 @@ async function markMessagesRead(){
 }
 
 
-/* =========================
-   MESSAGE REFRESH
-========================= */
-
 function startMessageRefresh(){
 
     stopMessageRefresh();
@@ -1912,10 +2929,6 @@ function stopMessageRefresh(){
 }
 
 
-/* =========================
-   CLOSE CHAT
-========================= */
-
 async function closeChat(){
 
     stopMessageRefresh();
@@ -1936,162 +2949,1370 @@ async function closeChat(){
 }
 
 
-/* =========================
-   MENU
-========================= */
+/* =========================================================
+   GROUP NAVIGATION
+========================================================= */
 
-function openMenu(){
+function showChats(){
+
+    closeMenu();
+
+
+    document.getElementById(
+        "chatsSection"
+    ).style.display = "block";
+
+
+    document.getElementById(
+        "groupsSection"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "bottomChats"
+    ).classList.add("active");
+
+
+    document.getElementById(
+        "bottomGroups"
+    ).classList.remove("active");
+
+}
+
+
+async function showGroups(){
+
+    closeMenu();
+
+
+    document.getElementById(
+        "chatsSection"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "groupsSection"
+    ).style.display = "block";
+
+
+    document.getElementById(
+        "bottomChats"
+    ).classList.remove("active");
+
+
+    document.getElementById(
+        "bottomGroups"
+    ).classList.add("active");
+
+
+    await loadGroups();
+
+}
+
+
+function switchGroupTab(tab){
+
+    currentGroupTab = tab;
+
 
     document
-        .getElementById("sideMenu")
-        .classList.add("show");
+        .getElementById("discoverGroupTab")
+        .classList.toggle(
+            "active",
+            tab === "discover"
+        );
 
 
     document
-        .getElementById("sideMenuOverlay")
-        .classList.add("show");
+        .getElementById("myGroupTab")
+        .classList.toggle(
+            "active",
+            tab === "mine"
+        );
+
+
+    loadGroups();
 
 }
 
 
-function closeMenu(){
+/* =========================================================
+   LOAD GROUPS
+========================================================= */
 
-    document
-        .getElementById("sideMenu")
-        .classList.remove("show");
+async function loadGroups(){
 
-
-    document
-        .getElementById("sideMenuOverlay")
-        .classList.remove("show");
-
-}
+    if(!currentUser)
+        return;
 
 
-/* =========================
-   THEME
-========================= */
-
-function toggleTheme(){
-
-    document.body.classList.toggle(
-        "light"
-    );
+    const list =
+        document.getElementById(
+            "groupsList"
+        );
 
 
-    localStorage.setItem(
-        THEME_KEY,
-        document.body.classList.contains(
-            "light"
-        )
-            ? "light"
-            : "dark"
-    );
+    list.innerHTML = `
 
-}
+        <div class="groups-empty">
 
+            <i class="fa-solid fa-spinner fa-spin"></i>
 
-/* =========================
-   LOGOUT
-========================= */
+            <h3>Loading groups...</h3>
 
-function logout(){
+            <p>Please wait.</p>
 
-    stopMessageRefresh();
+        </div>
 
-    localStorage.removeItem(
-        CURRENT_USER_KEY
-    );
-
-    localStorage.removeItem(
-        LOGIN_KEY
-    );
-
-    window.location.replace(
-        "login.html"
-    );
-
-}
+    `;
 
 
-/* =========================
-   HELPERS
-========================= */
+    try{
 
-function escapeHtml(value){
-
-    return String(value ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
-}
+        const query =
+            document.getElementById(
+                "groupSearchInput"
+            ).value.trim();
 
 
-function formatTime(value){
-
-    const date =
-        new Date(value);
+        let url;
 
 
-    if(isNaN(date.getTime()))
-        return "";
+        if(currentGroupTab === "mine"){
 
+            url =
+                `${API_URL}/api/groups/my?userId=${encodeURIComponent(currentUser.id)}`;
 
-    return date.toLocaleDateString(
-        [],
-        {
-            day:"numeric",
-            month:"short"
+        }else{
+
+            url =
+                `${API_URL}/api/groups?userId=${encodeURIComponent(currentUser.id)}&q=${encodeURIComponent(query)}`;
+
         }
-    );
-
-}
 
 
-function formatMessageTime(value){
-
-    const date =
-        new Date(value);
+        const response =
+            await fetch(url);
 
 
-    if(isNaN(date.getTime()))
-        return "";
+        const data =
+            await response.json();
 
 
-    return date.toLocaleTimeString(
-        [],
-        {
-            hour:"numeric",
-            minute:"2-digit"
+        if(!response.ok){
+
+            throw new Error(
+                data.message ||
+                "Unable to load groups"
+            );
+
         }
-    );
-
-}
 
 
-/* =========================
-   INIT
-========================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    async () => {
-
-        const authenticated =
-            await loadUser();
+        groups =
+            data.groups || [];
 
 
-        if(!authenticated)
-            return;
+        renderGroups();
+
+    }catch(error){
+
+        console.error(
+            "Groups error:",
+            error
+        );
 
 
-        await loadConversations();
+        list.innerHTML = `
+
+            <div class="groups-empty">
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                <h3>Unable to load groups</h3>
+
+                <p>
+                    ${escapeHtml(
+                        error.message ||
+                        "Please try again."
+                    )}
+                </p>
+
+            </div>
+
+        `;
 
     }
-);
 
-</script></body>
-</html>
+}
+
+
+function renderGroups(){
+
+    const list =
+        document.getElementById(
+            "groupsList"
+        );
+
+
+    if(!groups.length){
+
+        list.innerHTML = `
+
+            <div class="groups-empty">
+
+                <i class="fa-solid fa-users"></i>
+
+                <h3>
+                    ${
+                        currentGroupTab === "mine"
+                            ? "You have no groups yet"
+                            : "No groups found"
+                    }
+                </h3>
+
+                <p>
+                    ${
+                        currentGroupTab === "mine"
+                            ? "Create a group or join a public community."
+                            : "Try another search or create the first group."
+                    }
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    list.innerHTML =
+        groups.map(group => {
+
+            const name =
+                group.name || "Group";
+
+
+            const initial =
+                name.charAt(0).toUpperCase();
+
+
+            const picture =
+                group.groupPicture ||
+                group.group_picture ||
+                "";
+
+
+            const isPrivate =
+                group.privacy === "private";
+
+
+            const fee =
+                Number(
+                    group.joiningFee || 0
+                );
+
+
+            let action;
+
+
+            if(group.isMember){
+
+                action = `
+
+                    <button
+                        class="group-action secondary"
+                        onclick='openGroupChatById(${Number(group.id)})'>
+
+                        Open
+
+                    </button>
+
+                `;
+
+            }else if(
+                group.membershipStatus === "pending" ||
+                group.paymentStatus === "pending"
+            ){
+
+                action = `
+
+                    <button
+                        class="group-action pending"
+                        onclick='openGroupDetailsById(${Number(group.id)})'>
+
+                        Pending
+
+                    </button>
+
+                `;
+
+            }else if(
+                currentGroupTab === "mine"
+            ){
+
+                action = `
+
+                    <button
+                        class="group-action secondary"
+                        onclick='openGroupDetailsById(${Number(group.id)})'>
+
+                        View
+
+                    </button>
+
+                `;
+
+            }else{
+
+                action = `
+
+                    <button
+                        class="group-action"
+                        onclick='handleGroupJoin(${Number(group.id)})'>
+
+                        ${
+                            isPrivate && fee > 0
+                                ? `Pay KES ${formatMoney(fee)}`
+                                : "Join"
+                        }
+
+                    </button>
+
+                `;
+
+            }
+
+
+            return `
+
+                <div class="group-card">
+
+                    <div
+                        class="group-avatar"
+                        onclick='openGroupDetailsById(${Number(group.id)})'>
+
+                        ${
+                            picture
+                                ? `<img src="${escapeHtml(picture)}" alt="">`
+                                : initial
+                        }
+
+                    </div>
+
+
+                    <div
+                        class="group-info"
+                        onclick='openGroupDetailsById(${Number(group.id)})'>
+
+                        <div class="group-name">
+                            ${escapeHtml(name)}
+                        </div>
+
+                        <div class="group-description">
+                            ${
+                                escapeHtml(
+                                    group.description ||
+                                    "VibeChat group"
+                                )
+                            }
+                        </div>
+
+                        <div class="group-meta">
+
+                            <span class="group-badge ${
+                                isPrivate
+                                    ? "private"
+                                    : "free"
+                            }">
+
+                                ${
+                                    isPrivate
+                                        ? `<i class="fa-solid fa-lock"></i> Private`
+                                        : `<i class="fa-solid fa-earth-africa"></i> Public`
+                                }
+
+                            </span>
+
+
+                            <span class="group-badge">
+
+                                <i class="fa-solid fa-user"></i>
+
+                                ${Number(group.memberCount || 0)}
+
+                            </span>
+
+
+                            ${
+                                isPrivate && fee > 0
+                                    ? `
+                                        <span class="group-badge private">
+                                            KES ${formatMoney(fee)}
+                                        </span>
+                                      `
+                                    : ""
+                            }
+
+                        </div>
+
+                    </div>
+
+
+                    ${action}
+
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* =========================================================
+   GROUP SEARCH
+========================================================= */
+
+document
+    .getElementById("groupSearchInput")
+    .addEventListener(
+        "input",
+        function(){
+
+            clearTimeout(
+                groupSearchTimer
+            );
+
+
+            if(
+                currentGroupTab !==
+                "discover"
+            )
+                return;
+
+
+            groupSearchTimer =
+                setTimeout(
+                    () => loadGroups(),
+                    350
+                );
+
+        }
+    );
+
+
+/* =========================================================
+   CREATE GROUP
+========================================================= */
+
+function openCreateGroupModal(){
+
+    document
+        .getElementById("createGroupModal")
+        .classList.add("show");
+
+}
+
+
+function closeCreateGroupModal(){
+
+    document
+        .getElementById("createGroupModal")
+        .classList.remove("show");
+
+}
+
+
+function selectPrivacy(privacy){
+
+    selectedPrivacy =
+        privacy;
+
+
+    document
+        .getElementById(
+            "publicPrivacyButton"
+        )
+        .classList.toggle(
+            "selected",
+            privacy === "public"
+        );
+
+
+    document
+        .getElementById(
+            "privatePrivacyButton"
+        )
+        .classList.toggle(
+            "selected",
+            privacy === "private"
+        );
+
+
+    document
+        .getElementById(
+            "joiningFeeGroup"
+        ).style.display =
+            privacy === "private"
+                ? "block"
+                : "none";
+
+
+    if(privacy === "public"){
+
+        document.getElementById(
+            "createGroupFee"
+        ).value = "";
+
+    }
+
+}
+
+
+async function createGroup(){
+
+    if(!currentUser)
+        return;
+
+
+    const name =
+        document
+            .getElementById(
+                "createGroupName"
+            )
+            .value
+            .trim();
+
+
+    const description =
+        document
+            .getElementById(
+                "createGroupDescription"
+            )
+            .value
+            .trim();
+
+
+    const picture =
+        document
+            .getElementById(
+                "createGroupPicture"
+            )
+            .value
+            .trim();
+
+
+    const feeValue =
+        document
+            .getElementById(
+                "createGroupFee"
+            )
+            .value;
+
+
+    const joiningFee =
+        selectedPrivacy === "private"
+            ? Number(feeValue || 0)
+            : 0;
+
+
+    if(!name){
+
+        showToast(
+            "Please enter a group name",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !Number.isFinite(joiningFee) ||
+        joiningFee < 0
+    ){
+
+        showToast(
+            "Enter a valid joining fee",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const response =
+            await fetch(
+                `${API_URL}/api/groups`,
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        ownerId:
+                            currentUser.id,
+
+                        name:
+                            name,
+
+                        description:
+                            description,
+
+                        groupPicture:
+                            picture,
+
+                        privacy:
+                            selectedPrivacy,
+
+                        joiningFee:
+                            joiningFee
+
+                    })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok){
+
+            throw new Error(
+                data.message ||
+                "Unable to create group"
+            );
+
+        }
+
+
+        closeCreateGroupModal();
+
+
+        document.getElementById(
+            "createGroupName"
+        ).value = "";
+
+
+        document.getElementById(
+            "createGroupDescription"
+        ).value = "";
+
+
+        document.getElementById(
+            "createGroupPicture"
+        ).value = "";
+
+
+        document.getElementById(
+            "createGroupFee"
+        ).value = "";
+
+
+        showToast(
+            "Group created successfully",
+            "success"
+        );
+
+
+        currentGroupTab =
+            "mine";
+
+
+        document
+            .getElementById("discoverGroupTab")
+            .classList.remove("active");
+
+
+        document
+            .getElementById("myGroupTab")
+            .classList.add("active");
+
+
+        await loadGroups();
+
+
+    }catch(error){
+
+        console.error(
+            "Create group error:",
+            error
+        );
+
+
+        showToast(
+            error.message ||
+            "Unable to create group",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   GROUP DETAILS
+========================================================= */
+
+async function openGroupDetailsById(groupId){
+
+    try{
+
+        const response =
+            await fetch(
+                `${API_URL}/api/groups/${encodeURIComponent(groupId)}?userId=${encodeURIComponent(currentUser.id)}`
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok){
+
+            throw new Error(
+                data.message ||
+                "Unable to load group"
+            );
+
+        }
+
+
+        const group =
+            data.group;
+
+
+        await renderGroupDetails(
+            group
+        );
+
+
+        document
+            .getElementById("groupDetailsModal")
+            .classList.add("show");
+
+    }catch(error){
+
+        console.error(
+            "Group details error:",
+            error
+        );
+
+
+        showToast(
+            error.message ||
+            "Unable to load group",
+            "error"
+        );
+
+    }
+
+}
+
+
+async function renderGroupDetails(group){
+
+    const container =
+        document.getElementById(
+            "groupDetailsContent"
+        );
+
+
+    const name =
+        group.name || "Group";
+
+
+    const picture =
+        group.groupPicture ||
+        "";
+
+
+    const initial =
+        name.charAt(0).toUpperCase();
+
+
+    const fee =
+        Number(
+            group.joiningFee || 0
+        );
+
+
+    let members = [];
+
+
+    if(group.isMember){
+
+        try{
+
+            const response =
+                await fetch(
+                    `${API_URL}/api/groups/${encodeURIComponent(group.id)}/members?userId=${encodeURIComponent(currentUser.id)}`
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if(response.ok){
+
+                members =
+                    data.members || [];
+
+            }
+
+        }catch(error){
+
+            console.error(
+                "Members error:",
+                error
+            );
+
+        }
+
+    }
+
+
+    const isOwner =
+        Number(group.ownerId) ===
+        Number(currentUser.id);
+
+
+    const membersHtml =
+        members.length
+            ? members.map(member => {
+
+                const memberName =
+                    member.fullName ||
+                    "User";
+
+
+                const memberPicture =
+                    member.profilePicture ||
+                    "";
+
+
+                const memberInitial =
+                    memberName
+                        .charAt(0)
+                        .toUpperCase();
+
+
+                return `
+
+                    <div class="member-row">
+
+                        <div class="member-avatar">
+
+                            ${
+                                memberPicture
+                                    ? `<img src="${escapeHtml(memberPicture)}" alt="">`
+                                    : memberInitial
+                            }
+
+                        </div>
+
+                        <div class="member-info">
+
+                            <div class="member-name">
+                                ${escapeHtml(memberName)}
+                            </div>
+
+                            <div class="member-role">
+                                ${escapeHtml(member.role || "member")}
+                            </div>
+
+                        </div>
+
+                        ${
+                            member.isOnline
+                                ? `<div class="member-online"></div>`
+                                : ""
+                        }
+
+                    </div>
+
+                `;
+
+            }).join("")
+            : `
+                <div style="color:var(--muted);font-size:10px;">
+                    ${
+                        group.isMember
+                            ? "No member information available."
+                            : "Join the group to see members."
+                    }
+                </div>
+            `;
+
+
+    let actionHtml = "";
+
+
+    if(group.isMember){
+
+        actionHtml += `
+
+            <button
+                class="modal-button"
+                onclick='closeGroupDetails(); openGroupChatById(${Number(group.id)})'>
+
+                <i class="fa-solid fa-comments"></i>
+
+                Open Group Chat
+
+            </button>
+
+        `;
+
+
+        if(!isOwner){
+
+            actionHtml += `
+
+                <button
+                    class="modal-button danger"
+                    onclick='leaveGroup(${Number(group.id)})'>
+
+                    Leave Group
+
+                </button>
+
+            `;
+
+        }
+
+    }else{
+
+        if(
+            group.privacy === "private" &&
+            fee > 0
+        ){
+
+            actionHtml += `
+
+                <div class="info-box">
+
+                    <strong>Private paid group</strong><br>
+
+                    Joining this group requires a payment of
+                    <strong>KES ${formatMoney(fee)}</strong>.
+
+                    Your payment will need to be completed
+                    through the payment provider before access
+                    is granted.
+
+                </div>
+
+                <button
+                    class="modal-button"
+                    onclick='requestPrivateGroup(${Number(group.id)})'>
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    Continue to Payment
+
+                </button>
+
+            `;
+
+        }else{
+
+            actionHtml += `
+
+                <button
+                    class="modal-button"
+                    onclick='joinPublicGroup(${Number(group.id)})'>
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                    Join Group
+
+                </button>
+
+            `;
+
+        }
+
+    }
+
+
+    if(isOwner){
+
+        actionHtml += `
+
+            <button
+                class="modal-button danger"
+                onclick='deleteGroup(${Number(group.id)})'>
+
+                <i class="fa-solid fa-trash"></i>
+
+                Delete Group
+
+            </button>
+
+        `;
+
+    }
+
+
+    container.innerHTML = `
+
+        <div class="group-detail-top">
+
+            <div class="detail-group-avatar">
+
+                ${
+                    picture
+                        ? `<img src="${escapeHtml(picture)}" alt="">`
+                        : initial
+                }
+
+            </div>
+
+            <div class="detail-group-name">
+                ${escapeHtml(name)}
+            </div>
+
+            <div class="detail-group-description">
+                ${
+                    escapeHtml(
+                        group.description ||
+                        "No group description."
+                    )
+                }
+            </div>
+
+        </div>
+
+
+        <div class="detail-stats">
+
+            <div class="detail-stat">
+
+                <strong>
+                    ${Number(group.memberCount || 0)}
+                </strong>
+
+                <span>
+                    Members
+                </span>
+
+            </div>
+
+
+            <div class="detail-stat">
+
+                <strong>
+                    ${
+                        group.privacy === "private"
+                            ? "Private"
+                            : "Public"
+                    }
+                </strong>
+
+                <span>
+                    Privacy
+                </span>
+
+            </div>
+
+
+            <div class="detail-stat">
+
+                <strong>
+                    ${
+                        fee > 0
+                            ? "KES " + formatMoney(fee)
+                            : "Free"
+                    }
+                </strong>
+
+                <span>
+                    Join fee
+                </span>
+
+            </div>
+
+        </div>
+
+
+        ${
+            group.privacy === "private"
+                ? `
+                    <div class="info-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        This is a private VibeChat group.
+
+                    </div>
+                  `
+                : ""
+        }
+
+
+        ${
+            group.isMember
+                ? `
+                    <div class="detail-section">
+
+                        <div class="detail-section-title">
+                            Members
+                        </div>
+
+                        ${membersHtml}
+
+                    </div>
+                  `
+                : ""
+        }
+
+
+        <div class="detail-actions">
+
+            ${actionHtml}
+
+        </div>
+
+    `;
+
+}
+
+
+function closeGroupDetails(){
+
+    document
+        .getElementById("groupDetailsModal")
+        .classList.remove("show");
+
+}
+
+
+/* =========================================================
+   JOIN GROUP
+========================================================= */
+
+async function handleGroupJoin(groupId){
+
+    try{
+
+        const response =
+            await fetch(
+                `${API_URL}/api/groups/${encodeURIComponent(groupId)}?userId=${encodeURIComponent(currentUser.id)}`
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok){
+
+            throw new Error(
+                data.message ||
+                "Unable to load group"
+            );
+
+        }
+
+
+        const group =
+            data.group;
+
+
+        if(
+            group.privacy === "private" &&
+            Number(group.joiningFee) > 0
+        ){
+
+            await requestPrivateGroup(
+                groupId
+            );
+
+        }else{
+
+            await joinPublicGroup(
+                groupId
+            );
+
+        }
+
+    }catch(error){
+
+        showToast(
+            error.message ||
+            "Unable to join group",
+            "error"
+        );
+
+    }
+
+}
+
+
+async function joinPublicGroup(groupId){
+
+    try{
+
+        const response =
+            await fetch(
+                `${API_URL}/api/groups/${encodeURIComponent(groupId)}/join`,
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        userId:
+                            currentUser.id
+
+                    })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok){
+
+            if(data.paymentRequired){
+
+                showToast(
+                    `Payment required: KES ${formatMoney(data.joiningFee)}`,
+                    "error"
+                );
+
+            }else{
+
+                throw new Error(
+                    data.message ||
+                    "Unable to join group"
+                );
+
+            }
+
+            return;
+
+        }
+
+
+        showToast(
+            "You joined the group",
+            "success"
+        );
+
+
+        currentGroupTab =
+            "mine";
+
+
+        switchGroupTab(
+            "mine"
+        );
+
+    }catch(error){
+
+        console.error(
+            "Join group error:",
+            error
+        );
+
+
+        showToast(
+            error.message ||
+            "Unable to join group",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   PRIVATE GROUP PAYMENT REQUEST
+========================================================= */
+
+async function requestPrivateGroup(groupId){
+
+    try{
+
+        const response =
+            await fetch(
+                `${API_URL}/api/groups/${encodeURIComponent(groupId)}/request`,
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        userId:
+                            currentUser.id
+
+                    })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok){
+
+            throw new Error(
+                data.message ||
+                "Unable to start group payment"
+            );
+
+        }
+
+
+        if(data.paymentRequired){
+
+            closeGroupDetails();
+
+
+            showToast(
+                `Payment request created for KES ${formatMoney(data.payment?.amount || 0)}. Payment provider connection is the next step.`,
+                "success"
+            );
+
+
+            await loadGroups();
+
+            return;
+
+        }
+
+
+        showToast(
+            data.message ||
+            "Join request submitted
