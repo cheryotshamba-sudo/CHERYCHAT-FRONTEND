@@ -4315,4 +4315,892 @@ async function requestPrivateGroup(groupId){
 
         showToast(
             data.message ||
-            "Join request submitted
+            "Join request submitted",
+            "success"
+        );
+
+
+        closeGroupDetails();
+
+        await loadGroups();
+
+    }catch(error){
+
+        console.error(
+            "Private group payment error:",
+            error
+        );
+
+
+        showToast(
+            error.message ||
+            "Unable to start payment",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   GROUP CHAT
+========================================================= */
+
+async function openGroupChatById(groupId){
+
+    try{
+
+        const response =
+            await fetch(
+                `${API_URL}/api/groups/${encodeURIComponent(groupId)}?userId=${encodeURIComponent(currentUser.id)}`
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok){
+
+            throw new Error(
+                data.message ||
+                "Unable to open group"
+            );
+
+        }
+
+
+        const group =
+            data.group;
+
+
+        if(!group.isMember){
+
+            showToast(
+                "You must be an active member to open this group chat.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        activeGroup =
+            group;
+
+
+        setupGroupChatHeader();
+
+
+        document
+            .getElementById("groupScreen")
+            .classList.add("show");
+
+
+        await loadGroupMessages();
+
+        startGroupMessageRefresh();
+
+    }catch(error){
+
+        console.error(
+            "Open group chat error:",
+            error
+        );
+
+
+        showToast(
+            error.message ||
+            "Unable to open group",
+            "error"
+        );
+
+    }
+
+}
+
+
+function setupGroupChatHeader(){
+
+    if(!activeGroup)
+        return;
+
+
+    const name =
+        activeGroup.name ||
+        "Group";
+
+
+    const picture =
+        activeGroup.groupPicture ||
+        "";
+
+
+    const avatar =
+        document.getElementById(
+            "groupChatAvatar"
+        );
+
+
+    if(picture){
+
+        avatar.innerHTML =
+            `<img src="${escapeHtml(picture)}" alt="">`;
+
+    }else{
+
+        avatar.textContent =
+            name.charAt(0).toUpperCase();
+
+    }
+
+
+    document.getElementById(
+        "groupChatName"
+    ).textContent = name;
+
+
+    document.getElementById(
+        "groupChatMembers"
+    ).textContent =
+        `${Number(activeGroup.memberCount || 0)} members`;
+
+}
+
+
+async function loadGroupMessages(){
+
+    if(
+        !activeGroup ||
+        !currentUser
+    )
+        return;
+
+
+    try{
+
+        const response =
+            await fetch(
+                `${API_URL}/api/groups/${encodeURIComponent(activeGroup.id)}/messages?userId=${encodeURIComponent(currentUser.id)}`
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok){
+
+            throw new Error(
+                data.message ||
+                "Unable to load group messages"
+            );
+
+        }
+
+
+        renderGroupMessages(
+            data.messages || []
+        );
+
+    }catch(error){
+
+        console.error(
+            "Group messages error:",
+            error
+        );
+
+    }
+
+}
+
+
+function renderGroupMessages(messages){
+
+    const container =
+        document.getElementById(
+            "groupMessages"
+        );
+
+
+    container.innerHTML =
+        messages.map(message => {
+
+            const senderId =
+                Number(
+                    message.senderId
+                );
+
+
+            const mine =
+                senderId ===
+                Number(currentUser.id);
+
+
+            const senderName =
+                message.senderName ||
+                "User";
+
+
+            const picture =
+                message.senderPicture ||
+                "";
+
+
+            const initial =
+                senderName
+                    .charAt(0)
+                    .toUpperCase();
+
+
+            return `
+
+                <div class="group-message-row ${
+                    mine
+                        ? "mine"
+                        : ""
+                }">
+
+                    ${
+                        !mine
+                            ? `
+                                <div class="group-message-avatar">
+
+                                    ${
+                                        picture
+                                            ? `<img src="${escapeHtml(picture)}" alt="">`
+                                            : initial
+                                    }
+
+                                </div>
+                              `
+                            : ""
+                    }
+
+
+                    <div class="group-message-content">
+
+                        ${
+                            !mine
+                                ? `
+                                    <div class="group-message-sender">
+                                        ${escapeHtml(senderName)}
+                                    </div>
+                                  `
+                                : ""
+                        }
+
+                        <div class="group-message">
+
+                            ${escapeHtml(
+                                message.message ||
+                                ""
+                            )}
+
+                            <div class="group-message-time">
+
+                                ${formatMessageTime(
+                                    message.createdAt
+                                )}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+
+    container.scrollTop =
+        container.scrollHeight;
+
+}
+
+
+document
+    .getElementById("groupMessageForm")
+    .addEventListener(
+        "submit",
+        async function(event){
+
+            event.preventDefault();
+
+
+            if(
+                !activeGroup ||
+                !currentUser
+            )
+                return;
+
+
+            const input =
+                document.getElementById(
+                    "groupMessageInput"
+                );
+
+
+            const message =
+                input.value.trim();
+
+
+            if(!message)
+                return;
+
+
+            try{
+
+                const response =
+                    await fetch(
+                        `${API_URL}/api/groups/${encodeURIComponent(activeGroup.id)}/messages`,
+                        {
+                            method:"POST",
+
+                            headers:{
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:JSON.stringify({
+
+                                senderId:
+                                    currentUser.id,
+
+                                message:
+                                    message
+
+                            })
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if(!response.ok){
+
+                    throw new Error(
+                        data.message ||
+                        "Unable to send group message"
+                    );
+
+                }
+
+
+                input.value = "";
+
+                await loadGroupMessages();
+
+
+            }catch(error){
+
+                console.error(
+                    "Group send error:",
+                    error
+                );
+
+
+                showToast(
+                    error.message ||
+                    "Unable to send message",
+                    "error"
+                );
+
+            }
+
+        }
+    );
+
+
+function startGroupMessageRefresh(){
+
+    stopGroupMessageRefresh();
+
+
+    activeGroupMessagesTimer =
+        setInterval(
+            async () => {
+
+                if(activeGroup){
+
+                    await loadGroupMessages();
+
+                }
+
+            },
+            3000
+        );
+
+}
+
+
+function stopGroupMessageRefresh(){
+
+    if(activeGroupMessagesTimer){
+
+        clearInterval(
+            activeGroupMessagesTimer
+        );
+
+        activeGroupMessagesTimer = null;
+
+    }
+
+}
+
+
+function closeGroupChat(){
+
+    stopGroupMessageRefresh();
+
+
+    document
+        .getElementById("groupScreen")
+        .classList.remove("show");
+
+
+    activeGroup = null;
+
+}
+
+
+/* =========================================================
+   ACTIVE GROUP DETAILS
+========================================================= */
+
+function openActiveGroupDetails(){
+
+    if(!activeGroup)
+        return;
+
+
+    closeGroupChat();
+
+    openGroupDetailsById(
+        activeGroup.id
+    );
+
+}
+
+
+/* =========================================================
+   LEAVE GROUP
+========================================================= */
+
+async function leaveGroup(groupId){
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to leave this group?"
+        );
+
+
+    if(!confirmed)
+        return;
+
+
+    try{
+
+        const response =
+            await fetch(
+                `${API_URL}/api/groups/${encodeURIComponent(groupId)}/leave`,
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        userId:
+                            currentUser.id
+
+                    })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok){
+
+            throw new Error(
+                data.message ||
+                "Unable to leave group"
+            );
+
+        }
+
+
+        closeGroupDetails();
+
+
+        showToast(
+            "You left the group",
+            "success"
+        );
+
+
+        await loadGroups();
+
+    }catch(error){
+
+        console.error(
+            "Leave group error:",
+            error
+        );
+
+
+        showToast(
+            error.message ||
+            "Unable to leave group",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   DELETE GROUP
+========================================================= */
+
+async function deleteGroup(groupId){
+
+    const confirmed =
+        confirm(
+            "Delete this group permanently?"
+        );
+
+
+    if(!confirmed)
+        return;
+
+
+    try{
+
+        const response =
+            await fetch(
+                `${API_URL}/api/groups/${encodeURIComponent(groupId)}`,
+                {
+                    method:"DELETE",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        ownerId:
+                            currentUser.id
+
+                    })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok){
+
+            throw new Error(
+                data.message ||
+                "Unable to delete group"
+            );
+
+        }
+
+
+        closeGroupDetails();
+
+
+        showToast(
+            "Group deleted",
+            "success"
+        );
+
+
+        await loadGroups();
+
+    }catch(error){
+
+        console.error(
+            "Delete group error:",
+            error
+        );
+
+
+        showToast(
+            error.message ||
+            "Unable to delete group",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+function openMenu(){
+
+    document
+        .getElementById("sideMenu")
+        .classList.add("show");
+
+
+    document
+        .getElementById("sideMenuOverlay")
+        .classList.add("show");
+
+}
+
+
+function closeMenu(){
+
+    document
+        .getElementById("sideMenu")
+        .classList.remove("show");
+
+
+    document
+        .getElementById("sideMenuOverlay")
+        .classList.remove("show");
+
+}
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+function toggleTheme(){
+
+    document.body.classList.toggle(
+        "light"
+    );
+
+
+    localStorage.setItem(
+        THEME_KEY,
+        document.body.classList.contains(
+            "light"
+        )
+            ? "light"
+            : "dark"
+    );
+
+}
+
+
+function loadSavedTheme(){
+
+    const theme =
+        localStorage.getItem(
+            THEME_KEY
+        );
+
+
+    if(theme === "light"){
+
+        document.body.classList.add(
+            "light"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+async function logout(){
+
+    stopMessageRefresh();
+
+    stopGroupMessageRefresh();
+
+
+    if(currentUser){
+
+        try{
+
+            await fetch(
+                `${API_URL}/api/users/logout-status`,
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        userId:
+                            currentUser.id
+
+                    })
+
+                }
+            );
+
+        }catch(error){
+
+            console.error(
+                "Logout status error:",
+                error
+            );
+
+        }
+
+    }
+
+
+    localStorage.removeItem(
+        CURRENT_USER_KEY
+    );
+
+    localStorage.removeItem(
+        LOGIN_KEY
+    );
+
+
+    window.location.replace(
+        "login.html"
+    );
+
+}
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function escapeHtml(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+function safeJson(value){
+
+    return JSON.stringify(value)
+        .replace(/'/g,"&#39;");
+
+}
+
+
+function formatTime(value){
+
+    const date =
+        new Date(value);
+
+
+    if(isNaN(date.getTime()))
+        return "";
+
+
+    return date.toLocaleDateString(
+        [],
+        {
+            day:"numeric",
+            month:"short"
+        }
+    );
+
+}
+
+
+function formatMessageTime(value){
+
+    const date =
+        new Date(value);
+
+
+    if(isNaN(date.getTime()))
+        return "";
+
+
+    return date.toLocaleTimeString(
+        [],
+        {
+            hour:"numeric",
+            minute:"2-digit"
+        }
+    );
+
+}
+
+
+function formatMoney(value){
+
+    const number =
+        Number(value || 0);
+
+
+    return number.toLocaleString(
+        "en-KE",
+        {
+            minimumFractionDigits:0,
+            maximumFractionDigits:2
+        }
+    );
+
+}
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async () => {
+
+        const authenticated =
+            await loadUser();
+
+
+        if(!authenticated)
+            return;
+
+
+        await loadConversations();
+
+    }
+);
+
+</script>
+
+</body>
+</html>
