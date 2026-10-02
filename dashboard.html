@@ -2230,79 +2230,293 @@ function saveCurrentUser(){
 /* =========================================================
    PROFILE UI
 ========================================================= */
+async function uploadProfilePicture(input) {
 
-function updateProfileUI(){
+    const file = input.files?.[0];
 
-    if(!currentUser) return;
+    if (!file) return;
 
-    const picture =
-        currentUser.profilePicture ||
-        currentUser.profile_picture ||
-        createAvatar(
-            currentUser.fullName ||
-            currentUser.full_name
+    /* ---------------------------------------------------------
+       CHECK IMAGE TYPE
+    --------------------------------------------------------- */
+
+    const allowedTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/webp"
+    ];
+
+    if (!allowedTypes.includes(file.type)) {
+
+        showToast(
+            "Please select a JPG, PNG or WEBP image."
         );
 
-    const name =
-        currentUser.fullName ||
-        currentUser.full_name ||
-        "User";
+        input.value = "";
+        return;
+    }
 
-    const about =
-        currentUser.about ||
-        "Hey there! I am using VibeChat.";
+    /* ---------------------------------------------------------
+       CHECK ORIGINAL FILE SIZE
+    --------------------------------------------------------- */
 
-    document.getElementById(
-        "yourStoryImage"
-    ).src = picture;
+    if (file.size > 10 * 1024 * 1024) {
 
-    document.getElementById(
-        "storiesProfileImage"
-    ).src = picture;
+        showToast(
+            "Please choose an image smaller than 10MB."
+        );
 
-    document.getElementById(
-        "profileImage"
-    ).src = picture;
+        input.value = "";
+        return;
+    }
 
-    document.getElementById(
-        "profileName"
-    ).textContent = name;
+    /* ---------------------------------------------------------
+       READ IMAGE
+    --------------------------------------------------------- */
 
-    document.getElementById(
-        "profileAbout"
-    ).textContent = about;
+    const reader = new FileReader();
 
-    document.getElementById(
-        "editFullName"
-    ).value = name;
+    reader.onload = function () {
 
-    document.getElementById(
-        "editAbout"
-    ).value = about;
+        const image = new Image();
 
-    document.getElementById(
-        "profileEmail"
-    ).value =
-        currentUser.email || "";
+        image.onload = async function () {
 
-    document.getElementById(
-        "profilePhone"
-    ).value =
-        currentUser.phone || "";
+            try {
 
-    document.getElementById(
-        "menuProfileImage"
-    ).src = picture;
+                /* -------------------------------------------------
+                   RESIZE IMAGE
+                   Maximum dimension: 800px
+                ------------------------------------------------- */
 
-    document.getElementById(
-        "menuProfileName"
-    ).textContent = name;
+                const MAX_SIZE = 800;
 
-    document.getElementById(
-        "menuProfileAbout"
-    ).textContent = about;
+                let width = image.width;
+                let height = image.height;
 
+                if (width > MAX_SIZE || height > MAX_SIZE) {
+
+                    if (width > height) {
+
+                        height =
+                            Math.round(
+                                height *
+                                (MAX_SIZE / width)
+                            );
+
+                        width = MAX_SIZE;
+
+                    } else {
+
+                        width =
+                            Math.round(
+                                width *
+                                (MAX_SIZE / height)
+                            );
+
+                        height = MAX_SIZE;
+                    }
+                }
+
+                /* -------------------------------------------------
+                   CREATE CANVAS
+                ------------------------------------------------- */
+
+                const canvas =
+                    document.createElement("canvas");
+
+                canvas.width = width;
+                canvas.height = height;
+
+                const ctx =
+                    canvas.getContext("2d");
+
+                ctx.drawImage(
+                    image,
+                    0,
+                    0,
+                    width,
+                    height
+                );
+
+                /* -------------------------------------------------
+                   COMPRESS TO JPEG
+                ------------------------------------------------- */
+
+                const compressedImage =
+                    canvas.toDataURL(
+                        "image/jpeg",
+                        0.82
+                    );
+
+                /* -------------------------------------------------
+                   FINAL SIZE CHECK
+                ------------------------------------------------- */
+
+                const base64Length =
+                    compressedImage.split(",")[1]?.length || 0;
+
+                const estimatedBytes =
+                    Math.ceil(
+                        (base64Length * 3) / 4
+                    );
+
+                if (
+                    estimatedBytes >
+                    2 * 1024 * 1024
+                ) {
+
+                    showToast(
+                        "Image is still too large. Please choose another photo."
+                    );
+
+                    input.value = "";
+                    return;
+                }
+
+                /* -------------------------------------------------
+                   SHOW PREVIEW IMMEDIATELY
+                ------------------------------------------------- */
+
+                const profileImage =
+                    document.getElementById(
+                        "profileImage"
+                    );
+
+                if (profileImage) {
+
+                    profileImage.src =
+                        compressedImage;
+                }
+
+                const menuProfileImage =
+                    document.getElementById(
+                        "menuProfileImage"
+                    );
+
+                if (menuProfileImage) {
+
+                    menuProfileImage.src =
+                        compressedImage;
+                }
+
+                const yourStoryImage =
+                    document.getElementById(
+                        "yourStoryImage"
+                    );
+
+                if (yourStoryImage) {
+
+                    yourStoryImage.src =
+                        compressedImage;
+                }
+
+                const storiesProfileImage =
+                    document.getElementById(
+                        "storiesProfileImage"
+                    );
+
+                if (storiesProfileImage) {
+
+                    storiesProfileImage.src =
+                        compressedImage;
+                }
+
+                /* -------------------------------------------------
+                   UPLOAD TO VIBECHAT BACKEND
+                ------------------------------------------------- */
+
+                showToast(
+                    "Uploading profile picture..."
+                );
+
+                const response =
+                    await fetch(
+                        `${API_URL}/api/users/${currentUser.id}/profile-picture`,
+                        {
+                            method: "PUT",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                profilePicture:
+                                    compressedImage
+                            })
+                        }
+                    );
+
+                const data =
+                    await response.json();
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.message ||
+                        "Unable to update profile picture."
+                    );
+                }
+
+                /* -------------------------------------------------
+                   SAVE UPDATED USER
+                ------------------------------------------------- */
+
+                currentUser =
+                    data.user ||
+                    currentUser;
+
+                saveCurrentUser();
+
+                /* -------------------------------------------------
+                   UPDATE ALL VIBECHAT PROFILE LOCATIONS
+                ------------------------------------------------- */
+
+                updateProfileUI();
+
+                showToast(
+                    "Profile picture updated successfully."
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "PROFILE PICTURE ERROR:",
+                    error
+                );
+
+                showToast(
+                    error.message ||
+                    "Unable to update profile picture."
+                );
+            }
+        };
+
+        image.onerror = function () {
+
+            showToast(
+                "Unable to read this image."
+            );
+
+            input.value = "";
+        };
+
+        image.src = reader.result;
+    };
+
+    reader.onerror = function () {
+
+        showToast(
+            "Unable to read the selected image."
+        );
+
+        input.value = "";
+    };
+
+    reader.readAsDataURL(file);
 }
+
 
 
 /* =========================================================
