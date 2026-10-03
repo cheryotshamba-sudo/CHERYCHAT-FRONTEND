@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
 
     <title>VibeChat</title>
 
@@ -13,7 +16,10 @@
     <link rel="apple-touch-icon" href="./icon-192.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
 
     <link
         rel="stylesheet"
@@ -50,6 +56,10 @@
         button {
             border: none;
             cursor: pointer;
+        }
+
+        img {
+            max-width: 100%;
         }
 
         .app {
@@ -396,6 +406,12 @@
             font-weight: 700;
         }
 
+        .drawer-user-name {
+            color: #ffffff;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+
         .drawer-menu {
             display: flex;
             flex-direction: column;
@@ -574,6 +590,13 @@
             border-bottom-left-radius: 4px;
         }
 
+        .message-time {
+            display: block;
+            font-size: 9px;
+            opacity: 0.65;
+            margin-top: 4px;
+        }
+
         .chat-input-area {
             display: flex;
             gap: 8px;
@@ -599,6 +622,7 @@
             border-radius: 50%;
             background: #ffd54a;
             color: #170c20;
+            flex-shrink: 0;
         }
 
         /* STORIES */
@@ -608,6 +632,11 @@
             gap: 12px;
             overflow-x: auto;
             padding: 3px 2px 15px;
+            scrollbar-width: none;
+        }
+
+        .story-bar::-webkit-scrollbar {
+            display: none;
         }
 
         .story-item {
@@ -616,6 +645,7 @@
             text-align: center;
             color: #aaa2b1;
             font-size: 10px;
+            cursor: pointer;
         }
 
         .story-image {
@@ -633,6 +663,14 @@
             border-style: dashed;
         }
 
+        .story-unviewed .story-image {
+            border-color: #ffd54a;
+        }
+
+        .story-viewed .story-image {
+            border-color: #665c70;
+        }
+
         .story-media {
             width: 100%;
             max-height: 65vh;
@@ -641,43 +679,17 @@
             border-radius: 12px;
         }
 
-        /* PROFILE */
-
-        .profile-card {
-            text-align: center;
-            padding: 25px 15px;
-        }
-
-        .profile-picture-wrap {
-            position: relative;
-            width: 90px;
-            height: 90px;
-            margin: 0 auto 12px;
-        }
-
-        .profile-picture-wrap img {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #ffd54a;
-        }
-
-        .profile-name {
-            font-size: 20px;
-            font-weight: 700;
-        }
-
-        .profile-about {
-            color: #9d96aa;
+        .story-caption {
+            margin-top: 12px;
             font-size: 13px;
-            margin-top: 4px;
+            color: #dddddd;
+            line-height: 1.5;
         }
 
-        .profile-contact {
-            color: #777080;
+        .story-view-count {
+            color: #9d96aa;
             font-size: 11px;
-            margin-top: 5px;
+            margin-top: 8px;
         }
 
         /* GROUP */
@@ -706,6 +718,25 @@
             color: #ffd54a;
             font-size: 10px;
             margin-top: 3px;
+        }
+
+        .group-messages {
+            max-height: 48vh;
+            overflow-y: auto;
+            padding: 5px 0;
+        }
+
+        .group-member-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 0;
+            border-bottom: 1px solid #251635;
+        }
+
+        .member-role {
+            color: #ffd54a;
+            font-size: 10px;
         }
 
         /* LIGHT THEME */
@@ -738,7 +769,8 @@
             border-color: #ddd5e4;
         }
 
-        body.light-theme .list-item {
+        body.light-theme .list-item,
+        body.light-theme .group-member-row {
             border-color: #e5dfe9;
         }
 
@@ -756,6 +788,10 @@
 
         body.light-theme .drawer-item:hover {
             background: #eee9f1;
+        }
+
+        body.light-theme .drawer-user-name {
+            color: #17111d;
         }
 
         body.light-theme .search-box input,
@@ -800,7 +836,6 @@
     <!-- HEADER -->
     <header class="header">
 
-        <!-- LEFT SIDE MENU -->
         <button class="menu-button" id="menuButton">
             <i class="fa-solid fa-ellipsis-vertical"></i>
         </button>
@@ -831,6 +866,7 @@
 
                 <div class="search-box">
                     <i class="fa-solid fa-magnifying-glass"></i>
+
                     <input
                         type="text"
                         id="userSearch"
@@ -855,26 +891,35 @@
                 <div class="section-header">
 
                     <div>
-                        <div class="section-title">Groups</div>
+                        <div class="section-title">
+                            Groups
+                        </div>
+
                         <div class="section-subtitle">
                             Find and chat in VibeChat groups
                         </div>
                     </div>
 
-                    <button class="button-icon" id="createGroupButton">
+                    <button
+                        class="button-icon"
+                        id="createGroupButton"
+                    >
                         <i class="fa-solid fa-plus"></i>
                     </button>
 
                 </div>
 
                 <div class="search-box">
+
                     <i class="fa-solid fa-magnifying-glass"></i>
+
                     <input
                         type="text"
                         id="groupSearch"
                         placeholder="Search groups..."
                         autocomplete="off"
                     >
+
                 </div>
 
                 <div id="groupsList"></div>
@@ -891,13 +936,19 @@
                 <div class="section-header">
 
                     <div>
-                        <div class="section-title">Stories</div>
+                        <div class="section-title">
+                            Stories
+                        </div>
+
                         <div class="section-subtitle">
                             Photos and videos disappear after 24 hours
                         </div>
                     </div>
 
-                    <button class="button-icon" id="addStoryButton">
+                    <button
+                        class="button-icon"
+                        id="addStoryButton"
+                    >
                         <i class="fa-solid fa-plus"></i>
                     </button>
 
@@ -922,7 +973,7 @@
 
     </main>
 
-    <!-- BOTTOM NAVIGATION -->
+    <!-- BOTTOM NAV -->
     <nav class="bottom-nav">
 
         <button
@@ -961,7 +1012,7 @@
 
 </div>
 
-<!-- SIDE DRAWER -->
+<!-- DRAWER -->
 <div class="drawer" id="drawer">
 
     <div class="drawer-panel">
@@ -975,13 +1026,18 @@
             >
 
             <div>
+
                 <div class="drawer-brand">
                     VibeChat
                 </div>
 
-                <div class="section-subtitle">
+                <div
+                    class="drawer-user-name"
+                    id="drawerUserName"
+                >
                     Chat, connect and vibe
                 </div>
+
             </div>
 
         </div>
@@ -1045,12 +1101,18 @@
 <!-- GENERAL MODAL -->
 <div class="modal" id="modal">
 
-    <div class="modal-box" id="modalBox"></div>
+    <div
+        class="modal-box"
+        id="modalBox"
+    ></div>
 
 </div>
 
 <!-- PRIVATE CHAT -->
-<div class="chat-screen" id="chatScreen">
+<div
+    class="chat-screen"
+    id="chatScreen"
+>
 
     <div class="chat-header">
 
@@ -1113,18 +1175,27 @@
 </div>
 
 <script>
-    const API_URL = "https://cherychat-backend.onrender.com";
+    const API_URL =
+        "https://cherychat-backend.onrender.com";
 
     let currentUser = null;
     let currentChatUser = null;
     let currentGroup = null;
     let currentStories = [];
+    let currentStoryGroups = [];
     let currentGroups = [];
+
     let messageRefreshTimer = null;
+    let groupRefreshTimer = null;
     let groupSearchTimer = null;
     let userSearchTimer = null;
 
-    const $ = (id) => document.getElementById(id);
+    const $ = (id) =>
+        document.getElementById(id);
+
+    /* =========================
+       HELPERS
+    ========================= */
 
     function escapeHTML(value) {
         return String(value ?? "")
@@ -1135,15 +1206,28 @@
             .replace(/'/g, "&#039;");
     }
 
+    function avatarFor(name) {
+        return `https://ui-avatars.com/api/?name=${encodeURIComponent(
+            name || "VibeChat User"
+        )}&background=211332&color=ffd54a`;
+    }
+
     function getStoredUser() {
         try {
-            const newUser = localStorage.getItem("vibeChatCurrentUser");
 
-            if (newUser) {
-                return JSON.parse(newUser);
+            const user =
+                localStorage.getItem(
+                    "vibeChatCurrentUser"
+                );
+
+            if (user) {
+                return JSON.parse(user);
             }
 
-            const oldUser = localStorage.getItem("cheryChatCurrentUser");
+            const oldUser =
+                localStorage.getItem(
+                    "cheryChatCurrentUser"
+                );
 
             if (oldUser) {
                 return JSON.parse(oldUser);
@@ -1156,17 +1240,23 @@
         }
     }
 
-    currentUser = getStoredUser();
+    currentUser =
+        getStoredUser();
 
     if (!currentUser) {
-        window.location.href = "login.html";
+        window.location.href =
+            "login.html";
     }
 
     function userId() {
-        return currentUser?.id || currentUser?.userId;
+        return (
+            currentUser?.id ||
+            currentUser?.userId
+        );
     }
 
     function saveUser(user) {
+
         currentUser = user;
 
         localStorage.setItem(
@@ -1178,62 +1268,104 @@
             "cheryChatCurrentUser",
             JSON.stringify(user)
         );
+
+        updateDrawerUser();
     }
 
-    async function apiRequest(endpoint, options = {}) {
+    function updateDrawerUser() {
 
-        const response = await fetch(
-            API_URL + endpoint,
-            {
-                ...options,
-                headers: {
-                    "Content-Type": "application/json",
-                    ...(options.headers || {})
+        const name =
+            currentUser?.fullName ||
+            currentUser?.full_name ||
+            "VibeChat User";
+
+        const picture =
+            currentUser?.profilePicture ||
+            currentUser?.profile_picture ||
+            avatarFor(name);
+
+        $("drawerLogo").src =
+            picture;
+
+        $("drawerUserName").textContent =
+            name;
+    }
+
+    async function apiRequest(
+        endpoint,
+        options = {}
+    ) {
+
+        const response =
+            await fetch(
+                API_URL + endpoint,
+                {
+                    ...options,
+                    headers: {
+                        "Content-Type":
+                            "application/json",
+                        ...(options.headers || {})
+                    }
                 }
-            }
-        );
+            );
 
         let data = {};
 
         try {
-            data = await response.json();
+            data =
+                await response.json();
         } catch (error) {
             data = {};
         }
 
         if (!response.ok) {
+
             throw new Error(
-                data.message || "Something went wrong."
+                data.message ||
+                "Something went wrong."
             );
         }
 
         return data;
     }
 
+    /* =========================
+       NAVIGATION
+    ========================= */
+
     function showPage(pageId) {
 
         document
             .querySelectorAll(".page")
             .forEach((page) => {
-                page.classList.remove("active");
+                page.classList.remove(
+                    "active"
+                );
             });
 
-        const selectedPage = $(pageId);
+        const page =
+            $(pageId);
 
-        if (selectedPage) {
-            selectedPage.classList.add("active");
+        if (page) {
+            page.classList.add(
+                "active"
+            );
         }
 
         document
             .querySelectorAll(".nav-button")
             .forEach((button) => {
+
                 button.classList.toggle(
                     "active",
-                    button.dataset.page === pageId
+                    button.dataset.page ===
+                        pageId
                 );
+
             });
 
-        $("drawer").classList.remove("show");
+        $("drawer")
+            .classList.remove("show");
 
         if (pageId === "chatsPage") {
             loadConversations();
@@ -1253,62 +1385,126 @@
     }
 
     document
-        .querySelectorAll(".nav-button, .drawer-item[data-page]")
+        .querySelectorAll(
+            ".nav-button, .drawer-item[data-page]"
+        )
         .forEach((button) => {
 
-            button.addEventListener("click", () => {
-                showPage(button.dataset.page);
-            });
+            button.addEventListener(
+                "click",
+                () => {
+                    showPage(
+                        button.dataset.page
+                    );
+                }
+            );
 
         });
 
-    $("menuButton").addEventListener("click", () => {
-        $("drawer").classList.add("show");
-    });
-
-    $("drawer").addEventListener("click", (event) => {
-
-        if (event.target === $("drawer")) {
-            $("drawer").classList.remove("show");
+    $("menuButton").addEventListener(
+        "click",
+        () => {
+            $("drawer")
+                .classList.add("show");
         }
+    );
 
-    });
+    $("drawer").addEventListener(
+        "click",
+        (event) => {
 
-    $("refreshButton").addEventListener("click", () => {
+            if (
+                event.target ===
+                $("drawer")
+            ) {
+                $("drawer")
+                    .classList.remove(
+                        "show"
+                    );
+            }
 
-        const activePage =
-            document.querySelector(".page.active");
-
-        if (activePage) {
-            showPage(activePage.id);
         }
+    );
 
-    });
+    $("refreshButton").addEventListener(
+        "click",
+        () => {
 
-    $("themeButton").addEventListener("click", () => {
+            const activePage =
+                document.querySelector(
+                    ".page.active"
+                );
 
-        document.body.classList.toggle("light-theme");
+            if (activePage) {
+                showPage(
+                    activePage.id
+                );
+            }
 
-        localStorage.setItem(
-            "vibeChatTheme",
-            document.body.classList.contains("light-theme")
-                ? "light"
-                : "dark"
-        );
+        }
+    );
 
-    });
+    /* =========================
+       THEME
+    ========================= */
 
-    if (
-        localStorage.getItem("vibeChatTheme") === "light"
-    ) {
-        document.body.classList.add("light-theme");
+    function applyTheme() {
+
+        const theme =
+            localStorage.getItem(
+                "vibeChatTheme"
+            );
+
+        if (theme === "light") {
+
+            document.body.classList.add(
+                "light-theme"
+            );
+
+        } else {
+
+            document.body.classList.remove(
+                "light-theme"
+            );
+
+        }
     }
 
-    $("logoutButton").addEventListener("click", logout);
+    applyTheme();
+
+    $("themeButton").addEventListener(
+        "click",
+        () => {
+
+            document.body.classList.toggle(
+                "light-theme"
+            );
+
+            localStorage.setItem(
+                "vibeChatTheme",
+                document.body.classList.contains(
+                    "light-theme"
+                )
+                    ? "light"
+                    : "dark"
+            );
+
+        }
+    );
+
+    /* =========================
+       LOGOUT
+    ========================= */
+
+    $("logoutButton").addEventListener(
+        "click",
+        logout
+    );
 
     async function logout() {
 
         try {
+
             await apiRequest(
                 `/api/users/${userId()}/offline`,
                 {
@@ -1316,14 +1512,33 @@
                     body: JSON.stringify({})
                 }
             );
+
         } catch (error) {
-            // Continue with logout even if online status fails.
+            // Continue logout.
         }
 
-        localStorage.removeItem("vibeChatCurrentUser");
-        localStorage.removeItem("cheryChatCurrentUser");
+        localStorage.removeItem(
+            "vibeChatCurrentUser"
+        );
 
-        window.location.href = "index.html";
+        localStorage.removeItem(
+            "cheryChatCurrentUser"
+        );
+
+        if (messageRefreshTimer) {
+            clearInterval(
+                messageRefreshTimer
+            );
+        }
+
+        if (groupRefreshTimer) {
+            clearInterval(
+                groupRefreshTimer
+            );
+        }
+
+        window.location.href =
+            "index.html";
     }
 
     /* =========================
@@ -1332,25 +1547,34 @@
 
     function openModal(content) {
 
-        $("modalBox").innerHTML = content;
+        $("modalBox").innerHTML =
+            content;
 
-        $("modal").classList.add("show");
+        $("modal")
+            .classList.add("show");
     }
 
     function closeModal() {
 
-        $("modal").classList.remove("show");
+        $("modal")
+            .classList.remove("show");
 
         $("modalBox").innerHTML = "";
     }
 
-    $("modal").addEventListener("click", (event) => {
+    $("modal").addEventListener(
+        "click",
+        (event) => {
 
-        if (event.target === $("modal")) {
-            closeModal();
+            if (
+                event.target ===
+                $("modal")
+            ) {
+                closeModal();
+            }
+
         }
-
-    });
+    );
 
     /* =========================
        CONVERSATIONS
@@ -1360,14 +1584,23 @@
 
         try {
 
-            const data = await apiRequest(
-                `/api/conversations?userId=${encodeURIComponent(userId())}`
-            );
+            const data =
+                await apiRequest(
+                    `/api/conversations?userId=${encodeURIComponent(
+                        userId()
+                    )}`
+                );
 
             const conversations =
-                data.conversations || data || [];
+                data.conversations ||
+                data ||
+                [];
 
-            if (!conversations.length) {
+            if (!Array.isArray(
+                conversations
+            ) ||
+                !conversations.length
+            ) {
 
                 $("chatList").innerHTML = `
                     <div class="empty">
@@ -1383,91 +1616,134 @@
                 return;
             }
 
-            $("chatList").innerHTML = conversations
-                .map((conversation, index) => {
+            $("chatList").innerHTML =
+                conversations
+                    .map(
+                        (
+                            conversation,
+                            index
+                        ) => {
 
-                    const other =
-                        conversation.otherUser ||
-                        conversation.other_user ||
-                        conversation.user ||
-                        conversation;
+                            const other =
+                                conversation.otherUser ||
+                                conversation.other_user ||
+                                {};
 
-                    const name =
-                        other.fullName ||
-                        other.full_name ||
-                        "VibeChat User";
+                            const name =
+                                other.fullName ||
+                                other.full_name ||
+                                "VibeChat User";
 
-                    const picture =
-                        other.profilePicture ||
-                        other.profile_picture ||
-                        `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=211332&color=ffd54a`;
+                            const picture =
+                                other.profilePicture ||
+                                other.profile_picture ||
+                                avatarFor(name);
 
-                    const preview =
-                        conversation.lastMessage ||
-                        conversation.last_message ||
-                        "Start chatting";
+                            const preview =
+                                conversation.lastMessage ||
+                                conversation.last_message ||
+                                "Start chatting";
 
-                    const online =
-                        other.isOnline ||
-                        other.is_online;
+                            const online =
+                                other.isOnline ||
+                                other.is_online;
 
-                    return `
-                        <div
-                            class="list-item conversation-item"
-                            data-index="${index}"
-                        >
+                            return `
+                                <div
+                                    class="list-item conversation-item"
+                                    data-index="${index}"
+                                >
 
-                            <img
-                                class="avatar"
-                                src="${picture}"
-                                alt=""
-                            >
+                                    <img
+                                        class="avatar"
+                                        src="${picture}"
+                                        alt=""
+                                        onerror="this.src=avatarFor('${escapeHTML(
+                                            name
+                                        )}')"
+                                    >
 
-                            <div class="list-content">
+                                    <div class="list-content">
 
-                                <div class="list-name">
-                                    ${escapeHTML(name)}
+                                        <div class="list-name">
+                                            ${escapeHTML(
+                                                name
+                                            )}
+
+                                            ${
+                                                online
+                                                    ? `<span class="online-dot"></span>`
+                                                    : ""
+                                            }
+                                        </div>
+
+                                        <div class="list-preview">
+                                            ${escapeHTML(
+                                                preview
+                                            )}
+                                        </div>
+
+                                    </div>
 
                                     ${
-                                        online
-                                            ? `<span class="online-dot"></span>`
+                                        conversation.lastMessageTime
+                                            ? `
+                                                <div
+                                                    style="
+                                                        color:#777080;
+                                                        font-size:9px;
+                                                        align-self:flex-start;
+                                                        margin-top:5px;
+                                                    "
+                                                >
+                                                    ${formatTime(
+                                                        conversation.lastMessageTime
+                                                    )}
+                                                </div>
+                                            `
                                             : ""
                                     }
+
                                 </div>
-
-                                <div class="list-preview">
-                                    ${escapeHTML(preview)}
-                                </div>
-
-                            </div>
-
-                        </div>
-                    `;
-                })
-                .join("");
+                            `;
+                        }
+                    )
+                    .join("");
 
             document
-                .querySelectorAll(".conversation-item")
-                .forEach((item) => {
+                .querySelectorAll(
+                    ".conversation-item"
+                )
+                .forEach(
+                    (item) => {
 
-                    item.addEventListener("click", () => {
+                        item.addEventListener(
+                            "click",
+                            () => {
 
-                        const conversation =
-                            conversations[
-                                Number(item.dataset.index)
-                            ];
+                                const conversation =
+                                    conversations[
+                                        Number(
+                                            item.dataset
+                                                .index
+                                        )
+                                    ];
 
-                        const other =
-                            conversation.otherUser ||
-                            conversation.other_user ||
-                            conversation.user ||
-                            conversation;
+                                const other =
+                                    conversation.otherUser ||
+                                    conversation.other_user;
 
-                        openPrivateChat(other);
+                                if (other) {
+                                    openPrivateChat(
+                                        other
+                                    );
+                                }
 
-                    });
+                            }
+                        );
 
-                });
+                    }
+                );
 
         } catch (error) {
 
@@ -1475,10 +1751,38 @@
                 <div class="empty">
                     <i class="fa-solid fa-triangle-exclamation"></i>
                     <h3>Unable to load chats</h3>
-                    <p>${escapeHTML(error.message)}</p>
+                    <p>
+                        ${escapeHTML(
+                            error.message
+                        )}
+                    </p>
                 </div>
             `;
         }
+    }
+
+    function formatTime(value) {
+
+        if (!value) {
+            return "";
+        }
+
+        const date =
+            new Date(value);
+
+        if (Number.isNaN(
+            date.getTime()
+        )) {
+            return "";
+        }
+
+        return date.toLocaleTimeString(
+            [],
+            {
+                hour: "2-digit",
+                minute: "2-digit"
+            }
+        );
     }
 
     /* =========================
@@ -1489,40 +1793,58 @@
         "input",
         (event) => {
 
-            clearTimeout(userSearchTimer);
+            clearTimeout(
+                userSearchTimer
+            );
 
             const query =
                 event.target.value.trim();
 
             if (!query) {
-                $("searchResults").innerHTML = "";
+
+                $("searchResults")
+                    .innerHTML = "";
+
                 return;
             }
 
-            userSearchTimer = setTimeout(
-                () => searchUsers(query),
-                350
-            );
-
+            userSearchTimer =
+                setTimeout(
+                    () => {
+                        searchUsers(
+                            query
+                        );
+                    },
+                    350
+                );
         }
     );
 
-    async function searchUsers(query) {
+    async function searchUsers(
+        query
+    ) {
 
         try {
 
-            const data = await apiRequest(
-                `/api/users/search?q=${encodeURIComponent(query)}&userId=${encodeURIComponent(userId())}`
-            );
+            const data =
+                await apiRequest(
+                    `/api/users/search?q=${encodeURIComponent(
+                        query
+                    )}&userId=${encodeURIComponent(
+                        userId()
+                    )}`
+                );
 
             const users =
-                data.users || data || [];
+                data.users ||
+                data ||
+                [];
 
             if (!users.length) {
 
                 $("searchResults").innerHTML = `
                     <div class="card">
-                        <div class="muted">
+                        <div class="list-preview">
                             No VibeChat users found.
                         </div>
                     </div>
@@ -1535,76 +1857,109 @@
                 <div class="card">
 
                     ${users
-                        .map((user, index) => {
+                        .map(
+                            (
+                                user,
+                                index
+                            ) => {
 
-                            const name =
-                                user.fullName ||
-                                user.full_name ||
-                                "User";
+                                const name =
+                                    user.fullName ||
+                                    user.full_name ||
+                                    "User";
 
-                            const picture =
-                                user.profilePicture ||
-                                user.profile_picture ||
-                                `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=211332&color=ffd54a`;
+                                const picture =
+                                    user.profilePicture ||
+                                    user.profile_picture ||
+                                    avatarFor(
+                                        name
+                                    );
 
-                            return `
-                                <div
-                                    class="list-item search-user"
-                                    data-index="${index}"
-                                >
+                                const online =
+                                    user.isOnline ||
+                                    user.is_online;
 
-                                    <img
-                                        class="avatar"
-                                        src="${picture}"
-                                        alt=""
+                                return `
+                                    <div
+                                        class="list-item search-user"
+                                        data-index="${index}"
                                     >
 
-                                    <div class="list-content">
+                                        <img
+                                            class="avatar"
+                                            src="${picture}"
+                                            alt=""
+                                        >
 
-                                        <div class="list-name">
-                                            ${escapeHTML(name)}
+                                        <div class="list-content">
+
+                                            <div class="list-name">
+                                                ${escapeHTML(
+                                                    name
+                                                )}
+
+                                                ${
+                                                    online
+                                                        ? `<span class="online-dot"></span>`
+                                                        : ""
+                                                }
+                                            </div>
+
+                                            <div class="list-preview">
+                                                ${escapeHTML(
+                                                    user.about ||
+                                                    ""
+                                                )}
+                                            </div>
+
                                         </div>
 
-                                        <div class="list-preview">
-                                            ${escapeHTML(user.about || "")}
-                                        </div>
+                                        <button
+                                            class="button"
+                                            type="button"
+                                        >
+                                            Chat
+                                        </button>
 
                                     </div>
-
-                                    <button
-                                        class="button"
-                                        type="button"
-                                    >
-                                        Chat
-                                    </button>
-
-                                </div>
-                            `;
-                        })
+                                `;
+                            }
+                        )
                         .join("")}
 
                 </div>
             `;
 
             document
-                .querySelectorAll(".search-user")
-                .forEach((item) => {
+                .querySelectorAll(
+                    ".search-user"
+                )
+                .forEach(
+                    (item) => {
 
-                    item.addEventListener("click", () => {
+                        item.addEventListener(
+                            "click",
+                            () => {
 
-                        openPrivateChat(
-                            users[
-                                Number(item.dataset.index)
-                            ]
+                                openPrivateChat(
+                                    users[
+                                        Number(
+                                            item.dataset
+                                                .index
+                                        )
+                                    ]
+                                );
+
+                            }
                         );
 
-                    });
-
-                });
+                    }
+                );
 
         } catch (error) {
 
-            $("searchResults").innerHTML = "";
+            $("searchResults")
+                .innerHTML = "";
         }
     }
 
@@ -1612,9 +1967,12 @@
        PRIVATE CHAT
     ========================= */
 
-    async function openPrivateChat(otherUser) {
+    async function openPrivateChat(
+        otherUser
+    ) {
 
-        currentChatUser = otherUser;
+        currentChatUser =
+            otherUser;
 
         const name =
             otherUser.fullName ||
@@ -1624,19 +1982,22 @@
         const picture =
             otherUser.profilePicture ||
             otherUser.profile_picture ||
-            `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=211332&color=ffd54a`;
+            avatarFor(name);
 
-        $("chatAvatar").src = picture;
+        $("chatAvatar").src =
+            picture;
 
-        $("chatName").textContent = name;
+        $("chatName").textContent =
+            name;
 
         $("chatStatus").innerHTML =
             otherUser.isOnline ||
             otherUser.is_online
                 ? `<span style="color:#22c55e">online</span>`
-                : "";
+                : "offline";
 
-        $("chatScreen").classList.add("show");
+        $("chatScreen")
+            .classList.add("show");
 
         try {
 
@@ -1645,7 +2006,8 @@
                 {
                     method: "POST",
                     body: JSON.stringify({
-                        userId: userId(),
+                        userId:
+                            userId(),
                         otherUserId:
                             otherUser.id ||
                             otherUser.userId
@@ -1660,13 +2022,16 @@
         await loadPrivateMessages();
 
         if (messageRefreshTimer) {
-            clearInterval(messageRefreshTimer);
+            clearInterval(
+                messageRefreshTimer
+            );
         }
 
-        messageRefreshTimer = setInterval(
-            loadPrivateMessages,
-            3000
-        );
+        messageRefreshTimer =
+            setInterval(
+                loadPrivateMessages,
+                3000
+            );
     }
 
     $("chatBackButton").addEventListener(
@@ -1676,11 +2041,17 @@
 
     function closePrivateChat() {
 
-        $("chatScreen").classList.remove("show");
+        $("chatScreen")
+            .classList.remove("show");
 
         if (messageRefreshTimer) {
-            clearInterval(messageRefreshTimer);
-            messageRefreshTimer = null;
+
+            clearInterval(
+                messageRefreshTimer
+            );
+
+            messageRefreshTimer =
+                null;
         }
 
         currentChatUser = null;
@@ -1698,12 +2069,19 @@
                 currentChatUser.id ||
                 currentChatUser.userId;
 
-            const data = await apiRequest(
-                `/api/messages?userId=${encodeURIComponent(userId())}&otherUserId=${encodeURIComponent(otherId)}`
-            );
+            const data =
+                await apiRequest(
+                    `/api/messages?userId=${encodeURIComponent(
+                        userId()
+                    )}&otherUserId=${encodeURIComponent(
+                        otherId
+                    )}`
+                );
 
             const messages =
-                data.messages || data || [];
+                data.messages ||
+                data ||
+                [];
 
             if (!messages.length) {
 
@@ -1711,7 +2089,9 @@
                     <div class="empty">
                         <i class="fa-regular fa-message"></i>
                         <h3>No messages yet</h3>
-                        <p>Say hello and start the conversation.</p>
+                        <p>
+                            Say hello and start the conversation.
+                        </p>
                     </div>
                 `;
 
@@ -1720,28 +2100,57 @@
 
             $("chatMessages").innerHTML =
                 messages
-                    .map((message) => {
+                    .map(
+                        (message) => {
 
-                        const senderId =
-                            message.senderId ||
-                            message.sender_id;
+                            const senderId =
+                                message.senderId ??
+                                message.sender_id;
 
-                        const text =
-                            message.messageText ||
-                            message.message_text ||
-                            "";
+                            const text =
+                                message.messageText ??
+                                message.message_text ??
+                                "";
 
-                        const mine =
-                            String(senderId) ===
-                            String(userId());
+                            const mine =
+                                String(
+                                    senderId
+                                ) ===
+                                String(
+                                    userId()
+                                );
 
-                        return `
-                            <div class="message-bubble ${mine ? "mine" : "theirs"}">
-                                ${escapeHTML(text)}
-                            </div>
-                        `;
+                            const time =
+                                message.createdAt ||
+                                message.created_at;
 
-                    })
+                            return `
+                                <div
+                                    class="message-bubble ${
+                                        mine
+                                            ? "mine"
+                                            : "theirs"
+                                    }"
+                                >
+                                    ${escapeHTML(
+                                        text
+                                    )}
+
+                                    ${
+                                        time
+                                            ? `
+                                                <span class="message-time">
+                                                    ${formatTime(
+                                                        time
+                                                    )}
+                                                </span>
+                                            `
+                                            : ""
+                                    }
+                                </div>
+                            `;
+                        }
+                    )
                     .join("");
 
             $("chatMessages").scrollTop =
@@ -1752,13 +2161,16 @@
                 {
                     method: "PUT",
                     body: JSON.stringify({
-                        userId: userId(),
+                        userId:
+                            userId(),
                         otherUserId:
                             currentChatUser.id ||
                             currentChatUser.userId
                     })
                 }
-            ).catch(() => {});
+            ).catch(
+                () => {}
+            );
 
         } catch (error) {
 
@@ -1772,12 +2184,16 @@
 
     async function sendPrivateMessage() {
 
-        const input = $("messageInput");
+        const input =
+            $("messageInput");
 
         const text =
             input.value.trim();
 
-        if (!text || !currentChatUser) {
+        if (
+            !text ||
+            !currentChatUser
+        ) {
             return;
         }
 
@@ -1790,11 +2206,13 @@
                 {
                     method: "POST",
                     body: JSON.stringify({
-                        senderId: userId(),
+                        senderId:
+                            userId(),
                         receiverId:
                             currentChatUser.id ||
                             currentChatUser.userId,
-                        messageText: text
+                        messageText:
+                            text
                     })
                 }
             );
@@ -1803,7 +2221,11 @@
 
         } catch (error) {
 
-            alert(error.message);
+            input.value = text;
+
+            alert(
+                error.message
+            );
         }
     }
 
@@ -1816,8 +2238,13 @@
         "keydown",
         (event) => {
 
-            if (event.key === "Enter") {
+            if (
+                event.key ===
+                "Enter"
+            ) {
+
                 event.preventDefault();
+
                 sendPrivateMessage();
             }
 
@@ -1826,34 +2253,92 @@
 
     /* =========================
        STORIES
+       MATCHES /api/stories
     ========================= */
 
     async function loadStories() {
 
         try {
 
-            const data = await apiRequest(
-                `/api/stories?userId=${encodeURIComponent(userId())}`
-            );
+            const data =
+                await apiRequest(
+                    `/api/stories?userId=${encodeURIComponent(
+                        userId()
+                    )}`
+                );
 
             currentStories =
-                data.stories || data || [];
+                Array.isArray(
+                    data.stories
+                )
+                    ? data.stories
+                    : [];
 
-            if (!currentStories.length) {
+            currentStoryGroups =
+                Array.isArray(
+                    data.users
+                )
+                    ? data.users
+                    : [];
+
+            if (
+                !currentStories.length
+            ) {
 
                 $("storiesList").innerHTML = `
+                    <div class="story-bar">
+
+                        <div
+                            class="story-item story-add"
+                            id="storyAddItem"
+                        >
+                            <img
+                                class="story-image"
+                                src="${
+                                    currentUser.profilePicture ||
+                                    currentUser.profile_picture ||
+                                    avatarFor(
+                                        currentUser.fullName ||
+                                        currentUser.full_name ||
+                                        "VibeChat User"
+                                    )
+                                }"
+                                alt=""
+                            >
+
+                            <div>
+                                Add story
+                            </div>
+
+                        </div>
+
+                    </div>
+
                     <div class="empty">
                         <i class="fa-solid fa-circle-play"></i>
-                        <h3>No stories yet</h3>
+
+                        <h3>
+                            No stories yet
+                        </h3>
+
                         <p>
-                            Share a photo or video with
-                            your VibeChat friends.
+                            Share a photo or video
+                            with your VibeChat friends.
                         </p>
                     </div>
                 `;
 
+                $("storyAddItem").onclick =
+                    openAddStory;
+
                 return;
             }
+
+            /*
+             * The backend returns grouped stories
+             * in data.users. We use that to create
+             * one story circle per user.
+             */
 
             $("storiesList").innerHTML = `
                 <div class="story-bar">
@@ -1862,80 +2347,133 @@
                         class="story-item story-add"
                         id="storyAddItem"
                     >
+
                         <img
                             class="story-image"
                             src="${
                                 currentUser.profilePicture ||
                                 currentUser.profile_picture ||
-                                "./icon-192.png"
+                                avatarFor(
+                                    currentUser.fullName ||
+                                    currentUser.full_name ||
+                                    "VibeChat User"
+                                )
                             }"
                             alt=""
                         >
 
-                        <div>Add story</div>
+                        <div>
+                            Add story
+                        </div>
+
                     </div>
 
-                    ${currentStories
-                        .map((story, index) => {
+                    ${currentStoryGroups
+                        .map(
+                            (
+                                group,
+                                index
+                            ) => {
 
-                            const name =
-                                story.fullName ||
-                                "User";
+                                const name =
+                                    group.fullName ||
+                                    "User";
 
-                            const picture =
-                                story.profilePicture ||
-                                `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=211332&color=ffd54a`;
+                                const picture =
+                                    group.profilePicture ||
+                                    avatarFor(
+                                        name
+                                    );
 
-                            return `
-                                <div
-                                    class="story-item story-view"
-                                    data-index="${index}"
-                                >
+                                const stories =
+                                    group.stories ||
+                                    [];
 
-                                    <img
-                                        class="story-image"
-                                        src="${picture}"
-                                        alt=""
+                                const hasUnviewed =
+                                    stories.some(
+                                        (story) =>
+                                            !story.viewedByMe &&
+                                            !story.isOwn
+                                    );
+
+                                return `
+                                    <div
+                                        class="story-item ${
+                                            hasUnviewed
+                                                ? "story-unviewed"
+                                                : "story-viewed"
+                                        } story-user"
+                                        data-index="${index}"
                                     >
 
-                                    <div>
-                                        ${escapeHTML(name)}
-                                    </div>
+                                        <img
+                                            class="story-image"
+                                            src="${picture}"
+                                            alt=""
+                                        >
 
-                                </div>
-                            `;
-                        })
+                                        <div>
+                                            ${escapeHTML(
+                                                name
+                                            )}
+                                        </div>
+
+                                    </div>
+                                `;
+                            }
+                        )
                         .join("")}
 
                 </div>
             `;
 
-            $("storyAddItem").addEventListener(
-                "click",
-                openAddStory
-            );
+            $("storyAddItem").onclick =
+                openAddStory;
 
             document
-                .querySelectorAll(".story-view")
-                .forEach((item) => {
+                .querySelectorAll(
+                    ".story-user"
+                )
+                .forEach(
+                    (item) => {
 
-                    item.addEventListener("click", () => {
+                        item.addEventListener(
+                            "click",
+                            () => {
 
-                        openStory(
-                            currentStories[
-                                Number(item.dataset.index)
-                            ]
+                                const group =
+                                    currentStoryGroups[
+                                        Number(
+                                            item.dataset
+                                                .index
+                                        )
+                                    ];
+
+                                openStoryGroup(
+                                    group
+                                );
+
+                            }
                         );
 
-                    });
-
-                });
+                    }
+                );
 
         } catch (error) {
 
             $("storiesList").innerHTML = `
                 <div class="empty">
-                    Unable to load stories.
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+
+                    <h3>
+                        Unable to load stories
+                    </h3>
+
+                    <p>
+                        ${escapeHTML(
+                            error.message
+                        )}
+                    </p>
                 </div>
             `;
         }
@@ -1951,7 +2489,9 @@
         openModal(`
             <div class="modal-header">
 
-                <h3>Add Story</h3>
+                <h3>
+                    Add Story
+                </h3>
 
                 <button
                     class="close-button"
@@ -2017,12 +2557,18 @@
             $("storyCaption").value.trim();
 
         if (!file) {
-            alert("Choose a photo or video.");
+
+            alert(
+                "Choose a photo or video."
+            );
+
             return;
         }
 
         const isVideo =
-            file.type.startsWith("video/");
+            file.type.startsWith(
+                "video/"
+            );
 
         const maxSize =
             isVideo
@@ -2052,7 +2598,8 @@
                     {
                         method: "POST",
                         body: JSON.stringify({
-                            userId: userId(),
+                            userId:
+                                userId(),
                             mediaType:
                                 isVideo
                                     ? "video"
@@ -2070,196 +2617,358 @@
 
             } catch (error) {
 
-                alert(error.message);
+                alert(
+                    error.message
+                );
             }
         };
 
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(
+            file
+        );
     }
 
-    function openStory(story) {
+    function openStoryGroup(
+        group
+    ) {
 
-        const media =
-            story.mediaType === "video"
-                ? `
-                    <video
-                        class="story-media"
-                        src="${story.mediaData}"
-                        controls
-                        autoplay
-                    ></video>
-                `
-                : `
-                    <img
-                        class="story-media"
-                        src="${story.mediaData}"
-                        alt="Story"
+        const stories =
+            group.stories ||
+            [];
+
+        if (!stories.length) {
+            return;
+        }
+
+        let index = 0;
+
+        function showCurrentStory() {
+
+            const story =
+                stories[index];
+
+            const name =
+                story.fullName ||
+                group.fullName ||
+                "User";
+
+            const picture =
+                story.profilePicture ||
+                group.profilePicture ||
+                avatarFor(name);
+
+            const media =
+                story.mediaType ===
+                "video"
+                    ? `
+                        <video
+                            class="story-media"
+                            src="${story.mediaData}"
+                            controls
+                            autoplay
+                            playsinline
+                        ></video>
+                    `
+                    : `
+                        <img
+                            class="story-media"
+                            src="${story.mediaData}"
+                            alt="Story"
+                        >
+                    `;
+
+            openModal(`
+                <div class="modal-header">
+
+                    <div
+                        style="
+                            display:flex;
+                            align-items:center;
+                            gap:10px;
+                        "
                     >
-                `;
 
-        openModal(`
-            <div class="modal-header">
+                        <img
+                            src="${picture}"
+                            style="
+                                width:40px;
+                                height:40px;
+                                border-radius:50%;
+                                object-fit:cover;
+                            "
+                            alt=""
+                        >
 
-                <div>
+                        <div>
 
-                    <div class="list-name">
-                        ${escapeHTML(
-                            story.fullName || "User"
-                        )}
+                            <div class="list-name">
+                                ${escapeHTML(
+                                    name
+                                )}
+                            </div>
+
+                            <div class="section-subtitle">
+                                ${
+                                    story.createdAt
+                                        ? new Date(
+                                              story.createdAt
+                                          ).toLocaleString()
+                                        : ""
+                                }
+                            </div>
+
+                        </div>
+
                     </div>
 
-                    <div class="section-subtitle">
-                        ${
-                            story.createdAt
-                                ? new Date(
-                                      story.createdAt
-                                  ).toLocaleString()
-                                : ""
-                        }
-                    </div>
+                    <button
+                        class="close-button"
+                        id="closeStoryView"
+                    >
+                        ×
+                    </button>
 
                 </div>
 
-                <button
-                    class="close-button"
-                    id="closeStoryView"
-                >
-                    ×
-                </button>
+                ${media}
 
-            </div>
+                ${
+                    story.caption
+                        ? `
+                            <div class="story-caption">
+                                ${escapeHTML(
+                                    story.caption
+                                )}
+                            </div>
+                        `
+                        : ""
+                }
 
-            ${media}
+                <div class="story-view-count">
+                    <i class="fa-solid fa-eye"></i>
+                    ${Number(
+                        story.viewCount || 0
+                    )} views
+                </div>
 
-            ${
-                story.caption
-                    ? `
-                        <p
-                            style="
-                                margin-top:12px;
-                                font-size:13px;
-                                color:#ddd;
-                            "
-                        >
-                            ${escapeHTML(
-                                story.caption
-                            )}
-                        </p>
-                    `
-                    : ""
-            }
+                <div class="button-row">
 
-            ${
-                story.isOwn
-                    ? `
-                        <button
-                            class="button danger"
-                            id="deleteStoryButton"
-                            style="
-                                width:100%;
-                                margin-top:14px;
-                            "
-                        >
-                            Delete Story
-                        </button>
-                    `
-                    : ""
-            }
-        `);
+                    ${
+                        stories.length > 1
+                            ? `
+                                <button
+                                    class="button secondary"
+                                    id="previousStoryButton"
+                                >
+                                    <i class="fa-solid fa-arrow-left"></i>
+                                    Previous
+                                </button>
 
-        $("closeStoryView").onclick =
-            closeModal;
-
-        apiRequest(
-            `/api/stories/${story.id}/view`,
-            {
-                method: "POST",
-                body: JSON.stringify({
-                    userId: userId()
-                })
-            }
-        ).catch(() => {});
-
-        if (story.isOwn) {
-
-            $("deleteStoryButton").onclick =
-                async () => {
-
-                    if (
-                        !confirm(
-                            "Delete this story?"
-                        )
-                    ) {
-                        return;
+                                <button
+                                    class="button"
+                                    id="nextStoryButton"
+                                >
+                                    Next
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            `
+                            : ""
                     }
 
-                    try {
+                </div>
 
-                        await apiRequest(
-                            `/api/stories/${story.id}`,
-                            {
-                                method: "DELETE",
-                                body: JSON.stringify({
-                                    userId: userId()
-                                })
-                            }
-                        );
+                ${
+                    story.isOwn
+                        ? `
+                            <button
+                                class="button danger"
+                                id="deleteStoryButton"
+                                style="
+                                    width:100%;
+                                    margin-top:10px;
+                                "
+                            >
+                                <i class="fa-solid fa-trash"></i>
+                                Delete Story
+                            </button>
+                        `
+                        : ""
+                }
+            `);
 
-                        closeModal();
+            $("closeStoryView").onclick =
+                closeModal;
 
-                        loadStories();
+            /*
+             * Record view for other users.
+             * The backend ignores the owner's
+             * own view.
+             */
 
-                    } catch (error) {
+            if (!story.isOwn) {
 
-                        alert(error.message);
+                apiRequest(
+                    `/api/stories/${story.id}/view`,
+                    {
+                        method: "POST",
+                        body: JSON.stringify({
+                            userId:
+                                userId()
+                        })
                     }
-                };
+                ).catch(
+                    () => {}
+                );
+            }
+
+            if (
+                stories.length > 1
+            ) {
+
+                $("previousStoryButton")
+                    .onclick = () => {
+
+                        index =
+                            (
+                                index -
+                                1 +
+                                stories.length
+                            ) %
+                            stories.length;
+
+                        showCurrentStory();
+                    };
+
+                $("nextStoryButton")
+                    .onclick = () => {
+
+                        index =
+                            (
+                                index +
+                                1
+                            ) %
+                            stories.length;
+
+                        showCurrentStory();
+                    };
+            }
+
+            if (
+                story.isOwn &&
+                $("deleteStoryButton")
+            ) {
+
+                $("deleteStoryButton")
+                    .onclick =
+                    async () => {
+
+                        if (
+                            !confirm(
+                                "Delete this story?"
+                            )
+                        ) {
+                            return;
+                        }
+
+                        try {
+
+                            await apiRequest(
+                                `/api/stories/${story.id}`,
+                                {
+                                    method:
+                                        "DELETE",
+                                    body:
+                                        JSON.stringify({
+                                            userId:
+                                                userId()
+                                        })
+                                }
+                            );
+
+                            closeModal();
+
+                            await loadStories();
+
+                        } catch (
+                            error
+                        ) {
+
+                            alert(
+                                error.message
+                            );
+                        }
+                    };
+            }
         }
+
+        showCurrentStory();
     }
 
     /* =========================
        GROUPS
     ========================= */
 
-    async function loadGroups(query = "") {
+    async function loadGroups(
+        query = ""
+    ) {
 
         try {
 
-            const endpoint =
-                `/api/groups?userId=${encodeURIComponent(userId())}` +
-                `&q=${encodeURIComponent(query)}`;
-
             const data =
-                await apiRequest(endpoint);
+                await apiRequest(
+                    `/api/groups?userId=${encodeURIComponent(
+                        userId()
+                    )}&q=${encodeURIComponent(
+                        query
+                    )}`
+                );
 
             currentGroups =
-                data.groups || data || [];
+                data.groups ||
+                data ||
+                [];
 
-            renderGroups(currentGroups);
+            renderGroups(
+                currentGroups
+            );
 
         } catch (error) {
 
             $("groupsList").innerHTML = `
                 <div class="empty">
                     <i class="fa-solid fa-users"></i>
-                    <h3>Unable to load groups</h3>
-                    <p>${escapeHTML(error.message)}</p>
+
+                    <h3>
+                        Unable to load groups
+                    </h3>
+
+                    <p>
+                        ${escapeHTML(
+                            error.message
+                        )}
+                    </p>
                 </div>
             `;
         }
     }
 
-    function renderGroups(groups) {
+    function renderGroups(
+        groups
+    ) {
 
         if (!groups.length) {
 
             $("groupsList").innerHTML = `
                 <div class="empty">
                     <i class="fa-solid fa-users"></i>
-                    <h3>No groups found</h3>
+
+                    <h3>
+                        No groups found
+                    </h3>
+
                     <p>
-                        Create a group or search for
-                        an existing group.
+                        Create a group or search
+                        for an existing group.
                     </p>
                 </div>
             `;
@@ -2269,152 +2978,191 @@
 
         $("groupsList").innerHTML =
             groups
-                .map((group, index) => {
+                .map(
+                    (
+                        group,
+                        index
+                    ) => {
 
-                    const isMember =
-                        group.isMember ||
-                        group.is_member;
+                        const membership =
+                            group.membership ||
+                            null;
 
-                    const memberCount =
-                        group.memberCount ||
-                        group.member_count ||
-                        0;
+                        const isMember =
+                            group.isMember ||
+                            group.is_member ||
+                            group.membership?.status ===
+                                "active" ||
+                            group.membership_status ===
+                                "active";
 
-                    const type =
-                        group.groupType ||
-                        group.group_type ||
-                        "public";
+                        const memberCount =
+                            Number(
+                                group.memberCount ||
+                                group.member_count ||
+                                0
+                            );
 
-                    return `
-                        <div class="card">
+                        const type =
+                            group.groupType ||
+                            group.group_type ||
+                            "public";
 
-                            <div
-                                style="
-                                    display:flex;
-                                    align-items:center;
-                                    gap:12px;
-                                "
-                            >
+                        return `
+                            <div class="card">
 
-                                <div class="group-icon">
-                                    <i class="fa-solid fa-users"></i>
+                                <div
+                                    style="
+                                        display:flex;
+                                        align-items:center;
+                                        gap:12px;
+                                    "
+                                >
+
+                                    <div class="group-icon">
+                                        <i class="fa-solid fa-users"></i>
+                                    </div>
+
+                                    <div class="list-content">
+
+                                        <div class="list-name">
+                                            ${escapeHTML(
+                                                group.name ||
+                                                "VibeChat Group"
+                                            )}
+                                        </div>
+
+                                        <div class="list-preview">
+                                            ${escapeHTML(
+                                                group.description ||
+                                                "No description"
+                                            )}
+                                        </div>
+
+                                        <div class="group-members">
+                                            ${memberCount}
+                                            members
+                                        </div>
+
+                                        <div class="group-type">
+                                            ${escapeHTML(
+                                                type
+                                            )}
+                                        </div>
+
+                                    </div>
+
                                 </div>
 
-                                <div class="list-content">
+                                <div class="button-row">
 
-                                    <div class="list-name">
-                                        ${escapeHTML(
-                                            group.name
-                                        )}
-                                    </div>
+                                    <button
+                                        class="button secondary group-view-button"
+                                        data-index="${index}"
+                                    >
+                                        View
+                                    </button>
 
-                                    <div class="list-preview">
-                                        ${escapeHTML(
-                                            group.description ||
-                                            "No description"
-                                        )}
-                                    </div>
-
-                                    <div class="group-members">
-                                        ${memberCount} members
-                                    </div>
-
-                                    <div class="group-type">
-                                        ${escapeHTML(type)}
-                                    </div>
+                                    <button
+                                        class="button group-join-button"
+                                        data-index="${index}"
+                                    >
+                                        ${
+                                            isMember
+                                                ? "Open"
+                                                : type ===
+                                                  "private"
+                                                ? "Request"
+                                                : "Join"
+                                        }
+                                    </button>
 
                                 </div>
 
                             </div>
-
-                            <div class="button-row">
-
-                                <button
-                                    class="button secondary group-view-button"
-                                    data-index="${index}"
-                                >
-                                    View
-                                </button>
-
-                                <button
-                                    class="button group-join-button"
-                                    data-index="${index}"
-                                >
-                                    ${
-                                        isMember
-                                            ? "Open"
-                                            : "Join"
-                                    }
-                                </button>
-
-                            </div>
-
-                        </div>
-                    `;
-                })
+                        `;
+                    }
+                )
                 .join("");
 
         document
-            .querySelectorAll(".group-view-button")
-            .forEach((button) => {
+            .querySelectorAll(
+                ".group-view-button"
+            )
+            .forEach(
+                (button) => {
 
-                button.addEventListener(
-                    "click",
-                    () => {
+                    button.addEventListener(
+                        "click",
+                        () => {
 
-                        viewGroup(
-                            currentGroups[
-                                Number(
-                                    button.dataset.index
-                                )
-                            ]
-                        );
+                            viewGroup(
+                                currentGroups[
+                                    Number(
+                                        button.dataset
+                                            .index
+                                    )
+                                ]
+                            );
 
-                    }
-                );
+                        }
+                    );
 
-            });
+                }
+            );
 
         document
-            .querySelectorAll(".group-join-button")
-            .forEach((button) => {
+            .querySelectorAll(
+                ".group-join-button"
+            )
+            .forEach(
+                (button) => {
 
-                button.addEventListener(
-                    "click",
-                    () => {
+                    button.addEventListener(
+                        "click",
+                        () => {
 
-                        joinGroup(
-                            currentGroups[
-                                Number(
-                                    button.dataset.index
-                                )
-                            ]
-                        );
+                            joinGroup(
+                                currentGroups[
+                                    Number(
+                                        button.dataset
+                                            .index
+                                    )
+                                ]
+                            );
 
-                    }
-                );
+                        }
+                    );
 
-            });
+                }
+            );
     }
 
     $("groupSearch").addEventListener(
         "input",
         (event) => {
 
-            clearTimeout(groupSearchTimer);
+            clearTimeout(
+                groupSearchTimer
+            );
 
             groupSearchTimer =
-                setTimeout(() => {
+                setTimeout(
+                    () => {
 
-                    loadGroups(
-                        event.target.value.trim()
-                    );
+                        loadGroups(
+                            event.target.value.trim()
+                        );
 
-                }, 350);
+                    },
+                    350
+                );
         }
     );
 
-    /* CREATE GROUP */
+    /* =========================
+       CREATE GROUP
+    ========================= */
 
     $("createGroupButton").addEventListener(
         "click",
@@ -2426,7 +3174,9 @@
         openModal(`
             <div class="modal-header">
 
-                <h3>Create Group</h3>
+                <h3>
+                    Create Group
+                </h3>
 
                 <button
                     class="close-button"
@@ -2477,6 +3227,7 @@
                     class="form-control"
                     id="groupType"
                 >
+
                     <option value="public">
                         Public
                     </option>
@@ -2484,6 +3235,7 @@
                     <option value="private">
                         Private
                     </option>
+
                 </select>
 
             </div>
@@ -2507,16 +3259,25 @@
     async function createGroup() {
 
         const name =
-            $("groupName").value.trim();
+            $("groupName")
+                .value
+                .trim();
 
         const description =
-            $("groupDescription").value.trim();
+            $("groupDescription")
+                .value
+                .trim();
 
         const groupType =
-            $("groupType").value;
+            $("groupType")
+                .value;
 
         if (!name) {
-            alert("Enter a group name.");
+
+            alert(
+                "Enter a group name."
+            );
+
             return;
         }
 
@@ -2527,12 +3288,14 @@
                     "/api/groups",
                     {
                         method: "POST",
-                        body: JSON.stringify({
-                            ownerId: userId(),
-                            name,
-                            description,
-                            groupType
-                        })
+                        body:
+                            JSON.stringify({
+                                ownerId:
+                                    userId(),
+                                name,
+                                description,
+                                groupType
+                            })
                     }
                 );
 
@@ -2541,42 +3304,60 @@
             await loadGroups();
 
             if (data.group) {
-                viewGroup(data.group);
+                viewGroup(
+                    data.group
+                );
             }
 
         } catch (error) {
 
-            alert(error.message);
+            alert(
+                error.message
+            );
         }
     }
 
-    async function joinGroup(group) {
-
-        const isMember =
-            group.isMember ||
-            group.is_member;
-
-        if (isMember) {
-            viewGroup(group);
-            return;
-        }
+    async function joinGroup(
+        group
+    ) {
 
         const type =
             group.groupType ||
             group.group_type ||
             "public";
 
+        const isMember =
+            group.isMember ||
+            group.is_member ||
+            group.membership?.status ===
+                "active";
+
+        if (isMember) {
+
+            viewGroup(
+                group
+            );
+
+            return;
+        }
+
         try {
 
-            if (type === "private") {
+            if (
+                type ===
+                "private"
+            ) {
 
                 await apiRequest(
                     `/api/groups/${group.id}/request`,
                     {
-                        method: "POST",
-                        body: JSON.stringify({
-                            userId: userId()
-                        })
+                        method:
+                            "POST",
+                        body:
+                            JSON.stringify({
+                                userId:
+                                    userId()
+                            })
                     }
                 );
 
@@ -2584,15 +3365,20 @@
                     "Your request to join the private group has been sent."
                 );
 
+                await loadGroups();
+
             } else {
 
                 await apiRequest(
                     `/api/groups/${group.id}/join`,
                     {
-                        method: "POST",
-                        body: JSON.stringify({
-                            userId: userId()
-                        })
+                        method:
+                            "POST",
+                        body:
+                            JSON.stringify({
+                                userId:
+                                    userId()
+                            })
                     }
                 );
 
@@ -2606,32 +3392,57 @@
 
         } catch (error) {
 
-            alert(error.message);
+            alert(
+                error.message
+            );
         }
     }
 
-    /* GROUP VIEW */
+    /* =========================
+       GROUP VIEW
+    ========================= */
 
-    async function viewGroup(group) {
+    async function viewGroup(
+        group
+    ) {
 
-        currentGroup = group;
+        currentGroup =
+            group;
 
         try {
 
             const data =
                 await apiRequest(
-                    `/api/groups/${group.id}?userId=${encodeURIComponent(userId())}`
+                    `/api/groups/${group.id}?userId=${encodeURIComponent(
+                        userId()
+                    )}`
                 );
 
             currentGroup =
-                data.group || group;
+                data.group ||
+                group;
 
         } catch (error) {
-            // Use existing group information.
+            // Keep existing group.
         }
 
         const groupData =
             currentGroup;
+
+        const membership =
+            groupData.membership ||
+            null;
+
+        const isMember =
+            groupData.isMember ||
+            groupData.is_member ||
+            membership?.status ===
+                "active";
+
+        const type =
+            groupData.groupType ||
+            groupData.group_type ||
+            "public";
 
         openModal(`
             <div class="modal-header">
@@ -2640,7 +3451,8 @@
 
                     <div class="list-name">
                         ${escapeHTML(
-                            groupData.name
+                            groupData.name ||
+                            "VibeChat Group"
                         )}
                     </div>
 
@@ -2662,52 +3474,246 @@
 
             </div>
 
-            <div id="groupMessages"></div>
-
             <div
-                class="chat-input-area"
                 style="
-                    padding:10px 0 0;
-                    border:0;
+                    display:flex;
+                    gap:8px;
+                    flex-wrap:wrap;
+                    margin-bottom:12px;
                 "
             >
 
-                <input
-                    class="chat-input"
-                    id="groupMessageInput"
-                    placeholder="Message group..."
-                    autocomplete="off"
+                <span
+                    style="
+                        color:#ffd54a;
+                        font-size:11px;
+                    "
                 >
+                    ${escapeHTML(
+                        type
+                    )}
+                </span>
 
-                <button
-                    class="send-button"
-                    id="sendGroupMessageButton"
-                >
-                    <i class="fa-solid fa-paper-plane"></i>
-                </button>
+                ${
+                    isMember
+                        ? `
+                            <span
+                                style="
+                                    color:#22c55e;
+                                    font-size:11px;
+                                "
+                            >
+                                Member
+                            </span>
+                        `
+                        : `
+                            <span
+                                style="
+                                    color:#9d96aa;
+                                    font-size:11px;
+                                "
+                            >
+                                Not a member
+                            </span>
+                        `
+                }
 
             </div>
+
+            ${
+                isMember
+                    ? `
+                        <div
+                            class="group-messages"
+                            id="groupMessages"
+                        >
+                            <div class="empty">
+                                Loading messages...
+                            </div>
+                        </div>
+
+                        <div
+                            class="chat-input-area"
+                            style="
+                                padding:10px 0 0;
+                                border:0;
+                            "
+                        >
+
+                            <input
+                                class="chat-input"
+                                id="groupMessageInput"
+                                placeholder="Message group..."
+                                autocomplete="off"
+                            >
+
+                            <button
+                                class="send-button"
+                                id="sendGroupMessageButton"
+                            >
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+
+                        </div>
+
+                        <div
+                            class="button-row"
+                        >
+
+                            <button
+                                class="button secondary"
+                                id="groupMembersButton"
+                            >
+                                <i class="fa-solid fa-users"></i>
+                                Members
+                            </button>
+
+                            <button
+                                class="button secondary"
+                                id="groupInviteButton"
+                            >
+                                <i class="fa-solid fa-link"></i>
+                                Invite
+                            </button>
+
+                        </div>
+
+                        <div
+                            class="button-row"
+                        >
+
+                            <button
+                                class="button secondary"
+                                id="groupEditButton"
+                            >
+                                Edit
+                            </button>
+
+                            <button
+                                class="button danger"
+                                id="groupLeaveButton"
+                            >
+                                Leave
+                            </button>
+
+                        </div>
+                    `
+                    : `
+                        <div class="empty">
+                            <i class="fa-solid fa-lock"></i>
+
+                            <h3>
+                                ${
+                                    type === "private"
+                                        ? "Private Group"
+                                        : "Join this group"
+                                }
+                            </h3>
+
+                            <p>
+                                ${
+                                    type === "private"
+                                        ? "Request to join this private group to participate."
+                                        : "Join this group to start chatting."
+                                }
+                            </p>
+                        </div>
+
+                        <button
+                            class="button"
+                            id="groupJoinFromView"
+                            style="width:100%;"
+                        >
+                            ${
+                                type === "private"
+                                    ? "Request to Join"
+                                    : "Join Group"
+                            }
+                        </button>
+                    `
+            }
         `);
 
         $("closeGroupModal").onclick =
             closeModal;
 
-        $("sendGroupMessageButton").onclick =
+        if (!isMember) {
+
+            $("groupJoinFromView")
+                .onclick =
+                async () => {
+
+                    await joinGroup(
+                        groupData
+                    );
+
+                    if (
+                        currentGroup &&
+                        currentGroup.id ===
+                            groupData.id
+                    ) {
+
+                        closeModal();
+
+                    }
+                };
+
+            return;
+        }
+
+        $("sendGroupMessageButton")
+            .onclick =
             sendGroupMessage;
 
-        $("groupMessageInput").addEventListener(
-            "keydown",
-            (event) => {
+        $("groupMessageInput")
+            .addEventListener(
+                "keydown",
+                (event) => {
 
-                if (event.key === "Enter") {
-                    event.preventDefault();
-                    sendGroupMessage();
+                    if (
+                        event.key ===
+                        "Enter"
+                    ) {
+
+                        event.preventDefault();
+
+                        sendGroupMessage();
+                    }
+
                 }
+            );
 
-            }
-        );
+        $("groupMembersButton")
+            .onclick =
+            () => {
+                loadGroupMembers();
+            };
+
+        $("groupInviteButton")
+            .onclick =
+            getGroupInvite;
+
+        $("groupEditButton")
+            .onclick =
+            openEditGroup;
+
+        $("groupLeaveButton")
+            .onclick =
+            leaveGroup;
 
         await loadGroupMessages();
+
+        if (groupRefreshTimer) {
+            clearInterval(
+                groupRefreshTimer
+            );
+        }
+
+        groupRefreshTimer =
+            setInterval(
+                loadGroupMessages,
+                5000
+            );
     }
 
     async function loadGroupMessages() {
@@ -2716,83 +3722,110 @@
             return;
         }
 
+        const container =
+            $("groupMessages");
+
+        if (!container) {
+            return;
+        }
+
         try {
 
             const data =
                 await apiRequest(
-                    `/api/groups/${currentGroup.id}/messages?userId=${encodeURIComponent(userId())}`
+                    `/api/groups/${currentGroup.id}/messages?userId=${encodeURIComponent(
+                        userId()
+                    )}`
                 );
 
             const messages =
-                data.messages || data || [];
+                data.messages ||
+                data ||
+                [];
 
             if (!messages.length) {
 
-                $("groupMessages").innerHTML = `
+                container.innerHTML = `
                     <div class="empty">
                         <i class="fa-solid fa-users"></i>
-                        <p>No group messages yet.</p>
+                        <p>
+                            No group messages yet.
+                        </p>
                     </div>
                 `;
 
                 return;
             }
 
-            $("groupMessages").innerHTML =
+            container.innerHTML =
                 messages
-                    .map((message) => {
+                    .map(
+                        (message) => {
 
-                        const sender =
-                            message.userId ||
-                            message.user_id;
+                            const sender =
+                                message.userId ??
+                                message.user_id ??
+                                message.senderId ??
+                                message.sender_id;
 
-                        const name =
-                            message.fullName ||
-                            message.full_name ||
-                            "";
+                            const name =
+                                message.fullName ||
+                                message.full_name ||
+                                message.senderName ||
+                                "";
 
-                        const text =
-                            message.messageText ||
-                            message.message_text ||
-                            "";
+                            const text =
+                                message.messageText ??
+                                message.message_text ??
+                                "";
 
-                        const mine =
-                            String(sender) ===
-                            String(userId());
+                            const mine =
+                                String(
+                                    sender
+                                ) ===
+                                String(
+                                    userId()
+                                );
 
-                        return `
-                            <div
-                                class="message-bubble ${
-                                    mine
-                                        ? "mine"
-                                        : "theirs"
-                                }"
-                            >
+                            return `
+                                <div
+                                    class="message-bubble ${
+                                        mine
+                                            ? "mine"
+                                            : "theirs"
+                                    }"
+                                >
 
-                                ${
-                                    name
-                                        ? `
-                                            <b>
-                                                ${escapeHTML(
-                                                    name
-                                                )}
-                                            </b>
-                                            <br>
-                                        `
-                                        : ""
-                                }
+                                    ${
+                                        name &&
+                                        !mine
+                                            ? `
+                                                <b>
+                                                    ${escapeHTML(
+                                                        name
+                                                    )}
+                                                </b>
+                                                <br>
+                                            `
+                                            : ""
+                                    }
 
-                                ${escapeHTML(text)}
+                                    ${escapeHTML(
+                                        text
+                                    )}
 
-                            </div>
-                        `;
-
-                    })
+                                </div>
+                            `;
+                        }
+                    )
                     .join("");
+
+            container.scrollTop =
+                container.scrollHeight;
 
         } catch (error) {
 
-            $("groupMessages").innerHTML = `
+            container.innerHTML = `
                 <div class="empty">
                     Unable to load group messages.
                 </div>
@@ -2809,6 +3842,10 @@
         const input =
             $("groupMessageInput");
 
+        if (!input) {
+            return;
+        }
+
         const text =
             input.value.trim();
 
@@ -2823,11 +3860,15 @@
             await apiRequest(
                 `/api/groups/${currentGroup.id}/messages`,
                 {
-                    method: "POST",
-                    body: JSON.stringify({
-                        userId: userId(),
-                        messageText: text
-                    })
+                    method:
+                        "POST",
+                    body:
+                        JSON.stringify({
+                            userId:
+                                userId(),
+                            messageText:
+                                text
+                        })
                 }
             );
 
@@ -2835,7 +3876,441 @@
 
         } catch (error) {
 
-            alert(error.message);
+            input.value =
+                text;
+
+            alert(
+                error.message
+            );
+        }
+    }
+
+    async function loadGroupMembers() {
+
+        if (!currentGroup) {
+            return;
+        }
+
+        try {
+
+            const data =
+                await apiRequest(
+                    `/api/groups/${currentGroup.id}/members?userId=${encodeURIComponent(
+                        userId()
+                    )}`
+                );
+
+            const members =
+                data.members ||
+                data ||
+                [];
+
+            openModal(`
+                <div class="modal-header">
+
+                    <h3>
+                        Group Members
+                    </h3>
+
+                    <button
+                        class="close-button"
+                        id="closeMembersModal"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+                ${
+                    members.length
+                        ? members
+                              .map(
+                                  (
+                                      member
+                                  ) => {
+
+                                      const name =
+                                          member.fullName ||
+                                          member.full_name ||
+                                          "User";
+
+                                      const picture =
+                                          member.profilePicture ||
+                                          member.profile_picture ||
+                                          avatarFor(
+                                              name
+                                          );
+
+                                      const role =
+                                          member.role ||
+                                          "member";
+
+                                      return `
+                                          <div class="group-member-row">
+
+                                              <img
+                                                  class="avatar avatar-small"
+                                                  src="${picture}"
+                                                  alt=""
+                                              >
+
+                                              <div class="list-content">
+
+                                                  <div class="list-name">
+                                                      ${escapeHTML(
+                                                          name
+                                                      )}
+                                                  </div>
+
+                                                  <div class="member-role">
+                                                      ${escapeHTML(
+                                                          role
+                                                      )}
+                                                  </div>
+
+                                              </div>
+
+                                          </div>
+                                      `;
+                                  }
+                              )
+                              .join("")
+                        : `
+                            <div class="empty">
+                                No members found.
+                            </div>
+                        `
+                }
+            `);
+
+            $("closeMembersModal")
+                .onclick =
+                closeModal;
+
+        } catch (error) {
+
+            alert(
+                error.message
+            );
+        }
+    }
+
+    async function getGroupInvite() {
+
+        if (!currentGroup) {
+            return;
+        }
+
+        try {
+
+            const data =
+                await apiRequest(
+                    `/api/groups/${currentGroup.id}/invite?userId=${encodeURIComponent(
+                        userId()
+                    )}`
+                );
+
+            const inviteCode =
+                data.inviteCode ||
+                data.invite_code ||
+                "";
+
+            const inviteLink =
+                data.inviteLink ||
+                data.invite_link ||
+                `https://cherychat.onrender.com/dashboard.html?group=${encodeURIComponent(
+                    inviteCode
+                )}`;
+
+            openModal(`
+                <div class="modal-header">
+
+                    <h3>
+                        Group Invite
+                    </h3>
+
+                    <button
+                        class="close-button"
+                        id="closeInviteModal"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+                        Invite code
+                    </label>
+
+                    <input
+                        class="form-control"
+                        value="${escapeHTML(
+                            inviteCode
+                        )}"
+                        readonly
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+                        Invite link
+                    </label>
+
+                    <input
+                        class="form-control"
+                        id="inviteLinkInput"
+                        value="${escapeHTML(
+                            inviteLink
+                        )}"
+                        readonly
+                    >
+
+                </div>
+
+                <button
+                    class="button"
+                    id="copyInviteButton"
+                    style="width:100%;"
+                >
+                    <i class="fa-solid fa-copy"></i>
+                    Copy Invite Link
+                </button>
+            `);
+
+            $("closeInviteModal")
+                .onclick =
+                closeModal;
+
+            $("copyInviteButton")
+                .onclick =
+                async () => {
+
+                    try {
+
+                        await navigator.clipboard.writeText(
+                            inviteLink
+                        );
+
+                        alert(
+                            "Invite link copied."
+                        );
+
+                    } catch (error) {
+
+                        $("inviteLinkInput")
+                            .select();
+
+                        alert(
+                            "Copy the invite link manually."
+                        );
+                    }
+                };
+
+        } catch (error) {
+
+            alert(
+                error.message
+            );
+        }
+    }
+
+    function openEditGroup() {
+
+        if (!currentGroup) {
+            return;
+        }
+
+        openModal(`
+            <div class="modal-header">
+
+                <h3>
+                    Edit Group
+                </h3>
+
+                <button
+                    class="close-button"
+                    id="closeEditGroup"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Group name
+                </label>
+
+                <input
+                    class="form-control"
+                    id="editGroupName"
+                    maxlength="100"
+                    value="${escapeHTML(
+                        currentGroup.name ||
+                        ""
+                    )}"
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Description
+                </label>
+
+                <textarea
+                    class="form-control"
+                    id="editGroupDescription"
+                    maxlength="500"
+                >${escapeHTML(
+                    currentGroup.description ||
+                    ""
+                )}</textarea>
+
+            </div>
+
+            <button
+                class="button"
+                id="saveGroupButton"
+                style="width:100%;"
+            >
+                Save Changes
+            </button>
+        `);
+
+        $("closeEditGroup")
+            .onclick =
+            closeModal;
+
+        $("saveGroupButton")
+            .onclick =
+            saveGroup;
+    }
+
+    async function saveGroup() {
+
+        if (!currentGroup) {
+            return;
+        }
+
+        const name =
+            $("editGroupName")
+                .value
+                .trim();
+
+        const description =
+            $("editGroupDescription")
+                .value
+                .trim();
+
+        if (!name) {
+
+            alert(
+                "Enter a group name."
+            );
+
+            return;
+        }
+
+        try {
+
+            const data =
+                await apiRequest(
+                    `/api/groups/${currentGroup.id}`,
+                    {
+                        method:
+                            "PUT",
+                        body:
+                            JSON.stringify({
+                                userId:
+                                    userId(),
+                                name,
+                                description
+                            })
+                    }
+                );
+
+            currentGroup =
+                data.group ||
+                {
+                    ...currentGroup,
+                    name,
+                    description
+                };
+
+            closeModal();
+
+            await loadGroups();
+
+            viewGroup(
+                currentGroup
+            );
+
+        } catch (error) {
+
+            alert(
+                error.message
+            );
+        }
+    }
+
+    async function leaveGroup() {
+
+        if (!currentGroup) {
+            return;
+        }
+
+        if (
+            !confirm(
+                "Leave this group?"
+            )
+        ) {
+            return;
+        }
+
+        try {
+
+            await apiRequest(
+                `/api/groups/${currentGroup.id}/leave`,
+                {
+                    method:
+                        "POST",
+                    body:
+                        JSON.stringify({
+                            userId:
+                                userId()
+                        })
+                }
+            );
+
+            if (groupRefreshTimer) {
+
+                clearInterval(
+                    groupRefreshTimer
+                );
+
+                groupRefreshTimer =
+                    null;
+            }
+
+            currentGroup =
+                null;
+
+            closeModal();
+
+            await loadGroups();
+
+        } catch (error) {
+
+            alert(
+                error.message
+            );
         }
     }
 
@@ -2849,13 +4324,18 @@
 
             const data =
                 await apiRequest(
-                    `/api/users/${encodeURIComponent(userId())}`
+                    `/api/users/${encodeURIComponent(
+                        userId()
+                    )}`
                 );
 
             const updatedUser =
-                data.user || data;
+                data.user ||
+                data;
 
-            saveUser(updatedUser);
+            saveUser(
+                updatedUser
+            );
 
             const name =
                 updatedUser.fullName ||
@@ -2865,7 +4345,7 @@
             const picture =
                 updatedUser.profilePicture ||
                 updatedUser.profile_picture ||
-                `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=211332&color=ffd54a`;
+                avatarFor(name);
 
             $("profileContent").innerHTML = `
 
@@ -2881,12 +4361,15 @@
                     </div>
 
                     <div class="profile-name">
-                        ${escapeHTML(name)}
+                        ${escapeHTML(
+                            name
+                        )}
                     </div>
 
                     <div class="profile-about">
                         ${escapeHTML(
-                            updatedUser.about || ""
+                            updatedUser.about ||
+                            ""
                         )}
                     </div>
 
@@ -2924,7 +4407,10 @@
 
                         <i
                             class="fa-solid fa-user"
-                            style="color:#ffd54a;width:25px;"
+                            style="
+                                color:#ffd54a;
+                                width:25px;
+                            "
                         ></i>
 
                         <div class="list-content">
@@ -2945,7 +4431,10 @@
 
                         <i
                             class="fa-solid fa-right-from-bracket"
-                            style="color:#ffd54a;width:25px;"
+                            style="
+                                color:#ffd54a;
+                                width:25px;
+                            "
                         ></i>
 
                         <div class="list-content">
@@ -2972,22 +4461,35 @@
                 </div>
             `;
 
-            $("editProfileButton").onclick =
+            $("editProfileButton")
+                .onclick =
                 openEditProfile;
 
-            $("changePhotoButton").onclick =
+            $("changePhotoButton")
+                .onclick =
                 openChangePhoto;
 
-            $("profileLogoutButton").onclick =
+            $("profileLogoutButton")
+                .onclick =
                 logout;
 
         } catch (error) {
 
             $("profileContent").innerHTML = `
                 <div class="empty">
+
                     <i class="fa-solid fa-user"></i>
-                    <h3>Unable to load profile</h3>
-                    <p>${escapeHTML(error.message)}</p>
+
+                    <h3>
+                        Unable to load profile
+                    </h3>
+
+                    <p>
+                        ${escapeHTML(
+                            error.message
+                        )}
+                    </p>
+
                 </div>
             `;
         }
@@ -2998,7 +4500,9 @@
         openModal(`
             <div class="modal-header">
 
-                <h3>Edit Profile</h3>
+                <h3>
+                    Edit Profile
+                </h3>
 
                 <button
                     class="close-button"
@@ -3039,7 +4543,8 @@
                     id="profileAboutInput"
                     maxlength="500"
                 >${escapeHTML(
-                    currentUser.about || ""
+                    currentUser.about ||
+                    ""
                 )}</textarea>
 
             </div>
@@ -3053,10 +4558,12 @@
             </button>
         `);
 
-        $("closeEditProfile").onclick =
+        $("closeEditProfile")
+            .onclick =
             closeModal;
 
-        $("saveProfileButton").onclick =
+        $("saveProfileButton")
+            .onclick =
             saveProfile;
     }
 
@@ -3073,7 +4580,11 @@
                 .trim();
 
         if (!fullName) {
-            alert("Enter your full name.");
+
+            alert(
+                "Enter your full name."
+            );
+
             return;
         }
 
@@ -3083,16 +4594,19 @@
                 await apiRequest(
                     `/api/users/${userId()}/profile`,
                     {
-                        method: "PUT",
-                        body: JSON.stringify({
-                            fullName,
-                            about
-                        })
+                        method:
+                            "PUT",
+                        body:
+                            JSON.stringify({
+                                fullName,
+                                about
+                            })
                     }
                 );
 
             saveUser(
-                data.user || data
+                data.user ||
+                data
             );
 
             closeModal();
@@ -3101,7 +4615,9 @@
 
         } catch (error) {
 
-            alert(error.message);
+            alert(
+                error.message
+            );
         }
     }
 
@@ -3110,7 +4626,9 @@
         openModal(`
             <div class="modal-header">
 
-                <h3>Change Profile Picture</h3>
+                <h3>
+                    Change Profile Picture
+                </h3>
 
                 <button
                     class="close-button"
@@ -3145,20 +4663,27 @@
             </button>
         `);
 
-        $("closePhotoModal").onclick =
+        $("closePhotoModal")
+            .onclick =
             closeModal;
 
-        $("uploadPhotoButton").onclick =
+        $("uploadPhotoButton")
+            .onclick =
             uploadProfilePhoto;
     }
 
     async function uploadProfilePhoto() {
 
         const file =
-            $("profilePhotoFile").files[0];
+            $("profilePhotoFile")
+                .files[0];
 
         if (!file) {
-            alert("Choose an image.");
+
+            alert(
+                "Choose an image."
+            );
+
             return;
         }
 
@@ -3166,46 +4691,56 @@
             file.size >
             2 * 1024 * 1024
         ) {
+
             alert(
                 "Profile picture must be below 2MB."
             );
+
             return;
         }
 
         const reader =
             new FileReader();
 
-        reader.onload = async () => {
+        reader.onload =
+            async () => {
 
-            try {
+                try {
 
-                const data =
-                    await apiRequest(
-                        `/api/users/${userId()}/profile-picture`,
-                        {
-                            method: "PUT",
-                            body: JSON.stringify({
-                                profilePicture:
-                                    reader.result
-                            })
-                        }
+                    const data =
+                        await apiRequest(
+                            `/api/users/${userId()}/profile-picture`,
+                            {
+                                method:
+                                    "PUT",
+                                body:
+                                    JSON.stringify({
+                                        profilePicture:
+                                            reader.result
+                                    })
+                            }
+                        );
+
+                    saveUser(
+                        data.user ||
+                        data
                     );
 
-                saveUser(
-                    data.user || data
-                );
+                    closeModal();
 
-                closeModal();
+                    await loadProfile();
 
-                await loadProfile();
+                } catch (error) {
 
-            } catch (error) {
+                    alert(
+                        error.message
+                    );
+                }
+            };
 
-                alert(error.message);
-            }
-        };
-
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(
+            file
+        );
     }
 
     /* =========================
@@ -3214,13 +4749,19 @@
 
     async function setOnline() {
 
+        if (!userId()) {
+            return;
+        }
+
         try {
 
             await apiRequest(
                 `/api/users/${userId()}/online`,
                 {
-                    method: "PUT",
-                    body: JSON.stringify({})
+                    method:
+                        "PUT",
+                    body:
+                        JSON.stringify({})
                 }
             );
 
@@ -3240,17 +4781,25 @@
        SERVICE WORKER
     ========================= */
 
-    if ("serviceWorker" in navigator) {
+    if (
+        "serviceWorker" in
+        navigator
+    ) {
 
         navigator.serviceWorker
-            .register("./sw.js")
-            .catch(() => {});
-
+            .register(
+                "./sw.js"
+            )
+            .catch(
+                () => {}
+            );
     }
 
     /* =========================
        INITIAL LOAD
     ========================= */
+
+    updateDrawerUser();
 
     loadConversations();
 </script>
