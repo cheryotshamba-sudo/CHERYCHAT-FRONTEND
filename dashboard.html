@@ -1,2656 +1,3258 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-<title>VibeChat</title>
-
-<link rel="manifest" href="./manifest.json">
-<meta name="theme-color" content="#120a22">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<link rel="apple-touch-icon" href="./icon-192.png">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
-}
-
-html,body{
-    width:100%;
-    min-height:100%;
-}
-
-body{
-    min-height:100vh;
-    background:#07030f;
-    color:#fff;
-    font-family:'Poppins',sans-serif;
-    overflow-x:hidden;
-}
-
-button,input,textarea{
-    font-family:inherit;
-}
-
-button{
-    border:0;
-    cursor:pointer;
-}
-
-.hidden{
-    display:none!important;
-}
-
-/* HEADER */
-.header{
-    height:64px;
-    width:100%;
-    background:#120a22;
-    border-bottom:1px solid rgba(255,213,74,.12);
-    display:flex;
-    align-items:center;
-    padding:0 15px;
-    position:sticky;
-    top:0;
-    z-index:100;
-}
-
-.header-left{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.menu-btn,
-.header-btn{
-    width:40px;
-    height:40px;
-    border-radius:50%;
-    background:rgba(255,255,255,.05);
-    color:#ffd54a;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:18px;
-}
-
-.logo{
-    width:38px;
-    height:38px;
-    object-fit:contain;
-    border-radius:50%;
-}
-
-.brand{
-    font-size:19px;
-    font-weight:700;
-    color:#ffd54a;
-}
-
-.header-spacer{
-    flex:1;
-}
-
-/* SEARCH */
-.search-area{
-    padding:12px 14px 8px;
-    background:#07030f;
-}
-
-.search-box{
-    width:100%;
-    height:46px;
-    background:#120a22;
-    border:1px solid rgba(255,255,255,.06);
-    border-radius:25px;
-    display:flex;
-    align-items:center;
-    padding:0 15px;
-    gap:10px;
-}
-
-.search-box i{
-    color:#9d96aa;
-}
-
-.search-box input{
-    width:100%;
-    height:100%;
-    border:0;
-    outline:0;
-    background:transparent;
-    color:#fff;
-    font-size:14px;
-}
-
-.search-box input::placeholder{
-    color:#777181;
-}
-
-/* STORIES */
-.stories-section{
-    padding:10px 0 12px;
-}
-
-.section-heading{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 15px 9px;
-}
-
-.section-heading h3{
-    font-size:15px;
-    font-weight:600;
-}
-
-.section-heading span{
-    color:#9d96aa;
-    font-size:11px;
-}
-
-.stories-container{
-    display:flex;
-    gap:13px;
-    overflow-x:auto;
-    padding:3px 15px 8px;
-    scrollbar-width:none;
-}
-
-.stories-container::-webkit-scrollbar{
-    display:none;
-}
-
-.story-item{
-    flex:0 0 auto;
-    width:64px;
-    text-align:center;
-}
-
-.story-avatar{
-    width:62px;
-    height:62px;
-    border-radius:50%;
-    padding:2px;
-    background:linear-gradient(135deg,#ffd54a,#ff9e00,#ff4d8d);
-    position:relative;
-}
-
-.story-avatar img{
-    width:100%;
-    height:100%;
-    border-radius:50%;
-    object-fit:cover;
-    border:2px solid #07030f;
-}
-
-.add-story .story-avatar{
-    background:#120a22;
-    border:1px dashed #ffd54a;
-    padding:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.add-story-icon{
-    width:28px;
-    height:28px;
-    border-radius:50%;
-    background:#ffd54a;
-    color:#120a22;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:14px;
-}
-
-.story-name{
-    margin-top:5px;
-    font-size:10px;
-    color:#c7c1d0;
-    overflow:hidden;
-    white-space:nowrap;
-    text-overflow:ellipsis;
-}
-
-/* CHATS */
-.section-title{
-    padding:8px 15px 10px;
-    font-size:15px;
-    font-weight:600;
-}
-
-.conversation-list{
-    padding-bottom:85px;
-}
-
-.conversation{
-    min-height:74px;
-    padding:10px 15px;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    border-bottom:1px solid rgba(255,255,255,.035);
-    cursor:pointer;
-}
-
-.conversation:active{
-    background:rgba(255,255,255,.04);
-}
-
-.avatar{
-    width:54px;
-    height:54px;
-    flex:0 0 54px;
-    border-radius:50%;
-    background:#211732;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-    color:#ffd54a;
-    font-weight:600;
-}
-
-.avatar img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.conversation-info{
-    flex:1;
-    min-width:0;
-}
-
-.conversation-top{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-}
-
-.conversation-name{
-    font-size:14px;
-    font-weight:600;
-    overflow:hidden;
-    white-space:nowrap;
-    text-overflow:ellipsis;
-}
-
-.conversation-time{
-    font-size:10px;
-    color:#777181;
-    white-space:nowrap;
-}
-
-.conversation-bottom{
-    display:flex;
-    justify-content:space-between;
-    margin-top:4px;
-}
-
-.last-message{
-    font-size:12px;
-    color:#9d96aa;
-    overflow:hidden;
-    white-space:nowrap;
-    text-overflow:ellipsis;
-}
-
-.unread{
-    min-width:19px;
-    height:19px;
-    padding:0 5px;
-    border-radius:12px;
-    background:#ffd54a;
-    color:#120a22;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:10px;
-    font-weight:700;
-}
-
-.empty-state{
-    padding:55px 25px;
-    text-align:center;
-}
-
-.empty-icon{
-    width:70px;
-    height:70px;
-    margin:0 auto 15px;
-    border-radius:50%;
-    background:#120a22;
-    color:#ffd54a;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:26px;
-}
-
-.empty-state h3{
-    font-size:16px;
-    margin-bottom:7px;
-}
-
-.empty-state p{
-    color:#8d8798;
-    font-size:12px;
-}
-
-/* BOTTOM NAV */
-.bottom-nav{
-    position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    height:68px;
-    background:#120a22;
-    border-top:1px solid rgba(255,213,74,.12);
-    display:flex;
-    z-index:200;
-    padding-bottom:env(safe-area-inset-bottom);
-}
-
-.nav-item{
-    flex:1;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:4px;
-    color:#777181;
-    font-size:10px;
-    cursor:pointer;
-}
-
-.nav-item i{
-    font-size:18px;
-}
-
-.nav-item.active{
-    color:#ffd54a;
-}
-
-/* SIDE MENU */
-.menu-overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.6);
-    z-index:400;
-}
-
-.side-menu{
-    position:absolute;
-    left:0;
-    top:0;
-    bottom:0;
-    width:280px;
-    background:#120a22;
-    box-shadow:10px 0 30px rgba(0,0,0,.5);
-    padding:20px 15px;
-}
-
-.menu-profile{
-    padding:10px 5px 20px;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-.menu-profile .avatar{
-    width:48px;
-    height:48px;
-    flex-basis:48px;
-}
-
-.menu-profile-name{
-    font-size:14px;
-    font-weight:600;
-}
-
-.menu-profile-about{
-    color:#8d8798;
-    font-size:11px;
-    margin-top:3px;
-    overflow:hidden;
-    white-space:nowrap;
-    text-overflow:ellipsis;
-}
-
-.menu-items{
-    margin-top:15px;
-}
-
-.menu-item{
-    width:100%;
-    height:50px;
-    display:flex;
-    align-items:center;
-    gap:15px;
-    padding:0 13px;
-    border-radius:12px;
-    background:transparent;
-    color:#ddd8e5;
-    font-size:13px;
-    margin-bottom:4px;
-    text-align:left;
-}
-
-.menu-item i{
-    width:22px;
-    text-align:center;
-    color:#ffd54a;
-}
-
-.menu-item:active{
-    background:rgba(255,213,74,.08);
-}
-
-.menu-item.logout{
-    color:#ff7777;
-}
-
-.menu-item.logout i{
-    color:#ff7777;
-}
-
-/* CHAT */
-.chat-screen{
-    position:fixed;
-    inset:0;
-    background:#07030f;
-    z-index:300;
-    display:flex;
-    flex-direction:column;
-}
-
-.chat-header{
-    height:64px;
-    background:#120a22;
-    display:flex;
-    align-items:center;
-    padding:0 12px;
-    gap:10px;
-    border-bottom:1px solid rgba(255,255,255,.07);
-}
-
-.back-btn{
-    width:38px;
-    height:38px;
-    background:transparent;
-    color:#fff;
-    font-size:18px;
-}
-
-.chat-user-avatar{
-    width:42px;
-    height:42px;
-    border-radius:50%;
-    overflow:hidden;
-    background:#241a35;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#ffd54a;
-}
-
-.chat-user-avatar img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.chat-user-info{
-    flex:1;
-    min-width:0;
-}
-
-.chat-user-name{
-    font-size:14px;
-    font-weight:600;
-}
-
-.chat-user-status{
-    font-size:10px;
-    color:#22c55e;
-}
-
-.messages{
-    flex:1;
-    overflow-y:auto;
-    padding:15px;
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-}
-
-.message{
-    max-width:78%;
-    padding:9px 12px;
-    border-radius:15px;
-    font-size:13px;
-    line-height:1.4;
-    word-break:break-word;
-}
-
-.message.mine{
-    align-self:flex-end;
-    background:#ffd54a;
-    color:#120a22;
-    border-bottom-right-radius:4px;
-}
-
-.message.theirs{
-    align-self:flex-start;
-    background:#1b132a;
-    color:#fff;
-    border-bottom-left-radius:4px;
-}
-
-.message-time{
-    display:block;
-    font-size:8px;
-    margin-top:3px;
-    opacity:.6;
-    text-align:right;
-}
-
-.chat-input-area{
-    min-height:62px;
-    padding:8px;
-    background:#120a22;
-    display:flex;
-    gap:7px;
-    align-items:center;
-}
-
-.chat-input{
-    flex:1;
-    min-width:0;
-    height:44px;
-    border:0;
-    outline:0;
-    border-radius:23px;
-    background:#1b132a;
-    color:#fff;
-    padding:0 15px;
-    font-size:13px;
-}
-
-.send-btn{
-    width:44px;
-    height:44px;
-    flex:0 0 44px;
-    border-radius:50%;
-    background:#ffd54a;
-    color:#120a22;
-    font-size:16px;
-}
-
-/* STORY VIEWER */
-.story-viewer{
-    position:fixed;
-    inset:0;
-    background:#000;
-    z-index:600;
-    display:flex;
-    flex-direction:column;
-}
-
-.story-progress{
-    position:absolute;
-    top:9px;
-    left:10px;
-    right:10px;
-    display:flex;
-    gap:4px;
-    z-index:5;
-}
-
-.story-progress-bar{
-    height:3px;
-    flex:1;
-    background:rgba(255,255,255,.3);
-    border-radius:4px;
-    overflow:hidden;
-}
-
-.story-progress-fill{
-    height:100%;
-    background:#fff;
-}
-
-.story-viewer-header{
-    position:absolute;
-    top:20px;
-    left:12px;
-    right:12px;
-    display:flex;
-    align-items:center;
-    z-index:5;
-    gap:10px;
-}
-
-.story-viewer-avatar{
-    width:40px;
-    height:40px;
-    border-radius:50%;
-    overflow:hidden;
-    border:2px solid #ffd54a;
-}
-
-.story-viewer-avatar img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.story-viewer-name{
-    font-size:13px;
-    font-weight:600;
-}
-
-.story-viewer-time{
-    display:block;
-    color:#aaa;
-    font-size:9px;
-}
-
-.close-story{
-    margin-left:auto;
-    width:38px;
-    height:38px;
-    border-radius:50%;
-    background:rgba(0,0,0,.4);
-    color:#fff;
-    font-size:19px;
-}
-
-.story-content{
-    width:100%;
-    height:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position:relative;
-    padding:70px 15px 80px;
-}
-
-.story-content img{
-    max-width:100%;
-    max-height:100%;
-    object-fit:contain;
-    border-radius:4px;
-}
-
-.story-text-content{
-    width:100%;
-    text-align:center;
-    font-size:28px;
-    font-weight:600;
-    line-height:1.35;
-    word-break:break-word;
-    padding:20px;
-}
-
-/* STORY MODAL */
-.modal-overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.7);
-    z-index:500;
-    display:flex;
-    align-items:flex-end;
-    justify-content:center;
-}
-
-.story-modal{
-    width:100%;
-    max-width:500px;
-    background:#120a22;
-    border-radius:22px 22px 0 0;
-    padding:20px;
-}
-
-.modal-title{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:15px;
-}
-
-.modal-title h3{
-    font-size:16px;
-}
-
-.modal-close{
-    width:34px;
-    height:34px;
-    border-radius:50%;
-    background:#211631;
-    color:#fff;
-}
-
-.story-tabs{
-    display:flex;
-    gap:8px;
-    margin-bottom:15px;
-}
-
-.story-tab{
-    flex:1;
-    height:40px;
-    border-radius:10px;
-    background:#211631;
-    color:#aaa;
-    font-size:12px;
-}
-
-.story-tab.active{
-    background:#ffd54a;
-    color:#120a22;
-}
-
-.story-text-input{
-    width:100%;
-    min-height:120px;
-    resize:none;
-    border:1px solid rgba(255,255,255,.08);
-    outline:0;
-    border-radius:13px;
-    background:#0b0712;
-    color:#fff;
-    padding:13px;
-    font-size:13px;
-}
-
-.story-file{
-    width:100%;
-    padding:20px;
-    border:1px dashed #50465e;
-    border-radius:13px;
-    text-align:center;
-    color:#aaa;
-    font-size:12px;
-}
-
-.story-file i{
-    display:block;
-    font-size:28px;
-    color:#ffd54a;
-    margin-bottom:8px;
-}
-
-.story-file input{
-    width:100%;
-    margin-top:10px;
-}
-
-.post-story-btn{
-    width:100%;
-    height:48px;
-    border-radius:24px;
-    background:#ffd54a;
-    color:#120a22;
-    font-size:13px;
-    font-weight:700;
-    margin-top:15px;
-}
-
-/* TOAST */
-.toast{
-    position:fixed;
-    left:50%;
-    bottom:82px;
-    transform:translateX(-50%);
-    background:#211631;
-    color:#fff;
-    padding:10px 16px;
-    border-radius:20px;
-    font-size:11px;
-    z-index:1000;
-    white-space:nowrap;
-}
-
-/* LIGHT THEME */
-body.light{
-    background:#f5f4f8;
-    color:#16121c;
-}
-
-body.light .header,
-body.light .bottom-nav,
-body.light .side-menu,
-body.light .chat-header,
-body.light .chat-input-area,
-body.light .story-modal{
-    background:#fff;
-}
-
-body.light .search-area{
-    background:#f5f4f8;
-}
-
-body.light .search-box{
-    background:#fff;
-}
-
-body.light .conversation:active{
-    background:#eeeaf3;
-}
-
-body.light .last-message,
-body.light .conversation-time,
-body.light .section-heading span{
-    color:#777;
-}
-
-body.light .story-name{
-    color:#555;
-}
-
-body.light .story-avatar img{
-    border-color:#f5f4f8;
-}
-
-body.light .empty-icon{
-    background:#fff;
-}
-
-body.light .chat-screen{
-    background:#f5f4f8;
-}
-
-body.light .message.theirs{
-    background:#fff;
-    color:#222;
-}
-
-body.light .chat-input{
-    background:#eeeaf3;
-    color:#222;
-}
-
-/* DESKTOP */
-@media(min-width:700px){
-    body{
-        max-width:700px;
-        margin:auto;
-        border-left:1px solid rgba(255,255,255,.05);
-        border-right:1px solid rgba(255,255,255,.05);
-    }
-
-    .bottom-nav{
-        max-width:700px;
-        margin:auto;
-    }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>VibeChat</title>
+
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#120a22">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="./icon-192.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #07030f;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font-family: inherit;
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+        }
+
+        .app {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* HEADER */
+
+        .header {
+            height: 64px;
+            min-height: 64px;
+            background: #120a22;
+            border-bottom: 1px solid #2b1940;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            gap: 10px;
+            z-index: 20;
+        }
+
+        .menu-button,
+        .header-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #211332;
+            color: #ffd54a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .brand {
+            flex: 1;
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffd54a;
+        }
+
+        /* MAIN */
+
+        .main {
+            flex: 1;
+            min-height: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page {
+            display: none;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            padding: 14px 14px 90px;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .page-inner {
+            width: 100%;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        /* SEARCH */
+
+        .search-box {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #120a22;
+            border: 1px solid #2b1940;
+            border-radius: 14px;
+            padding: 11px 14px;
+            margin-bottom: 14px;
+        }
+
+        .search-box i {
+            color: #9d96aa;
+        }
+
+        .search-box input {
+            width: 100%;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: #ffffff;
+            font-size: 14px;
+        }
+
+        .search-box input::placeholder {
+            color: #777080;
+        }
+
+        /* CARDS */
+
+        .card {
+            background: #120a22;
+            border: 1px solid #2b1940;
+            border-radius: 16px;
+            padding: 14px;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 21px;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            color: #9d96aa;
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        /* AVATARS */
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #211332;
+            flex-shrink: 0;
+        }
+
+        .avatar-small {
+            width: 42px;
+            height: 42px;
+        }
+
+        .avatar-large {
+            width: 82px;
+            height: 82px;
+        }
+
+        /* LISTS */
+
+        .list-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 4px;
+            border-bottom: 1px solid #251635;
+        }
+
+        .list-item:last-child {
+            border-bottom: none;
+        }
+
+        .list-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .list-name {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .list-preview {
+            color: #9d96aa;
+            font-size: 12px;
+            margin-top: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .online-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22c55e;
+            margin-left: 5px;
+        }
+
+        /* BUTTONS */
+
+        .button {
+            background: linear-gradient(135deg, #ffd54a, #ff9e00);
+            color: #160b20;
+            font-weight: 700;
+            border-radius: 11px;
+            padding: 10px 14px;
+            font-size: 13px;
+        }
+
+        .button.secondary {
+            background: #211332;
+            border: 1px solid #3a2450;
+            color: #ffffff;
+        }
+
+        .button.danger {
+            background: #6c1e2b;
+            color: #ffffff;
+        }
+
+        .button-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #211332;
+            color: #ffd54a;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .button-row .button {
+            flex: 1;
+        }
+
+        /* EMPTY */
+
+        .empty {
+            text-align: center;
+            padding: 55px 20px;
+            color: #9d96aa;
+        }
+
+        .empty i {
+            color: #ffd54a;
+            font-size: 44px;
+            margin-bottom: 14px;
+        }
+
+        .empty h3 {
+            color: #ffffff;
+            font-size: 17px;
+            margin-bottom: 5px;
+        }
+
+        .empty p {
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        /* BOTTOM NAV */
+
+        .bottom-nav {
+            height: 68px;
+            min-height: 68px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #120a22;
+            border-top: 1px solid #2b1940;
+            display: flex;
+            z-index: 30;
+        }
+
+        .nav-button {
+            flex: 1;
+            background: transparent;
+            color: #827a8f;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            font-size: 10px;
+        }
+
+        .nav-button i {
+            font-size: 19px;
+        }
+
+        .nav-button.active {
+            color: #ffd54a;
+        }
+
+        /* DRAWER */
+
+        .drawer {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            display: none;
+        }
+
+        .drawer.show {
+            display: block;
+        }
+
+        .drawer-panel {
+            width: 290px;
+            max-width: 84%;
+            height: 100%;
+            background: #120a22;
+            border-right: 1px solid #38214c;
+            padding: 20px 14px;
+        }
+
+        .drawer-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .drawer-profile img {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            object-fit: cover;
+        }
+
+        .drawer-brand {
+            color: #ffd54a;
+            font-size: 19px;
+            font-weight: 700;
+        }
+
+        .drawer-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .drawer-item {
+            width: 100%;
+            padding: 14px 12px;
+            border-radius: 12px;
+            background: transparent;
+            color: #ffffff;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .drawer-item:hover {
+            background: #211332;
+        }
+
+        .drawer-item i {
+            width: 28px;
+            color: #ffd54a;
+        }
+
+        /* MODAL */
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.78);
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-box {
+            width: 100%;
+            max-width: 480px;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: #120a22;
+            border: 1px solid #3a2450;
+            border-radius: 18px;
+            padding: 18px;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .modal-header h3 {
+            font-size: 18px;
+        }
+
+        .close-button {
+            background: transparent;
+            color: #ffffff;
+            font-size: 23px;
+            width: 35px;
+            height: 35px;
+        }
+
+        /* FORM */
+
+        .form-group {
+            margin-bottom: 13px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #9d96aa;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .form-control {
+            width: 100%;
+            background: #09050f;
+            color: #ffffff;
+            border: 1px solid #3a2450;
+            border-radius: 11px;
+            padding: 12px;
+            outline: none;
+        }
+
+        textarea.form-control {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        /* CHAT */
+
+        .chat-screen {
+            position: fixed;
+            inset: 0;
+            background: #07030f;
+            z-index: 150;
+            display: none;
+            flex-direction: column;
+        }
+
+        .chat-screen.show {
+            display: flex;
+        }
+
+        .chat-header {
+            height: 64px;
+            min-height: 64px;
+            background: #120a22;
+            border-bottom: 1px solid #2b1940;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 10px;
+        }
+
+        .chat-back {
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            color: #ffffff;
+            font-size: 19px;
+        }
+
+        .chat-header-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .chat-header-name {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .chat-header-status {
+            color: #9d96aa;
+            font-size: 11px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+        }
+
+        .message-bubble {
+            max-width: 78%;
+            padding: 9px 12px;
+            margin-bottom: 8px;
+            border-radius: 15px;
+            font-size: 13px;
+            line-height: 1.5;
+            word-break: break-word;
+        }
+
+        .message-bubble.mine {
+            margin-left: auto;
+            background: #6a4c00;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message-bubble.theirs {
+            margin-right: auto;
+            background: #211332;
+            border-bottom-left-radius: 4px;
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 8px;
+            padding: 10px;
+            background: #120a22;
+            border-top: 1px solid #2b1940;
+        }
+
+        .chat-input {
+            flex: 1;
+            min-width: 0;
+            background: #09050f;
+            color: #ffffff;
+            border: 1px solid #3a2450;
+            border-radius: 23px;
+            padding: 11px 15px;
+            outline: none;
+        }
+
+        .send-button {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #ffd54a;
+            color: #170c20;
+        }
+
+        /* STORIES */
+
+        .story-bar {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding: 3px 2px 15px;
+        }
+
+        .story-item {
+            width: 68px;
+            min-width: 68px;
+            text-align: center;
+            color: #aaa2b1;
+            font-size: 10px;
+        }
+
+        .story-image {
+            width: 62px;
+            height: 62px;
+            margin: 0 auto 5px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ffd54a;
+            padding: 2px;
+            background: #120a22;
+        }
+
+        .story-add .story-image {
+            border-style: dashed;
+        }
+
+        .story-media {
+            width: 100%;
+            max-height: 65vh;
+            object-fit: contain;
+            background: #000000;
+            border-radius: 12px;
+        }
+
+        /* PROFILE */
+
+        .profile-card {
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        .profile-picture-wrap {
+            position: relative;
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 12px;
+        }
+
+        .profile-picture-wrap img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ffd54a;
+        }
+
+        .profile-name {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .profile-about {
+            color: #9d96aa;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .profile-contact {
+            color: #777080;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        /* GROUP */
+
+        .group-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 15px;
+            background: #251638;
+            color: #ffd54a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+            flex-shrink: 0;
+        }
+
+        .group-members {
+            color: #9d96aa;
+            font-size: 11px;
+            margin-top: 2px;
+        }
+
+        .group-type {
+            display: inline-block;
+            color: #ffd54a;
+            font-size: 10px;
+            margin-top: 3px;
+        }
+
+        /* LIGHT THEME */
+
+        body.light-theme {
+            background: #f4f1f8;
+            color: #17111d;
+        }
+
+        body.light-theme .header,
+        body.light-theme .bottom-nav,
+        body.light-theme .card,
+        body.light-theme .search-box,
+        body.light-theme .drawer-panel,
+        body.light-theme .modal-box,
+        body.light-theme .chat-header,
+        body.light-theme .chat-input-area {
+            background: #ffffff;
+        }
+
+        body.light-theme .header,
+        body.light-theme .bottom-nav,
+        body.light-theme .chat-header,
+        body.light-theme .chat-input-area {
+            border-color: #ddd5e4;
+        }
+
+        body.light-theme .card,
+        body.light-theme .search-box {
+            border-color: #ddd5e4;
+        }
+
+        body.light-theme .list-item {
+            border-color: #e5dfe9;
+        }
+
+        body.light-theme .menu-button,
+        body.light-theme .header-button,
+        body.light-theme .button.secondary,
+        body.light-theme .button-icon {
+            background: #eee9f1;
+            color: #5d4b69;
+        }
+
+        body.light-theme .drawer-item {
+            color: #17111d;
+        }
+
+        body.light-theme .drawer-item:hover {
+            background: #eee9f1;
+        }
+
+        body.light-theme .search-box input,
+        body.light-theme .form-control,
+        body.light-theme .chat-input {
+            color: #17111d;
+        }
+
+        body.light-theme .search-box input::placeholder,
+        body.light-theme .chat-input::placeholder {
+            color: #918895;
+        }
+
+        body.light-theme .form-control,
+        body.light-theme .chat-input {
+            background: #f5f2f7;
+            border-color: #d9d1df;
+        }
+
+        body.light-theme .message-bubble.theirs {
+            background: #e9e1ed;
+            color: #17111d;
+        }
+
+        body.light-theme .empty h3 {
+            color: #17111d;
+        }
+
+        @media (min-width: 700px) {
+            .page {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<header class="header">
-    <div class="header-left">
+<div class="app">
 
-        <button class="menu-btn" onclick="openMenu()">
+    <!-- HEADER -->
+    <header class="header">
+
+        <!-- LEFT SIDE MENU -->
+        <button class="menu-button" id="menuButton">
             <i class="fa-solid fa-ellipsis-vertical"></i>
         </button>
 
-        <img src="./icon-192.png" class="logo" alt="VibeChat">
+        <img
+            src="./icon-192.png"
+            class="logo"
+            alt="VibeChat"
+        >
 
-        <div class="brand">VibeChat</div>
-    </div>
-
-    <div class="header-spacer"></div>
-
-    <button class="header-btn" onclick="focusSearch()">
-        <i class="fa-solid fa-magnifying-glass"></i>
-    </button>
-</header>
-
-<section class="search-area">
-    <div class="search-box">
-        <i class="fa-solid fa-magnifying-glass"></i>
-
-        <input
-            id="searchInput"
-            type="text"
-            placeholder="Search VibeChat users..."
-            autocomplete="off">
-    </div>
-</section>
-
-<section class="stories-section" id="storiesSection">
-
-    <div class="section-heading">
-        <h3>Stories</h3>
-        <span id="storyCount"></span>
-    </div>
-
-    <div class="stories-container" id="storiesContainer">
-
-        <div class="story-item add-story" onclick="openStoryModal()">
-
-            <div class="story-avatar">
-
-                <div class="add-story-icon">
-                    <i class="fa-solid fa-plus"></i>
-                </div>
-
-            </div>
-
-            <div class="story-name">
-                Add Story
-            </div>
-
+        <div class="brand">
+            VibeChat
         </div>
 
-    </div>
-</section>
+        <button class="header-button" id="refreshButton">
+            <i class="fa-solid fa-rotate"></i>
+        </button>
 
-<div class="section-title">
-    Chats
+    </header>
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- CHATS -->
+        <section class="page active" id="chatsPage">
+
+            <div class="page-inner">
+
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input
+                        type="text"
+                        id="userSearch"
+                        placeholder="Search VibeChat users..."
+                        autocomplete="off"
+                    >
+                </div>
+
+                <div id="searchResults"></div>
+
+                <div id="chatList"></div>
+
+            </div>
+
+        </section>
+
+        <!-- GROUPS -->
+        <section class="page" id="groupsPage">
+
+            <div class="page-inner">
+
+                <div class="section-header">
+
+                    <div>
+                        <div class="section-title">Groups</div>
+                        <div class="section-subtitle">
+                            Find and chat in VibeChat groups
+                        </div>
+                    </div>
+
+                    <button class="button-icon" id="createGroupButton">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+
+                </div>
+
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input
+                        type="text"
+                        id="groupSearch"
+                        placeholder="Search groups..."
+                        autocomplete="off"
+                    >
+                </div>
+
+                <div id="groupsList"></div>
+
+            </div>
+
+        </section>
+
+        <!-- STORIES -->
+        <section class="page" id="storiesPage">
+
+            <div class="page-inner">
+
+                <div class="section-header">
+
+                    <div>
+                        <div class="section-title">Stories</div>
+                        <div class="section-subtitle">
+                            Photos and videos disappear after 24 hours
+                        </div>
+                    </div>
+
+                    <button class="button-icon" id="addStoryButton">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+
+                </div>
+
+                <div id="storiesList"></div>
+
+            </div>
+
+        </section>
+
+        <!-- PROFILE -->
+        <section class="page" id="profilePage">
+
+            <div class="page-inner">
+
+                <div id="profileContent"></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- BOTTOM NAVIGATION -->
+    <nav class="bottom-nav">
+
+        <button
+            class="nav-button active"
+            data-page="chatsPage"
+        >
+            <i class="fa-solid fa-comments"></i>
+            <span>Chats</span>
+        </button>
+
+        <button
+            class="nav-button"
+            data-page="groupsPage"
+        >
+            <i class="fa-solid fa-users"></i>
+            <span>Groups</span>
+        </button>
+
+        <button
+            class="nav-button"
+            data-page="storiesPage"
+        >
+            <i class="fa-solid fa-circle-play"></i>
+            <span>Stories</span>
+        </button>
+
+        <button
+            class="nav-button"
+            data-page="profilePage"
+        >
+            <i class="fa-solid fa-user"></i>
+            <span>Profile</span>
+        </button>
+
+    </nav>
+
 </div>
 
-<main id="conversationList" class="conversation-list">
+<!-- SIDE DRAWER -->
+<div class="drawer" id="drawer">
 
-    <div class="empty-state">
+    <div class="drawer-panel">
 
-        <div class="empty-icon">
-            <i class="fa-regular fa-comments"></i>
-        </div>
+        <div class="drawer-profile">
 
-        <h3>No conversations yet</h3>
-
-        <p>
-            Search for another VibeChat user to start chatting.
-        </p>
-
-    </div>
-
-</main>
-
-<nav class="bottom-nav">
-
-    <div class="nav-item active" onclick="showChats()">
-        <i class="fa-solid fa-message"></i>
-        <span>Chats</span>
-    </div>
-
-    <div class="nav-item" onclick="showGroups()">
-        <i class="fa-solid fa-user-group"></i>
-        <span>Groups</span>
-    </div>
-
-    <div class="nav-item" onclick="scrollToStories()">
-        <i class="fa-solid fa-circle-play"></i>
-        <span>Stories</span>
-    </div>
-
-    <div class="nav-item" onclick="openProfile()">
-        <i class="fa-solid fa-user"></i>
-        <span>Profile</span>
-    </div>
-
-</nav>
-
-<!-- SIDE MENU -->
-<div id="menuOverlay" class="menu-overlay hidden" onclick="closeMenu(event)">
-
-    <div class="side-menu" onclick="event.stopPropagation()">
-
-        <div class="menu-profile">
-
-            <div id="menuAvatar" class="avatar">
-                <i class="fa-solid fa-user"></i>
-            </div>
+            <img
+                src="./icon-192.png"
+                id="drawerLogo"
+                alt="VibeChat"
+            >
 
             <div>
-                <div id="menuName" class="menu-profile-name">
-                    VibeChat User
+                <div class="drawer-brand">
+                    VibeChat
                 </div>
 
-                <div id="menuAbout" class="menu-profile-about">
-                    using VibeChat
+                <div class="section-subtitle">
+                    Chat, connect and vibe
                 </div>
             </div>
 
         </div>
 
-        <div class="menu-items">
+        <div class="drawer-menu">
 
-            <button class="menu-item" onclick="showChats();closeMenu()">
-                <i class="fa-solid fa-message"></i>
+            <button
+                class="drawer-item"
+                data-page="chatsPage"
+            >
+                <i class="fa-solid fa-comments"></i>
                 Chats
             </button>
 
-            <button class="menu-item" onclick="showGroups();closeMenu()">
+            <button
+                class="drawer-item"
+                data-page="groupsPage"
+            >
                 <i class="fa-solid fa-users"></i>
                 Groups
             </button>
 
-            <button class="menu-item" onclick="scrollToStories();closeMenu()">
+            <button
+                class="drawer-item"
+                data-page="storiesPage"
+            >
                 <i class="fa-solid fa-circle-play"></i>
                 Stories
             </button>
 
-            <button class="menu-item" onclick="openFriends();closeMenu()">
-                <i class="fa-solid fa-user-group"></i>
-                Friends
+            <button
+                class="drawer-item"
+                data-page="profilePage"
+            >
+                <i class="fa-solid fa-user"></i>
+                Profile
             </button>
 
-            <button class="menu-item" onclick="openVerification();closeMenu()">
-                <i class="fa-solid fa-circle-check"></i>
-                Verification
-            </button>
-
-            <button class="menu-item" onclick="openSettings();closeMenu()">
-                <i class="fa-solid fa-gear"></i>
-                Settings
-            </button>
-
-            <button class="menu-item" onclick="toggleTheme()">
+            <button
+                class="drawer-item"
+                id="themeButton"
+            >
                 <i class="fa-solid fa-moon"></i>
                 Theme
             </button>
 
-            <button class="menu-item logout" onclick="logout()">
+            <button
+                class="drawer-item"
+                id="logoutButton"
+            >
                 <i class="fa-solid fa-right-from-bracket"></i>
                 Logout
             </button>
 
         </div>
+
     </div>
+
 </div>
 
-<!-- CHAT -->
-<div id="chatScreen" class="chat-screen hidden">
+<!-- GENERAL MODAL -->
+<div class="modal" id="modal">
+
+    <div class="modal-box" id="modalBox"></div>
+
+</div>
+
+<!-- PRIVATE CHAT -->
+<div class="chat-screen" id="chatScreen">
 
     <div class="chat-header">
 
-        <button class="back-btn" onclick="closeChat()">
+        <button
+            class="chat-back"
+            id="chatBackButton"
+        >
             <i class="fa-solid fa-arrow-left"></i>
         </button>
 
-        <div id="chatAvatar" class="chat-user-avatar">
-            <i class="fa-solid fa-user"></i>
-        </div>
+        <img
+            class="avatar avatar-small"
+            id="chatAvatar"
+            src="./icon-192.png"
+            alt=""
+        >
 
-        <div class="chat-user-info">
+        <div class="chat-header-info">
 
-            <div id="chatUserName" class="chat-user-name">
+            <div
+                class="chat-header-name"
+                id="chatName"
+            >
                 User
             </div>
 
-            <div id="chatUserStatus" class="chat-user-status">
-                Offline
-            </div>
+            <div
+                class="chat-header-status"
+                id="chatStatus"
+            ></div>
 
         </div>
+
     </div>
 
-    <div id="messages" class="messages"></div>
+    <div
+        class="chat-messages"
+        id="chatMessages"
+    ></div>
 
-    <form class="chat-input-area" onsubmit="sendMessage(event)">
+    <div class="chat-input-area">
 
         <input
-            id="messageInput"
+            type="text"
             class="chat-input"
+            id="messageInput"
             placeholder="Type a message..."
-            autocomplete="off">
+            autocomplete="off"
+        >
 
-        <button type="submit" class="send-btn">
+        <button
+            class="send-button"
+            id="sendMessageButton"
+        >
             <i class="fa-solid fa-paper-plane"></i>
         </button>
 
-    </form>
-</div>
-
-<!-- STORY VIEWER -->
-<div id="storyViewer" class="story-viewer hidden">
-
-    <div id="storyProgress" class="story-progress"></div>
-
-    <div class="story-viewer-header">
-
-        <div id="viewerAvatar" class="story-viewer-avatar">
-            <img src="./icon-192.png" alt="">
-        </div>
-
-        <div>
-            <div id="viewerName" class="story-viewer-name">
-                Story
-            </div>
-
-            <span id="viewerTime" class="story-viewer-time"></span>
-        </div>
-
-        <button class="close-story" onclick="closeStoryViewer()">
-            <i class="fa-solid fa-xmark"></i>
-        </button>
-
     </div>
 
-    <div id="storyContent" class="story-content"></div>
-
 </div>
-
-<!-- ADD STORY -->
-<div
-    id="storyModalOverlay"
-    class="modal-overlay hidden"
-    onclick="closeStoryModal(event)">
-
-    <div class="story-modal" onclick="event.stopPropagation()">
-
-        <div class="modal-title">
-
-            <h3>Create Story</h3>
-
-            <button class="modal-close" onclick="closeStoryModal()">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
-        </div>
-
-        <div class="story-tabs">
-
-            <button
-                id="textStoryTab"
-                class="story-tab active"
-                onclick="selectStoryType('text')">
-                Text Story
-            </button>
-
-            <button
-                id="imageStoryTab"
-                class="story-tab"
-                onclick="selectStoryType('image')">
-                Photo Story
-            </button>
-
-        </div>
-
-        <div id="textStoryArea">
-
-            <textarea
-                id="storyText"
-                class="story-text-input"
-                maxlength="500"
-                placeholder="What's your vibe today?"></textarea>
-
-        </div>
-
-        <div id="imageStoryArea" class="story-file hidden">
-
-            <i class="fa-solid fa-image"></i>
-
-            Select a photo for your story
-
-            <input
-                id="storyImage"
-                type="file"
-                accept="image/*">
-
-        </div>
-
-        <button
-            id="postStoryButton"
-            class="post-story-btn"
-            onclick="postStory()">
-
-            Post Story
-
-        </button>
-
-    </div>
-</div>
-
-<div id="toast" class="toast hidden"></div>
 
 <script>
-const API_URL = "https://cherychat-backend.onrender.com";
+    const API_URL = "https://cherychat-backend.onrender.com";
 
-let currentUser = null;
-let conversations = [];
-let selectedConversation = null;
-let messageRefreshTimer = null;
+    let currentUser = null;
+    let currentChatUser = null;
+    let currentGroup = null;
+    let currentStories = [];
+    let currentGroups = [];
+    let messageRefreshTimer = null;
+    let groupSearchTimer = null;
+    let userSearchTimer = null;
 
-let stories = [];
-let storyViewerIndex = 0;
-let storyViewerList = [];
+    const $ = (id) => document.getElementById(id);
 
-let currentStoryType = "text";
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    loadTheme();
-    loadUser();
-
-    if(currentUser){
-
-        loadConversations();
-        loadStories();
-
-        setInterval(loadStories,30000);
-        setInterval(loadConversations,15000);
-
+    function escapeHTML(value) {
+        return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
     }
 
-});
+    function getStoredUser() {
+        try {
+            const newUser = localStorage.getItem("vibeChatCurrentUser");
 
-/* USER */
+            if (newUser) {
+                return JSON.parse(newUser);
+            }
 
-function loadUser(){
+            const oldUser = localStorage.getItem("cheryChatCurrentUser");
 
-    const saved =
-        localStorage.getItem("cheryChatCurrentUser") ||
-        localStorage.getItem("vibeChatCurrentUser");
+            if (oldUser) {
+                return JSON.parse(oldUser);
+            }
 
-    if(!saved){
+            return null;
 
-        window.location.href = "index.html";
-        return;
-
+        } catch (error) {
+            return null;
+        }
     }
 
-    try{
+    currentUser = getStoredUser();
 
-        currentUser = JSON.parse(saved);
-
-    }catch(error){
-
-        localStorage.removeItem("cheryChatCurrentUser");
-        localStorage.removeItem("vibeChatCurrentUser");
-
-        window.location.href = "index.html";
-        return;
-
+    if (!currentUser) {
+        window.location.href = "login.html";
     }
 
-    updateUserUI();
-}
-
-function updateUserUI(){
-
-    const name =
-        currentUser.full_name ||
-        currentUser.name ||
-        "VibeChat User";
-
-    const about =
-        currentUser.about ||
-        "using VibeChat";
-
-    document.getElementById("menuName").textContent = name;
-    document.getElementById("menuAbout").textContent = about;
-
-    const picture = currentUser.profile_picture;
-
-    if(picture){
-
-        document.getElementById("menuAvatar").innerHTML =
-            `<img src="${escapeAttribute(picture)}" alt="">`;
-
+    function userId() {
+        return currentUser?.id || currentUser?.userId;
     }
 
-}
+    function saveUser(user) {
+        currentUser = user;
 
-/* CONVERSATIONS */
-
-async function loadConversations(){
-
-    if(!currentUser) return;
-
-    const userId =
-        currentUser.id ||
-        currentUser.user_id;
-
-    if(!userId) return;
-
-    try{
-
-        const response = await fetch(
-            `${API_URL}/api/conversations?userId=${encodeURIComponent(userId)}`
+        localStorage.setItem(
+            "vibeChatCurrentUser",
+            JSON.stringify(user)
         );
 
-        if(!response.ok) return;
-
-        const data = await response.json();
-
-        conversations =
-            Array.isArray(data)
-            ? data
-            : Array.isArray(data.conversations)
-            ? data.conversations
-            : [];
-
-        renderConversations();
-
-    }catch(error){
-
-        console.error("Conversation error:",error);
-
+        localStorage.setItem(
+            "cheryChatCurrentUser",
+            JSON.stringify(user)
+        );
     }
 
-}
+    async function apiRequest(endpoint, options = {}) {
 
-function renderConversations(){
-
-    const list =
-        document.getElementById("conversationList");
-
-    if(!conversations.length){
-
-        list.innerHTML = `
-            <div class="empty-state">
-                <div class="empty-icon">
-                    <i class="fa-regular fa-comments"></i>
-                </div>
-                <h3>No conversations yet</h3>
-                <p>
-                    Search for another VibeChat user to start chatting.
-                </p>
-            </div>
-        `;
-
-        return;
-    }
-
-    list.innerHTML = "";
-
-    conversations.forEach(conversation => {
-
-        const other =
-            conversation.other_user ||
-            conversation.user ||
-            conversation;
-
-        const name =
-            other.full_name ||
-            other.name ||
-            "VibeChat User";
-
-        const picture =
-            other.profile_picture ||
-            "";
-
-        const lastMessage =
-            conversation.last_message ||
-            conversation.message ||
-            "Start chatting";
-
-        const time =
-            formatTime(
-                conversation.last_message_at ||
-                conversation.updated_at
-            );
-
-        const unread =
-            Number(
-                conversation.unread_count ||
-                conversation.unread ||
-                0
-            );
-
-        const item =
-            document.createElement("div");
-
-        item.className = "conversation";
-
-        item.onclick = () => openChat(conversation);
-
-        item.innerHTML = `
-            <div class="avatar">
-                ${
-                    picture
-                    ? `<img src="${escapeAttribute(picture)}" alt="">`
-                    : escapeHTML(getInitials(name))
+        const response = await fetch(
+            API_URL + endpoint,
+            {
+                ...options,
+                headers: {
+                    "Content-Type": "application/json",
+                    ...(options.headers || {})
                 }
-            </div>
+            }
+        );
 
-            <div class="conversation-info">
+        let data = {};
 
-                <div class="conversation-top">
+        try {
+            data = await response.json();
+        } catch (error) {
+            data = {};
+        }
 
-                    <div class="conversation-name">
-                        ${escapeHTML(name)}
-                    </div>
+        if (!response.ok) {
+            throw new Error(
+                data.message || "Something went wrong."
+            );
+        }
 
-                    <div class="conversation-time">
-                        ${escapeHTML(time)}
-                    </div>
+        return data;
+    }
 
-                </div>
+    function showPage(pageId) {
 
-                <div class="conversation-bottom">
+        document
+            .querySelectorAll(".page")
+            .forEach((page) => {
+                page.classList.remove("active");
+            });
 
-                    <div class="last-message">
-                        ${escapeHTML(lastMessage)}
-                    </div>
+        const selectedPage = $(pageId);
 
-                    ${
-                        unread > 0
-                        ? `<div class="unread">${unread}</div>`
-                        : ""
-                    }
+        if (selectedPage) {
+            selectedPage.classList.add("active");
+        }
 
-                </div>
+        document
+            .querySelectorAll(".nav-button")
+            .forEach((button) => {
+                button.classList.toggle(
+                    "active",
+                    button.dataset.page === pageId
+                );
+            });
 
-            </div>
-        `;
+        $("drawer").classList.remove("show");
 
-        list.appendChild(item);
+        if (pageId === "chatsPage") {
+            loadConversations();
+        }
+
+        if (pageId === "groupsPage") {
+            loadGroups();
+        }
+
+        if (pageId === "storiesPage") {
+            loadStories();
+        }
+
+        if (pageId === "profilePage") {
+            loadProfile();
+        }
+    }
+
+    document
+        .querySelectorAll(".nav-button, .drawer-item[data-page]")
+        .forEach((button) => {
+
+            button.addEventListener("click", () => {
+                showPage(button.dataset.page);
+            });
+
+        });
+
+    $("menuButton").addEventListener("click", () => {
+        $("drawer").classList.add("show");
+    });
+
+    $("drawer").addEventListener("click", (event) => {
+
+        if (event.target === $("drawer")) {
+            $("drawer").classList.remove("show");
+        }
 
     });
 
-}
+    $("refreshButton").addEventListener("click", () => {
 
-/* SEARCH */
+        const activePage =
+            document.querySelector(".page.active");
 
-function focusSearch(){
+        if (activePage) {
+            showPage(activePage.id);
+        }
 
-    document.getElementById("searchInput").focus();
+    });
 
-}
+    $("themeButton").addEventListener("click", () => {
 
-let searchTimer = null;
+        document.body.classList.toggle("light-theme");
 
-document.getElementById("searchInput").addEventListener(
-    "input",
-    searchUsers
-);
+        localStorage.setItem(
+            "vibeChatTheme",
+            document.body.classList.contains("light-theme")
+                ? "light"
+                : "dark"
+        );
 
-function searchUsers(){
+    });
 
-    const query =
-        document.getElementById("searchInput").value.trim();
-
-    clearTimeout(searchTimer);
-
-    if(!query){
-
-        loadConversations();
-        return;
-
+    if (
+        localStorage.getItem("vibeChatTheme") === "light"
+    ) {
+        document.body.classList.add("light-theme");
     }
 
-    searchTimer = setTimeout(async () => {
+    $("logoutButton").addEventListener("click", logout);
 
-        try{
+    async function logout() {
 
-            const response = await fetch(
-                `${API_URL}/api/users/search?q=${encodeURIComponent(query)}`
+        try {
+            await apiRequest(
+                `/api/users/${userId()}/offline`,
+                {
+                    method: "PUT",
+                    body: JSON.stringify({})
+                }
+            );
+        } catch (error) {
+            // Continue with logout even if online status fails.
+        }
+
+        localStorage.removeItem("vibeChatCurrentUser");
+        localStorage.removeItem("cheryChatCurrentUser");
+
+        window.location.href = "index.html";
+    }
+
+    /* =========================
+       MODAL
+    ========================= */
+
+    function openModal(content) {
+
+        $("modalBox").innerHTML = content;
+
+        $("modal").classList.add("show");
+    }
+
+    function closeModal() {
+
+        $("modal").classList.remove("show");
+
+        $("modalBox").innerHTML = "";
+    }
+
+    $("modal").addEventListener("click", (event) => {
+
+        if (event.target === $("modal")) {
+            closeModal();
+        }
+
+    });
+
+    /* =========================
+       CONVERSATIONS
+    ========================= */
+
+    async function loadConversations() {
+
+        try {
+
+            const data = await apiRequest(
+                `/api/conversations?userId=${encodeURIComponent(userId())}`
             );
 
-            if(!response.ok) return;
+            const conversations =
+                data.conversations || data || [];
 
-            const data = await response.json();
+            if (!conversations.length) {
+
+                $("chatList").innerHTML = `
+                    <div class="empty">
+                        <i class="fa-regular fa-comments"></i>
+                        <h3>No conversations yet</h3>
+                        <p>
+                            Search for another VibeChat user
+                            to start chatting.
+                        </p>
+                    </div>
+                `;
+
+                return;
+            }
+
+            $("chatList").innerHTML = conversations
+                .map((conversation, index) => {
+
+                    const other =
+                        conversation.otherUser ||
+                        conversation.other_user ||
+                        conversation.user ||
+                        conversation;
+
+                    const name =
+                        other.fullName ||
+                        other.full_name ||
+                        "VibeChat User";
+
+                    const picture =
+                        other.profilePicture ||
+                        other.profile_picture ||
+                        `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=211332&color=ffd54a`;
+
+                    const preview =
+                        conversation.lastMessage ||
+                        conversation.last_message ||
+                        "Start chatting";
+
+                    const online =
+                        other.isOnline ||
+                        other.is_online;
+
+                    return `
+                        <div
+                            class="list-item conversation-item"
+                            data-index="${index}"
+                        >
+
+                            <img
+                                class="avatar"
+                                src="${picture}"
+                                alt=""
+                            >
+
+                            <div class="list-content">
+
+                                <div class="list-name">
+                                    ${escapeHTML(name)}
+
+                                    ${
+                                        online
+                                            ? `<span class="online-dot"></span>`
+                                            : ""
+                                    }
+                                </div>
+
+                                <div class="list-preview">
+                                    ${escapeHTML(preview)}
+                                </div>
+
+                            </div>
+
+                        </div>
+                    `;
+                })
+                .join("");
+
+            document
+                .querySelectorAll(".conversation-item")
+                .forEach((item) => {
+
+                    item.addEventListener("click", () => {
+
+                        const conversation =
+                            conversations[
+                                Number(item.dataset.index)
+                            ];
+
+                        const other =
+                            conversation.otherUser ||
+                            conversation.other_user ||
+                            conversation.user ||
+                            conversation;
+
+                        openPrivateChat(other);
+
+                    });
+
+                });
+
+        } catch (error) {
+
+            $("chatList").innerHTML = `
+                <div class="empty">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <h3>Unable to load chats</h3>
+                    <p>${escapeHTML(error.message)}</p>
+                </div>
+            `;
+        }
+    }
+
+    /* =========================
+       USER SEARCH
+    ========================= */
+
+    $("userSearch").addEventListener(
+        "input",
+        (event) => {
+
+            clearTimeout(userSearchTimer);
+
+            const query =
+                event.target.value.trim();
+
+            if (!query) {
+                $("searchResults").innerHTML = "";
+                return;
+            }
+
+            userSearchTimer = setTimeout(
+                () => searchUsers(query),
+                350
+            );
+
+        }
+    );
+
+    async function searchUsers(query) {
+
+        try {
+
+            const data = await apiRequest(
+                `/api/users/search?q=${encodeURIComponent(query)}&userId=${encodeURIComponent(userId())}`
+            );
 
             const users =
-                Array.isArray(data)
-                ? data
-                : Array.isArray(data.users)
-                ? data.users
-                : [];
+                data.users || data || [];
 
-            renderSearchResults(users);
+            if (!users.length) {
 
-        }catch(error){
+                $("searchResults").innerHTML = `
+                    <div class="card">
+                        <div class="muted">
+                            No VibeChat users found.
+                        </div>
+                    </div>
+                `;
 
-            console.error("Search error:",error);
-            showToast("User search is unavailable");
+                return;
+            }
 
-        }
+            $("searchResults").innerHTML = `
+                <div class="card">
 
-    },400);
+                    ${users
+                        .map((user, index) => {
 
-}
+                            const name =
+                                user.fullName ||
+                                user.full_name ||
+                                "User";
 
-function renderSearchResults(users){
+                            const picture =
+                                user.profilePicture ||
+                                user.profile_picture ||
+                                `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=211332&color=ffd54a`;
 
-    const list =
-        document.getElementById("conversationList");
+                            return `
+                                <div
+                                    class="list-item search-user"
+                                    data-index="${index}"
+                                >
 
-    if(!users.length){
+                                    <img
+                                        class="avatar"
+                                        src="${picture}"
+                                        alt=""
+                                    >
 
-        list.innerHTML = `
-            <div class="empty-state">
-                <div class="empty-icon">
-                    <i class="fa-solid fa-user-slash"></i>
+                                    <div class="list-content">
+
+                                        <div class="list-name">
+                                            ${escapeHTML(name)}
+                                        </div>
+
+                                        <div class="list-preview">
+                                            ${escapeHTML(user.about || "")}
+                                        </div>
+
+                                    </div>
+
+                                    <button
+                                        class="button"
+                                        type="button"
+                                    >
+                                        Chat
+                                    </button>
+
+                                </div>
+                            `;
+                        })
+                        .join("")}
+
                 </div>
-                <h3>No users found</h3>
-                <p>Try another name, email or phone.</p>
-            </div>
-        `;
+            `;
 
-        return;
+            document
+                .querySelectorAll(".search-user")
+                .forEach((item) => {
 
+                    item.addEventListener("click", () => {
+
+                        openPrivateChat(
+                            users[
+                                Number(item.dataset.index)
+                            ]
+                        );
+
+                    });
+
+                });
+
+        } catch (error) {
+
+            $("searchResults").innerHTML = "";
+        }
     }
 
-    list.innerHTML = "";
+    /* =========================
+       PRIVATE CHAT
+    ========================= */
 
-    users.forEach(user => {
+    async function openPrivateChat(otherUser) {
+
+        currentChatUser = otherUser;
 
         const name =
-            user.full_name ||
-            user.name ||
+            otherUser.fullName ||
+            otherUser.full_name ||
             "VibeChat User";
 
         const picture =
-            user.profile_picture ||
-            "";
+            otherUser.profilePicture ||
+            otherUser.profile_picture ||
+            `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=211332&color=ffd54a`;
 
-        const item =
-            document.createElement("div");
+        $("chatAvatar").src = picture;
 
-        item.className = "conversation";
+        $("chatName").textContent = name;
 
-        item.onclick = () =>
-            startConversationWithUser(user);
+        $("chatStatus").innerHTML =
+            otherUser.isOnline ||
+            otherUser.is_online
+                ? `<span style="color:#22c55e">online</span>`
+                : "";
 
-        item.innerHTML = `
-            <div class="avatar">
+        $("chatScreen").classList.add("show");
 
-                ${
-                    picture
-                    ? `<img src="${escapeAttribute(picture)}" alt="">`
-                    : escapeHTML(getInitials(name))
+        try {
+
+            await apiRequest(
+                "/api/conversations",
+                {
+                    method: "POST",
+                    body: JSON.stringify({
+                        userId: userId(),
+                        otherUserId:
+                            otherUser.id ||
+                            otherUser.userId
+                    })
                 }
-
-            </div>
-
-            <div class="conversation-info">
-
-                <div class="conversation-name">
-                    ${escapeHTML(name)}
-                </div>
-
-                <div class="last-message">
-                    Tap to start chatting
-                </div>
-
-            </div>
-        `;
-
-        list.appendChild(item);
-
-    });
-
-}
-
-async function startConversationWithUser(user){
-
-    const otherId =
-        user.id ||
-        user.user_id;
-
-    if(!otherId) return;
-
-    try{
-
-        const response = await fetch(
-            `${API_URL}/api/conversations`,
-            {
-                method:"POST",
-                headers:{
-                    "Content-Type":"application/json"
-                },
-                body:JSON.stringify({
-
-                    userOne:
-                        currentUser.id ||
-                        currentUser.user_id,
-
-                    userTwo:
-                        otherId
-
-                })
-            }
-        );
-
-        if(response.ok){
-
-            const data = await response.json();
-
-            openChat(
-                data.conversation ||
-                data
             );
 
-            return;
-
+        } catch (error) {
+            // Conversation may already exist.
         }
 
-    }catch(error){
+        await loadPrivateMessages();
 
-        console.error(error);
+        if (messageRefreshTimer) {
+            clearInterval(messageRefreshTimer);
+        }
 
-    }
-
-    openChat({
-        id:null,
-        conversation_id:null,
-        other_user:user
-    });
-
-}
-
-/* CHAT */
-
-function openChat(conversation){
-
-    selectedConversation = conversation;
-
-    const other =
-        conversation.other_user ||
-        conversation.user ||
-        conversation;
-
-    const name =
-        other.full_name ||
-        other.name ||
-        "VibeChat User";
-
-    const picture =
-        other.profile_picture ||
-        "";
-
-    document.getElementById("chatUserName").textContent = name;
-
-    if(picture){
-
-        document.getElementById("chatAvatar").innerHTML =
-            `<img src="${escapeAttribute(picture)}" alt="">`;
-
-    }else{
-
-        document.getElementById("chatAvatar").innerHTML =
-            escapeHTML(getInitials(name));
-
-    }
-
-    document.getElementById("chatScreen")
-        .classList.remove("hidden");
-
-    loadMessages();
-
-    clearInterval(messageRefreshTimer);
-
-    messageRefreshTimer =
-        setInterval(loadMessages,5000);
-
-}
-
-function closeChat(){
-
-    document.getElementById("chatScreen")
-        .classList.add("hidden");
-
-    clearInterval(messageRefreshTimer);
-
-    messageRefreshTimer = null;
-    selectedConversation = null;
-
-}
-
-async function loadMessages(){
-
-    if(!selectedConversation) return;
-
-    const conversationId =
-        selectedConversation.id ||
-        selectedConversation.conversation_id;
-
-    if(!conversationId) return;
-
-    try{
-
-        const response = await fetch(
-            `${API_URL}/api/messages/${conversationId}`
+        messageRefreshTimer = setInterval(
+            loadPrivateMessages,
+            3000
         );
-
-        if(!response.ok) return;
-
-        const data = await response.json();
-
-        const messages =
-            Array.isArray(data)
-            ? data
-            : Array.isArray(data.messages)
-            ? data.messages
-            : [];
-
-        renderMessages(messages);
-
-    }catch(error){
-
-        console.error("Messages error:",error);
-
     }
 
-}
+    $("chatBackButton").addEventListener(
+        "click",
+        closePrivateChat
+    );
 
-function renderMessages(messages){
+    function closePrivateChat() {
 
-    const box =
-        document.getElementById("messages");
+        $("chatScreen").classList.remove("show");
 
-    box.innerHTML = "";
+        if (messageRefreshTimer) {
+            clearInterval(messageRefreshTimer);
+            messageRefreshTimer = null;
+        }
 
-    messages.forEach(message => {
+        currentChatUser = null;
+    }
 
-        const senderId =
-            message.sender_id ||
-            message.senderId;
+    async function loadPrivateMessages() {
 
-        const myId =
-            currentUser.id ||
-            currentUser.user_id;
+        if (!currentChatUser) {
+            return;
+        }
 
-        const mine =
-            String(senderId) === String(myId);
+        try {
 
-        const div =
-            document.createElement("div");
+            const otherId =
+                currentChatUser.id ||
+                currentChatUser.userId;
 
-        div.className =
-            "message " +
-            (mine ? "mine" : "theirs");
+            const data = await apiRequest(
+                `/api/messages?userId=${encodeURIComponent(userId())}&otherUserId=${encodeURIComponent(otherId)}`
+            );
+
+            const messages =
+                data.messages || data || [];
+
+            if (!messages.length) {
+
+                $("chatMessages").innerHTML = `
+                    <div class="empty">
+                        <i class="fa-regular fa-message"></i>
+                        <h3>No messages yet</h3>
+                        <p>Say hello and start the conversation.</p>
+                    </div>
+                `;
+
+                return;
+            }
+
+            $("chatMessages").innerHTML =
+                messages
+                    .map((message) => {
+
+                        const senderId =
+                            message.senderId ||
+                            message.sender_id;
+
+                        const text =
+                            message.messageText ||
+                            message.message_text ||
+                            "";
+
+                        const mine =
+                            String(senderId) ===
+                            String(userId());
+
+                        return `
+                            <div class="message-bubble ${mine ? "mine" : "theirs"}">
+                                ${escapeHTML(text)}
+                            </div>
+                        `;
+
+                    })
+                    .join("");
+
+            $("chatMessages").scrollTop =
+                $("chatMessages").scrollHeight;
+
+            await apiRequest(
+                "/api/messages/read",
+                {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        userId: userId(),
+                        otherUserId:
+                            currentChatUser.id ||
+                            currentChatUser.userId
+                    })
+                }
+            ).catch(() => {});
+
+        } catch (error) {
+
+            $("chatMessages").innerHTML = `
+                <div class="empty">
+                    Unable to load messages.
+                </div>
+            `;
+        }
+    }
+
+    async function sendPrivateMessage() {
+
+        const input = $("messageInput");
 
         const text =
-            message.message_text ||
-            message.message ||
-            "";
+            input.value.trim();
 
-        div.innerHTML = `
-            ${escapeHTML(text)}
-
-            <span class="message-time">
-                ${escapeHTML(formatTime(message.created_at))}
-            </span>
-        `;
-
-        box.appendChild(div);
-
-    });
-
-    box.scrollTop = box.scrollHeight;
-
-}
-
-async function sendMessage(event){
-
-    event.preventDefault();
-
-    if(!selectedConversation) return;
-
-    const input =
-        document.getElementById("messageInput");
-
-    const message =
-        input.value.trim();
-
-    if(!message) return;
-
-    const conversationId =
-        selectedConversation.id ||
-        selectedConversation.conversation_id;
-
-    if(!conversationId){
-
-        showToast("Conversation is not ready yet");
-        return;
-
-    }
-
-    try{
-
-        const response = await fetch(
-            `${API_URL}/api/messages`,
-            {
-                method:"POST",
-                headers:{
-                    "Content-Type":"application/json"
-                },
-                body:JSON.stringify({
-
-                    conversationId,
-
-                    senderId:
-                        currentUser.id ||
-                        currentUser.user_id,
-
-                    messageText:message
-
-                })
-            }
-        );
-
-        if(!response.ok){
-
-            showToast("Message could not be sent");
+        if (!text || !currentChatUser) {
             return;
-
         }
 
         input.value = "";
 
-        loadMessages();
-        loadConversations();
+        try {
 
-    }catch(error){
-
-        console.error(error);
-        showToast("Network error");
-
-    }
-
-}
-
-/* STORIES */
-
-async function loadStories(){
-
-    if(!currentUser) return;
-
-    const userId =
-        currentUser.id ||
-        currentUser.user_id;
-
-    if(!userId) return;
-
-    try{
-
-        const response = await fetch(
-            `${API_URL}/api/stories?userId=${encodeURIComponent(userId)}`
-        );
-
-        if(!response.ok) return;
-
-        const data = await response.json();
-
-        stories =
-            Array.isArray(data)
-            ? data
-            : Array.isArray(data.stories)
-            ? data.stories
-            : [];
-
-        renderStories();
-
-    }catch(error){
-
-        console.error("Stories error:",error);
-
-    }
-
-}
-
-function renderStories(){
-
-    const container =
-        document.getElementById("storiesContainer");
-
-    container.innerHTML = `
-        <div class="story-item add-story"
-             onclick="openStoryModal()">
-
-            <div class="story-avatar">
-
-                <div class="add-story-icon">
-                    <i class="fa-solid fa-plus"></i>
-                </div>
-
-            </div>
-
-            <div class="story-name">
-                Add Story
-            </div>
-
-        </div>
-    `;
-
-    if(!stories.length){
-
-        document.getElementById("storyCount")
-            .textContent = "";
-
-        return;
-
-    }
-
-    document.getElementById("storyCount")
-        .textContent =
-        `${stories.length} active`;
-
-    const grouped =
-        groupStories(stories);
-
-    Object.values(grouped).forEach(group => {
-
-        const first = group[0];
-
-        const user =
-            first.user ||
-            first.author ||
-            first;
-
-        const name =
-            user.full_name ||
-            user.name ||
-            "User";
-
-        const picture =
-            user.profile_picture ||
-            first.profile_picture ||
-            "./icon-192.png";
-
-        const item =
-            document.createElement("div");
-
-        item.className = "story-item";
-
-        item.onclick = () =>
-            openStoryViewer(group);
-
-        item.innerHTML = `
-            <div class="story-avatar">
-
-                <img
-                    src="${escapeAttribute(picture)}"
-                    alt="">
-
-            </div>
-
-            <div class="story-name">
-                ${escapeHTML(name)}
-            </div>
-        `;
-
-        container.appendChild(item);
-
-    });
-
-}
-
-function groupStories(list){
-
-    const groups = {};
-
-    list.forEach(story => {
-
-        const user =
-            story.user ||
-            story.author ||
-            story;
-
-        const id =
-            user.id ||
-            user.user_id ||
-            story.user_id ||
-            "unknown";
-
-        if(!groups[id]){
-            groups[id] = [];
-        }
-
-        groups[id].push(story);
-
-    });
-
-    return groups;
-
-}
-
-/* CREATE STORY */
-
-function openStoryModal(){
-
-    document.getElementById("storyModalOverlay")
-        .classList.remove("hidden");
-
-}
-
-function closeStoryModal(event){
-
-    if(
-        event &&
-        event.target !==
-        document.getElementById("storyModalOverlay")
-    ){
-        return;
-    }
-
-    document.getElementById("storyModalOverlay")
-        .classList.add("hidden");
-
-}
-
-function selectStoryType(type){
-
-    currentStoryType = type;
-
-    const textTab =
-        document.getElementById("textStoryTab");
-
-    const imageTab =
-        document.getElementById("imageStoryTab");
-
-    const textArea =
-        document.getElementById("textStoryArea");
-
-    const imageArea =
-        document.getElementById("imageStoryArea");
-
-    if(type === "text"){
-
-        textTab.classList.add("active");
-        imageTab.classList.remove("active");
-
-        textArea.classList.remove("hidden");
-        imageArea.classList.add("hidden");
-
-    }else{
-
-        imageTab.classList.add("active");
-        textTab.classList.remove("active");
-
-        imageArea.classList.remove("hidden");
-        textArea.classList.add("hidden");
-
-    }
-
-}
-
-async function postStory(){
-
-    if(!currentUser) return;
-
-    const button =
-        document.getElementById("postStoryButton");
-
-    button.disabled = true;
-
-    try{
-
-        const userId =
-            currentUser.id ||
-            currentUser.user_id;
-
-        if(currentStoryType === "text"){
-
-            const text =
-                document.getElementById("storyText")
-                .value.trim();
-
-            if(!text){
-
-                showToast("Write something first");
-
-                button.disabled = false;
-                return;
-
-            }
-
-            const response = await fetch(
-                `${API_URL}/api/stories`,
+            await apiRequest(
+                "/api/messages",
                 {
-                    method:"POST",
-                    headers:{
-                        "Content-Type":"application/json"
-                    },
-                    body:JSON.stringify({
-
-                        userId:userId,
-                        storyType:"text",
-                        storyText:text
-
+                    method: "POST",
+                    body: JSON.stringify({
+                        senderId: userId(),
+                        receiverId:
+                            currentChatUser.id ||
+                            currentChatUser.userId,
+                        messageText: text
                     })
                 }
             );
 
-            if(!response.ok){
+            await loadPrivateMessages();
 
-                throw new Error("Story failed");
+        } catch (error) {
 
-            }
-
-        }else{
-
-            const file =
-                document.getElementById("storyImage")
-                .files[0];
-
-            if(!file){
-
-                showToast("Choose a photo first");
-
-                button.disabled = false;
-                return;
-
-            }
-
-            if(file.size > 5 * 1024 * 1024){
-
-                showToast("Photo must be under 5MB");
-
-                button.disabled = false;
-                return;
-
-            }
-
-            const base64 =
-                await fileToBase64(file);
-
-            const response = await fetch(
-                `${API_URL}/api/stories`,
-                {
-                    method:"POST",
-                    headers:{
-                        "Content-Type":"application/json"
-                    },
-                    body:JSON.stringify({
-
-                        userId:userId,
-                        storyType:"image",
-                        storyMedia:base64
-
-                    })
-                }
-            );
-
-            if(!response.ok){
-
-                throw new Error("Story failed");
-
-            }
-
+            alert(error.message);
         }
-
-        showToast("Story posted successfully");
-
-        document.getElementById("storyText").value = "";
-        document.getElementById("storyImage").value = "";
-
-        closeStoryModal();
-
-        loadStories();
-
-    }catch(error){
-
-        console.error(error);
-        showToast("Could not post story");
-
     }
 
-    button.disabled = false;
-
-}
-
-/* STORY VIEWER */
-
-function openStoryViewer(group){
-
-    if(!group || !group.length) return;
-
-    storyViewerList = group;
-    storyViewerIndex = 0;
-
-    document.getElementById("storyViewer")
-        .classList.remove("hidden");
-
-    renderCurrentStory();
-
-}
-
-function renderCurrentStory(){
-
-    const story =
-        storyViewerList[storyViewerIndex];
-
-    if(!story){
-
-        closeStoryViewer();
-        return;
-
-    }
-
-    const user =
-        story.user ||
-        story.author ||
-        story;
-
-    const name =
-        user.full_name ||
-        user.name ||
-        "User";
-
-    const picture =
-        user.profile_picture ||
-        story.profile_picture ||
-        "./icon-192.png";
-
-    document.getElementById("viewerName")
-        .textContent = name;
-
-    document.getElementById("viewerTime")
-        .textContent = timeAgo(story.created_at);
-
-    document.getElementById("viewerAvatar").innerHTML =
-        `<img src="${escapeAttribute(picture)}" alt="">`;
-
-    const content =
-        document.getElementById("storyContent");
-
-    const type =
-        story.story_type ||
-        story.storyType ||
-        "text";
-
-    if(
-        type === "image" ||
-        story.story_media ||
-        story.media_url ||
-        story.image_url
-    ){
-
-        const image =
-            story.story_media ||
-            story.media_url ||
-            story.image_url;
-
-        content.innerHTML =
-            `<img src="${escapeAttribute(image)}" alt="Story">`;
-
-    }else{
-
-        const text =
-            story.story_text ||
-            story.text ||
-            "";
-
-        content.innerHTML =
-            `<div class="story-text-content">
-                ${escapeHTML(text)}
-             </div>`;
-
-    }
-
-    renderStoryProgress();
-
-}
-
-function renderStoryProgress(){
-
-    const box =
-        document.getElementById("storyProgress");
-
-    box.innerHTML = "";
-
-    storyViewerList.forEach((story,index) => {
-
-        const bar =
-            document.createElement("div");
-
-        bar.className = "story-progress-bar";
-
-        const fill =
-            document.createElement("div");
-
-        fill.className = "story-progress-fill";
-
-        fill.style.width =
-            index <= storyViewerIndex
-            ? "100%"
-            : "0%";
-
-        bar.appendChild(fill);
-        box.appendChild(bar);
-
-    });
-
-}
-
-function closeStoryViewer(){
-
-    document.getElementById("storyViewer")
-        .classList.add("hidden");
-
-    storyViewerList = [];
-    storyViewerIndex = 0;
-
-}
-
-document.getElementById("storyContent")
-.addEventListener("click",event => {
-
-    const width = window.innerWidth;
-
-    if(event.clientX < width / 2){
-
-        previousStory();
-
-    }else{
-
-        nextStory();
-
-    }
-
-});
-
-function nextStory(){
-
-    if(
-        storyViewerIndex <
-        storyViewerList.length - 1
-    ){
-
-        storyViewerIndex++;
-
-        renderCurrentStory();
-
-    }else{
-
-        closeStoryViewer();
-
-    }
-
-}
-
-function previousStory(){
-
-    if(storyViewerIndex > 0){
-
-        storyViewerIndex--;
-
-        renderCurrentStory();
-
-    }
-
-}
-
-/* MENU */
-
-function openMenu(){
-
-    document.getElementById("menuOverlay")
-        .classList.remove("hidden");
-
-}
-
-function closeMenu(event){
-
-    if(
-        event &&
-        event.target !==
-        document.getElementById("menuOverlay")
-    ){
-        return;
-    }
-
-    document.getElementById("menuOverlay")
-        .classList.add("hidden");
-
-}
-
-/* NAVIGATION */
-
-function showChats(){
-
-    closeMenu();
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
-}
-
-function scrollToStories(){
-
-    closeMenu();
-
-    document.getElementById("storiesSection")
-        .scrollIntoView({
-            behavior:"smooth"
-        });
-
-}
-
-function showGroups(){
-
-    showToast("Groups coming soon");
-
-}
-
-function openFriends(){
-
-    showToast("Friends coming soon");
-
-}
-
-function openVerification(){
-
-    showToast("Verification coming soon");
-
-}
-
-function openSettings(){
-
-    showToast("Settings coming soon");
-
-}
-
-function openProfile(){
-
-    showToast("Profile coming soon");
-
-}
-
-/* THEME */
-
-function toggleTheme(){
-
-    document.body.classList.toggle("light");
-
-    const light =
-        document.body.classList.contains("light");
-
-    localStorage.setItem(
-        "vibeChatTheme",
-        light ? "light" : "dark"
+    $("sendMessageButton").addEventListener(
+        "click",
+        sendPrivateMessage
     );
 
-    closeMenu();
+    $("messageInput").addEventListener(
+        "keydown",
+        (event) => {
 
-}
+            if (event.key === "Enter") {
+                event.preventDefault();
+                sendPrivateMessage();
+            }
 
-function loadTheme(){
+        }
+    );
 
-    if(
-        localStorage.getItem("vibeChatTheme")
-        === "light"
-    ){
+    /* =========================
+       STORIES
+    ========================= */
 
-        document.body.classList.add("light");
+    async function loadStories() {
 
+        try {
+
+            const data = await apiRequest(
+                `/api/stories?userId=${encodeURIComponent(userId())}`
+            );
+
+            currentStories =
+                data.stories || data || [];
+
+            if (!currentStories.length) {
+
+                $("storiesList").innerHTML = `
+                    <div class="empty">
+                        <i class="fa-solid fa-circle-play"></i>
+                        <h3>No stories yet</h3>
+                        <p>
+                            Share a photo or video with
+                            your VibeChat friends.
+                        </p>
+                    </div>
+                `;
+
+                return;
+            }
+
+            $("storiesList").innerHTML = `
+                <div class="story-bar">
+
+                    <div
+                        class="story-item story-add"
+                        id="storyAddItem"
+                    >
+                        <img
+                            class="story-image"
+                            src="${
+                                currentUser.profilePicture ||
+                                currentUser.profile_picture ||
+                                "./icon-192.png"
+                            }"
+                            alt=""
+                        >
+
+                        <div>Add story</div>
+                    </div>
+
+                    ${currentStories
+                        .map((story, index) => {
+
+                            const name =
+                                story.fullName ||
+                                "User";
+
+                            const picture =
+                                story.profilePicture ||
+                                `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=211332&color=ffd54a`;
+
+                            return `
+                                <div
+                                    class="story-item story-view"
+                                    data-index="${index}"
+                                >
+
+                                    <img
+                                        class="story-image"
+                                        src="${picture}"
+                                        alt=""
+                                    >
+
+                                    <div>
+                                        ${escapeHTML(name)}
+                                    </div>
+
+                                </div>
+                            `;
+                        })
+                        .join("")}
+
+                </div>
+            `;
+
+            $("storyAddItem").addEventListener(
+                "click",
+                openAddStory
+            );
+
+            document
+                .querySelectorAll(".story-view")
+                .forEach((item) => {
+
+                    item.addEventListener("click", () => {
+
+                        openStory(
+                            currentStories[
+                                Number(item.dataset.index)
+                            ]
+                        );
+
+                    });
+
+                });
+
+        } catch (error) {
+
+            $("storiesList").innerHTML = `
+                <div class="empty">
+                    Unable to load stories.
+                </div>
+            `;
+        }
     }
 
-}
+    $("addStoryButton").addEventListener(
+        "click",
+        openAddStory
+    );
 
-/* LOGOUT */
+    function openAddStory() {
 
-function logout(){
+        openModal(`
+            <div class="modal-header">
 
-    localStorage.removeItem("cheryChatCurrentUser");
-    localStorage.removeItem("vibeChatCurrentUser");
+                <h3>Add Story</h3>
 
-    window.location.href = "index.html";
+                <button
+                    class="close-button"
+                    id="closeStoryModal"
+                >
+                    ×
+                </button>
 
-}
+            </div>
 
-/* HELPERS */
+            <div class="form-group">
 
-function getInitials(name){
+                <label>
+                    Photo or video
+                </label>
 
-    return String(name)
-        .trim()
-        .split(/\s+/)
-        .slice(0,2)
-        .map(word => word.charAt(0))
-        .join("")
-        .toUpperCase();
+                <input
+                    class="form-control"
+                    id="storyFile"
+                    type="file"
+                    accept="image/*,video/*"
+                >
 
-}
+            </div>
 
-function formatTime(date){
+            <div class="form-group">
 
-    if(!date) return "";
+                <label>
+                    Caption
+                </label>
 
-    const d = new Date(date);
+                <textarea
+                    class="form-control"
+                    id="storyCaption"
+                    maxlength="500"
+                    placeholder="Write a caption..."
+                ></textarea>
 
-    if(Number.isNaN(d.getTime())) return "";
+            </div>
 
-    const now = new Date();
+            <button
+                class="button"
+                id="postStoryButton"
+                style="width:100%;"
+            >
+                Post Story
+            </button>
+        `);
 
-    if(d.toDateString() === now.toDateString()){
+        $("closeStoryModal").onclick =
+            closeModal;
 
-        return d.toLocaleTimeString([],{
-            hour:"numeric",
-            minute:"2-digit"
-        });
-
+        $("postStoryButton").onclick =
+            uploadStory;
     }
 
-    return d.toLocaleDateString([],{
-        day:"numeric",
-        month:"short"
-    });
+    async function uploadStory() {
 
-}
+        const file =
+            $("storyFile").files[0];
 
-function timeAgo(date){
+        const caption =
+            $("storyCaption").value.trim();
 
-    if(!date) return "";
+        if (!file) {
+            alert("Choose a photo or video.");
+            return;
+        }
 
-    const d = new Date(date);
+        const isVideo =
+            file.type.startsWith("video/");
 
-    if(Number.isNaN(d.getTime())) return "";
+        const maxSize =
+            isVideo
+                ? 8 * 1024 * 1024
+                : 4 * 1024 * 1024;
 
-    const seconds =
-        Math.floor(
-            (Date.now() - d.getTime()) / 1000
-        );
+        if (file.size > maxSize) {
 
-    if(seconds < 60) return "Just now";
+            alert(
+                isVideo
+                    ? "Video must be below 8MB."
+                    : "Image must be below 4MB."
+            );
 
-    const minutes =
-        Math.floor(seconds / 60);
+            return;
+        }
 
-    if(minutes < 60) return `${minutes}m ago`;
+        const reader =
+            new FileReader();
 
-    const hours =
-        Math.floor(minutes / 60);
+        reader.onload = async () => {
 
-    if(hours < 24) return `${hours}h ago`;
+            try {
 
-    const days =
-        Math.floor(hours / 24);
+                await apiRequest(
+                    "/api/stories",
+                    {
+                        method: "POST",
+                        body: JSON.stringify({
+                            userId: userId(),
+                            mediaType:
+                                isVideo
+                                    ? "video"
+                                    : "image",
+                            mediaData:
+                                reader.result,
+                            caption
+                        })
+                    }
+                );
 
-    return `${days}d ago`;
+                closeModal();
 
-}
+                await loadStories();
 
-function fileToBase64(file){
+            } catch (error) {
 
-    return new Promise((resolve,reject) => {
-
-        const reader = new FileReader();
-
-        reader.onload = () =>
-            resolve(reader.result);
-
-        reader.onerror = reject;
+                alert(error.message);
+            }
+        };
 
         reader.readAsDataURL(file);
+    }
 
-    });
+    function openStory(story) {
 
-}
+        const media =
+            story.mediaType === "video"
+                ? `
+                    <video
+                        class="story-media"
+                        src="${story.mediaData}"
+                        controls
+                        autoplay
+                    ></video>
+                `
+                : `
+                    <img
+                        class="story-media"
+                        src="${story.mediaData}"
+                        alt="Story"
+                    >
+                `;
 
-function escapeHTML(value){
+        openModal(`
+            <div class="modal-header">
 
-    return String(value ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+                <div>
 
-}
+                    <div class="list-name">
+                        ${escapeHTML(
+                            story.fullName || "User"
+                        )}
+                    </div>
 
-function escapeAttribute(value){
+                    <div class="section-subtitle">
+                        ${
+                            story.createdAt
+                                ? new Date(
+                                      story.createdAt
+                                  ).toLocaleString()
+                                : ""
+                        }
+                    </div>
 
-    return escapeHTML(value);
+                </div>
 
-}
+                <button
+                    class="close-button"
+                    id="closeStoryView"
+                >
+                    ×
+                </button>
 
-/* TOAST */
+            </div>
 
-function showToast(message){
+            ${media}
 
-    const toast =
-        document.getElementById("toast");
+            ${
+                story.caption
+                    ? `
+                        <p
+                            style="
+                                margin-top:12px;
+                                font-size:13px;
+                                color:#ddd;
+                            "
+                        >
+                            ${escapeHTML(
+                                story.caption
+                            )}
+                        </p>
+                    `
+                    : ""
+            }
 
-    toast.textContent = message;
+            ${
+                story.isOwn
+                    ? `
+                        <button
+                            class="button danger"
+                            id="deleteStoryButton"
+                            style="
+                                width:100%;
+                                margin-top:14px;
+                            "
+                        >
+                            Delete Story
+                        </button>
+                    `
+                    : ""
+            }
+        `);
 
-    toast.classList.remove("hidden");
+        $("closeStoryView").onclick =
+            closeModal;
 
-    clearTimeout(window.toastTimer);
+        apiRequest(
+            `/api/stories/${story.id}/view`,
+            {
+                method: "POST",
+                body: JSON.stringify({
+                    userId: userId()
+                })
+            }
+        ).catch(() => {});
 
-    window.toastTimer =
-        setTimeout(() => {
+        if (story.isOwn) {
 
-            toast.classList.add("hidden");
+            $("deleteStoryButton").onclick =
+                async () => {
 
-        },2500);
+                    if (
+                        !confirm(
+                            "Delete this story?"
+                        )
+                    ) {
+                        return;
+                    }
 
-}
+                    try {
 
-/* SERVICE WORKER */
+                        await apiRequest(
+                            `/api/stories/${story.id}`,
+                            {
+                                method: "DELETE",
+                                body: JSON.stringify({
+                                    userId: userId()
+                                })
+                            }
+                        );
 
-if("serviceWorker" in navigator){
+                        closeModal();
 
-    window.addEventListener("load",() => {
+                        loadStories();
+
+                    } catch (error) {
+
+                        alert(error.message);
+                    }
+                };
+        }
+    }
+
+    /* =========================
+       GROUPS
+    ========================= */
+
+    async function loadGroups(query = "") {
+
+        try {
+
+            const endpoint =
+                `/api/groups?userId=${encodeURIComponent(userId())}` +
+                `&q=${encodeURIComponent(query)}`;
+
+            const data =
+                await apiRequest(endpoint);
+
+            currentGroups =
+                data.groups || data || [];
+
+            renderGroups(currentGroups);
+
+        } catch (error) {
+
+            $("groupsList").innerHTML = `
+                <div class="empty">
+                    <i class="fa-solid fa-users"></i>
+                    <h3>Unable to load groups</h3>
+                    <p>${escapeHTML(error.message)}</p>
+                </div>
+            `;
+        }
+    }
+
+    function renderGroups(groups) {
+
+        if (!groups.length) {
+
+            $("groupsList").innerHTML = `
+                <div class="empty">
+                    <i class="fa-solid fa-users"></i>
+                    <h3>No groups found</h3>
+                    <p>
+                        Create a group or search for
+                        an existing group.
+                    </p>
+                </div>
+            `;
+
+            return;
+        }
+
+        $("groupsList").innerHTML =
+            groups
+                .map((group, index) => {
+
+                    const isMember =
+                        group.isMember ||
+                        group.is_member;
+
+                    const memberCount =
+                        group.memberCount ||
+                        group.member_count ||
+                        0;
+
+                    const type =
+                        group.groupType ||
+                        group.group_type ||
+                        "public";
+
+                    return `
+                        <div class="card">
+
+                            <div
+                                style="
+                                    display:flex;
+                                    align-items:center;
+                                    gap:12px;
+                                "
+                            >
+
+                                <div class="group-icon">
+                                    <i class="fa-solid fa-users"></i>
+                                </div>
+
+                                <div class="list-content">
+
+                                    <div class="list-name">
+                                        ${escapeHTML(
+                                            group.name
+                                        )}
+                                    </div>
+
+                                    <div class="list-preview">
+                                        ${escapeHTML(
+                                            group.description ||
+                                            "No description"
+                                        )}
+                                    </div>
+
+                                    <div class="group-members">
+                                        ${memberCount} members
+                                    </div>
+
+                                    <div class="group-type">
+                                        ${escapeHTML(type)}
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="button-row">
+
+                                <button
+                                    class="button secondary group-view-button"
+                                    data-index="${index}"
+                                >
+                                    View
+                                </button>
+
+                                <button
+                                    class="button group-join-button"
+                                    data-index="${index}"
+                                >
+                                    ${
+                                        isMember
+                                            ? "Open"
+                                            : "Join"
+                                    }
+                                </button>
+
+                            </div>
+
+                        </div>
+                    `;
+                })
+                .join("");
+
+        document
+            .querySelectorAll(".group-view-button")
+            .forEach((button) => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        viewGroup(
+                            currentGroups[
+                                Number(
+                                    button.dataset.index
+                                )
+                            ]
+                        );
+
+                    }
+                );
+
+            });
+
+        document
+            .querySelectorAll(".group-join-button")
+            .forEach((button) => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        joinGroup(
+                            currentGroups[
+                                Number(
+                                    button.dataset.index
+                                )
+                            ]
+                        );
+
+                    }
+                );
+
+            });
+    }
+
+    $("groupSearch").addEventListener(
+        "input",
+        (event) => {
+
+            clearTimeout(groupSearchTimer);
+
+            groupSearchTimer =
+                setTimeout(() => {
+
+                    loadGroups(
+                        event.target.value.trim()
+                    );
+
+                }, 350);
+        }
+    );
+
+    /* CREATE GROUP */
+
+    $("createGroupButton").addEventListener(
+        "click",
+        openCreateGroup
+    );
+
+    function openCreateGroup() {
+
+        openModal(`
+            <div class="modal-header">
+
+                <h3>Create Group</h3>
+
+                <button
+                    class="close-button"
+                    id="closeCreateGroup"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Group name
+                </label>
+
+                <input
+                    class="form-control"
+                    id="groupName"
+                    maxlength="100"
+                    placeholder="Group name"
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Description
+                </label>
+
+                <textarea
+                    class="form-control"
+                    id="groupDescription"
+                    maxlength="500"
+                    placeholder="Describe your group"
+                ></textarea>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Group type
+                </label>
+
+                <select
+                    class="form-control"
+                    id="groupType"
+                >
+                    <option value="public">
+                        Public
+                    </option>
+
+                    <option value="private">
+                        Private
+                    </option>
+                </select>
+
+            </div>
+
+            <button
+                class="button"
+                id="createGroupSubmit"
+                style="width:100%;"
+            >
+                Create Group
+            </button>
+        `);
+
+        $("closeCreateGroup").onclick =
+            closeModal;
+
+        $("createGroupSubmit").onclick =
+            createGroup;
+    }
+
+    async function createGroup() {
+
+        const name =
+            $("groupName").value.trim();
+
+        const description =
+            $("groupDescription").value.trim();
+
+        const groupType =
+            $("groupType").value;
+
+        if (!name) {
+            alert("Enter a group name.");
+            return;
+        }
+
+        try {
+
+            const data =
+                await apiRequest(
+                    "/api/groups",
+                    {
+                        method: "POST",
+                        body: JSON.stringify({
+                            ownerId: userId(),
+                            name,
+                            description,
+                            groupType
+                        })
+                    }
+                );
+
+            closeModal();
+
+            await loadGroups();
+
+            if (data.group) {
+                viewGroup(data.group);
+            }
+
+        } catch (error) {
+
+            alert(error.message);
+        }
+    }
+
+    async function joinGroup(group) {
+
+        const isMember =
+            group.isMember ||
+            group.is_member;
+
+        if (isMember) {
+            viewGroup(group);
+            return;
+        }
+
+        const type =
+            group.groupType ||
+            group.group_type ||
+            "public";
+
+        try {
+
+            if (type === "private") {
+
+                await apiRequest(
+                    `/api/groups/${group.id}/request`,
+                    {
+                        method: "POST",
+                        body: JSON.stringify({
+                            userId: userId()
+                        })
+                    }
+                );
+
+                alert(
+                    "Your request to join the private group has been sent."
+                );
+
+            } else {
+
+                await apiRequest(
+                    `/api/groups/${group.id}/join`,
+                    {
+                        method: "POST",
+                        body: JSON.stringify({
+                            userId: userId()
+                        })
+                    }
+                );
+
+                await loadGroups();
+
+                viewGroup({
+                    ...group,
+                    isMember: true
+                });
+            }
+
+        } catch (error) {
+
+            alert(error.message);
+        }
+    }
+
+    /* GROUP VIEW */
+
+    async function viewGroup(group) {
+
+        currentGroup = group;
+
+        try {
+
+            const data =
+                await apiRequest(
+                    `/api/groups/${group.id}?userId=${encodeURIComponent(userId())}`
+                );
+
+            currentGroup =
+                data.group || group;
+
+        } catch (error) {
+            // Use existing group information.
+        }
+
+        const groupData =
+            currentGroup;
+
+        openModal(`
+            <div class="modal-header">
+
+                <div>
+
+                    <div class="list-name">
+                        ${escapeHTML(
+                            groupData.name
+                        )}
+                    </div>
+
+                    <div class="section-subtitle">
+                        ${escapeHTML(
+                            groupData.description ||
+                            ""
+                        )}
+                    </div>
+
+                </div>
+
+                <button
+                    class="close-button"
+                    id="closeGroupModal"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <div id="groupMessages"></div>
+
+            <div
+                class="chat-input-area"
+                style="
+                    padding:10px 0 0;
+                    border:0;
+                "
+            >
+
+                <input
+                    class="chat-input"
+                    id="groupMessageInput"
+                    placeholder="Message group..."
+                    autocomplete="off"
+                >
+
+                <button
+                    class="send-button"
+                    id="sendGroupMessageButton"
+                >
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+
+            </div>
+        `);
+
+        $("closeGroupModal").onclick =
+            closeModal;
+
+        $("sendGroupMessageButton").onclick =
+            sendGroupMessage;
+
+        $("groupMessageInput").addEventListener(
+            "keydown",
+            (event) => {
+
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    sendGroupMessage();
+                }
+
+            }
+        );
+
+        await loadGroupMessages();
+    }
+
+    async function loadGroupMessages() {
+
+        if (!currentGroup) {
+            return;
+        }
+
+        try {
+
+            const data =
+                await apiRequest(
+                    `/api/groups/${currentGroup.id}/messages?userId=${encodeURIComponent(userId())}`
+                );
+
+            const messages =
+                data.messages || data || [];
+
+            if (!messages.length) {
+
+                $("groupMessages").innerHTML = `
+                    <div class="empty">
+                        <i class="fa-solid fa-users"></i>
+                        <p>No group messages yet.</p>
+                    </div>
+                `;
+
+                return;
+            }
+
+            $("groupMessages").innerHTML =
+                messages
+                    .map((message) => {
+
+                        const sender =
+                            message.userId ||
+                            message.user_id;
+
+                        const name =
+                            message.fullName ||
+                            message.full_name ||
+                            "";
+
+                        const text =
+                            message.messageText ||
+                            message.message_text ||
+                            "";
+
+                        const mine =
+                            String(sender) ===
+                            String(userId());
+
+                        return `
+                            <div
+                                class="message-bubble ${
+                                    mine
+                                        ? "mine"
+                                        : "theirs"
+                                }"
+                            >
+
+                                ${
+                                    name
+                                        ? `
+                                            <b>
+                                                ${escapeHTML(
+                                                    name
+                                                )}
+                                            </b>
+                                            <br>
+                                        `
+                                        : ""
+                                }
+
+                                ${escapeHTML(text)}
+
+                            </div>
+                        `;
+
+                    })
+                    .join("");
+
+        } catch (error) {
+
+            $("groupMessages").innerHTML = `
+                <div class="empty">
+                    Unable to load group messages.
+                </div>
+            `;
+        }
+    }
+
+    async function sendGroupMessage() {
+
+        if (!currentGroup) {
+            return;
+        }
+
+        const input =
+            $("groupMessageInput");
+
+        const text =
+            input.value.trim();
+
+        if (!text) {
+            return;
+        }
+
+        input.value = "";
+
+        try {
+
+            await apiRequest(
+                `/api/groups/${currentGroup.id}/messages`,
+                {
+                    method: "POST",
+                    body: JSON.stringify({
+                        userId: userId(),
+                        messageText: text
+                    })
+                }
+            );
+
+            await loadGroupMessages();
+
+        } catch (error) {
+
+            alert(error.message);
+        }
+    }
+
+    /* =========================
+       PROFILE
+    ========================= */
+
+    async function loadProfile() {
+
+        try {
+
+            const data =
+                await apiRequest(
+                    `/api/users/${encodeURIComponent(userId())}`
+                );
+
+            const updatedUser =
+                data.user || data;
+
+            saveUser(updatedUser);
+
+            const name =
+                updatedUser.fullName ||
+                updatedUser.full_name ||
+                "VibeChat User";
+
+            const picture =
+                updatedUser.profilePicture ||
+                updatedUser.profile_picture ||
+                `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=211332&color=ffd54a`;
+
+            $("profileContent").innerHTML = `
+
+                <div class="card profile-card">
+
+                    <div class="profile-picture-wrap">
+
+                        <img
+                            src="${picture}"
+                            alt="Profile"
+                        >
+
+                    </div>
+
+                    <div class="profile-name">
+                        ${escapeHTML(name)}
+                    </div>
+
+                    <div class="profile-about">
+                        ${escapeHTML(
+                            updatedUser.about || ""
+                        )}
+                    </div>
+
+                    <div class="profile-contact">
+                        ${escapeHTML(
+                            updatedUser.email ||
+                            updatedUser.phone ||
+                            ""
+                        )}
+                    </div>
+
+                    <div class="button-row">
+
+                        <button
+                            class="button"
+                            id="editProfileButton"
+                        >
+                            Edit Profile
+                        </button>
+
+                        <button
+                            class="button secondary"
+                            id="changePhotoButton"
+                        >
+                            Change Photo
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="card">
+
+                    <div class="list-item">
+
+                        <i
+                            class="fa-solid fa-user"
+                            style="color:#ffd54a;width:25px;"
+                        ></i>
+
+                        <div class="list-content">
+
+                            <div class="list-name">
+                                Your Profile
+                            </div>
+
+                            <div class="list-preview">
+                                Manage your VibeChat profile.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="list-item">
+
+                        <i
+                            class="fa-solid fa-right-from-bracket"
+                            style="color:#ffd54a;width:25px;"
+                        ></i>
+
+                        <div class="list-content">
+
+                            <div class="list-name">
+                                Logout
+                            </div>
+
+                            <div class="list-preview">
+                                Sign out of this device.
+                            </div>
+
+                        </div>
+
+                        <button
+                            class="button danger"
+                            id="profileLogoutButton"
+                        >
+                            Logout
+                        </button>
+
+                    </div>
+
+                </div>
+            `;
+
+            $("editProfileButton").onclick =
+                openEditProfile;
+
+            $("changePhotoButton").onclick =
+                openChangePhoto;
+
+            $("profileLogoutButton").onclick =
+                logout;
+
+        } catch (error) {
+
+            $("profileContent").innerHTML = `
+                <div class="empty">
+                    <i class="fa-solid fa-user"></i>
+                    <h3>Unable to load profile</h3>
+                    <p>${escapeHTML(error.message)}</p>
+                </div>
+            `;
+        }
+    }
+
+    function openEditProfile() {
+
+        openModal(`
+            <div class="modal-header">
+
+                <h3>Edit Profile</h3>
+
+                <button
+                    class="close-button"
+                    id="closeEditProfile"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Full name
+                </label>
+
+                <input
+                    class="form-control"
+                    id="profileNameInput"
+                    maxlength="100"
+                    value="${escapeHTML(
+                        currentUser.fullName ||
+                        currentUser.full_name ||
+                        ""
+                    )}"
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    About
+                </label>
+
+                <textarea
+                    class="form-control"
+                    id="profileAboutInput"
+                    maxlength="500"
+                >${escapeHTML(
+                    currentUser.about || ""
+                )}</textarea>
+
+            </div>
+
+            <button
+                class="button"
+                id="saveProfileButton"
+                style="width:100%;"
+            >
+                Save Changes
+            </button>
+        `);
+
+        $("closeEditProfile").onclick =
+            closeModal;
+
+        $("saveProfileButton").onclick =
+            saveProfile;
+    }
+
+    async function saveProfile() {
+
+        const fullName =
+            $("profileNameInput")
+                .value
+                .trim();
+
+        const about =
+            $("profileAboutInput")
+                .value
+                .trim();
+
+        if (!fullName) {
+            alert("Enter your full name.");
+            return;
+        }
+
+        try {
+
+            const data =
+                await apiRequest(
+                    `/api/users/${userId()}/profile`,
+                    {
+                        method: "PUT",
+                        body: JSON.stringify({
+                            fullName,
+                            about
+                        })
+                    }
+                );
+
+            saveUser(
+                data.user || data
+            );
+
+            closeModal();
+
+            await loadProfile();
+
+        } catch (error) {
+
+            alert(error.message);
+        }
+    }
+
+    function openChangePhoto() {
+
+        openModal(`
+            <div class="modal-header">
+
+                <h3>Change Profile Picture</h3>
+
+                <button
+                    class="close-button"
+                    id="closePhotoModal"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Choose an image
+                </label>
+
+                <input
+                    class="form-control"
+                    id="profilePhotoFile"
+                    type="file"
+                    accept="image/jpeg,image/jpg,image/png,image/webp"
+                >
+
+            </div>
+
+            <button
+                class="button"
+                id="uploadPhotoButton"
+                style="width:100%;"
+            >
+                Upload Photo
+            </button>
+        `);
+
+        $("closePhotoModal").onclick =
+            closeModal;
+
+        $("uploadPhotoButton").onclick =
+            uploadProfilePhoto;
+    }
+
+    async function uploadProfilePhoto() {
+
+        const file =
+            $("profilePhotoFile").files[0];
+
+        if (!file) {
+            alert("Choose an image.");
+            return;
+        }
+
+        if (
+            file.size >
+            2 * 1024 * 1024
+        ) {
+            alert(
+                "Profile picture must be below 2MB."
+            );
+            return;
+        }
+
+        const reader =
+            new FileReader();
+
+        reader.onload = async () => {
+
+            try {
+
+                const data =
+                    await apiRequest(
+                        `/api/users/${userId()}/profile-picture`,
+                        {
+                            method: "PUT",
+                            body: JSON.stringify({
+                                profilePicture:
+                                    reader.result
+                            })
+                        }
+                    );
+
+                saveUser(
+                    data.user || data
+                );
+
+                closeModal();
+
+                await loadProfile();
+
+            } catch (error) {
+
+                alert(error.message);
+            }
+        };
+
+        reader.readAsDataURL(file);
+    }
+
+    /* =========================
+       ONLINE STATUS
+    ========================= */
+
+    async function setOnline() {
+
+        try {
+
+            await apiRequest(
+                `/api/users/${userId()}/online`,
+                {
+                    method: "PUT",
+                    body: JSON.stringify({})
+                }
+            );
+
+        } catch (error) {
+            // Ignore temporary status errors.
+        }
+    }
+
+    setOnline();
+
+    setInterval(
+        setOnline,
+        60000
+    );
+
+    /* =========================
+       SERVICE WORKER
+    ========================= */
+
+    if ("serviceWorker" in navigator) {
 
         navigator.serviceWorker
             .register("./sw.js")
-            .catch(error =>
-                console.log("Service worker:",error)
-            );
+            .catch(() => {});
 
-    });
+    }
 
-}
+    /* =========================
+       INITIAL LOAD
+    ========================= */
+
+    loadConversations();
 </script>
 
 </body>
